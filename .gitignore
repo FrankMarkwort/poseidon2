@@ -1,2 +1,4 @@
 /.phpunit.cache/
 /src/http/coverage/
+/tests/.phpunit.cache/
+.idea
