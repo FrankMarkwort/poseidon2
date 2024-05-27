@@ -1,0 +1,6 @@
+<?php
+require_once( __DIR__ . '/../../vendor/autoload.php');
+$memcachedserver = getenv('MEMCACHED_HOST');
+
+$bootstrap = new Nmea\Http\Bootstrap(new \Nmea\Cache\Memcached($memcachedserver));
+$bootstrap->run();

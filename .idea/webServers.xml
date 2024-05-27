@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9452f0f5-d3c7-4d4f-8d84-d363c3752b7c" name="Poseidon" url="http://192.168.0.101">
+        <fileTransfer accessType="SFTP" host="192.168.0.101" port="22" sshConfigId="b51cbc12-423c-4128-9fa4-134555bdc2d2" sshConfig="sftpuser@‏192.168.0.101:22">
+          <advancedOptions>
+            <advancedOptions keepAliveTimeout="0" connections="6" />
+          </advancedOptions>
+        </fileTransfer>
+        <option name="numberOfConnections" value="6" />
+      </webServer>
+    </option>
+  </component>
+</project>

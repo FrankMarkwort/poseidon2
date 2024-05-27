@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;hostKeyVerifier&quot;:{&quot;hashKnownHosts&quot;:true,&quot;stringHostKeyChecking&quot;:&quot;ASK&quot;}}" host="192.168.0.101" id="b51cbc12-423c-4128-9fa4-134555bdc2d2" port="22" customName="sftpuser@‏192.168.0.101:22" nameFormat="CUSTOM" username="sftpuser" useOpenSSHConfig="false">
+        <option name="customName" value="sftpuser@‏192.168.0.101:22" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

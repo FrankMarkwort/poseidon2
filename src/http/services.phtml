@@ -1,0 +1,53 @@
+<?php
+require_once( __DIR__ . '/../../vendor/autoload.php');
+use Nmea\Service\Service;
+
+$memcached = new Service('memcached');
+$deamon = new Service('phpreader');
+function getColor(Service $service):string
+{
+    if ($service->isRunning()) {
+
+        return 'style="color:green"';
+    }
+
+    return 'style="color:red"';
+}
+
+if (isset($_GET['service']) && isset($_GET['mode'])) {
+    $service = $_GET['service'];
+    $mode = $_GET['mode'];
+    switch ($mode) {
+        case 'start':
+            if ($service === 'memcached') {
+                $memcached->start();
+            } elseif ($service === 'phpreader') {
+                $deamon->start();
+            }
+            break;
+        case 'stop':
+            if ($service === 'memcached') {
+                $memcached->stop();
+            } elseif ($service === 'phpreader') {
+                $deamon->stop();
+            }
+            break;
+    }
+}
+
+?>
+
+<table>
+    <tr>
+        <td <?= getColor($memcached)?>> <?= $memcached->getServiceName() ?> </td>
+        <td>
+            <a href="services.phtml?mode=<?=$memcached->nextStatus()?>&service=<?=$memcached->getServiceName()?>" > <?= $memcached->nextStatus() ?> </a>
+        </td>
+    </tr>
+    <tr>
+        <td  <?= getColor($deamon)?>> <?= $deamon->getServiceName() ?> </td>
+        <td>
+            <a href="services.phtml?mode=<?=$deamon->nextStatus()?>&service=<?=$deamon->getServiceName()?>" > <?= $deamon->nextStatus() ?> </a>
+        </td>
+    </tr>
+</table>

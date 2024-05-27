@@ -1,0 +1,1 @@
+{"version":1,"defects":{"TestsNmea\\Protocol\\Frames\\Frame\\Header\\HeaderTest::testHeader":5,"TestsNmea\\Protocol\\Frames\\Frame\\Header\\HeaderTest::testIsSingleFrame":5},"times":{"TestsNmea\\Protocol\\Frames\\Frame\\Header\\HeaderTest::testHeader":0.004,"TestsNmea\\Protocol\\Frames\\Frame\\Header\\HeaderTest::testIsSingleFrame":0.045}}

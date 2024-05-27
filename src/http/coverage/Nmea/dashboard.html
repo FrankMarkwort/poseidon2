@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Nmea</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=11.0.3" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css?v=11.0.3" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=11.0.3" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Nmea</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractHeader.php.html#7">Nmea\AbstractHeader</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Dummy.php.html#5">Nmea\Cache\Dummy</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#8">Nmea\Cache\Memcached</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#5">Nmea\Cache\RingBuffer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#11">Nmea\Config\Config</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#11">Nmea\Config\ConfigFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#11">Nmea\Config\PngFieldConfig</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#9">Nmea\Deamon\Bootstrap</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#5">Nmea\Deamon\Serial</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#10">Nmea\Http\Bootstrap</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#5">Nmea\Logger\AbstractLogger</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Factory.php.html#8">Nmea\Logger\Factory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger.php.html#7">Nmea\Logger\Logger</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/FileLogger.php.html#7">Nmea\Logger\Logger\FileLogger</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#7">Nmea\Logger\Logger\NullLogger</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#13">Nmea\Parser\Data\Data</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#7">Nmea\Parser\Data\DataFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#9">Nmea\Parser\Data\DataPart</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#14">Nmea\Parser\Data\MainPart</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#12">Nmea\Parser\DataFacadeFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeCanId.php.html#7">Nmea\Parser\Decode\DecodeCanId</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#8">Nmea\Parser\Decode\DecodeNmea2000</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#5">Nmea\Parser\Lib\BinDec</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#12">Nmea\Parser\Lib\Units\Unit</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#7">Nmea\Protocol\Frames\Frame\Data\Data</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#8">Nmea\Protocol\Frames\Frame\Frame</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#5">Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#8">Nmea\Protocol\Frames\Frames</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#11">Nmea\Protocol\FramesFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#5">Nmea\Logger\AbstractLoggerTrait</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#12">Nmea\Parser\Lib\Units\Unit</a></td><td class="text-right">1260</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#8">Nmea\Protocol\Frames\Frames</a></td><td class="text-right">1122</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#7">Nmea\AbstractHeader</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#11">Nmea\Config\PngFieldConfig</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#13">Nmea\Parser\Data\Data</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#7">Nmea\Parser\Data\DataFacade</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#14">Nmea\Parser\Data\MainPart</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#5">Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="Config/Config.php.html#11">Nmea\Config\Config</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#8">Nmea\Protocol\Frames\Frame\Frame</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#10">Nmea\Http\Bootstrap</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#5">Nmea\Parser\Lib\BinDec</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#8">Nmea\Cache\Memcached</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#8">Nmea\Parser\Decode\DecodeNmea2000</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#11">Nmea\Config\ConfigFactory</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#9">Nmea\Parser\Data\DataPart</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#5">Nmea\Cache\RingBuffer</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#9">Nmea\Deamon\Bootstrap</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#11">Nmea\Protocol\FramesFactory</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#5">Nmea\Deamon\Serial</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#12">Nmea\Parser\DataFacadeFactory</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Logger/Factory.php.html#8">Nmea\Logger\Factory</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Logger/Logger/FileLogger.php.html#7">Nmea\Logger\Logger\FileLogger</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractHeader.php.html#9"><abbr title="Nmea\AbstractHeader::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#17"><abbr title="Nmea\AbstractHeader::getCanIdDec">getCanIdDec</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#21"><abbr title="Nmea\AbstractHeader::getPgn">getPgn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#26"><abbr title="Nmea\AbstractHeader::getCanIdHex">getCanIdHex</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#30"><abbr title="Nmea\AbstractHeader::getCanExtendedId">getCanExtendedId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#35"><abbr title="Nmea\AbstractHeader::decode">decode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#39"><abbr title="Nmea\AbstractHeader::getPriority">getPriority</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#44"><abbr title="Nmea\AbstractHeader::getReserved">getReserved</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#49"><abbr title="Nmea\AbstractHeader::getDataPage">getDataPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#54"><abbr title="Nmea\AbstractHeader::getExtendedDataPage">getExtendedDataPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#59"><abbr title="Nmea\AbstractHeader::getPduFormat">getPduFormat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#64"><abbr title="Nmea\AbstractHeader::getPduSpecific">getPduSpecific</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#69"><abbr title="Nmea\AbstractHeader::getSourceAdress">getSourceAdress</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#74"><abbr title="Nmea\AbstractHeader::getDestination">getDestination</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#84"><abbr title="Nmea\AbstractHeader::getGroupExtension">getGroupExtension</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#94"><abbr title="Nmea\AbstractHeader::isSingelPacked">isSingelPacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#99"><abbr title="Nmea\AbstractHeader::isFastPacked">isFastPacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#104"><abbr title="Nmea\AbstractHeader::isNmea2000Packed">isNmea2000Packed</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#109"><abbr title="Nmea\AbstractHeader::isPdu1Format">isPdu1Format</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#114"><abbr title="Nmea\AbstractHeader::isPdu2Format">isPdu2Format</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Dummy.php.html#9"><abbr title="Nmea\Cache\Dummy::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Dummy.php.html#14"><abbr title="Nmea\Cache\Dummy::set">set</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Dummy.php.html#21"><abbr title="Nmea\Cache\Dummy::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Dummy.php.html#26"><abbr title="Nmea\Cache\Dummy::clear">clear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#11"><abbr title="Nmea\Cache\Memcached::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#21"><abbr title="Nmea\Cache\Memcached::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#26"><abbr title="Nmea\Cache\Memcached::set">set</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#34"><abbr title="Nmea\Cache\Memcached::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#61"><abbr title="Nmea\Cache\Memcached::clear">clear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#11"><abbr title="Nmea\Cache\RingBuffer::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#15"><abbr title="Nmea\Cache\RingBuffer::addLine">addLine</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#26"><abbr title="Nmea\Cache\RingBuffer::getLine">getLine</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#27"><abbr title="Nmea\Config\Config::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#32"><abbr title="Nmea\Config\Config::readJsonConfig">readJsonConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#38"><abbr title="Nmea\Config\Config::getPngConfig">getPngConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#56"><abbr title="Nmea\Config\Config::getFields">getFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#61"><abbr title="Nmea\Config\Config::getComplete">getComplete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#66"><abbr title="Nmea\Config\Config::getRepeatingFields">getRepeatingFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#71"><abbr title="Nmea\Config\Config::countFields">countFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#76"><abbr title="Nmea\Config\Config::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#81"><abbr title="Nmea\Config\Config::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#86"><abbr title="Nmea\Config\Config::getLength">getLength</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#91"><abbr title="Nmea\Config\Config::getPng">getPng</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/Config.php.html#96"><abbr title="Nmea\Config\Config::getOrderIds">getOrderIds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#16"><abbr title="Nmea\Config\ConfigFactory::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#23"><abbr title="Nmea\Config\ConfigFactory::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#25"><abbr title="Nmea\Config\ConfigFactory::__clone">__clone</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#27"><abbr title="Nmea\Config\ConfigFactory::getPngFieldConfigInstance">getPngFieldConfigInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#36"><abbr title="Nmea\Config\ConfigFactory::getConfigInstance">getConfigInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#35"><abbr title="Nmea\Config\PngFieldConfig::setConfigInstance">setConfigInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#42"><abbr title="Nmea\Config\PngFieldConfig::setPgn">setPgn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#50"><abbr title="Nmea\Config\PngFieldConfig::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#55"><abbr title="Nmea\Config\PngFieldConfig::getOrderIds">getOrderIds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#60"><abbr title="Nmea\Config\PngFieldConfig::getFields">getFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#65"><abbr title="Nmea\Config\PngFieldConfig::getFieldsJson">getFieldsJson</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#70"><abbr title="Nmea\Config\PngFieldConfig::getFieldsByOrder">getFieldsByOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#87"><abbr title="Nmea\Config\PngFieldConfig::count">count</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#92"><abbr title="Nmea\Config\PngFieldConfig::getBitLengthVariable">getBitLengthVariable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#101"><abbr title="Nmea\Config\PngFieldConfig::getBitLength">getBitLength</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#106"><abbr title="Nmea\Config\PngFieldConfig::getBitOffset">getBitOffset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#111"><abbr title="Nmea\Config\PngFieldConfig::getBitStart">getBitStart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#116"><abbr title="Nmea\Config\PngFieldConfig::getResolution">getResolution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#121"><abbr title="Nmea\Config\PngFieldConfig::getUnits">getUnits</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#126"><abbr title="Nmea\Config\PngFieldConfig::getSigned">getSigned</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#131"><abbr title="Nmea\Config\PngFieldConfig::getType">getType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#136"><abbr title="Nmea\Config\PngFieldConfig::getEnumValues">getEnumValues</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#142"><abbr title="Nmea\Config\PngFieldConfig::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#147"><abbr title="Nmea\Config\PngFieldConfig::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#11"><abbr title="Nmea\Deamon\Bootstrap::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#15"><abbr title="Nmea\Deamon\Bootstrap::run">run</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#38"><abbr title="Nmea\Deamon\Bootstrap::valideNmea2000">valideNmea2000</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#9"><abbr title="Nmea\Deamon\Serial::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#12"><abbr title="Nmea\Deamon\Serial::readStream">readStream</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#22"><abbr title="Nmea\Deamon\Serial::open">open</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#27"><abbr title="Nmea\Deamon\Serial::close">close</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#13"><abbr title="Nmea\Http\Bootstrap::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#17"><abbr title="Nmea\Http\Bootstrap::run">run</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#30"><abbr title="Nmea\Http\Bootstrap::getOnePgn">getOnePgn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#38"><abbr title="Nmea\Http\Bootstrap::getAllPgns">getAllPgns</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#47"><abbr title="Nmea\Http\Bootstrap::watherDeep">watherDeep</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#58"><abbr title="Nmea\Http\Bootstrap::windData">windData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#78"><abbr title="Nmea\Http\Bootstrap::getPgn">getPgn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#7"><abbr title="Nmea\Logger\AbstractLogger::emergency">emergency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#12"><abbr title="Nmea\Logger\AbstractLogger::alert">alert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#17"><abbr title="Nmea\Logger\AbstractLogger::critical">critical</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#22"><abbr title="Nmea\Logger\AbstractLogger::error">error</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#27"><abbr title="Nmea\Logger\AbstractLogger::warning">warning</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#32"><abbr title="Nmea\Logger\AbstractLogger::notice">notice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#37"><abbr title="Nmea\Logger\AbstractLogger::info">info</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#42"><abbr title="Nmea\Logger\AbstractLogger::debug">debug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLogger.php.html#47"><abbr title="Nmea\Logger\AbstractLogger::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Factory.php.html#12"><abbr title="Nmea\Logger\Factory::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger.php.html#10"><abbr title="Nmea\Logger\Logger::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger.php.html#14"><abbr title="Nmea\Logger\Logger::setLogger">setLogger</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger.php.html#19"><abbr title="Nmea\Logger\Logger::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger.php.html#24"><abbr title="Nmea\Logger\Logger::getLogger">getLogger</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/FileLogger.php.html#10"><abbr title="Nmea\Logger\Logger\FileLogger::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#10"><abbr title="Nmea\Logger\Logger\NullLogger::emergency">emergency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#14"><abbr title="Nmea\Logger\Logger\NullLogger::alert">alert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#18"><abbr title="Nmea\Logger\Logger\NullLogger::critical">critical</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#22"><abbr title="Nmea\Logger\Logger\NullLogger::error">error</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#26"><abbr title="Nmea\Logger\Logger\NullLogger::warning">warning</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#30"><abbr title="Nmea\Logger\Logger\NullLogger::notice">notice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#34"><abbr title="Nmea\Logger\Logger\NullLogger::info">info</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#38"><abbr title="Nmea\Logger\Logger\NullLogger::debug">debug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/Logger/NullLogger.php.html#42"><abbr title="Nmea\Logger\Logger\NullLogger::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#24"><abbr title="Nmea\Parser\Data\Data::getValueWhithResolution">getValueWhithResolution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#37"><abbr title="Nmea\Parser\Data\Data::getValueWhithResolutionAndUnit">getValueWhithResolutionAndUnit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#47"><abbr title="Nmea\Parser\Data\Data::getValue">getValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#56"><abbr title="Nmea\Parser\Data\Data::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#61"><abbr title="Nmea\Parser\Data\Data::getUnit">getUnit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#66"><abbr title="Nmea\Parser\Data\Data::getResolution">getResolution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#71"><abbr title="Nmea\Parser\Data\Data::getEnum">getEnum</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#76"><abbr title="Nmea\Parser\Data\Data::setValue">setValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#83"><abbr title="Nmea\Parser\Data\Data::setName">setName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#90"><abbr title="Nmea\Parser\Data\Data::setUnit">setUnit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#97"><abbr title="Nmea\Parser\Data\Data::setResolution">setResolution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#104"><abbr title="Nmea\Parser\Data\Data::setEnum">setEnum</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#111"><abbr title="Nmea\Parser\Data\Data::getType">getType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#116"><abbr title="Nmea\Parser\Data\Data::setType">setType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#123"><abbr title="Nmea\Parser\Data\Data::findEnum">findEnum</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#12"><abbr title="Nmea\Parser\Data\DataFacade::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#18"><abbr title="Nmea\Parser\Data\DataFacade::getTimestamp">getTimestamp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#23"><abbr title="Nmea\Parser\Data\DataFacade::getPrio">getPrio</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#28"><abbr title="Nmea\Parser\Data\DataFacade::getPng">getPng</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#33"><abbr title="Nmea\Parser\Data\DataFacade::getDataPage">getDataPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#38"><abbr title="Nmea\Parser\Data\DataFacade::getSrc">getSrc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#43"><abbr title="Nmea\Parser\Data\DataFacade::getDst">getDst</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#48"><abbr title="Nmea\Parser\Data\DataFacade::getLength">getLength</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#53"><abbr title="Nmea\Parser\Data\DataFacade::count">count</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#58"><abbr title="Nmea\Parser\Data\DataFacade::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#63"><abbr title="Nmea\Parser\Data\DataFacade::getFieldValue">getFieldValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#68"><abbr title="Nmea\Parser\Data\DataFacade::getOrderIds">getOrderIds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#73"><abbr title="Nmea\Parser\Data\DataFacade::getPduFormat">getPduFormat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#78"><abbr title="Nmea\Parser\Data\DataFacade::toJson">toJson</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#96"><abbr title="Nmea\Parser\Data\DataFacade::toHtml">toHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#108"><abbr title="Nmea\Parser\Data\DataFacade::htmlFields">htmlFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#127"><abbr title="Nmea\Parser\Data\DataFacade::htmlField">htmlField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#17"><abbr title="Nmea\Parser\Data\DataPart::setDecoder">setDecoder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#24"><abbr title="Nmea\Parser\Data\DataPart::setData">setData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#32"><abbr title="Nmea\Parser\Data\DataPart::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#37"><abbr title="Nmea\Parser\Data\DataPart::getOrderIds">getOrderIds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#42"><abbr title="Nmea\Parser\Data\DataPart::count">count</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#47"><abbr title="Nmea\Parser\Data\DataPart::getFieldValue">getFieldValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#45"><abbr title="Nmea\Parser\Data\MainPart::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#50"><abbr title="Nmea\Parser\Data\MainPart::setDeviceType">setDeviceType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#57"><abbr title="Nmea\Parser\Data\MainPart::setMainBitString">setMainBitString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#99"><abbr title="Nmea\Parser\Data\MainPart::getFrameTye">getFrameTye</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#104"><abbr title="Nmea\Parser\Data\MainPart::getData">getData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#109"><abbr title="Nmea\Parser\Data\MainPart::getTimestamp">getTimestamp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#114"><abbr title="Nmea\Parser\Data\MainPart::getDataPage">getDataPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#119"><abbr title="Nmea\Parser\Data\MainPart::getPrio">getPrio</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#124"><abbr title="Nmea\Parser\Data\MainPart::getPng">getPng</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#129"><abbr title="Nmea\Parser\Data\MainPart::getSrc">getSrc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#134"><abbr title="Nmea\Parser\Data\MainPart::getDst">getDst</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#139"><abbr title="Nmea\Parser\Data\MainPart::getLength">getLength</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#144"><abbr title="Nmea\Parser\Data\MainPart::getPduFormat">getPduFormat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#149"><abbr title="Nmea\Parser\Data\MainPart::getDelimiter">getDelimiter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#19"><abbr title="Nmea\Parser\DataFacadeFactory::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#32"><abbr title="Nmea\Parser\DataFacadeFactory::getMainPartInstance">getMainPartInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#43"><abbr title="Nmea\Parser\DataFacadeFactory::getDataPartInstance">getDataPartInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeCanId.php.html#9"><abbr title="Nmea\Parser\Decode\DecodeCanId::getBin">getBin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#14"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::getInstance">getInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#23"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#25"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::__clone">__clone</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#27"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::setArray">setArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#42"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::getValue">getValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#49"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::convertToBin">convertToBin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#7"><abbr title="Nmea\Parser\Lib\BinDec::binDec2">binDec2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#35"><abbr title="Nmea\Parser\Lib\BinDec::isBinary">isBinary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#38"><abbr title="Nmea\Parser\Lib\Units\Unit::getValue">getValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#43"><abbr title="Nmea\Parser\Lib\Units\Unit::getUnit">getUnit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#52"><abbr title="Nmea\Parser\Lib\Units\Unit::getValueWithUnit">getValueWithUnit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#69"><abbr title="Nmea\Parser\Lib\Units\Unit::convert">convert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#85"><abbr title="Nmea\Parser\Lib\Units\Unit::angle">angle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#95"><abbr title="Nmea\Parser\Lib\Units\Unit::date">date</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#101"><abbr title="Nmea\Parser\Lib\Units\Unit::time">time</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#106"><abbr title="Nmea\Parser\Lib\Units\Unit::speed">speed</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#118"><abbr title="Nmea\Parser\Lib\Units\Unit::temperature">temperature</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#130"><abbr title="Nmea\Parser\Lib\Units\Unit::latitudeOrLongitude">latitudeOrLongitude</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#141"><abbr title="Nmea\Parser\Lib\Units\Unit::getDirectionForlatitudeOrLongitude">getDirectionForlatitudeOrLongitude</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#156"><abbr title="Nmea\Parser\Lib\Units\Unit::pressure">pressure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#11"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#15"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getTimestamp">getTimestamp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#20"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getDirection">getDirection</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#25"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getDataBytes">getDataBytes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#30"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getData">getData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#35"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getFirstByte">getFirstByte</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Data/Data.php.html#42"><abbr title="Nmea\Protocol\Frames\Frame\Data\Data::getSecondByte">getSecondByte</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#10"><abbr title="Nmea\Protocol\Frames\Frame\Frame::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#13"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getHeader">getHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#18"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getData">getData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#23"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getSequenceCounter">getSequenceCounter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#33"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getFrameCounter">getFrameCounter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#42"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getLowerBits">getLowerBits</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#47"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getNHighBits">getNHighBits</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#52"><abbr title="Nmea\Protocol\Frames\Frame\Frame::numberOfFrames">numberOfFrames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#62"><abbr title="Nmea\Protocol\Frames\Frame\Frame::totalNumberOfBytes">totalNumberOfBytes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#13"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isSinglePacked">isSinglePacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#24"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isFastPacked">isFastPacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#28"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::inMixedRangeAndIsSinglePacked">inMixedRangeAndIsSinglePacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#32"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::inMixedRangeAndIsFastPacked">inMixedRangeAndIsFastPacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#36"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isMixedSingleFastPacked">isMixedSingleFastPacked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#40"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isBetween">isBetween</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#15"><abbr title="Nmea\Protocol\Frames\Frames::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#19"><abbr title="Nmea\Protocol\Frames\Frames::addFrame">addFrame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#39"><abbr title="Nmea\Protocol\Frames\Frames::unSetFrameSequenceItIsTheFistFrame">unSetFrameSequenceItIsTheFistFrame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#46"><abbr title="Nmea\Protocol\Frames\Frames::isReady">isReady</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#59"><abbr title="Nmea\Protocol\Frames\Frames::countFrames">countFrames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#64"><abbr title="Nmea\Protocol\Frames\Frames::getFrame">getFrame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#69"><abbr title="Nmea\Protocol\Frames\Frames::makeData">makeData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#85"><abbr title="Nmea\Protocol\Frames\Frames::addCache">addCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#92"><abbr title="Nmea\Protocol\Frames\Frames::makeSinglePackedData">makeSinglePackedData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#110"><abbr title="Nmea\Protocol\Frames\Frames::makeFastPackedData">makeFastPackedData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#16"><abbr title="Nmea\Protocol\FramesFactory::setCache">setCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#21"><abbr title="Nmea\Protocol\FramesFactory::reset">reset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#26"><abbr title="Nmea\Protocol\FramesFactory::getInstance">getInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#37"><abbr title="Nmea\Protocol\FramesFactory::addData">addData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#44"><abbr title="Nmea\Protocol\FramesFactory::removeSpecialCharacter">removeSpecialCharacter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#7"><abbr title="Nmea\Logger\AbstractLoggerTrait::emergency">emergency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#12"><abbr title="Nmea\Logger\AbstractLoggerTrait::alert">alert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#17"><abbr title="Nmea\Logger\AbstractLoggerTrait::critical">critical</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#22"><abbr title="Nmea\Logger\AbstractLoggerTrait::error">error</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#27"><abbr title="Nmea\Logger\AbstractLoggerTrait::warning">warning</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#32"><abbr title="Nmea\Logger\AbstractLoggerTrait::notice">notice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#37"><abbr title="Nmea\Logger\AbstractLoggerTrait::info">info</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#42"><abbr title="Nmea\Logger\AbstractLoggerTrait::debug">debug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logger/AbstractLoggerTrait.php.html#47"><abbr title="Nmea\Logger\AbstractLoggerTrait::log">log</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#110"><abbr title="Nmea\Protocol\Frames\Frames::makeFastPackedData">makeFastPackedData</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#7"><abbr title="Nmea\Parser\Lib\BinDec::binDec2">binDec2</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#69"><abbr title="Nmea\Parser\Lib\Units\Unit::convert">convert</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#13"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isSinglePacked">isSinglePacked</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#57"><abbr title="Nmea\Parser\Data\MainPart::setMainBitString">setMainBitString</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#141"><abbr title="Nmea\Parser\Lib\Units\Unit::getDirectionForlatitudeOrLongitude">getDirectionForlatitudeOrLongitude</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#46"><abbr title="Nmea\Protocol\Frames\Frames::isReady">isReady</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#34"><abbr title="Nmea\Cache\Memcached::getAll">getAll</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#24"><abbr title="Nmea\Parser\Data\Data::getValueWhithResolution">getValueWhithResolution</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#47"><abbr title="Nmea\Parser\Data\Data::getValue">getValue</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#108"><abbr title="Nmea\Parser\Data\DataFacade::htmlFields">htmlFields</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Lib/BinDec.php.html#35"><abbr title="Nmea\Parser\Lib\BinDec::isBinary">isBinary</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#52"><abbr title="Nmea\Parser\Lib\Units\Unit::getValueWithUnit">getValueWithUnit</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#106"><abbr title="Nmea\Parser\Lib\Units\Unit::speed">speed</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#118"><abbr title="Nmea\Parser\Lib\Units\Unit::temperature">temperature</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#19"><abbr title="Nmea\Protocol\Frames\Frames::addFrame">addFrame</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#69"><abbr title="Nmea\Protocol\Frames\Frames::makeData">makeData</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#9"><abbr title="Nmea\AbstractHeader::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#26"><abbr title="Nmea\Cache\RingBuffer::getLine">getLine</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#136"><abbr title="Nmea\Config\PngFieldConfig::getEnumValues">getEnumValues</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#15"><abbr title="Nmea\Deamon\Bootstrap::run">run</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#17"><abbr title="Nmea\Http\Bootstrap::run">run</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#37"><abbr title="Nmea\Parser\Data\Data::getValueWhithResolutionAndUnit">getValueWhithResolutionAndUnit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/Data/MainPart.php.html#149"><abbr title="Nmea\Parser\Data\MainPart::getDelimiter">getDelimiter</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#156"><abbr title="Nmea\Parser\Lib\Units\Unit::pressure">pressure</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#52"><abbr title="Nmea\Protocol\Frames\Frame\Frame::numberOfFrames">numberOfFrames</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#24"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isFastPacked">isFastPacked</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#39"><abbr title="Nmea\Protocol\Frames\Frames::unSetFrameSequenceItIsTheFistFrame">unSetFrameSequenceItIsTheFistFrame</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Protocol/Frames/Frames.php.html#92"><abbr title="Nmea\Protocol\Frames\Frames::makeSinglePackedData">makeSinglePackedData</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#21"><abbr title="Nmea\AbstractHeader::getPgn">getPgn</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#74"><abbr title="Nmea\AbstractHeader::getDestination">getDestination</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#84"><abbr title="Nmea\AbstractHeader::getGroupExtension">getGroupExtension</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractHeader.php.html#104"><abbr title="Nmea\AbstractHeader::isNmea2000Packed">isNmea2000Packed</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Cache/Memcached.php.html#11"><abbr title="Nmea\Cache\Memcached::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Cache/RingBuffer.php.html#15"><abbr title="Nmea\Cache\RingBuffer::addLine">addLine</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/Config.php.html#38"><abbr title="Nmea\Config\Config::getPngConfig">getPngConfig</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/Config.php.html#96"><abbr title="Nmea\Config\Config::getOrderIds">getOrderIds</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#27"><abbr title="Nmea\Config\ConfigFactory::getPngFieldConfigInstance">getPngFieldConfigInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/ConfigFactory.php.html#36"><abbr title="Nmea\Config\ConfigFactory::getConfigInstance">getConfigInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#70"><abbr title="Nmea\Config\PngFieldConfig::getFieldsByOrder">getFieldsByOrder</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#92"><abbr title="Nmea\Config\PngFieldConfig::getBitLengthVariable">getBitLengthVariable</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#116"><abbr title="Nmea\Config\PngFieldConfig::getResolution">getResolution</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#121"><abbr title="Nmea\Config\PngFieldConfig::getUnits">getUnits</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Config/PngFieldConfig.php.html#131"><abbr title="Nmea\Config\PngFieldConfig::getType">getType</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Deamon/Bootstrap.php.html#38"><abbr title="Nmea\Deamon\Bootstrap::valideNmea2000">valideNmea2000</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Deamon/Serial.php.html#12"><abbr title="Nmea\Deamon\Serial::readStream">readStream</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#38"><abbr title="Nmea\Http\Bootstrap::getAllPgns">getAllPgns</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Http/Bootstrap.php.html#78"><abbr title="Nmea\Http\Bootstrap::getPgn">getPgn</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Logger/Factory.php.html#12"><abbr title="Nmea\Logger\Factory::log">log</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Logger/Logger/FileLogger.php.html#10"><abbr title="Nmea\Logger\Logger\FileLogger::log">log</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Data/Data.php.html#123"><abbr title="Nmea\Parser\Data\Data::findEnum">findEnum</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Data/DataFacade.php.html#78"><abbr title="Nmea\Parser\Data\DataFacade::toJson">toJson</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Data/DataPart.php.html#47"><abbr title="Nmea\Parser\Data\DataPart::getFieldValue">getFieldValue</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#32"><abbr title="Nmea\Parser\DataFacadeFactory::getMainPartInstance">getMainPartInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/DataFacadeFactory.php.html#43"><abbr title="Nmea\Parser\DataFacadeFactory::getDataPartInstance">getDataPartInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#14"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::getInstance">getInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#27"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::setArray">setArray</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Decode/DecodeNmea2000.php.html#49"><abbr title="Nmea\Parser\Decode\DecodeNmea2000::convertToBin">convertToBin</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#43"><abbr title="Nmea\Parser\Lib\Units\Unit::getUnit">getUnit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/Lib/Units/Unit.php.html#85"><abbr title="Nmea\Parser\Lib\Units\Unit::angle">angle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#23"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getSequenceCounter">getSequenceCounter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Frame.php.html#33"><abbr title="Nmea\Protocol\Frames\Frame\Frame::getFrameCounter">getFrameCounter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#28"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::inMixedRangeAndIsSinglePacked">inMixedRangeAndIsSinglePacked</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#32"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::inMixedRangeAndIsFastPacked">inMixedRangeAndIsFastPacked</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/Frames/Frame/Header/PackedTypeHelper.php.html#40"><abbr title="Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper::isBetween">isBetween</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Protocol/FramesFactory.php.html#26"><abbr title="Nmea\Protocol\FramesFactory::getInstance">getInstance</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.3</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.4</a> and <a href="https://phpunit.de/">PHPUnit 11.2-dev</a> at Tue May 14 15:42:44 CEST 2024.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=11.0.3" type="text/javascript"></script>
+  <script src="../_js/d3.min.js?v=11.0.3" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js?v=11.0.3" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([30,0,0,0,0,0,0,0,0,0,0,5], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([228,0,0,0,0,0,0,0,0,0,0,1], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,26,"<a href=\"AbstractHeader.php.html#7\">Nmea\\AbstractHeader<\/a>"],[0,4,"<a href=\"Cache\/Dummy.php.html#5\">Nmea\\Cache\\Dummy<\/a>"],[0,9,"<a href=\"Cache\/Memcached.php.html#8\">Nmea\\Cache\\Memcached<\/a>"],[0,6,"<a href=\"Cache\/RingBuffer.php.html#5\">Nmea\\Cache\\RingBuffer<\/a>"],[0,14,"<a href=\"Config\/Config.php.html#11\">Nmea\\Config\\Config<\/a>"],[100,0,"<a href=\"Config\/ConfigException.php.html#7\">Nmea\\Config\\ConfigException<\/a>"],[0,7,"<a href=\"Config\/ConfigFactory.php.html#11\">Nmea\\Config\\ConfigFactory<\/a>"],[0,26,"<a href=\"Config\/PngFieldConfig.php.html#11\">Nmea\\Config\\PngFieldConfig<\/a>"],[0,6,"<a href=\"Deamon\/Bootstrap.php.html#9\">Nmea\\Deamon\\Bootstrap<\/a>"],[0,5,"<a href=\"Deamon\/Serial.php.html#5\">Nmea\\Deamon\\Serial<\/a>"],[0,11,"<a href=\"Http\/Bootstrap.php.html#10\">Nmea\\Http\\Bootstrap<\/a>"],[0,8,"<a href=\"Logger\/AbstractLogger.php.html#5\">Nmea\\Logger\\AbstractLogger<\/a>"],[0,2,"<a href=\"Logger\/Factory.php.html#8\">Nmea\\Logger\\Factory<\/a>"],[100,0,"<a href=\"Logger\/InvalidArgumentException.php.html#5\">Nmea\\Logger\\InvalidArgumentException<\/a>"],[100,0,"<a href=\"Logger\/LogLevel.php.html#5\">Nmea\\Logger\\LogLevel<\/a>"],[0,4,"<a href=\"Logger\/Logger.php.html#7\">Nmea\\Logger\\Logger<\/a>"],[0,2,"<a href=\"Logger\/Logger\/FileLogger.php.html#7\">Nmea\\Logger\\Logger\\FileLogger<\/a>"],[0,9,"<a href=\"Logger\/Logger\/NullLogger.php.html#7\">Nmea\\Logger\\Logger\\NullLogger<\/a>"],[0,24,"<a href=\"Parser\/Data\/Data.php.html#13\">Nmea\\Parser\\Data\\Data<\/a>"],[0,21,"<a href=\"Parser\/Data\/DataFacade.php.html#7\">Nmea\\Parser\\Data\\DataFacade<\/a>"],[0,7,"<a href=\"Parser\/Data\/DataPart.php.html#9\">Nmea\\Parser\\Data\\DataPart<\/a>"],[0,20,"<a href=\"Parser\/Data\/MainPart.php.html#14\">Nmea\\Parser\\Data\\MainPart<\/a>"],[0,5,"<a href=\"Parser\/DataFacadeFactory.php.html#12\">Nmea\\Parser\\DataFacadeFactory<\/a>"],[0,1,"<a href=\"Parser\/Decode\/DecodeCanId.php.html#7\">Nmea\\Parser\\Decode\\DecodeCanId<\/a>"],[0,9,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#8\">Nmea\\Parser\\Decode\\DecodeNmea2000<\/a>"],[0,11,"<a href=\"Parser\/Lib\/BinDec.php.html#5\">Nmea\\Parser\\Lib\\BinDec<\/a>"],[0,35,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#12\">Nmea\\Parser\\Lib\\Units\\Unit<\/a>"],[100,0,"<a href=\"Parser\/ParserException.php.html#13\">Nmea\\Parser\\ParserException<\/a>"],[0,7,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#7\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data<\/a>"],[0,13,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#8\">Nmea\\Protocol\\Frames\\Frame\\Frame<\/a>"],[100,0,"<a href=\"Protocol\/Frames\/Frame\/Header\/Header.php.html#7\">Nmea\\Protocol\\Frames\\Frame\\Header\\Header<\/a>"],[0,16,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#5\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper<\/a>"],[0,33,"<a href=\"Protocol\/Frames\/Frames.php.html#8\">Nmea\\Protocol\\Frames\\Frames<\/a>"],[0,6,"<a href=\"Protocol\/FramesFactory.php.html#11\">Nmea\\Protocol\\FramesFactory<\/a>"],[0,8,"<a href=\"Logger\/AbstractLoggerTrait.php.html#5\">Nmea\\Logger\\AbstractLoggerTrait<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,3,"<a href=\"AbstractHeader.php.html#9\">Nmea\\AbstractHeader::__construct<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#17\">Nmea\\AbstractHeader::getCanIdDec<\/a>"],[0,2,"<a href=\"AbstractHeader.php.html#21\">Nmea\\AbstractHeader::getPgn<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#26\">Nmea\\AbstractHeader::getCanIdHex<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#30\">Nmea\\AbstractHeader::getCanExtendedId<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#35\">Nmea\\AbstractHeader::decode<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#39\">Nmea\\AbstractHeader::getPriority<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#44\">Nmea\\AbstractHeader::getReserved<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#49\">Nmea\\AbstractHeader::getDataPage<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#54\">Nmea\\AbstractHeader::getExtendedDataPage<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#59\">Nmea\\AbstractHeader::getPduFormat<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#64\">Nmea\\AbstractHeader::getPduSpecific<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#69\">Nmea\\AbstractHeader::getSourceAdress<\/a>"],[0,2,"<a href=\"AbstractHeader.php.html#74\">Nmea\\AbstractHeader::getDestination<\/a>"],[0,2,"<a href=\"AbstractHeader.php.html#84\">Nmea\\AbstractHeader::getGroupExtension<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#94\">Nmea\\AbstractHeader::isSingelPacked<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#99\">Nmea\\AbstractHeader::isFastPacked<\/a>"],[0,2,"<a href=\"AbstractHeader.php.html#104\">Nmea\\AbstractHeader::isNmea2000Packed<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#109\">Nmea\\AbstractHeader::isPdu1Format<\/a>"],[0,1,"<a href=\"AbstractHeader.php.html#114\">Nmea\\AbstractHeader::isPdu2Format<\/a>"],[0,1,"<a href=\"Cache\/Dummy.php.html#9\">Nmea\\Cache\\Dummy::get<\/a>"],[0,1,"<a href=\"Cache\/Dummy.php.html#14\">Nmea\\Cache\\Dummy::set<\/a>"],[0,1,"<a href=\"Cache\/Dummy.php.html#21\">Nmea\\Cache\\Dummy::getAll<\/a>"],[0,1,"<a href=\"Cache\/Dummy.php.html#26\">Nmea\\Cache\\Dummy::clear<\/a>"],[0,2,"<a href=\"Cache\/Memcached.php.html#11\">Nmea\\Cache\\Memcached::__construct<\/a>"],[0,1,"<a href=\"Cache\/Memcached.php.html#21\">Nmea\\Cache\\Memcached::get<\/a>"],[0,1,"<a href=\"Cache\/Memcached.php.html#26\">Nmea\\Cache\\Memcached::set<\/a>"],[0,4,"<a href=\"Cache\/Memcached.php.html#34\">Nmea\\Cache\\Memcached::getAll<\/a>"],[0,1,"<a href=\"Cache\/Memcached.php.html#61\">Nmea\\Cache\\Memcached::clear<\/a>"],[0,1,"<a href=\"Cache\/RingBuffer.php.html#11\">Nmea\\Cache\\RingBuffer::__construct<\/a>"],[0,2,"<a href=\"Cache\/RingBuffer.php.html#15\">Nmea\\Cache\\RingBuffer::addLine<\/a>"],[0,3,"<a href=\"Cache\/RingBuffer.php.html#26\">Nmea\\Cache\\RingBuffer::getLine<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#27\">Nmea\\Config\\Config::__construct<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#32\">Nmea\\Config\\Config::readJsonConfig<\/a>"],[0,2,"<a href=\"Config\/Config.php.html#38\">Nmea\\Config\\Config::getPngConfig<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#56\">Nmea\\Config\\Config::getFields<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#61\">Nmea\\Config\\Config::getComplete<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#66\">Nmea\\Config\\Config::getRepeatingFields<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#71\">Nmea\\Config\\Config::countFields<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#76\">Nmea\\Config\\Config::getId<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#81\">Nmea\\Config\\Config::getDescription<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#86\">Nmea\\Config\\Config::getLength<\/a>"],[0,1,"<a href=\"Config\/Config.php.html#91\">Nmea\\Config\\Config::getPng<\/a>"],[0,2,"<a href=\"Config\/Config.php.html#96\">Nmea\\Config\\Config::getOrderIds<\/a>"],[0,1,"<a href=\"Config\/ConfigFactory.php.html#16\">Nmea\\Config\\ConfigFactory::create<\/a>"],[0,1,"<a href=\"Config\/ConfigFactory.php.html#23\">Nmea\\Config\\ConfigFactory::__construct<\/a>"],[0,1,"<a href=\"Config\/ConfigFactory.php.html#25\">Nmea\\Config\\ConfigFactory::__clone<\/a>"],[0,2,"<a href=\"Config\/ConfigFactory.php.html#27\">Nmea\\Config\\ConfigFactory::getPngFieldConfigInstance<\/a>"],[0,2,"<a href=\"Config\/ConfigFactory.php.html#36\">Nmea\\Config\\ConfigFactory::getConfigInstance<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#35\">Nmea\\Config\\PngFieldConfig::setConfigInstance<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#42\">Nmea\\Config\\PngFieldConfig::setPgn<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#50\">Nmea\\Config\\PngFieldConfig::getDescription<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#55\">Nmea\\Config\\PngFieldConfig::getOrderIds<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#60\">Nmea\\Config\\PngFieldConfig::getFields<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#65\">Nmea\\Config\\PngFieldConfig::getFieldsJson<\/a>"],[0,2,"<a href=\"Config\/PngFieldConfig.php.html#70\">Nmea\\Config\\PngFieldConfig::getFieldsByOrder<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#87\">Nmea\\Config\\PngFieldConfig::count<\/a>"],[0,2,"<a href=\"Config\/PngFieldConfig.php.html#92\">Nmea\\Config\\PngFieldConfig::getBitLengthVariable<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#101\">Nmea\\Config\\PngFieldConfig::getBitLength<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#106\">Nmea\\Config\\PngFieldConfig::getBitOffset<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#111\">Nmea\\Config\\PngFieldConfig::getBitStart<\/a>"],[0,2,"<a href=\"Config\/PngFieldConfig.php.html#116\">Nmea\\Config\\PngFieldConfig::getResolution<\/a>"],[0,2,"<a href=\"Config\/PngFieldConfig.php.html#121\">Nmea\\Config\\PngFieldConfig::getUnits<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#126\">Nmea\\Config\\PngFieldConfig::getSigned<\/a>"],[0,2,"<a href=\"Config\/PngFieldConfig.php.html#131\">Nmea\\Config\\PngFieldConfig::getType<\/a>"],[0,3,"<a href=\"Config\/PngFieldConfig.php.html#136\">Nmea\\Config\\PngFieldConfig::getEnumValues<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#142\">Nmea\\Config\\PngFieldConfig::getId<\/a>"],[0,1,"<a href=\"Config\/PngFieldConfig.php.html#147\">Nmea\\Config\\PngFieldConfig::getName<\/a>"],[0,1,"<a href=\"Deamon\/Bootstrap.php.html#11\">Nmea\\Deamon\\Bootstrap::__construct<\/a>"],[0,3,"<a href=\"Deamon\/Bootstrap.php.html#15\">Nmea\\Deamon\\Bootstrap::run<\/a>"],[0,2,"<a href=\"Deamon\/Bootstrap.php.html#38\">Nmea\\Deamon\\Bootstrap::valideNmea2000<\/a>"],[0,1,"<a href=\"Deamon\/Serial.php.html#9\">Nmea\\Deamon\\Serial::__construct<\/a>"],[0,2,"<a href=\"Deamon\/Serial.php.html#12\">Nmea\\Deamon\\Serial::readStream<\/a>"],[0,1,"<a href=\"Deamon\/Serial.php.html#22\">Nmea\\Deamon\\Serial::open<\/a>"],[0,1,"<a href=\"Deamon\/Serial.php.html#27\">Nmea\\Deamon\\Serial::close<\/a>"],[0,1,"<a href=\"Http\/Bootstrap.php.html#13\">Nmea\\Http\\Bootstrap::__construct<\/a>"],[0,3,"<a href=\"Http\/Bootstrap.php.html#17\">Nmea\\Http\\Bootstrap::run<\/a>"],[0,1,"<a href=\"Http\/Bootstrap.php.html#30\">Nmea\\Http\\Bootstrap::getOnePgn<\/a>"],[0,2,"<a href=\"Http\/Bootstrap.php.html#38\">Nmea\\Http\\Bootstrap::getAllPgns<\/a>"],[0,1,"<a href=\"Http\/Bootstrap.php.html#47\">Nmea\\Http\\Bootstrap::watherDeep<\/a>"],[0,1,"<a href=\"Http\/Bootstrap.php.html#58\">Nmea\\Http\\Bootstrap::windData<\/a>"],[0,2,"<a href=\"Http\/Bootstrap.php.html#78\">Nmea\\Http\\Bootstrap::getPgn<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#7\">Nmea\\Logger\\AbstractLogger::emergency<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#12\">Nmea\\Logger\\AbstractLogger::alert<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#17\">Nmea\\Logger\\AbstractLogger::critical<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#22\">Nmea\\Logger\\AbstractLogger::error<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#27\">Nmea\\Logger\\AbstractLogger::warning<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#32\">Nmea\\Logger\\AbstractLogger::notice<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#37\">Nmea\\Logger\\AbstractLogger::info<\/a>"],[0,1,"<a href=\"Logger\/AbstractLogger.php.html#42\">Nmea\\Logger\\AbstractLogger::debug<\/a>"],[0,0,"<a href=\"Logger\/AbstractLogger.php.html#47\">Nmea\\Logger\\AbstractLogger::log<\/a>"],[0,2,"<a href=\"Logger\/Factory.php.html#12\">Nmea\\Logger\\Factory::log<\/a>"],[0,1,"<a href=\"Logger\/Logger.php.html#10\">Nmea\\Logger\\Logger::__construct<\/a>"],[0,1,"<a href=\"Logger\/Logger.php.html#14\">Nmea\\Logger\\Logger::setLogger<\/a>"],[0,1,"<a href=\"Logger\/Logger.php.html#19\">Nmea\\Logger\\Logger::log<\/a>"],[0,1,"<a href=\"Logger\/Logger.php.html#24\">Nmea\\Logger\\Logger::getLogger<\/a>"],[0,2,"<a href=\"Logger\/Logger\/FileLogger.php.html#10\">Nmea\\Logger\\Logger\\FileLogger::log<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#10\">Nmea\\Logger\\Logger\\NullLogger::emergency<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#14\">Nmea\\Logger\\Logger\\NullLogger::alert<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#18\">Nmea\\Logger\\Logger\\NullLogger::critical<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#22\">Nmea\\Logger\\Logger\\NullLogger::error<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#26\">Nmea\\Logger\\Logger\\NullLogger::warning<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#30\">Nmea\\Logger\\Logger\\NullLogger::notice<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#34\">Nmea\\Logger\\Logger\\NullLogger::info<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#38\">Nmea\\Logger\\Logger\\NullLogger::debug<\/a>"],[0,1,"<a href=\"Logger\/Logger\/NullLogger.php.html#42\">Nmea\\Logger\\Logger\\NullLogger::log<\/a>"],[0,4,"<a href=\"Parser\/Data\/Data.php.html#24\">Nmea\\Parser\\Data\\Data::getValueWhithResolution<\/a>"],[0,3,"<a href=\"Parser\/Data\/Data.php.html#37\">Nmea\\Parser\\Data\\Data::getValueWhithResolutionAndUnit<\/a>"],[0,4,"<a href=\"Parser\/Data\/Data.php.html#47\">Nmea\\Parser\\Data\\Data::getValue<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#56\">Nmea\\Parser\\Data\\Data::getName<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#61\">Nmea\\Parser\\Data\\Data::getUnit<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#66\">Nmea\\Parser\\Data\\Data::getResolution<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#71\">Nmea\\Parser\\Data\\Data::getEnum<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#76\">Nmea\\Parser\\Data\\Data::setValue<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#83\">Nmea\\Parser\\Data\\Data::setName<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#90\">Nmea\\Parser\\Data\\Data::setUnit<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#97\">Nmea\\Parser\\Data\\Data::setResolution<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#104\">Nmea\\Parser\\Data\\Data::setEnum<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#111\">Nmea\\Parser\\Data\\Data::getType<\/a>"],[0,1,"<a href=\"Parser\/Data\/Data.php.html#116\">Nmea\\Parser\\Data\\Data::setType<\/a>"],[0,2,"<a href=\"Parser\/Data\/Data.php.html#123\">Nmea\\Parser\\Data\\Data::findEnum<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#12\">Nmea\\Parser\\Data\\DataFacade::__construct<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#18\">Nmea\\Parser\\Data\\DataFacade::getTimestamp<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#23\">Nmea\\Parser\\Data\\DataFacade::getPrio<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#28\">Nmea\\Parser\\Data\\DataFacade::getPng<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#33\">Nmea\\Parser\\Data\\DataFacade::getDataPage<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#38\">Nmea\\Parser\\Data\\DataFacade::getSrc<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#43\">Nmea\\Parser\\Data\\DataFacade::getDst<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#48\">Nmea\\Parser\\Data\\DataFacade::getLength<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#53\">Nmea\\Parser\\Data\\DataFacade::count<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#58\">Nmea\\Parser\\Data\\DataFacade::getDescription<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#63\">Nmea\\Parser\\Data\\DataFacade::getFieldValue<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#68\">Nmea\\Parser\\Data\\DataFacade::getOrderIds<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#73\">Nmea\\Parser\\Data\\DataFacade::getPduFormat<\/a>"],[0,2,"<a href=\"Parser\/Data\/DataFacade.php.html#78\">Nmea\\Parser\\Data\\DataFacade::toJson<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#96\">Nmea\\Parser\\Data\\DataFacade::toHtml<\/a>"],[0,4,"<a href=\"Parser\/Data\/DataFacade.php.html#108\">Nmea\\Parser\\Data\\DataFacade::htmlFields<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataFacade.php.html#127\">Nmea\\Parser\\Data\\DataFacade::htmlField<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataPart.php.html#17\">Nmea\\Parser\\Data\\DataPart::setDecoder<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataPart.php.html#24\">Nmea\\Parser\\Data\\DataPart::setData<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataPart.php.html#32\">Nmea\\Parser\\Data\\DataPart::getDescription<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataPart.php.html#37\">Nmea\\Parser\\Data\\DataPart::getOrderIds<\/a>"],[0,1,"<a href=\"Parser\/Data\/DataPart.php.html#42\">Nmea\\Parser\\Data\\DataPart::count<\/a>"],[0,2,"<a href=\"Parser\/Data\/DataPart.php.html#47\">Nmea\\Parser\\Data\\DataPart::getFieldValue<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#45\">Nmea\\Parser\\Data\\MainPart::__construct<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#50\">Nmea\\Parser\\Data\\MainPart::setDeviceType<\/a>"],[0,5,"<a href=\"Parser\/Data\/MainPart.php.html#57\">Nmea\\Parser\\Data\\MainPart::setMainBitString<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#99\">Nmea\\Parser\\Data\\MainPart::getFrameTye<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#104\">Nmea\\Parser\\Data\\MainPart::getData<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#109\">Nmea\\Parser\\Data\\MainPart::getTimestamp<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#114\">Nmea\\Parser\\Data\\MainPart::getDataPage<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#119\">Nmea\\Parser\\Data\\MainPart::getPrio<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#124\">Nmea\\Parser\\Data\\MainPart::getPng<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#129\">Nmea\\Parser\\Data\\MainPart::getSrc<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#134\">Nmea\\Parser\\Data\\MainPart::getDst<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#139\">Nmea\\Parser\\Data\\MainPart::getLength<\/a>"],[0,1,"<a href=\"Parser\/Data\/MainPart.php.html#144\">Nmea\\Parser\\Data\\MainPart::getPduFormat<\/a>"],[0,3,"<a href=\"Parser\/Data\/MainPart.php.html#149\">Nmea\\Parser\\Data\\MainPart::getDelimiter<\/a>"],[0,1,"<a href=\"Parser\/DataFacadeFactory.php.html#19\">Nmea\\Parser\\DataFacadeFactory::create<\/a>"],[0,2,"<a href=\"Parser\/DataFacadeFactory.php.html#32\">Nmea\\Parser\\DataFacadeFactory::getMainPartInstance<\/a>"],[0,2,"<a href=\"Parser\/DataFacadeFactory.php.html#43\">Nmea\\Parser\\DataFacadeFactory::getDataPartInstance<\/a>"],[0,1,"<a href=\"Parser\/Decode\/DecodeCanId.php.html#9\">Nmea\\Parser\\Decode\\DecodeCanId::getBin<\/a>"],[0,2,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#14\">Nmea\\Parser\\Decode\\DecodeNmea2000::getInstance<\/a>"],[0,1,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#23\">Nmea\\Parser\\Decode\\DecodeNmea2000::__construct<\/a>"],[0,1,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#25\">Nmea\\Parser\\Decode\\DecodeNmea2000::__clone<\/a>"],[0,2,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#27\">Nmea\\Parser\\Decode\\DecodeNmea2000::setArray<\/a>"],[0,1,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#42\">Nmea\\Parser\\Decode\\DecodeNmea2000::getValue<\/a>"],[0,2,"<a href=\"Parser\/Decode\/DecodeNmea2000.php.html#49\">Nmea\\Parser\\Decode\\DecodeNmea2000::convertToBin<\/a>"],[0,7,"<a href=\"Parser\/Lib\/BinDec.php.html#7\">Nmea\\Parser\\Lib\\BinDec::binDec2<\/a>"],[0,4,"<a href=\"Parser\/Lib\/BinDec.php.html#35\">Nmea\\Parser\\Lib\\BinDec::isBinary<\/a>"],[100,1,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#21\">Nmea\\Parser\\Lib\\Units\\Unit::__construct<\/a>"],[0,1,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#38\">Nmea\\Parser\\Lib\\Units\\Unit::getValue<\/a>"],[0,2,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#43\">Nmea\\Parser\\Lib\\Units\\Unit::getUnit<\/a>"],[0,4,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#52\">Nmea\\Parser\\Lib\\Units\\Unit::getValueWithUnit<\/a>"],[0,6,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#69\">Nmea\\Parser\\Lib\\Units\\Unit::convert<\/a>"],[0,2,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#85\">Nmea\\Parser\\Lib\\Units\\Unit::angle<\/a>"],[0,1,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#95\">Nmea\\Parser\\Lib\\Units\\Unit::date<\/a>"],[0,1,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#101\">Nmea\\Parser\\Lib\\Units\\Unit::time<\/a>"],[0,4,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#106\">Nmea\\Parser\\Lib\\Units\\Unit::speed<\/a>"],[0,4,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#118\">Nmea\\Parser\\Lib\\Units\\Unit::temperature<\/a>"],[0,1,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#130\">Nmea\\Parser\\Lib\\Units\\Unit::latitudeOrLongitude<\/a>"],[0,5,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#141\">Nmea\\Parser\\Lib\\Units\\Unit::getDirectionForlatitudeOrLongitude<\/a>"],[0,3,"<a href=\"Parser\/Lib\/Units\/Unit.php.html#156\">Nmea\\Parser\\Lib\\Units\\Unit::pressure<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#11\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::__construct<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#15\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getTimestamp<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#20\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getDirection<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#25\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getDataBytes<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#30\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getData<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#35\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getFirstByte<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Data\/Data.php.html#42\">Nmea\\Protocol\\Frames\\Frame\\Data\\Data::getSecondByte<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#10\">Nmea\\Protocol\\Frames\\Frame\\Frame::__construct<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#13\">Nmea\\Protocol\\Frames\\Frame\\Frame::getHeader<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#18\">Nmea\\Protocol\\Frames\\Frame\\Frame::getData<\/a>"],[0,2,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#23\">Nmea\\Protocol\\Frames\\Frame\\Frame::getSequenceCounter<\/a>"],[0,2,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#33\">Nmea\\Protocol\\Frames\\Frame\\Frame::getFrameCounter<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#42\">Nmea\\Protocol\\Frames\\Frame\\Frame::getLowerBits<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#47\">Nmea\\Protocol\\Frames\\Frame\\Frame::getNHighBits<\/a>"],[0,3,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#52\">Nmea\\Protocol\\Frames\\Frame\\Frame::numberOfFrames<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Frame.php.html#62\">Nmea\\Protocol\\Frames\\Frame\\Frame::totalNumberOfBytes<\/a>"],[0,6,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#13\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::isSinglePacked<\/a>"],[0,3,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#24\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::isFastPacked<\/a>"],[0,2,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#28\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::inMixedRangeAndIsSinglePacked<\/a>"],[0,2,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#32\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::inMixedRangeAndIsFastPacked<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#36\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::isMixedSingleFastPacked<\/a>"],[0,2,"<a href=\"Protocol\/Frames\/Frame\/Header\/PackedTypeHelper.php.html#40\">Nmea\\Protocol\\Frames\\Frame\\Header\\PackedTypeHelper::isBetween<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frames.php.html#15\">Nmea\\Protocol\\Frames\\Frames::__construct<\/a>"],[0,4,"<a href=\"Protocol\/Frames\/Frames.php.html#19\">Nmea\\Protocol\\Frames\\Frames::addFrame<\/a>"],[0,3,"<a href=\"Protocol\/Frames\/Frames.php.html#39\">Nmea\\Protocol\\Frames\\Frames::unSetFrameSequenceItIsTheFistFrame<\/a>"],[0,5,"<a href=\"Protocol\/Frames\/Frames.php.html#46\">Nmea\\Protocol\\Frames\\Frames::isReady<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frames.php.html#59\">Nmea\\Protocol\\Frames\\Frames::countFrames<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frames.php.html#64\">Nmea\\Protocol\\Frames\\Frames::getFrame<\/a>"],[0,4,"<a href=\"Protocol\/Frames\/Frames.php.html#69\">Nmea\\Protocol\\Frames\\Frames::makeData<\/a>"],[0,1,"<a href=\"Protocol\/Frames\/Frames.php.html#85\">Nmea\\Protocol\\Frames\\Frames::addCache<\/a>"],[0,3,"<a href=\"Protocol\/Frames\/Frames.php.html#92\">Nmea\\Protocol\\Frames\\Frames::makeSinglePackedData<\/a>"],[0,10,"<a href=\"Protocol\/Frames\/Frames.php.html#110\">Nmea\\Protocol\\Frames\\Frames::makeFastPackedData<\/a>"],[0,1,"<a href=\"Protocol\/FramesFactory.php.html#16\">Nmea\\Protocol\\FramesFactory::setCache<\/a>"],[0,1,"<a href=\"Protocol\/FramesFactory.php.html#21\">Nmea\\Protocol\\FramesFactory::reset<\/a>"],[0,2,"<a href=\"Protocol\/FramesFactory.php.html#26\">Nmea\\Protocol\\FramesFactory::getInstance<\/a>"],[0,1,"<a href=\"Protocol\/FramesFactory.php.html#37\">Nmea\\Protocol\\FramesFactory::addData<\/a>"],[0,1,"<a href=\"Protocol\/FramesFactory.php.html#44\">Nmea\\Protocol\\FramesFactory::removeSpecialCharacter<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#7\">Nmea\\Logger\\AbstractLoggerTrait::emergency<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#12\">Nmea\\Logger\\AbstractLoggerTrait::alert<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#17\">Nmea\\Logger\\AbstractLoggerTrait::critical<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#22\">Nmea\\Logger\\AbstractLoggerTrait::error<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#27\">Nmea\\Logger\\AbstractLoggerTrait::warning<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#32\">Nmea\\Logger\\AbstractLoggerTrait::notice<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#37\">Nmea\\Logger\\AbstractLoggerTrait::info<\/a>"],[0,1,"<a href=\"Logger\/AbstractLoggerTrait.php.html#42\">Nmea\\Logger\\AbstractLoggerTrait::debug<\/a>"],[0,0,"<a href=\"Logger\/AbstractLoggerTrait.php.html#47\">Nmea\\Logger\\AbstractLoggerTrait::log<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

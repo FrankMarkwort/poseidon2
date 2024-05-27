@@ -1,0 +1,24 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^11.2.x-dev",
+      "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nmea\\": "src/Nmea/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TestsNmea\\": "tests/Nmea/"
+        }
+    },
+    "require": {
+        "ext-mbstring": "*",
+      "ext-bcmath": "*",
+        "krowinski/bcmath-extended": "^7.0",
+      "ext-pcntl": "*",
+       "amphp/parallel": "^v2.2.9",
+       "amphp/amp": "^v3.0.2"
+    }
+}
