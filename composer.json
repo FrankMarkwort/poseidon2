@@ -26,10 +26,6 @@
     "require": {
       "php": ">= 8.3",
       "ext-mbstring": "*",
-      "ext-bcmath": "*",
-        "krowinski/bcmath-extended": "^7.0",
-      "ext-pcntl": "*",
-       "amphp/parallel": "^v2.2.9",
-       "amphp/amp": "^v3.0.2"
+      "ext-bcmath": "*"
     }
 }
