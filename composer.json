@@ -24,7 +24,8 @@
         }
     },
     "require": {
-        "ext-mbstring": "*",
+      "php": ">= 8.3",
+      "ext-mbstring": "*",
       "ext-bcmath": "*",
         "krowinski/bcmath-extended": "^7.0",
       "ext-pcntl": "*",
