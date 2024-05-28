@@ -13,6 +13,8 @@ jobs:
       - name: Install deps
         run: |
           sudo apt-get install -y php-bcmath
+          sudo apt-get install -Y memcached
+          sudo systemctl start memcached
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
