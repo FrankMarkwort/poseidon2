@@ -18,7 +18,7 @@ jobs:
         with:
           version: 9.6
           php_version: 8.3
-          extension-csv: php8.3-bcmath
+          extensions: bcmath
           bootstrap: vendor/autoload.php
           configuration: test/phpunit.xml
           args: --coverage-text
