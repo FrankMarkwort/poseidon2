@@ -7,11 +7,7 @@
          colors="true"
          failOnRisky="true"
          failOnWarning="true">
-    <coverage includeUncoveredFiles="false" pathCoverage="false" ignoreDeprecatedCodeUnits="false" disableCodeCoverageIgnore="false">
-        <report>
-            <html outputDirectory="../src/http/coverage" lowUpperBound="35" highLowerBound="70"/>
-        </report>
-    </coverage>
+
     <testsuites>
         <testsuite name="default">
             <directory>../test</directory>
