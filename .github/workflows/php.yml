@@ -10,8 +10,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: php-actions/composer@v6
-      - uses: KeisukeYamashita/memcahed-action@v1
-
+      - name: Install deps
+        run: |
+          docker-php-ext-install bcmath && docker-php-ext-enable bcmath
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
