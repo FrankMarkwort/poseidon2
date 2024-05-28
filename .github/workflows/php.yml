@@ -16,6 +16,7 @@ jobs:
           sudo apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
           sudo apt-get install -y php-memcached
           sudo php -m
+          sudo ls -l /usr/local/etc/php/conf.d/
       - uses: php-actions/composer@v6
        
       - name: PHPUnit Tests
