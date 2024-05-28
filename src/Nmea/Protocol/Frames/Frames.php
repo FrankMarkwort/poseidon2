@@ -23,7 +23,6 @@ class Frames
         $frameCounter = $frame->getFrameCounter();
         $this->unSetFrameSequenceItIsTheFistFrame($pgn, $sequence, $frameCounter);
         $this->frames[$pgn][$sequence][$frameCounter] = $frame;
-        #echo "\$this->frames[$pgn][$sequence][$frameCounter] = " . $this->getFrame($pgn,$sequence,$frameCounter)->getData()->getData() ."\n";
         if ($this->isReady($pgn, $sequence)) {
             if ($this->makeData($this->frames[$pgn][$sequence])) {
                 unset($this->frames[$pgn][$sequence]);

@@ -2,3 +2,4 @@
 /src/http/coverage/
 /tests/.phpunit.cache/
 .idea
+/src/logs/

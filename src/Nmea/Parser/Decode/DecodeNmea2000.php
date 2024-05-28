@@ -13,9 +13,7 @@ class DecodeNmea2000 implements DecoderInterface
 
     public static function getInstance() : DecoderInterface
     {
-       # if (null === self::$instance) {
-            self::$instance = new self();
-       # }
+        self::$instance = new self();
 
         return self::$instance;
     }
@@ -40,7 +38,6 @@ class DecodeNmea2000 implements DecoderInterface
      */
     public function getValue(Request $request) : float|int|string|null
     {
-        #$bin = strrev(substr($this->binString, $request->getBitStart() + $request->getBitOffset(), $request->getBitLength()));
         $bin = strrev(substr($this->binString, $request->getBitOffset(), $request->getBitLength()));
         if ($request->getType() === static::ASCCII) {
             $result =  BinDec::binToAscii($bin);
@@ -60,10 +57,8 @@ class DecodeNmea2000 implements DecoderInterface
     {
         if (! (is_null($request->getRangeMax()) || is_null($request->getRangeMin()))) {
             if ($value > $request->getRangeMax()) {
-                #$value = $request->getRangeMax();
                 $value = null;
             } elseif ($value < $request->getRangeMin()) {
-                #$value = $request->getRangeMin();
                 $value = null;
             }
         }

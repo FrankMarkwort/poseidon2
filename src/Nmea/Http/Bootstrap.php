@@ -8,8 +8,8 @@ use Nmea\Logger\Factory;
 use Nmea\Parser\Data\DataFacadenColection;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\ParserException;
-use Nmea\Presenter\Html;
-use Nmea\Presenter\Json;
+use Nmea\View\Html;
+use Nmea\View\Json;
 
 class Bootstrap
 {

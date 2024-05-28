@@ -1,12 +1,9 @@
 <?php
 
-namespace Nmea\Presenter;
+namespace Nmea\View;
 
-use Nmea\Parser\Data\DataFacade;
-
-class Json extends AbstractPresenter
+class Json extends AbstractView
 {
-
     public function present(): string
     {
         return $this->toJson();

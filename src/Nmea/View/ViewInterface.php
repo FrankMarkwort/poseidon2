@@ -1,10 +1,10 @@
 <?php
 
-namespace Nmea\Presenter;
+namespace Nmea\View;
 
 use Nmea\Parser\Data\DataFacadenColection;
 
-interface PresenterInterface
+interface ViewInterface
 {
     public function __construct(DataFacadenColection $dataFacade);
 

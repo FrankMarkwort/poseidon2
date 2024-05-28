@@ -1,12 +1,12 @@
 <?php
 
-namespace Nmea\Presenter;
+namespace Nmea\View;
 
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\Data\DataFacadenColection;
 use Nmea\Parser\Lib\Units\Unit;
 
-abstract class AbstractPresenter implements PresenterInterface
+abstract class AbstractView implements ViewInterface
 {
     public function __construct(protected readonly DataFacadenColection $dataFacaden)
     {

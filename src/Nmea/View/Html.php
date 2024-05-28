@@ -1,8 +1,8 @@
 <?php
 
-namespace Nmea\Presenter;
+namespace Nmea\View;
 
-class Html extends AbstractPresenter
+class Html extends AbstractView
 {
     public function present(): string
     {
