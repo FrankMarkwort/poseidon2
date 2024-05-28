@@ -16,4 +16,7 @@ _Configuration_\
 
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
-The Apache directory is _/src/http/_ \
+The Apache directory is _src/http/_ \
+
+**.htaccess**\
+SetEnv MEMCACHED_HOST 172.17.0.1
