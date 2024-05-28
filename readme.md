@@ -10,5 +10,4 @@ Data format from usb device\
 **Deamon**\
 _Configuration_\
  src/Deamon/deamon.php\
- &nbsp;&nbsp;$bootstrap = new Bootstrap(new Serial( '_/dev/ttyACM0_'), (new Memcached(127.0.0.1, 11211))->clear());\
-    
+ &nbsp;&nbsp;$bootstrap = new Bootstrap(new Serial( '_/dev/ttyACM0_'), (new Memcached(127.0.0.1, 11211))->clear());\    
