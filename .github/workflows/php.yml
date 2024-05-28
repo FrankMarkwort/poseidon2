@@ -8,8 +8,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - uses: php-actions/composer@v6
       - name: Install deps
         run: |
           sudo apt-get install -y php-bcmath
@@ -18,6 +16,8 @@ jobs:
           sudo apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
           sudo apt-get install -y php-memcached
           sudo php -m
+      - uses: php-actions/composer@v6
+       
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
