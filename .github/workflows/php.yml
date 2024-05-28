@@ -12,7 +12,7 @@ jobs:
       - uses: php-actions/composer@v6
       - name: Install deps
         run: |
-          apt install php-bcmath
+          sudo apt-get install -y php-bcmath
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
