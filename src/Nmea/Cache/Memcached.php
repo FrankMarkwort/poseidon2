@@ -2,7 +2,7 @@
 
 namespace Nmea\Cache;
 
-use Memcached as Cache;
+use \Memcached as Cache;
 use Nmea\Logger\Factory;
 use Exception;
 
