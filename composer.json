@@ -20,7 +20,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "TestsNmea\\": "tests/Nmea/"
+            "TestsNmea\\": "test/Nmea/"
         }
     },
     "require": {
