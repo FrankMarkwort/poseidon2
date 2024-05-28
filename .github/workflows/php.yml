@@ -15,6 +15,8 @@ jobs:
           sudo apt-get install -y php-bcmath
           sudo apt-get install memcached
           sudo systemctl start memcached
+          apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
+          echo yes '' | pecl install -f memcached-3.2.0  && docker-php-ext-enable memcached
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
