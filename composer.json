@@ -1,6 +1,7 @@
 {
   "name": "poseidon/nmea200",
   "description": "nmea2000 decoder",
+  "version": "1.0.0",
   "authors": [
         {
             "name": "Frank Markwort",
