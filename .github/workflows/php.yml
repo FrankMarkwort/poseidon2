@@ -14,9 +14,9 @@ jobs:
           sudo apt-get install memcached
           sudo systemctl start memcached
           sudo apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
-          sudo apt-get install -y php-memcached
-          sudo php -m
-          sudo php --ini
+         # sudo apt-get install -y php-memcached
+          #sudo php -m
+          #sudo php --ini
       - name: Composer    
         uses: php-actions/composer@v6
         with:
