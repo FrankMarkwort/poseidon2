@@ -21,7 +21,7 @@ jobs:
         uses: php-actions/composer@v6
         with:
           php_version: "8.3"
-          #php_extensions: memcached bcmath
+          php_extensions: memcached bcmath
           version: latest
        
       - name: PHPUnit Tests
@@ -31,7 +31,7 @@ jobs:
         with:
           version: 11.0
           php_version: 8.3
-          php_extensions: bcmath memcached
+          php_extensions: bcmath memcached xdebug
           bootstrap: vendor/autoload.php
           configuration: test/phpunit.xml
          # args: --coverage-text
