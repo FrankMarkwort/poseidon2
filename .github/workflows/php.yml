@@ -29,7 +29,7 @@ jobs:
         env:
           TEST_NAME: Scarlett
         with:
-          version: 10.0
+          version: 11.0
           php_version: 8.3
           php_extensions: bcmath memcached
           bootstrap: vendor/autoload.php
