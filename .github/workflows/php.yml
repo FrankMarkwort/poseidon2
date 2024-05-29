@@ -31,7 +31,7 @@ jobs:
         with:
           version: 11.0
           php_version: 8.3
-          php_extensions: bcmath memcached xdebug
+          php_extensions: bcmath memcached
           bootstrap: vendor/autoload.php
           configuration: test/phpunit.xml
          # args: --coverage-text
