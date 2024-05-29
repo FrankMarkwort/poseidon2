@@ -17,7 +17,12 @@ jobs:
           sudo apt-get install -y php-memcached
           sudo php -m
           sudo php --ini
-      - uses: php-actions/composer@v6
+      - name: Composer    
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.3"
+          php_extensions: memcached bcmath
+          version: latest
        
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
@@ -26,7 +31,7 @@ jobs:
         with:
           version: 11.2
           php_version: 8.3
-          extensions: bcmath memcached
+          php_extensions: bcmath memcached
           bootstrap: vendor/autoload.php
           configuration: test/phpunit.xml
           args: --coverage-text
