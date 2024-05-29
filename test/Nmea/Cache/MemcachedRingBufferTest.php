@@ -14,7 +14,7 @@ class MemcachedRingBufferTest extends TestCase
 
     protected function setUp():void
     {
-        $this->ringBuffer = new MemcachedRingBuffer((new Memcached('172.17.0.1', 11211))->clear(), 3);
+        $this->ringBuffer = new MemcachedRingBuffer((new Memcached('127.0.0.1', 11211))->clear(), 3);
     }
 
     public function testAddLine()

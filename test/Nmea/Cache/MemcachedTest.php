@@ -10,7 +10,7 @@ class MemcachedTest extends TestCase
 
     public function testBla()
     {
-        $test = new Memcached('172.17.0.1', 11211);
+        $test = new Memcached('127.0.0.1', 11211);
         $test->clear();
         $test->set('blub', 'bla');
         $test->set('blub', 'bla1');
