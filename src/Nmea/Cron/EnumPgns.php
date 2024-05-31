@@ -7,4 +7,5 @@ enum EnumPgns: string
     case WIND = '130306';
     case COG_SOG ='129026';
     case Vessel_Heading = '127250';
+    case Set_And_Drift = '129291';
 }

@@ -17,8 +17,12 @@ class CronWorker
     public function run()
     {
         while ($this->running) {
-           $this->store($this->cache->get(EnumPgns::WIND->value), $this->cache->get(EnumPgns::COG_SOG->value));
-           var_dump($this->cache->get(EnumPgns::WIND->value), $this->cache->get(EnumPgns::COG_SOG->value));
+           $this->store(
+               $this->cache->get(EnumPgns::WIND->value),
+               $this->cache->get(EnumPgns::COG_SOG->value),
+               $this->cache->get(EnumPgns::Vessel_Heading->value),
+           );
+           #var_dump($this->cache->get(EnumPgns::WIND->value), $this->cache->get(EnumPgns::COG_SOG->value));
            sleep($this->sleepTime - date('s') % $this->sleepTime);
         }
     }
@@ -28,25 +32,30 @@ class CronWorker
         $this->running = false;
     }
 
-    public function store(string $windData, string $cogSogData):void
+    public function store(string $windData, string $cogSogData, string $vesselHeading):void
     {
-        if (empty($windData) || empty($cogSogData)) {
+        if (empty($windData) || empty($cogSogData) || empty($vesselHeading)) {
 
             return;
         }
 
         $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
         $cogSogFacade = DataFacadeFactory::create($cogSogData, 'YACHT_DEVICE');
+        $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
         $mapper = new WindSpeedCourse($this->database);
         $mapper->setTime($windFacade->getTimestamp())
-            ->setWindSpeed( $windFacade->getFieldValue(2)->getValue())
-            ->setWindAngle( $windFacade->getFieldValue(3)->getValue())
+            ->setApparentWindSpeed( $windFacade->getFieldValue(2)->getValue())
+            ->setApparentWindAngle( $windFacade->getFieldValue(3)->getValue())
             ->setWindRefernce($windFacade->getFieldValue(4)->getValue())
             ->setCogReference($cogSogFacade->getFieldValue(2)->getValue())
             ->setCog($cogSogFacade->getFieldValue(4)->getValue())
-            ->setSog($cogSogFacade->getFieldValue(5)->getValue());
+            ->setSog($cogSogFacade->getFieldValue(5)->getValue())
+            ->setVesselHeading($vesselHeadingFacade->getFieldValue(2)->getValue());
+
+
 
         $mapper->store();
+        #$this->printAllFieldNames($vesselHeadingFacade);
     }
 
     private function printAllFieldNames(DataFacade $dataFacade)
