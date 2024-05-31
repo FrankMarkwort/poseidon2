@@ -8,7 +8,7 @@ class PackedTypeHelper
         129291,129283,126993
     ];
 
-    private static array $fastPackedPgnsInMixed = [128275, 129542, 129540, 129029, 130577, 129044];
+    private static array $fastPackedPgnsInMixed = [128275, 129542, 129540, 129029, 130577, 129044, 126996];
 
     public static function isSinglePacked(int $pgn):bool
     {

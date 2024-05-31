@@ -11,7 +11,7 @@ abstract class AbstractHeader
     {
         if (!$this->isSingelPacked() && !$this->isFastPacked()) {
 
-            throw new \Exception($this->getPgn() . ' is not a singlePacked and not a fastPacked');
+            throw new \Exception($this->getPgn() . ' is not a singlePacked and not a fastPacked. Look src/Nmea/Protocol/Frames/Frame/Header/PackedTypeHelper.php');
         }
     }
 
