@@ -3,7 +3,7 @@
 namespace Nmea\Cron;
 
 use Nmea\Cache\CacheInterface;
-use Nmea\Database\Database;
+use Nmea\Database\DatabaseInterface;
 use Nmea\Database\Mapper\WindSpeedCourse;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\Data\DataFacade;
@@ -11,7 +11,7 @@ use Nmea\Parser\Data\DataFacade;
 class CronWorker
 {
     private bool $running = true;
-    public function __construct(private readonly int $sleepTime, private readonly Database $database, private readonly CacheInterface $cache)
+    public function __construct(private readonly int $sleepTime, private readonly DatabaseInterface $database, private readonly CacheInterface $cache)
     {
     }
     public function run()
@@ -22,7 +22,6 @@ class CronWorker
                $this->cache->get(EnumPgns::COG_SOG->value),
                $this->cache->get(EnumPgns::Vessel_Heading->value),
            );
-           #var_dump($this->cache->get(EnumPgns::WIND->value), $this->cache->get(EnumPgns::COG_SOG->value));
            sleep($this->sleepTime - date('s') % $this->sleepTime);
         }
     }
@@ -46,16 +45,11 @@ class CronWorker
         $mapper->setTime($windFacade->getTimestamp())
             ->setApparentWindSpeed( $windFacade->getFieldValue(2)->getValue())
             ->setApparentWindAngle( $windFacade->getFieldValue(3)->getValue())
-            ->setWindRefernce($windFacade->getFieldValue(4)->getValue())
-            ->setCogReference($cogSogFacade->getFieldValue(2)->getValue())
             ->setCog($cogSogFacade->getFieldValue(4)->getValue())
             ->setSog($cogSogFacade->getFieldValue(5)->getValue())
             ->setVesselHeading($vesselHeadingFacade->getFieldValue(2)->getValue());
 
-
-
         $mapper->store();
-        #$this->printAllFieldNames($vesselHeadingFacade);
     }
 
     private function printAllFieldNames(DataFacade $dataFacade)

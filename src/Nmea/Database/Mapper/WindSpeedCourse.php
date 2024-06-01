@@ -2,21 +2,18 @@
 
 namespace Nmea\Database\Mapper;
 
-use Nmea\Database\Database;
+use Nmea\Database\DatabaseInterface;
 
 class WindSpeedCourse
 {
-    private int $idMinute;
     private string $time;
     private float $windSpeed;
     private float $windAngle;
-    private string $windRefernce;
-    private string $cogReference;
     private float $cog;
     private float $sog;
     private float $vesselHeading;
 
-    public function __construct(private Database $database)
+    public function __construct(private DatabaseInterface $database)
     {
     }
 
@@ -56,33 +53,9 @@ class WindSpeedCourse
         return $this;
     }
 
-    private function getCogReference(): string
-    {
-        return $this->cogReference;
-    }
-
-    public function setCogReference(string $cogReference): WindSpeedCourse
-    {
-        $this->cogReference = $cogReference;
-     
-        return $this;
-    }
-
-    private function getWindRefernce(): string
-    {
-        return $this->windRefernce;
-    }
-
-    public function setWindRefernce(string $windRefernce): WindSpeedCourse
-    {
-        $this->windRefernce = $windRefernce;
-     
-        return $this;
-    }
-
     private function getApparentWindAngle(): float
     {
-        return $this->anglePi($this->windAngle);
+        return $this->angleMaximalPi($this->windAngle);
     }
 
     public function setApparentWindAngle(float $windAngle): WindSpeedCourse
@@ -130,8 +103,13 @@ class WindSpeedCourse
         return $this->vesselHeading;
     }
 
-    private function getTrueWindDirection(): float
+    public function getTrueWindDirection(): float
     {
+        if ($this->getSog() >= 1) {
+
+            return (pi() - $this->getTrueWindAngle()) + $this->getCog();
+        }
+
         return (pi() - $this->getTrueWindAngle()) + $this->getVesselHeading();
     }
 
@@ -142,15 +120,13 @@ class WindSpeedCourse
         return $this;
     }
 
-    private function  getTrueWindAngle():float
+    public function getTrueWindAngle():float
     {
-         //TODO genzwerte
         # cos Ω = (a² + b² – c²) / (2ab)
-
-        $a = $this->getSog();
-        $b = $this->getApparentWindSpeed();
-        $c = $this->getTrueWindSpeed();
-        if (abs($a) <= 0.001 || abs($b) <= 0.001) {
+        $a = $this->getTrueWindSpeed();
+        $b = $this->getSog();
+        $c = $this->getApparentWindSpeed();
+        if (abs(2 * $a * $b) <= 0.5) {
 
             return $this->getApparentWindAngle();
         }
@@ -159,7 +135,7 @@ class WindSpeedCourse
 
     }
 
-    private function getTrueWindSpeed():float
+    public function getTrueWindSpeed():float
     {
         #c² = a² + b² – 2ab * cos θ,
         $a = $this->getSog();
@@ -171,18 +147,12 @@ class WindSpeedCourse
             return sqrt($z);
         }
 
-        return 0;
+        return $this->getApparentWindSpeed();
     }
 
-    public function anglePi(float $angle):float
+    public function angleMaximalPi(float $angle):float
     {
          return $angle <= pi() ? $angle : (2 * pi() - $angle) * -1;
-    }
-
-
-    private function addRadAngle(float $angle1, float $angle2): float
-    {
-        return ($angle1 + $angle2) % (2 * pi());
     }
 
     private function angleGrad(float $angle): float

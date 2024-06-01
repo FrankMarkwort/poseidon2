@@ -4,11 +4,15 @@ namespace Nmea\Database;
 
 use \PDO;
 
-class Database
+class Database implements DatabaseInterface
 {
     private PDO $pdo;
     private static $instance = null;
 
+    public function init(string $host, string $user, string $pass, string $db): void
+    {
+        $this->pdo = new PDO("mysql:host=$host;port=3306;dbname=$db", $user, $pass);
+    }
 
     public static function getInstance():self
     {
@@ -19,28 +23,17 @@ class Database
         return self::$instance;
     }
 
-    /**
-     *
-     */
-    public function init($host, $user, $pass, $db)
-    {
-        $this->pdo = new PDO("mysql:host=$host;port=3306;dbname=$db", $user, $pass);
-    }
-
-    /**
-     *
-     */
-    public function execute($sql):int|false
+    public function execute(string $sql):int|false
     {
         return $this->getPdo()->exec($sql);
     }
 
-    public function query($sql):array
+    public function query(string $sql):array
     {
         return $this->getPdo()->query($sql)->fetchAll();
     }
 
-    public function getPdo():PDO
+    private function getPdo():PDO
     {
         return $this->pdo;
     }
@@ -49,10 +42,8 @@ class Database
     {
     }
 
-    private function __clone(){
-
+    private function __clone()
+    {
     }
-
-
 }
 
