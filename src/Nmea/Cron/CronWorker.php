@@ -36,12 +36,7 @@ class CronWorker
         }
     }
 
-    public function stop():void
-    {
-        $this->running = false;
-    }
-
-    public function storePosition(string $position):void
+    private function storePosition(string $position):void
     {
         if (empty($position)) {
 
@@ -86,13 +81,12 @@ class CronWorker
 
     }
 
-    public function store(string $windData, string $cogSogData, string $vesselHeading):void
+    private function store(string $windData, string $cogSogData, string $vesselHeading):void
     {
         if (empty($windData) || empty($cogSogData) || empty($vesselHeading)) {
 
             return;
         }
-
         $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
         $cogSogFacade = DataFacadeFactory::create($cogSogData, 'YACHT_DEVICE');
         $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
