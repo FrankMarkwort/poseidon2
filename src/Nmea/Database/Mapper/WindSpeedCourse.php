@@ -107,10 +107,10 @@ class WindSpeedCourse
     {
         if ($this->getSog() >= 1) {
 
-            return (pi() - $this->getTrueWindAngle()) + $this->getCog();
+            return ((pi() - $this->getTrueWindAngle()) + $this->getCog() % (2 * pi()));
         }
 
-        return (pi() - $this->getTrueWindAngle()) + $this->getVesselHeading();
+        return ((pi() - $this->getTrueWindAngle()) + $this->getVesselHeading() % (2 * pi()));
     }
 
     public function setVesselHeading(float $vesselHeading): WindSpeedCourse

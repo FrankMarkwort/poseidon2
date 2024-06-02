@@ -19,34 +19,37 @@ create table wind_speed_minute
     vesselHeading double                                                  not null
 );
 
-drop table wind_speed_hour;
 create table wind_speed_hour
 (
-    date   datetime default current_timestamp() not null primary key,
-    avgTwd double                               not null,
-    maxTwd double                               not null,
-    minTwd double                               not null,
-    avgAws double                               not null,
-    maxAws double                               not null,
-    minAws double                               not null,
-    avgAwa double                               not null,
-    maxAwa double                               not null,
-    minAwa double                               not null,
-    avgTws double                               not null,
-    maxTws double                               not null,
-    minTws double                               not null,
-    avgTwa double                               not null,
-    maxTwa double                               not null,
-    minTwa double                               not null,
-    avgCog       double                               not null,
-    maxCog       double                               not null,
-    minCog       double                               not null,
-    avgSog       double                               not null,
-    maxSog       double                               not null,
-    minSog       double                               not null,
-    avgVesselHeading      double                               not null,
-    maxVesselHeading       double                               not null,
-    minVesselHeading       double                               not null
+    id               int auto_increment
+        primary key,
+    date             datetime default current_timestamp() not null,
+    avgTwd           double                               not null,
+    maxTwd           double                               not null,
+    minTwd           double                               not null,
+    avgAws           double                               not null,
+    maxAws           double                               not null,
+    minAws           double                               not null,
+    avgAwa           double                               not null,
+    maxAwa           double                               not null,
+    minAwa           double                               not null,
+    avgTws           double                               not null,
+    maxTws           double                               not null,
+    minTws           double                               not null,
+    avgTwa           double                               not null,
+    maxTwa           double                               not null,
+    minTwa           double                               not null,
+    avgCog           double                               not null,
+    maxCog           double                               not null,
+    minCog           double                               not null,
+    avgSog           double                               not null,
+    maxSog           double                               not null,
+    minSog           double                               not null,
+    avgVesselHeading double                               not null,
+    maxVesselHeading double                               not null,
+    minVesselHeading double                               not null,
+    constraint wind_speed_hour_pk
+        unique (date)
 );
 
 create definer = nmea2000@`%` trigger generateHourStatistics
@@ -77,3 +80,16 @@ BEGIN
             from wind_speed_minute;
         END IF;
 END;
+
+create table positions
+(
+    id                  int auto_increment
+        primary key,
+    fid_wind_speed_hour int                                  not null,
+    timestamp           datetime default current_timestamp() not null,
+    latitude            double                               not null,
+    longitude           double                               not null,
+    constraint positions_wind_speed_hour_id_fk
+        foreign key (fid_wind_speed_hour) references wind_speed_hour (id)
+            on update cascade on delete cascade
+);

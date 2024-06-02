@@ -8,4 +8,5 @@ enum EnumPgns: string
     case COG_SOG ='129026';
     case Vessel_Heading = '127250';
     case Set_And_Drift = '129291';
+    case Position =	'129025';
 }

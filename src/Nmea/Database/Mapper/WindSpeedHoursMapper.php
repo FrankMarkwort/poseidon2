@@ -2,20 +2,16 @@
 
 namespace Nmea\Database\Mapper;
 
+use Nmea\Database\Collection\WindSpeedHourCollection;
 use Nmea\Database\DatabaseInterface;
-use Nmea\Database\Mapper\Collection\WindSpeedHourCollection;
-use Nmea\Database\Mapper\Entity\WindSpeedHour;
+use Nmea\Database\Entity\WindSpeedHour;
 
-class WindSpeedHoursMapper
+class WindSpeedHoursMapper extends AbstractMapper
 {
-    public function __construct(private readonly DatabaseInterface $database)
-    {
-    }
-
     public function getAll():WindSpeedHourCollection
     {
         $collection = new WindSpeedHourCollection();
-        $result = $this->database->query('select * from wind_speed_hour');
+        $result = $this->database->query('select * from wind_speed_hour order by date');
         foreach ($result as $row) {
             $entity = new WindSpeedHour();
             $entity->setDate($row['date'])

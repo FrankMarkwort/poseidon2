@@ -1,8 +1,7 @@
 <?php
 
-namespace Nmea\Database\Mapper\Entity;
+namespace Nmea\Database\Entity;
 
-use \DateTime;
 class WindSpeedHour
 {
     private float $avgTwd;
@@ -78,7 +77,7 @@ class WindSpeedHour
     }
     public function getAvgAwa(): float
     {
-        return $this->avgAwa;
+        return round($this->avgAwa,0);
     }
     public function setAvgAwa(float $avgAwa): WindSpeedHour
     {
@@ -87,7 +86,7 @@ class WindSpeedHour
     }
     public function getMaxAwa(): float
     {
-        return $this->maxAwa;
+        return round($this->maxAwa,0);
     }
     public function setMaxAwa(float $maxAwa): WindSpeedHour
     {
@@ -96,7 +95,7 @@ class WindSpeedHour
     }
     public function getMinAwa(): float
     {
-        return $this->minAwa;
+        return round($this->minAwa,0);
     }
     public function setMinAwa(float $minAwa): WindSpeedHour
     {
@@ -105,7 +104,7 @@ class WindSpeedHour
     }
     public function getAvgTws(): float
     {
-        return $this->avgTws;
+        return round($this->avgTws,1);
     }
     public function setAvgTws(float $avgTws): WindSpeedHour
     {
@@ -114,7 +113,7 @@ class WindSpeedHour
     }
     public function getMaxTws(): float
     {
-        return $this->maxTws;
+        return round($this->maxTws,1);
     }
     public function setMaxTws(float $maxTws): WindSpeedHour
     {
@@ -123,7 +122,7 @@ class WindSpeedHour
     }
     public function getMinTws(): float
     {
-        return $this->minTws;
+        return round($this->minTws,1);
     }
     public function setMinTws(float $minTws): WindSpeedHour
     {
@@ -132,7 +131,7 @@ class WindSpeedHour
     }
     public function getAvgTwa(): float
     {
-        return $this->avgTwa;
+        return round($this->avgTwa,0);
     }
     public function setAvgTwa(float $avgTwa): WindSpeedHour
     {
@@ -141,7 +140,7 @@ class WindSpeedHour
     }
     public function getMaxTwa(): float
     {
-        return $this->maxTwa;
+        return round($this->maxTwa,0);
     }
     public function setMaxTwa(float $maxTwa): WindSpeedHour
     {
@@ -150,7 +149,7 @@ class WindSpeedHour
     }
     public function getMinTwa(): float
     {
-        return $this->minTwa;
+        return round($this->minTwa,1);
     }
     public function setMinTwa(float $minTwa): WindSpeedHour
     {
@@ -209,6 +208,7 @@ class WindSpeedHour
     public function setMinSog(float $minSog): WindSpeedHour
     {
         $this->minSog = $minSog;
+
         return $this;
     }
     public function getAvgVesselHeading(): float
@@ -218,6 +218,7 @@ class WindSpeedHour
     public function setAvgVesselHeading(float $avgVesselHeading): WindSpeedHour
     {
         $this->avgVesselHeading = $avgVesselHeading;
+
         return $this;
     }
     public function getMaxVesselHeading(): float
@@ -227,6 +228,7 @@ class WindSpeedHour
     public function setMaxVesselHeading(float $maxVesselHeading): WindSpeedHour
     {
         $this->maxVesselHeading = $maxVesselHeading;
+
         return $this;
     }
     public function getMinVesselHeading(): float
@@ -236,6 +238,7 @@ class WindSpeedHour
     public function setMinVesselHeading(float $minVesselHeading): WindSpeedHour
     {
         $this->minVesselHeading = $minVesselHeading;
+
         return $this;
     }
     public function getDate(): string
@@ -245,18 +248,20 @@ class WindSpeedHour
 
     public function getAvgTwd(): float
     {
-        return $this->avgTwd;
+        return round($this->avgTwd,0);
     }
 
     public function setAvgTwd(float $avgTwd): WindSpeedHour
     {
         $this->avgTwd = $avgTwd;
+
         return $this;
     }
 
     public function setDate(string $date): WindSpeedHour
     {
         $this->date = $date;
+
         return $this;
     }
 }
