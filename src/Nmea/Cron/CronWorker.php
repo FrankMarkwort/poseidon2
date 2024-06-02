@@ -28,7 +28,7 @@ class CronWorker
                $this->cache->get(EnumPgns::COG_SOG->value),
                $this->cache->get(EnumPgns::Vessel_Heading->value),
             );
-            if ($i >= 1) {
+            if ($i >= 60) {
                 $i = 0;
                 $this->storePosition($this->cache->get(EnumPgns::Position->value));
             }
