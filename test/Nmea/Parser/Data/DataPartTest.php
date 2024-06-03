@@ -3,7 +3,7 @@ namespace Nmea\Parser\Data;
 
 use Nmea\Parser\Data\DataPart;
 use Nmea\Parser\Decode\DecodeNmea2000;
-use Nmea\Config\Config;
+use Nmea\Config\ConfigPgn;
 use Nmea\Config\PngFieldConfig;
 use Nmea\Parser\Lib\BinDec;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DataPart::class)]
-#[CoversClass(Config::class)]
+#[CoversClass(ConfigPgn::class)]
 #[CoversClass(PngFieldConfig::class)]
 #[CoversClass(Data::class)]
 #[CoversClass(MainPart::class)]
@@ -32,7 +32,7 @@ final class DataPartTest extends TestCase
         $this->mainPart = new MainPart('NONE');
         $this->mainPart->setMainBitString($testData);
         $this->pngConfig = (new PngFieldConfig())
-            ->setConfigInstance(new Config())
+            ->setConfigInstance(new ConfigPgn())
             ->setPgn($this->mainPart->getPng());
         $this->dataPart =(new DataPart())->setDecoder(DecodeNmea2000::getInstance())->setData($this->mainPart->getData(),$this->mainPart->getLength(),$this->pngConfig);
     }

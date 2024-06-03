@@ -1,17 +1,17 @@
 <?php
 namespace TestsNmea\Config;
 
-use Nmea\Config\Config;
+use Nmea\Config\ConfigPgn;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
-    /** @var Config */
+    /** @var ConfigPgn */
     private $configClass;
 
     protected function setUp():void
     {
-        $this->configClass = new Config();
+        $this->configClass = new ConfigPgn();
     }
 
     public function testGetPngConfig()

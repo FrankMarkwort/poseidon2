@@ -2,7 +2,7 @@
 
 namespace TestsNmea\Parser;
 
-use Nmea\Config\Config;
+use Nmea\Config\ConfigPgn;
 use Nmea\Config\ConfigFactory;
 use Nmea\Config\PngFieldConfig;
 use Nmea\Parser\Data\Data;
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DataFacade::class)]
 #[CoversClass(DataFacadeFactory::class)]
-#[CoversClass(Config::class)]
+#[CoversClass(ConfigPgn::class)]
 #[CoversClass(ConfigFactory::class)]
 #[CoversClass(PngFieldConfig::class)]
 #[CoversClass(Data::class)]

@@ -1,18 +1,18 @@
 <?php
 namespace TestsNmea\Config;
 
-use Nmea\Config\Config;
+use Nmea\Config\ConfigPgn;
 use Nmea\Config\PngFieldConfig;
 use PHPUnit\Framework\TestCase;
 
 class PngFieldConfigTest extends TestCase
 {
-    /** @var Config */
+    /** @var ConfigPgn */
     private $configClass;
 
     protected function setUp():void
     {
-        $this->configClass = new Config();
+        $this->configClass = new ConfigPgn();
         $this->configFields = (new PngFieldConfig())
             ->setConfigInstance($this->configClass)
             ->setPgn(130306);

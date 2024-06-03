@@ -28,10 +28,10 @@ class ConfigFactory
          return new PngFieldConfig();
     }
 
-    private static function getConfigInstance():Config
+    private static function getConfigInstance():ConfigPgn
     {
         if(is_null(static::$configInstance)) {
-            static::$configInstance = new Config();
+            static::$configInstance = new ConfigPgn();
         }
         return static::$configInstance;
     }

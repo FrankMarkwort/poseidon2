@@ -2,9 +2,9 @@
 
 namespace TestsNmea\Cache;
 
-use Nmea\Cache\Dummy;
 use Nmea\Cache\Memcached;
 use Nmea\Cache\MemcachedRingBuffer;
+use Nmea\Config\Config;
 use PHPUnit\Framework\TestCase;
 
 class MemcachedRingBufferTest extends TestCase
@@ -14,12 +14,11 @@ class MemcachedRingBufferTest extends TestCase
 
     protected function setUp():void
     {
-        $this->ringBuffer = new MemcachedRingBuffer((new Memcached('127.0.0.1', 11211))->clear(), 3);
+        $this->ringBuffer = new MemcachedRingBuffer((new Memcached(Config::getMemcacheHost(), Config::getMemcachePort()))->clear(), 3);
     }
 
     public function testAddLine()
     {
-
         $this->ringBuffer->addValue('line1');
         $this->assertEquals('line1', $this->ringBuffer->getValue());
         $this->ringBuffer->addValue('line2');

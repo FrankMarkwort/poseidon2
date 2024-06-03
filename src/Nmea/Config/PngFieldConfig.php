@@ -11,7 +11,7 @@ namespace Nmea\Config;
 class PngFieldConfig
 {
     /**
-     * @var Config
+     * @var ConfigPgn
      */
     private $configInstance;
     private $jsonArray =[];
@@ -34,7 +34,7 @@ class PngFieldConfig
     const string ID = 'Id';
     const string NAME = 'Name';
 
-    public function setConfigInstance(Config $configInstance): self
+    public function setConfigInstance(ConfigPgn $configInstance): self
     {
         $this->configInstance = $configInstance;
 

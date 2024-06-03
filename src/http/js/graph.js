@@ -1,20 +1,15 @@
-function fetchJSON(url) {
-    return fetch(url)
-        .then(response => response.json())
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-fetchJSON('http://192.168.0.101/averages.php')
-.then((data) => {
-    chartData = data;
-
+(async () => {
+    const chartData = await fetch(
+        'http://192.168.0.101/averages.php'
+    ).then(response => response.json());
     Highcharts.chart('container', {
         chart: {
             zooming: {
                 type: 'x'
             }
+        },
+        rangeSelector: {
+            selected: 2
         },
         title: {
             text: 'Wind-Data',
@@ -38,6 +33,10 @@ fetchJSON('http://192.168.0.101/averages.php')
                 pointStart: chartData['startTime'],
                 pointInterval: chartData['pointInterval'],
             }
+        },
+        data: {
+            enablePolling: true,
+            dataRefreshRate: 3600,
         },
         series: [
             // #####################
@@ -178,5 +177,5 @@ fetchJSON('http://192.168.0.101/averages.php')
         }
         ],
     }
-)});
+)})();
 

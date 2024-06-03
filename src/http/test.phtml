@@ -1,13 +1,2 @@
 <?php
-use Nmea\Database\Database;
-use Nmea\Database\Mapper\WindSpeedHoursMapper;
-require_once( __DIR__ . '/../../vendor/autoload.php');
-
-Database::getInstance()->init('127.0.0.1', 'nmea2000', 'nmea2000', 'nmea2000');
-$mapper = new \Nmea\Database\Mapper\PositionMapper(Database::getInstance());
-$entity = new \Nmea\Database\Entity\Positions();
-$entity->setLatitude(93293)
-    ->setLongitude(33333)
-    ->setTimestamp('22:33:22 33:22');
-$mapper->storeEntity($entity);
-
+phpinfo();

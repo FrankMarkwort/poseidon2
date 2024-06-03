@@ -9,9 +9,9 @@ class Database implements DatabaseInterface
     private PDO $pdo;
     private static $instance = null;
 
-    public function init(string $host, string $user, string $pass, string $db): void
+    public function init(string $host, int $port, string $user, string $pass, string $db): void
     {
-        $this->pdo = new PDO("mysql:host=$host;port=3306;dbname=$db", $user, $pass);
+        $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass);
     }
 
     public static function getInstance():self

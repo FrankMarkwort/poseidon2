@@ -1,4 +1,5 @@
 SetEnv MEMCACHED_HOST 172.17.0.1
+SetEnv RUN_MODE develop
 <FilesMatch "\.ph(p[2-6]?|tml)$">
     SetHandler application/x-httpd-php
 
