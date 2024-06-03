@@ -94,9 +94,37 @@ root@raspberrypi:~# service phpcron status
 
 Jun 03 04:10:03 raspberrypi systemd[1]: Started Data NMEA2000 Cron.
 ```
+- 8 In the .htaccess set the RUN_MODE to production
+```
+root@raspberrypi:/var/www/html/src/http# cat .htaccess
+SetEnv RUN_MODE production
+<FilesMatch "\.ph(p[2-6]?|tml)$">
+    SetHandler application/x-httpd-php
+
+</FilesMatch>
+```
+- 9 Apache configuration something like this
+```
+root@raspberrypi:/etc/apache2/sites-enabled# cat  000-default.conf 
+VirtualHost *:80>
+ ServerAdmin webmaster@dummy-host.example.com
+    ServerName localhost 
+    DocumentRoot  /var/www/html/src/http  
+    ErrorLog /var/log/apache2/poseidon.localnet-error_log
+    CustomLog /var/log/apache2/podeidon.localnet-access_log combined
+    AllowEncodedSlashes On
+    <Directory "/var/www/html/src/http">
+        AllowOverride all
+        # New directive needed in Apache 2.4.3:
+        Require all granted    
+    </Directory>
+    <IfModule mod_rewrite.c>
+       RewriteEngine On
+       Options +FollowSymLinks
+    </IfModule>
+</VirtualHost>
+```
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
 The Apache directory is _src/http/_ \
 
-**.htaccess**\
-- SetEnv RUN_MODE production
