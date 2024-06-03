@@ -24,7 +24,7 @@ root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
 ```
 **Deamon**\
 _Dependencies_
-PHP 8.3, memcached and mariadb.
+PHP 8.3, memcached and mariadb.\
 **configuration**
 - 1 Create a user nmea2000 in the database.
 - 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, \
@@ -137,7 +137,9 @@ VirtualHost *:80>
     </IfModule>
 </VirtualHost>
 ```
-**Display of the decoded data.**\
+**Displaying the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
-The Apache directory is _src/http/_ \
+as html http://127.0.0.1/index.phtml\
+as Json http://127.0.0.1/index.phtml?mode=json\
+as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
 
