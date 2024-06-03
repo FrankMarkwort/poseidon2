@@ -7,12 +7,25 @@ The decoder works on 32 bit and 64 bit systems\
 \
 The deamon assembles the data packets and saves them ready for decoding in the memcached server. The key is the pgn.\
 Data format from usb device\
-cat /dev/ttyACM0 \
-06:26:23.548 R 09FD0270 00 0C 02 11 AA FA FF FF\
-\
+```
+root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
+
+06:13:27.186 R 09F5036E 00 00 00 FF FF 00 FF FF
+
+06:13:27.187 R 19F5136E 80 0E FF FF FF FF FF FF
+
+06:13:27.188 R 15FD066E 00 A5 73 FF FF FF FF FF
+
+06:13:27.189 R 15FD086E 00 00 00 A5 73 FF FF FF
+06:13:27.205 R 09F80200 FF FC 7C F1 0B 00 FF FF
+06:13:27.205 R 09F80100 37 7F 21 16 5C B7 00 10
+06:13:27.206 R 0DF90B00 FF FC 67 00 0C 00 FF FF
+06:13:27.207 R 19F81400 80 14 57 38 34 00 00 00
+```
 **Deamon**\
-_Dependencies and configuration_
+_Dependencies_
 PHP 8.3, memcached and mariadb.
+**configuration**
 - 1 Create a user nmea2000 in the database.
 - 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, \
 the database host and port.
