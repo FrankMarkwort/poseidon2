@@ -34,7 +34,7 @@ class Config
     }
     private static function getConfigArray():array
     {
-        $array = include(__DIR__ . '/../config/config.php');
+        $array = include(__DIR__ . '/../../config/config.php');
 
         return $array[static::getRunMode()];
     }
