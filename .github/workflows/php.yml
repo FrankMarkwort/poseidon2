@@ -12,7 +12,7 @@ jobs:
         run: |
           sudo apt-get install -y php-bcmath
           sudo apt-get install memcached
-          sudo systemctl start memcached
+          # sudo systemctl start memcached
           sudo apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
           sudo apt-get install -y php-memcached
       - name: Composer    
@@ -25,7 +25,7 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
-          TEST_NAME: Scarlett
+          TEST_NAME: Poseidon
         with:
           version: 11.0
           php_version: 8.3
