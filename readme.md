@@ -38,7 +38,7 @@ the database host and port.
 start Migration \
 ![Screenshot_20240603_062101](https://github.com/FrankMarkwort/poseidon2/assets/78704564/c92eaca4-0568-4ad2-be03-6e33044d3fb0)
 
-- 4 linux service phpreader\
+- 4 Create Linux service phpreader\
 ```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
 [Unit]
 Description=Data NMEA2000 Reader
@@ -51,9 +51,8 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-- 5 linux service phpcron\
-  ```
-  root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
+- 5 Create Linux service phpcrom\
+```root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
 [Unit]
 Description=Data NMEA2000 Cron
 
@@ -65,9 +64,6 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-
-
-
 
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
