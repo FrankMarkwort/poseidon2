@@ -38,7 +38,6 @@ the database host and port.
   http://127.0.0.1/service.phtml \
 start Migration \
 ![Screenshot_20240603_062101](https://github.com/FrankMarkwort/poseidon2/assets/78704564/c92eaca4-0568-4ad2-be03-6e33044d3fb0)
-
 - 4 Create Linux service phpreader\
 ```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
 [Unit]
@@ -65,7 +64,11 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-
+- 6 activate the services
+  ```
+  sudo systemctl enable phpreader
+  sudo systemctl enable phpcron
+  ``
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
 The Apache directory is _src/http/_ \
