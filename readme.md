@@ -68,7 +68,32 @@ WantedBy=multi-user.target
   ```
   sudo systemctl enable phpreader
   sudo systemctl enable phpcron
-  ``
+  ```
+- 7 start and test
+```
+root@raspberrypi:~# service phpreader start
+root@raspberrypi:~# service phpcron start
+root@raspberrypi:~# service phpreader status
+● phpreader.service - Data NMEA2000 Reader
+   Loaded: loaded (/etc/systemd/system/phpreader.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2024-06-03 07:45:50 CEST; 3min 25s ago
+ Main PID: 9627 (php)
+   CGroup: /system.slice/phpreader.service
+           └─9627 /usr/bin/php /var/www/html/src/http/../deamon/deamon.php
+
+Jun 03 07:45:50 raspberrypi systemd[1]: Started Data NMEA2000 Reader.
+root@raspberrypi:~# service phpcrom status
+Unit phpcrom.service could not be found.
+root@raspberrypi:~# service phpcron status
+● phpcron.service - Data NMEA2000 Cron
+   Loaded: loaded (/etc/systemd/system/phpcron.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2024-06-03 04:10:03 CEST; 3h 39min ago
+ Main PID: 7279 (php)
+   CGroup: /system.slice/phpcron.service
+           └─7279 /usr/bin/php /var/www/html/src/http/../deamon/cron.php
+
+Jun 03 04:10:03 raspberrypi systemd[1]: Started Data NMEA2000 Cron.
+```
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
 The Apache directory is _src/http/_ \
