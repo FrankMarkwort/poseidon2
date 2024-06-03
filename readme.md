@@ -139,7 +139,11 @@ VirtualHost *:80>
 ```
 **Displaying the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
-as html http://127.0.0.1/index.phtml\
-as Json http://127.0.0.1/index.phtml?mode=json\
+```
+as html http://127.0.0.1/index.phtml
+as Json http://127.0.0.1/index.phtml?mode=json
 as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
+as Highchart http://127.0.0.1/graph.phtml
+Services http://127.0.0.1/service.phtml
+```
 
