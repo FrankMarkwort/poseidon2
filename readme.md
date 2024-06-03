@@ -4,7 +4,7 @@
 @email frank.markwort@gmail.com\
 */\
 The wind data is stored every minute for maximum 60 minutes.\
-(Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG)\
+(Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG, waterTemperature)\
 After that, the average, min, max values ​​are stored in the hourly table.\
 The ship's position is stored in the position table every hour when the ship is moving.\
 (Id, Id_wind, Date, Latitude, longitude)\
