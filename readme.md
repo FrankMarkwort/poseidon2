@@ -7,7 +7,7 @@ The decoder works on 32 bit and 64 bit systems\
 \
 The deamon assembles the data packets and saves them ready for decoding in the memcached server. The key is the pgn.\
 Data format from usb device\
-cat /dev/ttyACM0
+cat /dev/ttyACM0 \
 06:26:23.548 R 09FD0270 00 0C 02 11 AA FA FF FF\
 \
 **Deamon**\
@@ -34,8 +34,10 @@ the database host and port.
     ],
     'testing' => [
 ```
-http://127.0.0.1/service.phtml\
+- 3 http://127.0.0.1/service.phtml\
 start Migration
+![Screenshot_20240603_062101](https://github.com/FrankMarkwort/poseidon2/assets/78704564/c92eaca4-0568-4ad2-be03-6e33044d3fb0)
+
 
 
 
