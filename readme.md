@@ -7,7 +7,7 @@ The wind data is stored every minute for maximum 60 minutes.\
 (Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG)\
 After that, the average, min, max values ​​are stored in the hourly table.\
 The ship's position is stored in the position table every hour when the ship is moving.\
-(Id, Date, Latitude, longitude)
+(Id, Id_wind, Date, Latitude, longitude)\
 ***The decoder works on 32 bit and 64 bit systems***\
 \
 The deamon assembles the data packets and saves them ready for decoding in the memcached server. The key is the pgn.\
