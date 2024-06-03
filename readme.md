@@ -143,6 +143,6 @@ as html http://127.0.0.1/index.phtml
 as Json http://127.0.0.1/index.phtml?mode=json
 as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
 as Highchart http://127.0.0.1/graph.phtml
-Services http://127.0.0.1/service.phtml look poin 3
+Services http://127.0.0.1/service.phtml __see point 3__
 ```
 
