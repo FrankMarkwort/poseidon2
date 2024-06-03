@@ -34,8 +34,10 @@ the database host and port.
     ],
     'testing' => [
 ```
-127.0.0.1/service.phtml\
+http://127.0.0.1/service.phtml\
 start Migration
+
+
 
 **Display of the decoded data.**\
 The data is currently displayed in the browser as HTML or JSON.\
