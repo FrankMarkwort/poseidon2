@@ -1,8 +1,6 @@
 use nmea2000;
-drop SEQUENCE wind_speed_minute_seq;
+#drop SEQUENCE wind_speed_minute_seq;
 CREATE SEQUENCE wind_speed_minute_seq START WITH 1 INCREMENT BY 1 MINVALUE=1 MAXVALUE=60 CYCLE;
-
-drop TABLE wind_speed_minute;
 
 create table wind_speed_minute
 (
