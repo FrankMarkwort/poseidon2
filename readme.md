@@ -4,6 +4,7 @@
 @email frank.markwort@gmail.com\
 */\
 The wind data is stored every minute for maximum 60 minutes.\
+(AWA AWS TWS TWA TWD VesselHeading SOG COG)
 After that, the average, min, max values ​​are stored in the hourly table.\
 The ship's position is stored in the position table every hour when the ship is moving.\
 ***The decoder works on 32 bit and 64 bit systems***\
@@ -66,7 +67,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-- 5 Create Linux service phpcrom\
+- 5 Create Linux service phpcron\
 ```root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
 [Unit]
 Description=Data NMEA2000 Cron
