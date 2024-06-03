@@ -11,7 +11,8 @@ return [
             'user' => 'nmea2000',
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
-        ]
+        ],
+        'serialdevice' => '/dev/ttyACM0',
     ],
     'production' => [
         'memcached' => [
@@ -24,7 +25,8 @@ return [
             'user' => 'nmea2000',
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
-        ]
+        ],
+        'serialdevice' => '/dev/ttyACM0',
     ],
     'testing' => [
         'memcached' => [
@@ -38,6 +40,7 @@ return [
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
         ],
+        'serialdevice' => '/dev/ttyACM0',
     ],
     'staging' => [
         'memcached' => [
@@ -51,5 +54,6 @@ return [
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
         ],
+        'serialdevice' => '/dev/ttyACM0',
     ]
 ];

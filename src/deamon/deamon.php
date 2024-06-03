@@ -6,7 +6,7 @@ use Nmea\Deamon\Bootstrap;
 use Nmea\Deamon\Serial;
 use Nmea\Config\Config;
 require_once(__DIR__ . '/../../vendor/autoload.php');
-$bootstrap = new Bootstrap(new Serial( '/dev/ttyACM0'), (new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()))->clear());
+$bootstrap = new Bootstrap(new Serial(Config::getSerialDevice()), (new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()))->clear());
 
 $bootstrap->run();
 

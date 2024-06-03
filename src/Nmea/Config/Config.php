@@ -32,6 +32,10 @@ class Config
     {
         return static::getConfigArray()['mariadb']['password'];
     }
+    public static function getSerialDevice():string
+    {
+        return static::getConfigArray()['serialdevice'];
+    }
     private static function getConfigArray():array
     {
         $array = include(__DIR__ . '/../../config/config.php');
