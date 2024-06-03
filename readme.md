@@ -34,9 +34,37 @@ the database host and port.
     ],
     'testing' => [
 ```
-- 3 http://127.0.0.1/service.phtml\
+- 3 http://127.0.0.1/service.phtml \
 start Migration \
 ![Screenshot_20240603_062101](https://github.com/FrankMarkwort/poseidon2/assets/78704564/c92eaca4-0568-4ad2-be03-6e33044d3fb0)
+
+- 4 linux service phpreader\
+```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
+[Unit]
+Description=Data NMEA2000 Reader
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/php  /var/www/html/src/http/../deamon/deamon.php
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+- 5 linux service phpcron\
+  ```
+  root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
+[Unit]
+Description=Data NMEA2000 Cron
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/php  /var/www/html/src/http/../deamon/cron.php
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
 
 
 
