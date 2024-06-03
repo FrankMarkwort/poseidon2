@@ -3,7 +3,10 @@
 @version 0.1.0\
 @email frank.markwort@gmail.com\
 */\
-The decoder works on 32 bit and 64 bit systems\
+The wind data is stored every minute for a maximum of 60 minutes.\
+After that, the average, min, max values ​​are stored in the hourly table.\
+The ship's position is stored in the position table every hour when the ship is moving.\
+***The decoder works on 32 bit and 64 bit systems***\
 \
 The deamon assembles the data packets and saves them ready for decoding in the memcached server. The key is the pgn.\
 Data format from usb device\
