@@ -50,7 +50,7 @@ the database host and port.
 - 3 Create database tables \
   http://127.0.0.1/service.phtml \
 start Migration \
-![Screenshot_20240603_062101](https://github.com/FrankMarkwort/poseidon2/assets/78704564/c92eaca4-0568-4ad2-be03-6e33044d3fb0)
+![Screenshot_20240603_094645](https://github.com/FrankMarkwort/poseidon2/assets/78704564/20989006-c8cd-4fc9-8d62-c76d3a09b841)
 - 4 Create Linux service phpreader\
 ```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
 [Unit]
