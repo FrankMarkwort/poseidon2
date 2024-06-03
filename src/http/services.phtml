@@ -39,7 +39,7 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
             break;
         case 'dbmigration':
             echo "start Database-Migration<br>";
-            exec(__DIR__ . '/../Nmea/bin/migration.php');
+            exec('/usr/bin/php ' . __DIR__ . '/../Nmea/bin/migration.php');
             break;
     }
 }

@@ -34,9 +34,11 @@ class WindSpeedHourCollection
             $avgTws[] = $entity->getAvgTws();
             $minMaxTwa[] = [$entity->getMinTwa(),$entity->getMaxTwa()];
             $avgTwa[] = $entity->getAvgTwa();
-
             $minMaxTwd[] = [$entity->getMinTwd(),$entity->getMaxTwd()];
             $avgTwd[] = $entity->getAvgTwd();
+
+            $minMaxWatertemperature[] = [$entity->getMinWatertemperature(),$entity->getMaxWatertemperature()];
+            $avgWatertemperature[] = $entity->getAvgWatertemperature();
         };
         $startTime = strtotime(reset($this->enitiys)->getDate());
         $endTime = strtotime(end($this->enitiys)->getDate());
@@ -58,10 +60,12 @@ class WindSpeedHourCollection
             'titleTwa' => 'TWA',
             'rangesTwa' => $minMaxTwa,
             'averagesTwa' => $avgTwa,
-
             'titleTwd' => 'TWD',
             'rangesTwd' => $minMaxTwd,
-            'averagesTwd' => $avgTwd
+            'averagesTwd' => $avgTwd,
+            'titleWatertemperature' => 'WaterTemperature',
+            'rangesWatertemperature' => $minMaxWatertemperature,
+            'averagesWatertemperature' => $avgWatertemperature
         ];
     }
 

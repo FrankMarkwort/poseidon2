@@ -28,6 +28,9 @@ class WindSpeedHour
     private float $avgVesselHeading;
     private float $maxVesselHeading;
     private float $minVesselHeading;
+    private float $avgWatertemperature;
+    private float $minWatertemperature;
+    private float $maxWatertemperature;
     private string $date;
 
     public function getMaxTwd(): float
@@ -264,4 +267,41 @@ class WindSpeedHour
 
         return $this;
     }
+
+    public function getAvgWatertemperature(): float
+    {
+        return $this->avgWatertemperature;
+    }
+
+    public function setAvgWatertemperature(float $avgWatertemperature): WindSpeedHour
+    {
+        $this->avgWatertemperature = $avgWatertemperature;
+
+        return $this;
+    }
+
+    public function getMinWatertemperature(): float
+    {
+        return $this->minWatertemperature;
+    }
+
+    public function setMinWatertemperature(float $minWatertemperature): WindSpeedHour
+    {
+        $this->minWatertemperature = $minWatertemperature;
+
+        return $this;
+    }
+
+    public function getMaxWatertemperature(): float
+    {
+        return $this->maxWatertemperature;
+    }
+
+    public function setMaxWatertemperature(float $maxWatertemperature): WindSpeedHour
+    {
+        $this->maxWatertemperature = $maxWatertemperature;
+
+        return $this;
+    }
+
 }

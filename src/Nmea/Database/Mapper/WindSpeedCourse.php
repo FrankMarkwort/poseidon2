@@ -12,6 +12,7 @@ class WindSpeedCourse
     private float $cog;
     private float $sog;
     private float $vesselHeading;
+    private float $waterTemperature;
 
     public function __construct(private DatabaseInterface $database)
     {
@@ -77,21 +78,36 @@ class WindSpeedCourse
         return $this;
     }
 
+    private function getWaterTemperature(): float
+    {
+        return $this->waterTemperature;
+    }
+
+    public function setWaterTemperature(float $waterTemperature): WindSpeedCourse
+    {
+        $this->waterTemperature = $waterTemperature;
+
+        return $this;
+    }
+
+
+
     public function store()
     {
-        $sqlformat = 'REPLACE INTO wind_speed_minute (`timestamp`, twd, aws, awa, tws, twa, cog, sog, vesselHeading)'
-            . " VALUES ('%s', %s, %s, %s, %s, %s, %s, %s, %s)";
+        $sqlformat = 'REPLACE INTO wind_speed_minute (`timestamp`, twd, aws, awa, tws, twa, cog, sog, vesselHeading, waterTemperature )'
+            . " VALUES ('%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)";
 
         $sql = sprintf($sqlformat,
             $this->getTime(),
             $this->angleGrad($this->getTrueWindDirection()),
-            $this->speedKnots($this->getApparentWindSpeed()),
+            $this->msToKnots($this->getApparentWindSpeed()),
             $this->angleGrad($this->getApparentWindAngle()),
-            $this->speedKnots($this->getApparentWindSpeed()),
+            $this->msToKnots($this->getApparentWindSpeed()),
             $this->angleGrad($this->getTrueWindAngle()),
             $this->angleGrad($this->getCog()),
-            $this->speedKnots($this->getSog()),
-            $this->angleGrad($this->getVesselHeading())
+            $this->msToKnots($this->getSog()),
+            $this->angleGrad($this->getVesselHeading()),
+            $this->kelvinToCelsius($this->getWaterTemperature())
         );
 
         $this->database::getInstance()->execute($sql);
@@ -107,10 +123,10 @@ class WindSpeedCourse
     {
         if ($this->getSog() >= 1) {
 
-            return ((pi() - $this->getTrueWindAngle()) + $this->getCog() % (2 * pi()));
+            return ($this->getTrueWindAngle()) + $this->getCog() % (2 * pi());
         }
 
-        return ((pi() - $this->getTrueWindAngle()) + $this->getVesselHeading() % (2 * pi()));
+        return ($this->getTrueWindAngle()) + $this->getVesselHeading() % (2 * pi());
     }
 
     public function setVesselHeading(float $vesselHeading): WindSpeedCourse
@@ -126,7 +142,7 @@ class WindSpeedCourse
         $a = $this->getTrueWindSpeed();
         $b = $this->getSog();
         $c = $this->getApparentWindSpeed();
-        if (abs(2 * $a * $b) <= 0.5) {
+        if (abs(2 * $a * $b) <= 0.001) {
 
             return $this->getApparentWindAngle();
         }
@@ -160,8 +176,14 @@ class WindSpeedCourse
         return round(rad2deg($angle),0);
     }
 
-    private function speedKnots(float $speed):float
+    private function msToKnots(float $speed):float
     {
         return round($speed * 1.94384 ,1);
+    }
+
+    private function kelvinToCelsius(float $kelvin):float
+    {
+        return $kelvin - 273.15;
+
     }
 }

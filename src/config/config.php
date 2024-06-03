@@ -12,7 +12,7 @@ return [
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
         ],
-        'serialdevice' => '/dev/ttyACM0',
+        'serialdevice' => __DIR__ . '/../../test/TestData/data.log',
     ],
     'production' => [
         'memcached' => [

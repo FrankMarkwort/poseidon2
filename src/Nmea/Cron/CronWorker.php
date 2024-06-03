@@ -24,9 +24,10 @@ class CronWorker
         while ($this->running) {
             $i++;
             $this->store(
-               $this->cache->get(EnumPgns::WIND->value),
-               $this->cache->get(EnumPgns::COG_SOG->value),
-               $this->cache->get(EnumPgns::Vessel_Heading->value),
+                $this->cache->get(EnumPgns::WIND->value),
+                $this->cache->get(EnumPgns::COG_SOG->value),
+                $this->cache->get(EnumPgns::Vessel_Heading->value),
+                $this->cache->get(EnumPgns::Temperature->value),
             );
             if ($i >= 60) {
                 $i = 0;
@@ -81,22 +82,27 @@ class CronWorker
 
     }
 
-    private function store(string $windData, string $cogSogData, string $vesselHeading):void
+    private function store(string $windData, string $cogSogData, string $vesselHeading, string $temperature):void
     {
-        if (empty($windData) || empty($cogSogData) || empty($vesselHeading)) {
+        if (empty($windData) || empty($cogSogData) || empty($vesselHeading) || empty($temperature)) {
 
             return;
         }
         $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
         $cogSogFacade = DataFacadeFactory::create($cogSogData, 'YACHT_DEVICE');
         $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
+        $temperatureFacade = DataFacadeFactory::create($temperature, 'YACHT_DEVICE');
         $mapper = new WindSpeedCourse($this->database);
+        #$this->printAllFieldNames($temperatureFacade);
+        #var_dump($temperatureFacade->getFieldValue(4)->getValue() - 273.15);
+        #return;
         $mapper->setTime($windFacade->getTimestamp())
             ->setApparentWindSpeed( $windFacade->getFieldValue(2)->getValue())
             ->setApparentWindAngle( $windFacade->getFieldValue(3)->getValue())
             ->setCog($cogSogFacade->getFieldValue(4)->getValue())
             ->setSog($cogSogFacade->getFieldValue(5)->getValue())
-            ->setVesselHeading($vesselHeadingFacade->getFieldValue(2)->getValue());
+            ->setVesselHeading($vesselHeadingFacade->getFieldValue(2)->getValue())
+            ->setWaterTemperature($temperatureFacade->getFieldValue(4)->getValue());
 
         $mapper->store();
     }
@@ -104,9 +110,9 @@ class CronWorker
     private function printAllFieldNames(DataFacade $dataFacade)
     {
         for ($i = 1; $i <= $dataFacade->count(); $i++) {
-            var_dump ($i, $dataFacade->getFieldValue($i)->getName());
-            var_dump ($i, $dataFacade->getFieldValue($i)->getValue());
-            var_dump ($i, $dataFacade->getFieldValue($i)->getType());
+            echo "$i, " . $dataFacade->getFieldValue($i)->getName() ." ";
+            echo "$i, " . $dataFacade->getFieldValue($i)->getValue() ." ";
+            echo "$i, " . $dataFacade->getFieldValue($i)->getType() ."\n";
         }
     }
 }

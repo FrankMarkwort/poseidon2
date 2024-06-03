@@ -31,6 +31,5 @@ class WindSpeedCourseTest extends TestCase
         $this->assertEquals(20, round($this->mapper->getTrueWindSpeed() * 1.944,1));
         $this->assertEquals(30, round(rad2deg($this->mapper->getTrueWindAngle())),0);
         $this->assertEquals(195, round(rad2deg($this->mapper->getTrueWindDirection()),0));
-
     }
 }

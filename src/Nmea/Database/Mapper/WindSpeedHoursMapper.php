@@ -38,7 +38,10 @@ class WindSpeedHoursMapper extends AbstractMapper
                 ->setMinSog($row['minSog'])
                 ->setAvgVesselHeading($row['avgVesselHeading'])
                 ->setMaxVesselHeading($row['maxVesselHeading'])
-                ->setMinVesselHeading($row['minVesselHeading']);
+                ->setMinVesselHeading($row['minVesselHeading'])
+                ->setAvgWatertemperature($row['avgWaterTemperature'])
+                ->setMaxWatertemperature($row['maxWaterTemperature'])
+                ->setMinWatertemperature($row['minWaterTemperature']);
           $collection->addEnity($entity);
         }
 

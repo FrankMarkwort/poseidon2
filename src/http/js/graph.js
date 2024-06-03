@@ -174,7 +174,34 @@
             marker: {
                 enabled: false
             }
-        }
+        }, // #####################
+          {
+            name:  chartData['titleWatertemperature'],
+            data: chartData['averagesWatertemperature'],
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[0]
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true,
+                valueSuffix: ' °'
+            },
+        }, {
+            name: 'RangeWaterTemperature',
+            data: chartData['rangesWatertemperature'],
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: Highcharts.getOptions().colors[0],
+            fillOpacity: 0.3,
+            zIndex: 0,
+            marker: {
+                enabled: false
+            }
+        } // #####################
         ],
     }
 )})();
