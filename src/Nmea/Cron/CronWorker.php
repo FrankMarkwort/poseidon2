@@ -6,6 +6,7 @@ use Nmea\Cache\CacheInterface;
 use Nmea\Database\DatabaseInterface;
 use Nmea\Database\Entity\Positions;
 use Nmea\Database\Mapper\PositionMapper;
+use Nmea\Database\Mapper\Vector\PolarVector;
 use Nmea\Database\Mapper\WindSpeedCourse;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\Data\DataFacade;
@@ -86,6 +87,7 @@ class CronWorker
     {
         if (empty($windData) || empty($cogSogData) || empty($vesselHeading) || empty($temperature)) {
 
+            echo "bla";
             return;
         }
         $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
@@ -94,15 +96,21 @@ class CronWorker
         $temperatureFacade = DataFacadeFactory::create($temperature, 'YACHT_DEVICE');
         $mapper = new WindSpeedCourse($this->database);
         #$this->printAllFieldNames($temperatureFacade);
-        #var_dump($temperatureFacade->getFieldValue(4)->getValue() - 273.15);
-        #return;
+        #$this->printAllFieldNames($windFacade);
+        #$this->printAllFieldNames($cogSogFacade);
+        #$this->printAllFieldNames($vesselHeadingFacade);
+
         $mapper->setTime($windFacade->getTimestamp())
-            ->setApparentWindSpeed( $windFacade->getFieldValue(2)->getValue())
-            ->setApparentWindAngle( $windFacade->getFieldValue(3)->getValue())
-            ->setCog($cogSogFacade->getFieldValue(4)->getValue())
-            ->setSog($cogSogFacade->getFieldValue(5)->getValue())
-            ->setVesselHeading($vesselHeadingFacade->getFieldValue(2)->getValue())
-            ->setWaterTemperature($temperatureFacade->getFieldValue(4)->getValue());
+            ->setApparentWind((new PolarVector())
+                ->setR($windFacade->getFieldValue(2)->getValue())
+                ->setOmega($windFacade->getFieldValue(3)->getValue()))
+            ->setCourseOverGround((new PolarVector())
+                ->setR($cogSogFacade->getFieldValue(5)->getValue())
+                ->setOmega($cogSogFacade->getFieldValue(4)->getValue()))
+            ->setVesselHeading((new PolarVector())
+                ->setR(0)
+                ->setOmega($vesselHeadingFacade->getFieldValue(2)->getValue()))
+               ->setWaterTemperature($temperatureFacade->getFieldValue(4)->getValue());
 
         $mapper->store();
     }

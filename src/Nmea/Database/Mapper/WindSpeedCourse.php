@@ -3,15 +3,19 @@
 namespace Nmea\Database\Mapper;
 
 use Nmea\Database\DatabaseInterface;
+use Nmea\Database\Mapper\Vector\Operator;
+use Nmea\Database\Mapper\Vector\PolarVector;
+use Nmea\Database\Mapper\Vector\PolarVectorOperation;
+use Nmea\Database\Mapper\Vector\Range;
 
 class WindSpeedCourse
 {
+
+    private const MIN_SPEED_VOTE_AS_SOG = 0.5; //m/s
     private string $time;
-    private float $windSpeed;
-    private float $windAngle;
-    private float $cog;
-    private float $sog;
-    private float $vesselHeading;
+    private ?PolarVector $courseOverGround = null;
+    private ?PolarVector $vesselHeading = null;
+    private ?PolarVector $apparentWind = null;
     private float $waterTemperature;
 
     public function __construct(private DatabaseInterface $database)
@@ -30,55 +34,43 @@ class WindSpeedCourse
         return $this;
     }
 
-    private function getSog(): float
+    public function setCourseOverGround(PolarVector $boatMoveTo):self
     {
-        return $this->sog;
-    }
+        $this->courseOverGround = $boatMoveTo;
 
-    public function setSog(float $sog): WindSpeedCourse
-    {
-        $this->sog = $sog;
-     
         return $this;
     }
 
-    private function getCog(): float
+    private function getCourseOverGround():PolarVector
     {
-        return $this->cog;
+        return $this->courseOverGround;
     }
 
-    public function setCog(float $cog): WindSpeedCourse
+    public function setVesselHeading(PolarVector $vesselHeading):self
     {
-        $this->cog = $cog;
-     
+        $this->vesselHeading = $vesselHeading;
+
         return $this;
     }
 
-    private function getApparentWindAngle(): float
+    private function getVesselHeading():PolarVector
     {
-        return $this->angleMaximalPi($this->windAngle);
+        return $this->vesselHeading;
     }
 
-    public function setApparentWindAngle(float $windAngle): WindSpeedCourse
+    public function setApparentWind(PolarVector $apparentWind): WindSpeedCourse
     {
-        $this->windAngle = $windAngle;
-     
+        $this->apparentWind = $apparentWind;
+
         return $this;
     }
 
-    private function getApparentWindSpeed(): float
+    private function getApparentWind():PolarVector
     {
-        return $this->windSpeed;
+        return $this->apparentWind;
     }
 
-    public function setApparentWindSpeed(float $windSpeed): WindSpeedCourse
-    {
-        $this->windSpeed = $windSpeed;
-     
-        return $this;
-    }
-
-    private function getWaterTemperature(): float
+    public function getWaterTemperature(): float
     {
         return $this->waterTemperature;
     }
@@ -90,90 +82,50 @@ class WindSpeedCourse
         return $this;
     }
 
-
-
-    public function store()
+    /**
+     * move too mapper
+     */
+    public function store():void
     {
         $sqlformat = 'REPLACE INTO wind_speed_minute (`timestamp`, twd, aws, awa, tws, twa, cog, sog, vesselHeading, waterTemperature )'
             . " VALUES ('%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)";
-
-        $sql = sprintf($sqlformat,
-            $this->getTime(),
-            $this->angleGrad($this->getTrueWindDirection()),
-            $this->msToKnots($this->getApparentWindSpeed()),
-            $this->angleGrad($this->getApparentWindAngle()),
-            $this->msToKnots($this->getApparentWindSpeed()),
-            $this->angleGrad($this->getTrueWindAngle()),
-            $this->angleGrad($this->getCog()),
-            $this->msToKnots($this->getSog()),
-            $this->angleGrad($this->getVesselHeading()),
-            $this->kelvinToCelsius($this->getWaterTemperature())
-        );
-
+        $sql = vsprintf($sqlformat, $this->getStoreArray());
         $this->database::getInstance()->execute($sql);
 
     }
 
-    private function getVesselHeading(): float
+    public function getStoreArray():array
     {
-        return $this->vesselHeading;
+        return [
+            $this->getTime(),
+            $this->angleGrad($this->getTrueWind()->getOmega()),
+            $this->msToKnots($this->getApparentWind()->getR()),
+            $this->angleGrad($this->getApparentWind()->getOmega(Range::G180)),
+            $this->msToKnots($this->getTrueWind()->getR()),
+            $this->angleGrad($this->getTrueWind()->getOmega(Range::G180)),
+            $this->angleGrad($this->getCourseOverGround()->getOmega()),
+            $this->msToKnots($this->getCourseOverGround()->getR()),
+            $this->angleGrad($this->getVesselHeading()->getOmega()),
+            $this->kelvinToCelsius($this->getWaterTemperature())
+        ];
     }
 
-    public function getTrueWindDirection(): float
+    private function getTrueWind(): PolarVector
     {
-        if ($this->getSog() >= 1) {
+        if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
 
-            return ($this->getTrueWindAngle()) + $this->getCog() % (2 * pi());
+            return (new PolarVectorOperation())($this->getCourseOverGround() , $this->getApparentWind(), Operator::MINUS);
         }
 
-        return ($this->getTrueWindAngle()) + $this->getVesselHeading() % (2 * pi());
-    }
+        $trueWindVector = clone $this->getApparentWind();
+        $trueWindVector->rotate( $this->getVesselHeading()->getOmega());
 
-    public function setVesselHeading(float $vesselHeading): WindSpeedCourse
-    {
-        $this->vesselHeading = $vesselHeading;
-
-        return $this;
-    }
-
-    public function getTrueWindAngle():float
-    {
-        # cos Ω = (a² + b² – c²) / (2ab)
-        $a = $this->getTrueWindSpeed();
-        $b = $this->getSog();
-        $c = $this->getApparentWindSpeed();
-        if (abs(2 * $a * $b) <= 0.001) {
-
-            return $this->getApparentWindAngle();
-        }
-
-        return acos((pow($a, 2) + pow($b, 2) - pow($c, 2)) / (2 * $a * $b));
-
-    }
-
-    public function getTrueWindSpeed():float
-    {
-        #c² = a² + b² – 2ab * cos θ,
-        $a = $this->getSog();
-        $b = $this->getApparentWindSpeed();
-        $O = $this->getApparentWindAngle();
-        $z = pow($a, 2) + pow($b, 2) - (2 * $a * $b * cos($O));
-        if ($z >= 0) {
-
-            return sqrt($z);
-        }
-
-        return $this->getApparentWindSpeed();
-    }
-
-    public function angleMaximalPi(float $angle):float
-    {
-         return $angle <= pi() ? $angle : (2 * pi() - $angle) * -1;
+        return $trueWindVector;
     }
 
     private function angleGrad(float $angle): float
     {
-        return round(rad2deg($angle),0);
+        return round(rad2deg($angle), 0);
     }
 
     private function msToKnots(float $speed):float
@@ -183,7 +135,6 @@ class WindSpeedCourse
 
     private function kelvinToCelsius(float $kelvin):float
     {
-        return $kelvin - 273.15;
-
+        return round($kelvin - 273.15, 1);
     }
 }
