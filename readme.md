@@ -150,4 +150,52 @@ as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
 as Highchart http://127.0.0.1/graph.phtml
 Services http://127.0.0.1/service.phtml __see point 3__
 ```
+** src/deamon/cron.php ***
+```
+pi@raspberrypi:/var/www/html/src/deamon $ ./cron.php --help
+--help
+--version
+--mode= [debug|both]
+     {debug} only print to terminal
+     {both}  run normal and print to terminal
 
+pi@raspberrypi:/var/www/html/src/deamon $ ./cron.php --mode=both
+mode=both
+Temperature pgn => 130312 src => 110 dst => 255 type => SP pduFormat => 253 dataPage => 1
+1, SID 1, 0 1, Integer
+2, Instance 2, 0 2, Integer
+3, Source 3, Sea Temperature 3, Lookup table
+4, Actual Temperature 4, 296.15 4, Temperature
+5, Set Temperature 5,  5, Temperature
+6, Reserved 6, 255 6, 
+Wind Data pgn => 130306 src => 112 dst => 255 type => SP pduFormat => 253 dataPage => 1
+1, SID 1, 0 1, Integer
+2, Wind Speed 2, 3.44 2, Number
+3, Wind Angle 3, 4.7376 3, Number
+4, Reference 4, Apparent 4, Lookup table
+5, Reserved 5, 2097151 5, 
+COG & SOG, Rapid Update pgn => 129026 src => 0 dst => 255 type => SP pduFormat => 248 dataPage => 1
+1, SID 1,  1, Integer
+2, COG Reference 2, True 2, Lookup table
+3, Reserved 3, 63 3, 
+4, COG 4, 0.3211 4, Number
+5, SOG 5, 0.09 5, Number
+6, Reserved 6, 65535 6, 
+Vessel Heading pgn => 127250 src => 115 dst => 255 type => SP pduFormat => 241 dataPage => 1
+1, SID 1, 0 1, Integer
+2, Heading 2, 1.2397 2, Number
+3, Deviation 3,  3, Number
+4, Variation 4,  4, Number
+5, Reference 5, Magnetic 5, Lookup table
+6, Reserved 6, 63 6, 
+
+store wind minute data !
+
+Temperature pgn => 130312 src => 110 dst => 255 type => SP pduFormat => 253 dataPage => 1
+1, SID 1, 0 1, Integer
+2, Instance 2, 0 2, Integer
+3, Source 3, Sea Temperature 3, Lookup table
+4, Actual Temperature 4, 296.05 4, Temp    
+
+
+```
