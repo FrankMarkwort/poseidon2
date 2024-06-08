@@ -150,7 +150,7 @@ as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
 as Highchart http://127.0.0.1/graph.phtml
 Services http://127.0.0.1/service.phtml __see point 3__
 ```
-*** src/deamon/cron.php ***\
+**src/deamon/cron.php**\
 ```
 pi@raspberrypi:/var/www/html/src/deamon $ ./cron.php --help
 --help
