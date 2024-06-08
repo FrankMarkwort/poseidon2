@@ -1,6 +1,6 @@
 /** \
 @author Frank Markwort\
-@version 0.9.1\
+@version 0.9.2\
 @email frank.markwort@gmail.com\
 */\
 The wind data is stored every minute for maximum 60 minutes.\
