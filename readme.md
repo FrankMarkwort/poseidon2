@@ -10,7 +10,7 @@ The ship's position is stored in the position table every hour when the ship is 
 (Id, Id_wind, Date, Latitude, longitude)\
 ***The decoder works on 32 bit and 64 bit systems***\
 \
-The deamon assembles the data packets and saves them ready for decoding in the memcached server. The key is the pgn.\
+The deamon assembles the data packets from "NMEA 2000 USB Gateway YDNU-02 (Yacht-Device)" and saves them ready for decoding in the memcached server. The key is the pgn.\
 Data format from usb device
 ```
 root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
