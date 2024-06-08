@@ -1,6 +1,6 @@
 <?php
 
-namespace Nmea\Database\Mapper\Vector;
+namespace Nmea\Math\Vector;
 
 enum Range:string
 {

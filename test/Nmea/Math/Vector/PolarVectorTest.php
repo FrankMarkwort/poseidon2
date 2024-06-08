@@ -1,9 +1,7 @@
 <?php
 
-namespace TestsNmea\Database\Mapper\Vector;
+namespace Nmea\Math\Vector;
 
-use Nmea\Database\Mapper\Vector\PolarVector;
-use Nmea\Database\Mapper\Vector\Range;
 use PHPUnit\Framework\TestCase;
 
 class PolarVectorTest extends TestCase

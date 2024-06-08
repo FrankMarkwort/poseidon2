@@ -2,11 +2,11 @@
 
 namespace TestsNmea\Database\Mapper;
 
-use Nmea\Database\Mapper\Vector\PolarVector;
+use Nmea\Database\Database;
 use Nmea\Database\Mapper\WindSpeedCourse;
+use Nmea\Math\Vector\PolarVector;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Nmea\Database\Database;
 
 class WindSpeedCourseTest extends TestCase
 {
@@ -80,9 +80,5 @@ class WindSpeedCourseTest extends TestCase
     {
         return round(rad2deg($deg),0);
     }
-
-
-
-
 }
 

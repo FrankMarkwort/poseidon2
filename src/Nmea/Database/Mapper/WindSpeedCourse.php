@@ -3,10 +3,10 @@
 namespace Nmea\Database\Mapper;
 
 use Nmea\Database\DatabaseInterface;
-use Nmea\Database\Mapper\Vector\Operator;
-use Nmea\Database\Mapper\Vector\PolarVector;
-use Nmea\Database\Mapper\Vector\PolarVectorOperation;
-use Nmea\Database\Mapper\Vector\Range;
+use Nmea\Math\Vector\Operator;
+use Nmea\Math\Vector\PolarVector;
+use Nmea\Math\Vector\PolarVectorOperation;
+use Nmea\Math\Vector\Range;
 
 class WindSpeedCourse
 {
