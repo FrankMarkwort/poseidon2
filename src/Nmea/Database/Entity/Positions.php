@@ -2,6 +2,8 @@
 
 namespace Nmea\Database\Entity;
 
+use Nmea\Math\Vector\PolarVector;
+
 class Positions implements ComparableInterface
 {
     private float $id;
@@ -9,6 +11,8 @@ class Positions implements ComparableInterface
     private string $timestamp;
     private float $latitude;
     private float $longitude;
+    private ?PolarVector $courseOverGround = null;
+    private ?PolarVector $drift = null;
 
     public function getId(): float
     {
@@ -69,6 +73,30 @@ class Positions implements ComparableInterface
 
         return $this;
     }
+
+    public function getCourseOverGround(): ?PolarVector
+    {
+        return $this->courseOverGround;
+    }
+
+    public function setCourseOverGround(?PolarVector $courseOverGround): Positions
+    {
+        $this->courseOverGround = $courseOverGround;
+        return $this;
+    }
+
+    public function getDrift(): ?PolarVector
+    {
+        return $this->drift;
+    }
+
+    public function setDrift(?PolarVector $drift): Positions
+    {
+        $this->drift = $drift;
+
+        return $this;
+    }
+
 
     public function compareTo(ComparableInterface $position):bool
     {

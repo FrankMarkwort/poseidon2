@@ -2,6 +2,8 @@
 
 namespace Nmea\Math\Vector;
 
+use Nmea\Math\EnumRange;
+
 class PolarVector
 {
     private float $r;
@@ -42,7 +44,7 @@ class PolarVector
         return $this;
     }
 
-    public function getOmega(Range $range = Range::G360): float
+    public function getOmega(EnumRange $range = EnumRange::G360): float
     {
         $omega = $this->omega;
         $omega = $this->rangePi($omega, $range);
@@ -57,7 +59,7 @@ class PolarVector
         return $this;
     }
 
-    public function getVector(Range $range = Range::G360):array
+    public function getVector(EnumRange $range = EnumRange::G360):array
     {
         return [
             $this->getR(),
@@ -65,9 +67,9 @@ class PolarVector
         ];
     }
 
-    private function rangePi(float $rad, Range $range):float
+    private function rangePi(float $rad, EnumRange $range):float
     {
-        if ($range === Range::G180) {
+        if ($range === EnumRange::G180) {
 
             return ($rad > pi() ? (2 * pi() - $rad) * -1 : $rad);
 

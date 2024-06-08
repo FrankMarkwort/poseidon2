@@ -2,6 +2,7 @@
 
 namespace Nmea\Math\Vector;
 
+use Nmea\Math\EnumRange;
 use PHPUnit\Framework\TestCase;
 
 class PolarVectorTest extends TestCase
@@ -11,28 +12,28 @@ class PolarVectorTest extends TestCase
     {
         $vector = new PolarVector();
         $vector->setOmega(0);
-        $this->assertEquals(0 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(0, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(pi()/2);
-        $this->assertEquals(90 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(90 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(pi());
-        $this->assertEquals(180 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(pi() * 3 / 2);
-        $this->assertEquals(270 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(-90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(270 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(-90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(2 * pi());
-        $this->assertEquals(0 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(0, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(3 * pi());
-        $this->assertEquals(180 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
     }
 
     public function testZeroR()
@@ -40,25 +41,25 @@ class PolarVectorTest extends TestCase
         $vector = new PolarVector();
         $vector->setR(0);
         $vector->setOmega( deg2rad(0));
-        $this->assertEquals(0 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(0, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega( deg2rad(90));
-        $this->assertEquals(90 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(90 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega( deg2rad(180));
-        $this->assertEquals(180 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega( deg2rad(270));
-        $this->assertEquals(270 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(-90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(270 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(-90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega( deg2rad(255));
         $vector->setR(0.07);
-        $this->assertEquals(255 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEqualsWithDelta(-105, rad2deg($vector->getOmega(Range::G180)), 0.1);
+        $this->assertEquals(255 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEqualsWithDelta(-105, rad2deg($vector->getOmega(EnumRange::G180)), 0.1);
     }
 
     public function testRotate()
@@ -130,27 +131,27 @@ class PolarVectorTest extends TestCase
     {
         $vector = new PolarVector();
         $vector->setOmega(0);
-        $this->assertEquals(0 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(0, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(-pi()/2);
-        $this->assertEquals(270 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(-90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(270 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(-90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(pi());
-        $this->assertEquals(180 , rad2deg($vector->getOmega(Range::G360)));
-        $this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(-pi() * 3 / 2);
-        $this->assertEquals(-270 , rad2deg($vector->getOmega(Range::G360)));
+        $this->assertEquals(-270 , rad2deg($vector->getOmega(EnumRange::G360)));
         #$this->assertEquals(90, rad2deg($vector->getOmega(Range::G180)));
 
         $vector->setOmega(-2 * pi());
-        $this->assertEquals(0 , rad2deg($vector->getOmega(Range::G360)));
+        $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
         #$this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
 
         $vector->setOmega(-3 * pi());
-        $this->assertEquals(180 , rad2deg($vector->getOmega(Range::G360)));
+        $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
         #$this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
     }
 }

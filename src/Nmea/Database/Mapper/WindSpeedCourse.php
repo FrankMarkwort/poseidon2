@@ -3,10 +3,10 @@
 namespace Nmea\Database\Mapper;
 
 use Nmea\Database\DatabaseInterface;
+use Nmea\Math\EnumRange;
 use Nmea\Math\Vector\Operator;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Math\Vector\PolarVectorOperation;
-use Nmea\Math\Vector\Range;
 
 class WindSpeedCourse
 {
@@ -100,9 +100,9 @@ class WindSpeedCourse
             $this->getTime(),
             $this->angleGrad($this->getTrueWind()->getOmega()),
             $this->msToKnots($this->getApparentWind()->getR()),
-            $this->angleGrad($this->getApparentWind()->getOmega(Range::G180)),
+            $this->angleGrad($this->getApparentWind()->getOmega(EnumRange::G180)),
             $this->msToKnots($this->getTrueWind()->getR()),
-            $this->angleGrad($this->getTrueWind()->getOmega(Range::G180)),
+            $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
             $this->angleGrad($this->getCourseOverGround()->getOmega()),
             $this->msToKnots($this->getCourseOverGround()->getR()),
             $this->angleGrad($this->getVesselHeading()->getOmega()),

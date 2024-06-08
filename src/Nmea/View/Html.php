@@ -21,11 +21,12 @@ class Html extends AbstractView
                     $dataFacade->getFrameType(),
                     $dataFacade->getDescription()
                 );
-                $html .= $this->tableRowHead('Name', 'Type', 'Value');
+                $html .= $this->tableRowHead('orderId => Name', 'Type', 'Value');
                 foreach ($dataFacade->getOrderIds() as $orderId) {
                     $valueWithUnit = $this->getValueWithUnit($dataFacade, $orderId);
                     if ($dataFacade->getFieldValue($orderId)->getValue() !== null) {
                         $html .= $this->tableRow(
+                            $orderId,
                             $dataFacade->getFieldValue($orderId)->getName(),
                             $dataFacade->getFieldValue($orderId)->getType(),
                             $valueWithUnit
@@ -40,9 +41,9 @@ class Html extends AbstractView
         return $html;
     }
 
-    private function tableRow(string $name, $type, $value): string
+    private function tableRow(int $id, string $name, $type, $value): string
     {
-        return "<tr><td>$name</td><td>$type</td><td>$value</td></tr>";
+        return "<tr><td>$id => $name</td><td>$type</td><td>$value</td></tr>";
     }
 
     private function tableRowHead(string $name, $type, $value): string

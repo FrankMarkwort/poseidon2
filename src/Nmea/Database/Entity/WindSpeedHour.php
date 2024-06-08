@@ -80,7 +80,7 @@ class WindSpeedHour
     }
     public function getAvgAwa(): float
     {
-        return round($this->avgAwa,0);
+        return round($this->avgAwa);
     }
     public function setAvgAwa(float $avgAwa): WindSpeedHour
     {
@@ -89,7 +89,7 @@ class WindSpeedHour
     }
     public function getMaxAwa(): float
     {
-        return round($this->maxAwa,0);
+        return round($this->maxAwa);
     }
     public function setMaxAwa(float $maxAwa): WindSpeedHour
     {
@@ -98,7 +98,7 @@ class WindSpeedHour
     }
     public function getMinAwa(): float
     {
-        return round($this->minAwa,0);
+        return round($this->minAwa);
     }
     public function setMinAwa(float $minAwa): WindSpeedHour
     {
@@ -134,7 +134,7 @@ class WindSpeedHour
     }
     public function getAvgTwa(): float
     {
-        return round($this->avgTwa,0);
+        return round($this->avgTwa);
     }
     public function setAvgTwa(float $avgTwa): WindSpeedHour
     {
@@ -143,7 +143,7 @@ class WindSpeedHour
     }
     public function getMaxTwa(): float
     {
-        return round($this->maxTwa,0);
+        return round($this->maxTwa);
     }
     public function setMaxTwa(float $maxTwa): WindSpeedHour
     {
@@ -197,7 +197,7 @@ class WindSpeedHour
     }
     public function getMaxSog(): float
     {
-        return $this->maxSog;
+        return round($this->maxSog,1);
     }
     public function setMaxSog(float $maxSog): WindSpeedHour
     {
@@ -206,7 +206,7 @@ class WindSpeedHour
     }
     public function getMinSog(): float
     {
-        return $this->minSog;
+        return round($this->minSog,1);
     }
     public function setMinSog(float $minSog): WindSpeedHour
     {
@@ -216,7 +216,7 @@ class WindSpeedHour
     }
     public function getAvgVesselHeading(): float
     {
-        return $this->avgVesselHeading;
+        return round($this->avgVesselHeading);
     }
     public function setAvgVesselHeading(float $avgVesselHeading): WindSpeedHour
     {
@@ -226,7 +226,7 @@ class WindSpeedHour
     }
     public function getMaxVesselHeading(): float
     {
-        return $this->maxVesselHeading;
+        return round($this->maxVesselHeading);
     }
     public function setMaxVesselHeading(float $maxVesselHeading): WindSpeedHour
     {
@@ -236,7 +236,7 @@ class WindSpeedHour
     }
     public function getMinVesselHeading(): float
     {
-        return $this->minVesselHeading;
+        return round($this->minVesselHeading);
     }
     public function setMinVesselHeading(float $minVesselHeading): WindSpeedHour
     {
@@ -251,7 +251,7 @@ class WindSpeedHour
 
     public function getAvgTwd(): float
     {
-        return round($this->avgTwd,0);
+        return round($this->avgTwd);
     }
 
     public function setAvgTwd(float $avgTwd): WindSpeedHour
@@ -270,7 +270,7 @@ class WindSpeedHour
 
     public function getAvgWatertemperature(): float
     {
-        return $this->avgWatertemperature;
+        return round($this->avgWatertemperature,1);
     }
 
     public function setAvgWatertemperature(float $avgWatertemperature): WindSpeedHour
@@ -282,7 +282,7 @@ class WindSpeedHour
 
     public function getMinWatertemperature(): float
     {
-        return $this->minWatertemperature;
+        return round($this->minWatertemperature,1);
     }
 
     public function setMinWatertemperature(float $minWatertemperature): WindSpeedHour
@@ -294,7 +294,7 @@ class WindSpeedHour
 
     public function getMaxWatertemperature(): float
     {
-        return $this->maxWatertemperature;
+        return round($this->maxWatertemperature,1);
     }
 
     public function setMaxWatertemperature(float $maxWatertemperature): WindSpeedHour

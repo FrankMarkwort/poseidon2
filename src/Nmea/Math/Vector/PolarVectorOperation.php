@@ -2,12 +2,14 @@
 
 namespace Nmea\Math\Vector;
 
+use Nmea\Math\EnumRange;
+
 /**
  *  Minus ist not testet
  */
 class PolarVectorOperation
 {
-    public function __invoke(PolarVector $vector1, PolarVector $vector2, Operator $operator = Operator::PLUS, Range $range = Range::G360): PolarVector
+    public function __invoke(PolarVector $vector1, PolarVector $vector2, Operator $operator = Operator::PLUS, EnumRange $range = EnumRange::G360): PolarVector
     {
         $omega = $this->getOmega($vector1, $vector2, $operator);
         $r = $this->getR($vector1, $vector2, $operator);

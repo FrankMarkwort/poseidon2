@@ -1,8 +1,8 @@
 <?php
 
-namespace Nmea\Math\Vector;
+namespace Nmea\Math;
 
-enum Range:string
+enum EnumRange:string
 {
     case G180 = 'PI';
     case G360 = '2PI';
