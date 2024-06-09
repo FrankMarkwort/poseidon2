@@ -143,15 +143,15 @@ class PolarVectorTest extends TestCase
         $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(-pi() * 3 / 2);
-        $this->assertEquals(-270 , rad2deg($vector->getOmega(EnumRange::G360)));
-        #$this->assertEquals(90, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(90 , rad2deg($vector->getOmega(EnumRange::G360)));
+        $this->assertEquals(90, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(-2 * pi());
         $this->assertEquals(0 , rad2deg($vector->getOmega(EnumRange::G360)));
-        #$this->assertEquals(0, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(0, rad2deg($vector->getOmega(EnumRange::G180)));
 
         $vector->setOmega(-3 * pi());
         $this->assertEquals(180 , rad2deg($vector->getOmega(EnumRange::G360)));
-        #$this->assertEquals(180, rad2deg($vector->getOmega(Range::G180)));
+        $this->assertEquals(180, rad2deg($vector->getOmega(EnumRange::G180)));
     }
 }

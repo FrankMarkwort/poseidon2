@@ -106,7 +106,7 @@ class WindSpeedCourse
             $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
             $this->angleGrad($this->getCourseOverGround()->getOmega()),
             $this->msToKnots($this->getCourseOverGround()->getR()),
-            $this->angleGrad($this->getVesselHeading()->getRad()),
+            $this->angleGrad($this->getVesselHeading()->getOmega()),
             $this->kelvinToCelsius($this->getWaterTemperature())
         ];
     }
@@ -119,7 +119,7 @@ class WindSpeedCourse
         }
 
         $trueWindVector = clone $this->getApparentWind();
-        $trueWindVector->rotate( $this->getVesselHeading()->getRad());
+        $trueWindVector->rotate( $this->getVesselHeading()->getOmega());
 
         return $trueWindVector;
     }

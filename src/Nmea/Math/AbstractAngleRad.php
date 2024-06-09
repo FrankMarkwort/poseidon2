@@ -4,7 +4,23 @@ namespace Nmea\Math;
 
 abstract class AbstractAngleRad
 {
-    protected function getRadAngle(float $rad, EnumRange $range = EnumRange::G360): float
+    private const DELTA = 0.0001;
+
+    protected float $omega = 0;
+
+    public function setOmega(float $omega): self
+    {
+        $this->omega = $omega;
+
+        return $this;
+    }
+
+    public function getOmega(EnumRange $range = EnumRange::G360): float
+    {
+        return $this->getRadInRange($this->omega, $range);
+    }
+
+    protected function getRadInRange(float $rad, EnumRange $range = EnumRange::G360): float
     {
         if ($range === EnumRange::G180) {
 
@@ -15,7 +31,8 @@ abstract class AbstractAngleRad
     }
     protected function getRad360(float $rad):float
     {
-        if (abs($rad) === 2 * pi() || abs($rad) === 0.0) {
+
+        if ($this->isEquals2PiOrZero($rad)) {
 
             return 0;
 
@@ -37,11 +54,11 @@ abstract class AbstractAngleRad
 
     protected function getRad180(float $rad):float
     {
-         if (abs($rad) === 2 * pi() || abs($rad) === 0.0) {
+         if ($this->isEquals2PiOrZero($rad)) {
 
              return 0;
 
-         } elseif (abs($rad) === pi()) {
+         } elseif ($this->isEqualsPi($rad)) {
 
              return pi();
 
@@ -61,12 +78,43 @@ abstract class AbstractAngleRad
 
              return fmod($rad, pi());
 
-         } elseif ($rad < -2* pi() && $rad < -pi())  {
+         } elseif ($rad < -2 * pi() && $rad < -pi())  {
 
-            return fmod($rad, pi());
+            if ($this->isEqualsPi(abs(fmod($rad, 2 * pi()))))
+            {
+                return abs(fmod($rad, 2 * pi()));
 
+            } else {
+
+                 return fmod($rad, 2 * pi());
+            }
+
+         } elseif ($rad < -pi() && $rad > - 2* pi()) {
+
+             return abs(fmod($rad, pi()));
          }
 
          return $rad;
     }
+
+    protected function isEqualsPi(float $rad): bool
+    {
+        return $this->isEqualsWithDelta(abs($rad), pi());
+
+        #abs($rad) === 2 * pi() || abs($rad) === 0.0)
+    }
+
+    protected function isEquals2PiOrZero(float $rad): bool
+    {
+        return ($this->isEqualsWithDelta(abs($rad),2 * pi()) || $this->isEqualsWithDelta(abs($rad),0));
+
+        #abs($rad) === 2 * pi() || abs($rad) === 0.0)
+    }
+
+    protected function isEqualsWithDelta(float $number1, float $number2 , float $delta = self::DELTA): bool
+    {
+        return abs($number1 - $number2) < $delta;
+    }
+
+    abstract public function rotate(float $rad):self;
 }

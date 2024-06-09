@@ -53,6 +53,6 @@ abstract class AbstractCronWorker
 
     protected function getNewRad(float $rad):Rad
     {
-        return (new Rad())->setRad($rad);
+        return (new Rad())->setOmega($rad);
     }
 }

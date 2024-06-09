@@ -28,7 +28,7 @@ class PolarVectorOperation
         if ($operator == Operator::PLUS) {
             $z = sqrt($part1 + $part2);
         } elseif ($operator == Operator::MINUS) {
-            //TODO sqrt(- )
+            //TODO sqrt(-x )
             $z = sqrt($part1 - $part2);
         }
 

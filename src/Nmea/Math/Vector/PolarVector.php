@@ -8,7 +8,6 @@ use Nmea\Math\EnumRange;
 class PolarVector extends AbstractAngleRad
 {
     private float $r;
-    private float $omega;
 
     public function getR(): float
     {
@@ -24,8 +23,8 @@ class PolarVector extends AbstractAngleRad
 
     public function rotate(float $rad): PolarVector
     {
-        $r = $this->r;
-        $omega = $this->omega;
+        $r = $this->getR();
+        $omega = $this->getOmega();
         $x = $r * cos( $omega ) * cos($rad) - $r * sin( $omega ) * sin($rad);
         $y = $r *  cos( $omega ) * sin($rad) + $r * sin($omega) * cos($rad);
         $newOmega = atan2($y, $x);
@@ -41,14 +40,9 @@ class PolarVector extends AbstractAngleRad
         return $this;
     }
 
-    public function getOmega(EnumRange $range = EnumRange::G360): float
-    {
-        return $this->getRadAngle($this->omega,$range);
-    }
-
     public function setOmega(float $omega): PolarVector
     {
-        $this->omega = $omega;
+        parent::setOmega($omega);
 
         return $this;
     }

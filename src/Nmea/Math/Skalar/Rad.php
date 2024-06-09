@@ -7,25 +7,16 @@ use Nmea\Math\EnumRange;
 
 class Rad extends AbstractAngleRad
 {
-    private float $rad;
-
-    public function getRad(EnumRange $range = EnumRange::G360): float
+   public function getDegOmega(EnumRange $range = EnumRange::G360): float
     {
-        return $this->getRadAngle($this->rad, $range);
+        return rad2deg($this->getOmega($range));
     }
 
-
-    public function getDeg(EnumRange $range = EnumRange::G360): float
+    /**
+     * @throws \Exception
+     */
+    public function rotate(float $rad): Rad
     {
-        return rad2deg($this->getRad($range));
+        throw new \Exception('not implemented');
     }
-
-    public function setRad(float $rad): Rad
-    {
-        $this->rad = $rad;
-
-        return $this;
-    }
-
-
 }
