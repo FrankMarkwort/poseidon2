@@ -4,6 +4,7 @@ namespace Nmea\Database\Mapper;
 
 use Nmea\Database\DatabaseInterface;
 use Nmea\Math\EnumRange;
+use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\Operator;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Math\Vector\PolarVectorOperation;
@@ -14,7 +15,7 @@ class WindSpeedCourse
     private const MIN_SPEED_VOTE_AS_SOG = 0.5; //m/s
     private string $time;
     private ?PolarVector $courseOverGround = null;
-    private ?PolarVector $vesselHeading = null;
+    private ?Rad $vesselHeading = null;
     private ?PolarVector $apparentWind = null;
     private float $waterTemperature;
 
@@ -46,14 +47,14 @@ class WindSpeedCourse
         return $this->courseOverGround;
     }
 
-    public function setVesselHeading(PolarVector $vesselHeading):self
+    public function setVesselHeading(Rad $vesselHeading):self
     {
         $this->vesselHeading = $vesselHeading;
 
         return $this;
     }
 
-    private function getVesselHeading():PolarVector
+    private function getVesselHeading():Rad
     {
         return $this->vesselHeading;
     }
@@ -105,7 +106,7 @@ class WindSpeedCourse
             $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
             $this->angleGrad($this->getCourseOverGround()->getOmega()),
             $this->msToKnots($this->getCourseOverGround()->getR()),
-            $this->angleGrad($this->getVesselHeading()->getOmega()),
+            $this->angleGrad($this->getVesselHeading()->getRad()),
             $this->kelvinToCelsius($this->getWaterTemperature())
         ];
     }
@@ -118,7 +119,7 @@ class WindSpeedCourse
         }
 
         $trueWindVector = clone $this->getApparentWind();
-        $trueWindVector->rotate( $this->getVesselHeading()->getOmega());
+        $trueWindVector->rotate( $this->getVesselHeading()->getRad());
 
         return $trueWindVector;
     }

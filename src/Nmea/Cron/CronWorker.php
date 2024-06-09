@@ -118,12 +118,7 @@ final class CronWorker extends AbstractCronWorker
             $mapper->setTime($windFacade->getTimestamp())
                 ->setApparentWind($this->getPolarVector($windFacade,2,3))
                 ->setCourseOverGround($this->getPolarVector($cogSogFacade,5,4))
-                //TODO is a skalar
-                ->setVesselHeading(
-                    (new PolarVector())
-                        ->setR(0)
-                        ->setOmega($vesselHeadingFacade->getFieldValue(2)->getValue())
-                )
+                ->setVesselHeading($this->getNewRad($vesselHeadingFacade->getFieldValue(2)->getValue()))
                 ->setWaterTemperature($temperatureFacade->getFieldValue(4)->getValue());
 
             $mapper->store();

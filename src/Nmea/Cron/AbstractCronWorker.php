@@ -4,6 +4,7 @@ namespace Nmea\Cron;
 
 use Nmea\Cache\CacheInterface;
 use Nmea\Database\DatabaseInterface;
+use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\Data\DataFacade;
 
@@ -48,5 +49,10 @@ abstract class AbstractCronWorker
              ->setR($dataFacade->getFieldValue($rFieldValue)->getValue())
              ->setOmega($dataFacade->getFieldValue($omegaFieldvalue)->getValue()
          );
+    }
+
+    protected function getNewRad(float $rad):Rad
+    {
+        return (new Rad())->setRad($rad);
     }
 }

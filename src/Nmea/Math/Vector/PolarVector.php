@@ -2,9 +2,10 @@
 
 namespace Nmea\Math\Vector;
 
+use Nmea\Math\AbstractAngleRad;
 use Nmea\Math\EnumRange;
 
-class PolarVector
+class PolarVector extends AbstractAngleRad
 {
     private float $r;
     private float $omega;
@@ -21,17 +22,13 @@ class PolarVector
         return $this;
     }
 
-    public function rotate(float $angle): PolarVector
+    public function rotate(float $rad): PolarVector
     {
-        //        (x´,y´) = (r × cos( omega )·cosθ – r × sin( omega )·sin θ,   r × cos( Omega )·sinθ + r × sin( Omega )·cosθ)
         $r = $this->r;
         $omega = $this->omega;
-        $x = $r * cos( $omega ) * cos($angle) - $r * sin( $omega ) * sin($angle);
-        $y = $r *  cos( $omega ) * sin($angle) + $r * sin($omega) * cos($angle);
+        $x = $r * cos( $omega ) * cos($rad) - $r * sin( $omega ) * sin($rad);
+        $y = $r *  cos( $omega ) * sin($rad) + $r * sin($omega) * cos($rad);
         $newOmega = atan2($y, $x);
-        #if ($newOmega < 0) {
-        #    $newOmega = $newOmega + 2 * pi();
-        #}
         if ($x < 0 && $y < 0) {
             $newOmega = 2 * pi() + $newOmega;
         } elseif ($x > 0 && $y < 0) {
@@ -46,10 +43,7 @@ class PolarVector
 
     public function getOmega(EnumRange $range = EnumRange::G360): float
     {
-        $omega = $this->omega;
-        $omega = $this->rangePi($omega, $range);
-
-        return $omega;
+        return $this->getRadAngle($this->omega,$range);
     }
 
     public function setOmega(float $omega): PolarVector
@@ -67,6 +61,9 @@ class PolarVector
         ];
     }
 
+    /**
+     * @deprecated
+     */
     private function rangePi(float $rad, EnumRange $range):float
     {
         if ($range === EnumRange::G180) {
@@ -76,7 +73,7 @@ class PolarVector
         }
         if ($rad < 0)  {
 
-             return ($rad <= 2 * pi()) ? $rad % 2 * pi() : $rad;
+             return ($rad <= 2 * pi()) ? fmod($rad, 2 * pi()) : $rad;
 
         } elseif (round($rad,6) === round(2 * pi(), 6)) {
 
@@ -84,7 +81,7 @@ class PolarVector
 
         } else {
 
-            return ($rad >= 2 * pi()) ? $rad % 2 * pi() : $rad;
+            return ($rad >= 2 * pi()) ? fmod($rad, 2 * pi()) : $rad;
         }
     }
 }
