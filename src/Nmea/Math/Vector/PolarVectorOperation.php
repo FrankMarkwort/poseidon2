@@ -55,6 +55,7 @@ class PolarVectorOperation
              $re = $rePart1 - $rePart2;
          }
 
-        return ($im < 0 )? atan2($im , $re) + 2 * pi() : atan2($im , $re);
+        return ($re < 0 )? atan2($im , $re) + 2 * pi() : atan2($im , $re);
+        #return ($im < 0 )? atan2($im , $re) + 2 * pi() : atan2($im , $re);
     }
 }

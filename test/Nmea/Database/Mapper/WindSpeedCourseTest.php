@@ -4,7 +4,11 @@ namespace TestsNmea\Database\Mapper;
 
 use Nmea\Database\Database;
 use Nmea\Database\Mapper\WindSpeedCourse;
+use Nmea\Math\EnumRange;
+use Nmea\Math\Skalar\Rad;
+use Nmea\Math\Vector\Operator;
 use Nmea\Math\Vector\PolarVector;
+use Nmea\Math\Vector\PolarVectorOperation;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +20,7 @@ class WindSpeedCourseTest extends TestCase
         $this->mapper = new WindSpeedCourse(Database::getInstance());
     }
 
-    public static function dataProvider()
+    public static function dataProviderCsv()
     {
         $file = file_get_contents(__DIR__ . "/windspeedcoursetest.csv","r");
         foreach ( explode("\n", $file, -1) as $key => $line ) {
@@ -32,32 +36,64 @@ class WindSpeedCourseTest extends TestCase
         return $data;
     }
 
-    #[DataProvider('dataProvider')]
-    public function testFront(float $aws, float $awa, float $sog, float $cog, float $heading,float $twd,float $tws,float $twa)
+    public static function dataprovider()
     {
+        return [
+            # [10.00 , 45.00 , 10.00 , 45.00, 7.7, 113.00, 158],
+            # [10.00 , 50.00 , 10.00 , 45.00, 7.7, 113.00, 163],
+            # [10.00 , 50 , 10.00 , 170, 19.9, 175, 225],
+            # [10.00 , 50 , 10.00 , 180, 20, 180, 230],
+            # [10.00 , 170 , 10.00 , 92, 14.4, 136, 306],
+             [ 10.00 , 50 , 10.00 , -170, 19.9, 175, 225],
+
+        ];
+
+    }
+
+    #[DataProvider('dataProvider')]
+    public function testFormula(float $sog, float $heading, float $aws, float $awa,float $expectedTws,float $expectedTwa,float $expectedTwd)
+    {
+        $tws = sqrt( pow($sog,2) + pow($aws,2) - (2 * $aws * $sog * cos(deg2rad($awa))));
+        $beta = acos((pow($aws,2) -  pow($tws,2) - pow($sog,2)) / ( 2 * $tws * $sog));
+
+        $twd = $beta + deg2rad($heading);
+
+        $this->assertEqualsWithDelta( $expectedTws , $tws, 0.1,'tws');
+        $this->assertEquals( $expectedTwd , $this->rad2deg($twd) ,'twd');
+        $this->assertEquals( $expectedTwa , ($this->rad2deg($twd) - $heading),'twa');
+
+        $vesselHeading = (new Rad())->setOmega(deg2rad($heading));
+        $courseOverGround = (new PolarVector())->setR($sog)->setOmega(deg2rad($heading));
+        $apparentWind = (new PolarVector())->setR($aws)->setOmega(deg2rad($awa));
+
+        $op = new PolarVectorOperation();
+        #$trueWind = $op($apparentWind->rotate(deg2rad() + $vesselHeading->getOmega(EnumRange::G180)), $courseOverGround, Operator::MINUS);
+        $trueWind = $op($apparentWind->rotate($vesselHeading->getOmega(EnumRange::G180)), $courseOverGround, Operator::MINUS);
+        $this->assertEqualsWithDelta( $expectedTws , $trueWind->getR(), 1,'tws');
+        $this->assertEquals( $expectedTwd , $this->rad2deg($trueWind->getOmega()) ,'twd');
+
+        #var_dump($trueWind);
+
+
+    }
+
+
+
+    #[DataProvider('dataProvider')]
+    public function testFront(float $sog, float $heading, float $aws, float $awa,float $tws,float $twa,float $twd)
+    {
+         $cog = $heading;
          $this->mapper->setTime('now')->setWaterTemperature(22);
 
          $this->mapper->setCourseOverGround((new PolarVector())->setR($this->kn2ms($sog))->setOmega(deg2rad($cog)));
-         $this->mapper->setVesselHeading( (new PolarVector())->setR(0)->setOmega(deg2rad($heading)));
+         $this->mapper->setVesselHeading( (new Rad())->setOmega(deg2rad($heading)));
          $this->mapper->setApparentWind((new PolarVector())->setR($this->kn2ms($aws))->setOmega(deg2rad($awa)));
 
-         $result = $this->mapper->getStoreArray();
+         $result = $this->mapper->testResult();
 
-        $this->assertEquals( $tws , $result[4], 'tws');
-        $this->assertEquals( $twa , $result[5],'twa');
-        $this->assertEquals( $twd , $result[1],'twd');
-        /*
-            $this->getTime(),
-            $this->angleGrad($this->getTrueWind()->getOmega()), 1
-            $this->msToKnots($this->getApparentWind()->getR()), 2
-            $this->angleGrad($this->getApparentWind()->getOmega(Range::G180)), 3
-            $this->msToKnots($this->getTrueWind()->getR()), 4 tws
-            $this->angleGrad($this->getTrueWind()->getOmega(Range::G180)), 5 twa
-            $this->angleGrad($this->getCourseOverGround()->getOmega()),
-            $this->msToKnots($this->getCourseOverGround()->getR()),
-            $this->angleGrad($this->getVesselHeading()->getOmega()),
-            $this->kelvinToCelsius($this->getWaterTemperature())
-        */
+         $this->assertEquals( $tws , $result[0], 'tws');
+         $this->assertEquals( $twa , $result[1],'twa');
+         $this->assertEquals( $twd , $result[2],'twd');
     }
 
 

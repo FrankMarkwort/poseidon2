@@ -95,6 +95,15 @@ class WindSpeedCourse
 
     }
 
+    public function testResult()
+    {
+        return [
+            $this->msToKnots($this->getTrueWind()->getR()),
+            $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
+            $this->angleGrad($this->getTrueWind()->getOmega())
+        ];
+    }
+
     public function getStoreArray():array
     {
         return [
@@ -111,11 +120,15 @@ class WindSpeedCourse
         ];
     }
 
+
     private function getTrueWind(): PolarVector
     {
         if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
 
-            return (new PolarVectorOperation())($this->getCourseOverGround() , $this->getApparentWind(), Operator::MINUS);
+            $apparentWind = $this->getApparentWind();
+            $speedWind = $this->getCourseOverGround();
+            $apparentWind->rotate($speedWind->getOmega(EnumRange::G180));
+            return (new PolarVectorOperation())( $apparentWind, $speedWind, Operator::MINUS);
         }
 
         $trueWindVector = clone $this->getApparentWind();

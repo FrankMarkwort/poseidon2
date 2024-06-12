@@ -78,7 +78,7 @@ abstract class AbstractAngleRad
 
              return fmod($rad, pi());
 
-         } elseif ($rad < -2 * pi() && $rad < -pi())  {
+         } elseif ($rad < -2 * pi() && $rad < -pi() )  {
 
             if ($this->isEqualsPi(abs(fmod($rad, 2 * pi()))))
             {
@@ -100,15 +100,11 @@ abstract class AbstractAngleRad
     protected function isEqualsPi(float $rad): bool
     {
         return $this->isEqualsWithDelta(abs($rad), pi());
-
-        #abs($rad) === 2 * pi() || abs($rad) === 0.0)
     }
 
     protected function isEquals2PiOrZero(float $rad): bool
     {
         return ($this->isEqualsWithDelta(abs($rad),2 * pi()) || $this->isEqualsWithDelta(abs($rad),0));
-
-        #abs($rad) === 2 * pi() || abs($rad) === 0.0)
     }
 
     protected function isEqualsWithDelta(float $number1, float $number2 , float $delta = self::DELTA): bool
