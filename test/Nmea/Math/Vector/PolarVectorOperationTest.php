@@ -24,7 +24,6 @@ class PolarVectorOperationTest extends TestCase
            'P5' =>  [10 ,170, 10, 220 , 18.13  , 195.00, EnumRange::G360, Operator::PLUS],
            'P6' => [10 ,190, 10, 220 , 19.32  , -155,   EnumRange::G180, Operator::PLUS],
            'P7' => [10 ,190, 10, 220 , 19.32  , 205,    EnumRange::G360, Operator::PLUS],
-
            'M0' => [10 , 45, 10,  45 , 0   ,  0 , EnumRange::G360, Operator::MINUS],
            'M1' => [10 , 90, 20,  90 , 10  , -90 , EnumRange::G180, Operator::MINUS],
            'M2' => [10 , 90, 20,  180 , 22.36  , 26.57 , EnumRange::G180, Operator::MINUS],
@@ -32,9 +31,10 @@ class PolarVectorOperationTest extends TestCase
            'M4' => [10 , 50, 10,  -170 , 18.79, 30.00, EnumRange::G360, Operator::MINUS],
            'M5' => [10 , 50, 10,  220, 19.92, 45, EnumRange::G360, Operator::MINUS],
            'M6' => [10 , 50, 10,  220, 19.92, 45, EnumRange::G360, Operator::MINUS],
+           'M7' => [ 10, -130, 10, -120, 19.9239, -125, EnumRange::G180, Operator::PLUS],
+           'M8' => [ 10, -130, 10, -120, 19.9239, 235, EnumRange::G360, Operator::PLUS],
         ];
 
-         # [ 10.00 , 50 , 10.00 , -170, 19.9, 175, 225],
     }
 
     #[DataProvider('dataProvider')]
@@ -106,16 +106,17 @@ class PolarVectorOperationTest extends TestCase
     public function testReal()
     {
         $addierer = new PolarVectorOperation();
-         $aw = (new PolarVector())->setR(0)->setOmega(deg2rad(71));
-         $course = (new PolarVector())->setR($this->kn2ms(3.1))->setOmega(deg2rad(-61));
-         $tw  = $addierer($aw, $aw,Operator::MINUS);
-         $this->assertEquals(0, round(rad2deg($tw->getOmega()),0));
-         $this->assertEquals(0, $tw->getR());
-         // I need a rotation
+        $aw = (new PolarVector())->setR(0)->setOmega(deg2rad(71));
+        $course = (new PolarVector())->setR($this->kn2ms(3.1))->setOmega(deg2rad(-61));
+        $tw = $addierer($aw, $aw, Operator::MINUS);
+        $this->assertEquals(0, round(rad2deg($tw->getOmega()), 0));
+        $this->assertEquals(0, $tw->getR());
+        // I need a rotation
         // (x´,y´) = (x·cosθ – y·sinθ, x·sinθ + y·cosθ)
         // (x´,y´) = (r × cos( omega )·cosθ – r × sin( omega )·sin θ,   r × cos( Omega )·sinθ + r × sin( Omega )·cosθ)
         //x = r × cos( θ )
         //y = r × sin( θ )
+    }
 
     private function kn2ms(float $kn):float
     {

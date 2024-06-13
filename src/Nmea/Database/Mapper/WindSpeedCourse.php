@@ -84,7 +84,7 @@ class WindSpeedCourse
     }
 
     /**
-     * move too mapper
+     * TODO move too mapper
      */
     public function store():void
     {
@@ -97,44 +97,54 @@ class WindSpeedCourse
 
     public function testResult()
     {
+        if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
+            $twa = $this->getTrueWind()->getOmega() - $this->getCourseOverGround()->getOmega();
+        } else {
+            $twa = $this->getTrueWind()->getOmega() - $this->getVesselHeading()->getOmega();
+        }
+
         return [
-            $this->msToKnots($this->getTrueWind()->getR()),
-            $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
-            $this->angleGrad($this->getTrueWind()->getOmega())
+            'twd' => $this->getTrueWind()->getOmega(),
+            'tws' => $this->getTrueWind()->getR(),
+            'twa' => $twa
         ];
     }
 
     public function getStoreArray():array
     {
+        if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
+            $twa = $this->getTrueWind()->getOmega() - $this->getCourseOverGround()->getOmega();
+        } else {
+            $twa = $this->getTrueWind()->getOmega() - $this->getVesselHeading()->getOmega();
+        }
         return [
-            $this->getTime(),
-            $this->angleGrad($this->getTrueWind()->getOmega()),
-            $this->msToKnots($this->getApparentWind()->getR()),
-            $this->angleGrad($this->getApparentWind()->getOmega(EnumRange::G180)),
-            $this->msToKnots($this->getTrueWind()->getR()),
-            $this->angleGrad($this->getTrueWind()->getOmega(EnumRange::G180)),
-            $this->angleGrad($this->getCourseOverGround()->getOmega()),
-            $this->msToKnots($this->getCourseOverGround()->getR()),
-            $this->angleGrad($this->getVesselHeading()->getOmega()),
-            $this->kelvinToCelsius($this->getWaterTemperature())
+            'timestamp' => $this->getTime(),
+            'twd' => $this->angleGrad($this->getTrueWind()->getOmega()),
+            'aws' => $this->msToKnots($this->getApparentWind()->getR()),
+            'awa' => $this->angleGrad($this->getApparentWind()->getOmega(EnumRange::G180)),
+            'tws' => $this->msToKnots($this->getTrueWind()->getR()),
+            'twa' => $this->angleGrad($twa),
+            'cog' => $this->angleGrad($this->getCourseOverGround()->getOmega()),
+            'sog' => $this->msToKnots($this->getCourseOverGround()->getR()),
+            'vesselHeading' => $this->angleGrad($this->getVesselHeading()->getOmega()),
+            'waterTemperature' => $this->kelvinToCelsius($this->getWaterTemperature())
         ];
     }
 
-
     private function getTrueWind(): PolarVector
     {
-        if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
-
-            $apparentWind = $this->getApparentWind();
-            $speedWind = $this->getCourseOverGround();
-            $apparentWind->rotate($speedWind->getOmega(EnumRange::G180));
-            return (new PolarVectorOperation())( $apparentWind, $speedWind, Operator::MINUS);
+        $courseOverGround = $this->getCourseOverGround();
+        if ($courseOverGround->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
+            $headingOrCog = $courseOverGround->getOmega();
+        } else {
+            $headingOrCog = $this->getVesselHeading()->getOmega();
         }
 
-        $trueWindVector = clone $this->getApparentWind();
-        $trueWindVector->rotate( $this->getVesselHeading()->getOmega());
+        $course =  (new PolarVector())->setR($courseOverGround->getR())->setOmega($headingOrCog);
+        $speedWind =  $courseOverGround->againstVector(true);
+        $apparentWind2 = $this->getApparentWind()->rotate($course->getOmega(), true);
 
-        return $trueWindVector;
+        return  (new PolarVectorOperation())($speedWind, $apparentWind2);
     }
 
     private function angleGrad(float $angle): float

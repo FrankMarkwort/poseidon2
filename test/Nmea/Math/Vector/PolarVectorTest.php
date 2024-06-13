@@ -8,6 +8,18 @@ use PHPUnit\Framework\TestCase;
 class PolarVectorTest extends TestCase
 {
 
+    public function testAgainstVector()
+    {
+        $vector = (new PolarVector())->setR(10  )->setOmega(deg2rad(45));
+        $beAgainstVector = $vector->againstVector(true);
+        $this->assertEquals(10, $vector->getR());
+        $this->assertEquals(45, rad2deg($vector->getOmega()));
+        $this->assertEquals(10, $beAgainstVector->getR());
+        $this->assertEqualsWithDelta(-135, rad2deg($beAgainstVector->getOmega(EnumRange::G180)), 0.01);
+        $this->assertEqualsWithDelta(225, rad2deg($beAgainstVector->getOmega(EnumRange::G360)), 0.01);
+
+
+    }
     public function testRotateNeg()
     {
        $vector = (new PolarVector())->setR(10)->setOmega(deg2rad(-170));

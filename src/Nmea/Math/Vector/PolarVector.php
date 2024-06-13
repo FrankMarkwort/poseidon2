@@ -21,7 +21,12 @@ class PolarVector extends AbstractAngleRad
         return $this;
     }
 
-    public function rotate(float $rad): PolarVector
+    public function againstVector( bool $clone = false):PolarVector
+    {
+        return $this->rotate(pi(), $clone);
+    }
+
+    public function rotate(float $rad , bool $clone = false): PolarVector
     {
         $r = $this->getR();
         $omega = $this->getOmega();
@@ -34,6 +39,14 @@ class PolarVector extends AbstractAngleRad
             $newOmega = 2 * pi() + $newOmega;
         }
         $newR = sqrt(pow($x,2) + pow($y,2));
+        if ($clone) {
+            $newVector = clone $this;
+            $newVector->setR($newR);
+            $newVector->setOmega($newOmega);
+
+            return $newVector;
+        }
+
         $this->setR($newR);
         $this->setOmega($newOmega);
 
