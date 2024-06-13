@@ -36,10 +36,6 @@ abstract class AbstractAngleRad
 
             return 0;
 
-        } elseif ($rad > 0 && $rad < 2 * pi()) {
-
-            return $rad;
-
         } elseif ($rad > 2 * pi()) {
 
             return fmod($rad, 2 * pi()) ;
@@ -62,24 +58,23 @@ abstract class AbstractAngleRad
 
              return pi();
 
-         } elseif ($rad > 0 && $rad < pi()) {
+         } elseif ($this->isBetween0AndPi($rad)) {
 
             return $rad;
 
-         } elseif ($rad > 0 && $rad > 2 * pi()) {
+         } elseif ($rad > 2 * pi()) {
 
              return fmod($rad, 2 * pi());
 
-         } elseif ($rad > 0 && $rad < 2 * pi()) {
+         } elseif ($this->isBetween0And2Pi($rad)) {
 
              return (2 * pi() - fmod($rad, 2 * pi())) * (-1);
 
-         } elseif ($rad > -pi() && $rad < 0  ) {
+         } elseif ($rad > -pi() && $rad < 0 ) {
 
              return fmod($rad, pi());
 
          } elseif ($rad < -2 * pi() && $rad < -pi() )  {
-
             if ($this->isEqualsPi(abs(fmod($rad, 2 * pi()))))
             {
                 return abs(fmod($rad, 2 * pi()));
@@ -88,13 +83,22 @@ abstract class AbstractAngleRad
 
                  return fmod($rad, 2 * pi());
             }
-
-         } elseif ($rad < -pi() && $rad > - 2* pi()) {
+         } elseif ($rad < -pi() && $rad > - 2 * pi()) {
 
              return abs(fmod($rad, pi()));
          }
 
          return $rad;
+    }
+
+    protected function isBetween0And2Pi(float $rad):bool
+    {
+        return $rad > 0 && $rad < 2 * pi();
+    }
+
+    protected function isBetween0AndPi(float $rad):bool
+    {
+        return $rad > 0 && $rad < pi();
     }
 
     protected function isEqualsPi(float $rad): bool

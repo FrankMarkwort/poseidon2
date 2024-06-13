@@ -95,21 +95,6 @@ class WindSpeedCourse
 
     }
 
-    public function testResult()
-    {
-        if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
-            $twa = $this->getTrueWind()->getOmega() - $this->getCourseOverGround()->getOmega();
-        } else {
-            $twa = $this->getTrueWind()->getOmega() - $this->getVesselHeading()->getOmega();
-        }
-
-        return [
-            'twd' => $this->getTrueWind()->getOmega(),
-            'tws' => $this->getTrueWind()->getR(),
-            'twa' => $twa
-        ];
-    }
-
     public function getStoreArray():array
     {
         if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
