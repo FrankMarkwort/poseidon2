@@ -67,28 +67,4 @@ class PolarVector extends AbstractAngleRad
             $this->getOmega($range)
         ];
     }
-
-    /**
-     * @deprecated
-     */
-    private function rangePi(float $rad, EnumRange $range):float
-    {
-        if ($range === EnumRange::G180) {
-
-            return ($rad > pi() ? (2 * pi() - $rad) * -1 : $rad);
-
-        }
-        if ($rad < 0)  {
-
-             return ($rad <= 2 * pi()) ? fmod($rad, 2 * pi()) : $rad;
-
-        } elseif (round($rad,6) === round(2 * pi(), 6)) {
-
-            return 0;
-
-        } else {
-
-            return ($rad >= 2 * pi()) ? fmod($rad, 2 * pi()) : $rad;
-        }
-    }
 }
