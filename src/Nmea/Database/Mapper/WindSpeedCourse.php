@@ -5,7 +5,6 @@ namespace Nmea\Database\Mapper;
 use Nmea\Database\DatabaseInterface;
 use Nmea\Math\EnumRange;
 use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\Operator;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Math\Vector\PolarVectorOperation;
 
@@ -97,10 +96,11 @@ class WindSpeedCourse
 
     public function getStoreArray():array
     {
+        $twa = new Rad();
         if ($this->getCourseOverGround()->getR() > static::MIN_SPEED_VOTE_AS_SOG) {
-            $twa = $this->getTrueWind()->getOmega() - $this->getCourseOverGround()->getOmega();
+            $twa->setOmega($this->getTrueWind()->getOmega() - $this->getCourseOverGround()->getOmega());
         } else {
-            $twa = $this->getTrueWind()->getOmega() - $this->getVesselHeading()->getOmega();
+            $twa->setOmega($this->getTrueWind()->getOmega() - $this->getVesselHeading()->getOmega());
         }
         return [
             'timestamp' => $this->getTime(),
@@ -108,7 +108,7 @@ class WindSpeedCourse
             'aws' => $this->msToKnots($this->getApparentWind()->getR()),
             'awa' => $this->angleGrad($this->getApparentWind()->getOmega(EnumRange::G180)),
             'tws' => $this->msToKnots($this->getTrueWind()->getR()),
-            'twa' => $this->angleGrad($twa),
+            'twa' => $this->angleGrad($twa->getOmega(EnumRange::G180)),
             'cog' => $this->angleGrad($this->getCourseOverGround()->getOmega()),
             'sog' => $this->msToKnots($this->getCourseOverGround()->getR()),
             'vesselHeading' => $this->angleGrad($this->getVesselHeading()->getOmega()),

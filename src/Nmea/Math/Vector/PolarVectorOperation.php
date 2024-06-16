@@ -41,20 +41,22 @@ class PolarVectorOperation
         $omega2 = $vector2->getOmega();
         $r1 = $vector1->getR();
         $r2 = $vector2->getR();
-
         $yPart1 = abs($r1) * sin($omega1);
         $yPart2 = abs($r2) * sin($omega2);
-
         $xPart1 = abs($r1) * cos($omega1);
         $xPart2 = abs($r2) * cos($omega2);
-         if ($operator == Operator::PLUS) {
+        if ($operator == Operator::PLUS) {
              $y = $yPart1 + $yPart2;
              $x = $xPart1 + $xPart2;
-         } elseif ($operator == Operator::MINUS) {
+        } elseif ($operator == Operator::MINUS) {
              $y = $yPart1 - $yPart2;
              $x = $xPart1 - $xPart2;
-         }
+        }
+        if ($x == 0 && $y == 0) {
 
-        return ($x < 0 )? atan2($y , $x) + 2 * pi() : atan2($y , $x);
+            return 0;
+        }
+
+        return ($y < 0 )? atan2($y , $x) + 2 * pi() : atan2($y , $x);
     }
 }
