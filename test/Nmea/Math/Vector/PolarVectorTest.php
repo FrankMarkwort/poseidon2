@@ -100,7 +100,7 @@ class PolarVectorTest extends TestCase
         $this->assertEquals(190, rad2deg($vector->getOmega()));
         $this->assertEqualsWithDelta(20, $vector->getR(), 0.0001);
         $vector->rotate(deg2rad(80));
-        $this->assertEquals(270, rad2deg($vector->getOmega()));
+        $this->assertEqualsWithDelta(270, rad2deg($vector->getOmega()), 0.0001);
         $this->assertEqualsWithDelta(20, $vector->getR(), 0.0001);
         $vector->rotate(deg2rad(80));
         $this->assertEqualsWithDelta(350, rad2deg($vector->getOmega()),0.0001);
