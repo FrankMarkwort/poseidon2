@@ -25,12 +25,20 @@ class Database implements DatabaseInterface
 
     public function execute(string $sql):int|false
     {
-        return $this->getPdo()->exec($sql);
+        try {
+            return $this->getPdo()->exec($sql);
+        } catch (\PDOException $e) {
+             throw new \Exception('exec' . $sql, $e->getCode(), $e);
+        }
     }
 
     public function query(string $sql):array
     {
-        return $this->getPdo()->query($sql)->fetchAll();
+        try {
+            return $this->getPdo()->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception('query' . $sql, $e->getCode(), $e);
+        }
     }
 
     private function getPdo():PDO

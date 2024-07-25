@@ -1,0 +1,7 @@
+<?php
+require_once( __DIR__ . '/../../vendor/autoload.php');
+use Nmea\Config\Config;
+use Nmea\Cache\Memcached;
+
+$cache  = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
+$cache->set('chain_length', 50);

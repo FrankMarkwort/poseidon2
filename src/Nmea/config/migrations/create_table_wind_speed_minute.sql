@@ -49,7 +49,24 @@ create table wind_speed_hour
     constraint wind_speed_hour_pk
         unique (date)
 );
+DROP FUNCTION if exists Vavg;
+CREATE FUNCTION Vavg (avgSinDir FLOAT,avgCosDir FLOAT, is180Deg BOOL)
+RETURNS FLOAT DETERMINISTIC
+begin
+     IF (avgSinDir = 0 AND avgCosDir = 0) THEN
+        return 0.0;
+    end if;
+    if (is180Deg) THEN
+        return mod(degrees(atan2(avgSinDir, avgCosDir)), 180);
+    end if;
+    if (avgSinDir < 0) then
+        return mod(degrees(atan2(avgSinDir, avgCosDir)) + 360, 360);
+    else
+        return mod(degrees(atan2(avgSinDir, avgCosDir)), 360);
+    end if;
+end;
 
+DROP TRIGGER if exists generateHourStatistics;
 create definer = nmea2000@`%` trigger generateHourStatistics
     after insert
     on wind_speed_minute
@@ -66,15 +83,15 @@ BEGIN
                 avgSog, maxSog, minSog,
                 avgVesselHeading, maxVesselHeading, minVesselHeading
             )
-            select
-                avg(twd), max(twd), min(twd),
+             select
+                vavg(sin(RADIANS(twd)), cos(RADIANS(twd)), false), max(twd), min(twd),
                 avg(aws), max(aws), min(aws),
-                avg(awa), max(awa), min(awa),
+                vavg(sin(RADIANS(awa)), cos(RADIANS(awa)), true), max(awa), min(awa),
                 avg(tws), max(tws), min(tws),
-                avg(twa), max(twa), min(twa),
-                avg(cog), max(cog), min(cog),
+                vavg(sin(RADIANS(twa)), cos(RADIANS(twa)), true), max(twa), min(twa),
+                vavg(sin(RADIANS(cog)), cos(RADIANS(cog)), false), max(cog), min(cog),
                 avg(sog), max(sog), min(sog),
-                avg(vesselHeading), max(vesselHeading), min(vesselHeading)
+                vavg(sin(RADIANS(vesselHeading)), cos(RADIANS(vesselHeading)), false), max(vesselHeading), min(vesselHeading)
             from wind_speed_minute;
         END IF;
 END;

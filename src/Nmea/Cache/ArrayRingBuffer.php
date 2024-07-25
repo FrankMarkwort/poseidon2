@@ -2,7 +2,7 @@
 
 namespace Nmea\Cache;
 
-class ArrayRingBuffer extends AbstractRingBuffer
+class ArrayRingBuffer extends AbstractRingBuffer implements \Iterator
 {
     public function isFull():bool
     {
@@ -47,5 +47,30 @@ class ArrayRingBuffer extends AbstractRingBuffer
     protected function countBuffer(): int
     {
         return count($this->getCache()->getAll());
+    }
+
+    public function current(): mixed
+    {
+        return $this->getValue();
+    }
+
+    public function next(): void
+    {
+        // dont need
+    }
+
+    public function key(): mixed
+    {
+        return $this->getReadIndex();
+    }
+
+    public function valid(): bool
+    {
+        return $this->issetBuffer($this->getReadIndex());
+    }
+
+    public function rewind(): void
+    {
+        // dont need
     }
 }

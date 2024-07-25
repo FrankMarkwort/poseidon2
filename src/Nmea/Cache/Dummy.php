@@ -43,4 +43,16 @@ class Dummy implements CacheInterface
     {
         return $this->arrayByKey[$serverKey][$key] ?? null;
     }
+
+    public function isSet(string $key): bool
+    {
+        return isset($this->array[$key]);
+    }
+
+    public function delete(string $key):bool
+    {
+        unset($this->array[$key]);
+
+        return true;
+    }
 }

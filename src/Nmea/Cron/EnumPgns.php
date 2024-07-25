@@ -10,4 +10,5 @@ enum EnumPgns: string
     case Set_And_Drift = '129291';
     case Position =	'129025';
     case Temperature = '130312';
+    case Water_Depth = '128267';
 }

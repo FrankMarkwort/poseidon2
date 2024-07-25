@@ -1,0 +1,10 @@
+<?php
+require_once( __DIR__ . '/../../vendor/autoload.php');
+use Nmea\Config\Config;
+use Nmea\Cache\Memcached;
+
+$cache  = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
+echo "unset<br>";
+echo $cache->delete('chain_length');
+echo $cache->delete('OBJ_ANCHOR');
+print_r($cache->get('OBJ_ANCHOR'));

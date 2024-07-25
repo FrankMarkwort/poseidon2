@@ -2,24 +2,40 @@
 
 namespace Nmea\Cron;
 
+use Nmea\Database\Entity\Anchor;
+use Nmea\Database\Entity\Observer\ObserverAnchor;
+use Nmea\Database\Entity\Observer\ObserverAnchorToCache;
 use Nmea\Database\Entity\Positions;
 use Nmea\Database\Mapper\PositionMapper;
 use Nmea\Database\Mapper\WindSpeedCourse;
-use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\DataFacadeFactory;
 
 final class CronWorker extends AbstractCronWorker
 {
+    private const string CHAIN_LENGTH = 'chain_length';
+
     private bool $running = true;
     private ?Positions $position = null;
     private ?PositionMapper $positionMapper = null;
     private ?string $privTimastamp = null;
+    private ?Anchor $anchor = null;
     public function run():void
     {
+        $this->anchor = new Anchor();
+        $this->anchor->attach(new ObserverAnchorToCache());
+        if ($this->isDebugRunMode()) {
+            $this->anchor->attach(new ObserverAnchor());
+        }
         $i = 0;
         while ($this->running) {
             $i++;
+            $this->anchor(
+                $this->cache->get(EnumPgns::Position->value),
+                $this->cache->get(EnumPgns::Vessel_Heading->value),
+                $this->cache->get(EnumPgns::Water_Depth->value),
+                $this->cache->get(EnumPgns::WIND->value)
+            );
             $this->store(
                 $this->cache->get(EnumPgns::WIND->value),
                 $this->cache->get(EnumPgns::COG_SOG->value),
@@ -35,6 +51,29 @@ final class CronWorker extends AbstractCronWorker
                 );
             }
             sleep($this->sleepTime - date('s') % $this->sleepTime);
+        }
+    }
+
+    private function anchor(string $position, string $vesselHeading, string $waterDepth, string $windData): void
+    {
+        $positionFacade = DataFacadeFactory::create($position, 'YACHT_DEVICE');
+        $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
+        $waterDepthFacade = DataFacadeFactory::create($waterDepth, 'YACHT_DEVICE');
+        $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
+        $this->anchor->setPosition(
+            $positionFacade->getFieldValue(1)->getValue(),
+            $positionFacade->getFieldValue(2)->getValue(),
+            $vesselHeadingFacade->getFieldValue(2)->getValue(),
+            ($waterDepthFacade->getFieldValue(2)->getValue() + $waterDepthFacade->getFieldValue(3)->getValue()),
+            $windFacade->getFieldValue(3)->getValue(),
+            $windFacade->getFieldValue(2)->getValue()
+        );
+        if (! $this->cache->isSet(static::CHAIN_LENGTH)) {
+            $this->anchor->unsetAnchor();
+        } else {
+            if (! $this->anchor->isAnchorSet()) {
+                $this->anchor->setAnchor($this->cache->get(static::CHAIN_LENGTH));
+            }
         }
     }
 
@@ -55,9 +94,7 @@ final class CronWorker extends AbstractCronWorker
             ->setCourseOverGround($this->getPolarVector($courseFacade,5,4 ))
             ->setDrift($this->getPolarVector($driftFacade,5,4 ));
         if (! $this->isPositionChanged($position)) {
-
             $this->getPositionMapper()->storeEntity($position);
-
             $this->isDebugPrintMessage('store hour position data !' . PHP_EOL);
         }
     }

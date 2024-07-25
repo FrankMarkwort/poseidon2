@@ -19,6 +19,11 @@ abstract class AbstractCronWorker
         protected readonly ModeEnum $runMode = ModeEnum::NORMAL
     ) {}
 
+    public function isDebugRunMode(): bool
+    {
+        return $this->runMode === ModeEnum::DEBUG || $this->runMode === ModeEnum::NORMAL_PLUS_DEBUG;
+    }
+
     protected function printAllFieldNames(DataFacade $dataFacade):string
     {
         $result = $dataFacade->getDescription() . ' pgn => ' . $dataFacade->getPng() . " src => " .$dataFacade->getSrc() . ' dst => ' . $dataFacade->getDst()

@@ -17,6 +17,10 @@ class Memcached implements CacheInterface
             throw new \Exception('memcache connection failed');
         }
     }
+    public function isSet(string $key):bool
+    {
+        return $this->cache->get($key) !== false || $this->cache->getResultCode() != Cache::RES_NOTFOUND;
+    }
 
     public function get(string $pgn): mixed
     {
@@ -126,5 +130,10 @@ class Memcached implements CacheInterface
     public function getByKey(string $serverKey, string $key, ?callable $cacheCb = null, int $getFlags = 0): mixed
     {
         return $this->cache->getByKey($serverKey, $key, $cacheCb, $getFlags);
+    }
+
+    public function delete(string $key): bool
+    {
+        return $this->cache->delete($key);
     }
 }

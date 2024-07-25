@@ -5,7 +5,7 @@ namespace Nmea\Protocol\Frames\Frame\Header;
 class PackedTypeHelper
 {
     private static array $singlePackedPngsInMixed = [130306, 128259, 130310, 130312, 128267, 127250, 127245, 129026, 129025, 127258,129033,126992,
-        129291,129283,126993
+        129291,129283,126993, 130311
     ];
 
     private static array $fastPackedPgnsInMixed = [128275, 129542, 129540, 129029, 130577, 129044, 126996];

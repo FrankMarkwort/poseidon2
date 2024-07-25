@@ -34,7 +34,6 @@ class PositionMapper extends AbstractMapper
 
     }
 
-    //TODO move to helper or enum
     private function msToKnots(float $speed):float
     {
         return round($speed * 1.94384 ,1);
