@@ -5,7 +5,7 @@ namespace TestsNmea\Database\Entity;
 use Nmea\Database\Entity\Anchor;
 use PHPUnit\Framework\TestCase;
 
-class AncorTest extends TestCase
+class AncorTes extends TestCase
 {
 
     protected function testGetWhaterDeep()
