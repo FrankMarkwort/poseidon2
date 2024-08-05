@@ -4,6 +4,7 @@ use Nmea\Service\Service;
 
 $memcached = new Service('memcached');
 $deamon = new Service('phpreader');
+$phpSocketServer = new Service('php-socket-server');
 $phpcron = new Service('phpcron');
 function getColor(Service $service):string
 {
@@ -24,6 +25,8 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
                 $memcached->start();
             } elseif ($service === 'phpreader') {
                 $deamon->start();
+            } elseif ($service === 'php-socket-server') {
+                $phpSocketServer->start();
             } elseif ($service === 'phpcron') {
                 $phpcron->start();
             }
@@ -33,6 +36,8 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
                 $memcached->stop();
             } elseif ($service === 'phpreader') {
                 $deamon->stop();
+            } elseif ($service === 'php-socket-server') {
+                $phpSocketServer->stop();
             } elseif ($service === 'phpcron') {
                 $phpcron->stop();
             }
@@ -56,6 +61,12 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
         <td  <?= getColor($deamon)?>> <?= $deamon->getServiceName() ?> </td>
         <td>
             <a href="services.phtml?mode=<?=$deamon->nextStatus()?>&service=<?=$deamon->getServiceName()?>" > <?= $deamon->nextStatus() ?> </a>
+        </td>
+    </tr>
+    <tr>
+        <td  <?= getColor($phpSocketServer)?>> <?= $phpSocketServer->getServiceName() ?> </td>
+        <td>
+            <a href="services.phtml?mode=<?=$phpSocketServer->nextStatus()?>&service=<?=$phpSocketServer->getServiceName()?>" > <?= $phpSocketServer->nextStatus() ?> </a>
         </td>
     </tr>
     <tr>

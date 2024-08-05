@@ -1,7 +1,6 @@
-setInterval(() => {
 (async () => {
-    const chartData = await fetch(
-        'http://192.168.0.101/anchorJson.php'
+    let chartData = await fetch(
+       'http://192.168.0.101/anchorJson.php'
     ).then(response => response.json());
     // Initialize the chart
     Highcharts.mapChart('container', {
@@ -91,6 +90,22 @@ setInterval(() => {
             },
             reversed: true
         },
+        data: {
+            csvURL: 'http://192.168.0.101/testJson.php',
+            dataRefreshRate: 20,
+            firstRowAsNames: true,
+            enablePolling: true,
+            //parsed: function (columns) {
+            //    console.info('fuck js');
+            //    console.info(columns);
+            // We want to keep the values since 1950 only
+              // rows.forEach(row => {
+                // Keep the first item which is the series name, then remove
+                // the following 70
+                //console.info($row);
+                //});
+           // }
+        },
 
         series: [{
             type: 'tiledwebmap',
@@ -100,7 +115,7 @@ setInterval(() => {
                 theme: 'Standard'
             },
             color: 'rgba(128,128,128,0.3)'
-        },
+        },/*
         {
             name: 'AnchorCircle',
             type: 'map',
@@ -139,14 +154,14 @@ setInterval(() => {
                 },
                 data: [
                     {
-                        name: 'AnchorPosition',
+                        name: 'anchorHistory',
                         color:'rgba(255,255,255,0)',
                         geometry: {
                             type: 'Polygon',
                             coordinates: chartData.anchorHistory
                         }
                     }
-                ]},
+                ]},*/
         {
             type: 'mappoint',
             name: 'Boat',
@@ -163,17 +178,10 @@ setInterval(() => {
                 name: 'Boat',
                 lat: chartData.latitude,
                 lon: chartData.longitude
-            },
-            {
-                name: 'Ancor',
-                color: 'rgb(255,0,0)',
-                lat: chartData.anchorLatitude,
-                lon: chartData.anchorLongitude
             }
             ]
         },
 
            ]
     });
-})();
-}, 60000);
+})(console.info(this.Highcharts.mapChart));

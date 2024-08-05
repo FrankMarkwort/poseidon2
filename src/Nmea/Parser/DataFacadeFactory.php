@@ -13,8 +13,6 @@ class DataFacadeFactory
 {
     const string YACHT_DEVICE = 'YACHT_DEVICE';
     const string NONE_DEVICE =  'NON_DEVICE';
-    private static $mainPart;
-    private static $dataPart;
 
     /**
      * @throws ParserException

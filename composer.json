@@ -28,6 +28,7 @@
       "php": ">= 8.3",
       "ext-mbstring": "*",
       "ext-memcached": "*",
-      "ext-bcmath": "*"
+      "ext-bcmath": "*",
+      "ext-sockets": "*"
     }
 }

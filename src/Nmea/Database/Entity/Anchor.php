@@ -24,7 +24,7 @@ class Anchor implements InterfaceObservable
     private array $historyPosition = [];
     private int $chainLength = 0;
     private float $waterDepth = 5;
-    private int $historyPositionCounter = 0;
+    private int $historyPositionCounter = 10;
     /*
      * @var InterfaceObserver[] $observers
      */

@@ -1,7 +1,6 @@
-setInterval(() => {
 (async () => {
-    const chartData = await fetch(
-        'http://192.168.0.101/anchorJson.php'
+    let chartData = await fetch(
+       'http://192.168.0.101/api/anchorJson.php'
     ).then(response => response.json());
     // Initialize the chart
     Highcharts.mapChart('container', {
@@ -91,6 +90,22 @@ setInterval(() => {
             },
             reversed: true
         },
+        data: {
+            columnsURL: 'http://192.168.0.101/anchorJson.php',
+            dataRefreshRate: 1,
+            firstRowAsNames: false,
+            enablePolling: true,
+            parsed: function (columns) {
+                console.info('fuck js');
+                console.info($rows);
+            // We want to keep the values since 1950 only
+               rows.forEach(row => {
+                // Keep the first item which is the series name, then remove
+                // the following 70
+                console.info($row);
+                });
+            }
+        },
 
         series: [{
             type: 'tiledwebmap',
@@ -139,7 +154,7 @@ setInterval(() => {
                 },
                 data: [
                     {
-                        name: 'AnchorPosition',
+                        name: 'anchorHistory',
                         color:'rgba(255,255,255,0)',
                         geometry: {
                             type: 'Polygon',
@@ -176,4 +191,5 @@ setInterval(() => {
            ]
     });
 })();
-}, 60000);
+
+console.info(this);

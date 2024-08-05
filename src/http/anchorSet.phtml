@@ -4,4 +4,15 @@ use Nmea\Config\Config;
 use Nmea\Cache\Memcached;
 
 $cache  = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
-$cache->set('chain_length', 50);
+if (!$cache->isSet('chain_length')) {
+    echo 'set to 50 m<br>';
+    $cache->set('chain_length', 50);
+} else {
+    echo "is alredy set to = " . $cache->get('chain_length') . " m<br>";
+    if ($cache->isSet('OBJ_ANCHOR')) {
+        echo "Ancor Obj is set<br>";
+    } else {
+        echo "try to set Ancor<br>";
+    }
+}
+

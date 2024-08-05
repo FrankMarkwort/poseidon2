@@ -3,7 +3,10 @@
 namespace Nmea\Protocol\Frames;
 
 use Nmea\Cache\CacheInterface;
+use Nmea\Cron\EnumPgns;
 use Nmea\Protocol\Frames\Frame\Frame;
+use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
+use Nmea\Protocol\Socket\Client;
 
 class Frames
 {
@@ -11,8 +14,9 @@ class Frames
      * @var Frames[][][]
      */
     private array $frames = [];
+    private array $tempStore = [];
 
-    public function __construct(private readonly CacheInterface $cache)
+    public function __construct(private readonly CacheInterface $cache, private readonly ?Client $webSocket = null)
     {
     }
 
@@ -85,6 +89,50 @@ class Frames
     {
         $this->cache->set($frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data);
+        try {
+            $this->windSocketData(
+                $frame->getHeader()->getPgn(),
+                $frame->getData()->getTimestamp()
+                . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
+            );
+        } catch (\ErrorException $e) {}
+    }
+
+    private function windSocketData($pgn, string $data):void
+    {
+        if ($this->isNeedForWindData($pgn)) {
+            $this->tempStore[$pgn] = $data;
+        }
+        if ($this->hasAllDataForWindSocket()) {
+            $this->writeToSocket();
+        }
+    }
+
+    private function writeToSocket()
+    {
+        $socketObj = new WindSpeedCourseFactory($this->webSocket);
+        $socketObj->writeToSocket(
+            $this->tempStore[EnumPgns::WIND->value],
+            $this->tempStore[EnumPgns::COG_SOG->value],
+            $this->tempStore[EnumPgns::Vessel_Heading->value]
+        );
+        $this->tempStore = [];
+    }
+
+    private function hasAllDataForWindSocket():bool
+    {
+        if (isset($this->tempStore[EnumPgns::WIND->value])
+            && isset($this->tempStore[EnumPgns::Vessel_Heading->value])
+            && isset($this->tempStore[EnumPgns::COG_SOG->value])) {
+
+            return true;
+        }
+        return false;
+    }
+
+    private function isNeedForWindData($pgn):bool
+    {
+        return in_array($pgn, array(EnumPgns::WIND->value,EnumPgns::Vessel_Heading->value,EnumPgns::COG_SOG->value));
 
     }
 

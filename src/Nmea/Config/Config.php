@@ -36,6 +36,16 @@ class Config
     {
         return static::getConfigArray()['serialdevice'];
     }
+    public static function getSocketServerHost():string
+    {
+        return static::getConfigArray()['socketServer']['host'];
+    }
+    public static function getSocketServerPort():string
+    {
+        return static::getConfigArray()['socketServer']['port'];
+    }
+
+
     private static function getConfigArray():array
     {
         $array = include(__DIR__ . '/../../config/config.php');

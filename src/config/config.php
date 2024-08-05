@@ -12,6 +12,10 @@ return [
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
         ],
+        'socketServer' => [
+            'host' => '172.17.0.1',
+            'port' => 8090,
+        ],
         'serialdevice' => __DIR__ . '/../../test/TestData/data.log',
     ],
     'production' => [
@@ -25,6 +29,10 @@ return [
             'user' => 'nmea2000',
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
+        ],
+        'socketServer' => [
+            'host' => '192.168.0.101',
+            'port' => 8090,
         ],
         'serialdevice' => '/dev/ttyACM0',
     ],
@@ -40,6 +48,10 @@ return [
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
         ],
+        'socketServer' => [
+            'host' => '172.17.0.1',
+            'port' => 8090,
+        ],
         'serialdevice' => '/dev/ttyACM0',
     ],
     'staging' => [
@@ -53,6 +65,10 @@ return [
             'user' => 'nmea2000',
             'password' => 'nmea2000',
             'dbname' => 'nmea2000'
+        ],
+        'socketServer' => [
+            'host' => '172.17.0.1',
+            'port' => 8090,
         ],
         'serialdevice' => '/dev/ttyACM0',
     ]

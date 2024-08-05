@@ -7,15 +7,22 @@ use Nmea\Protocol\Frames\Frame\Data\Data;
 use Nmea\Protocol\Frames\Frames;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Frames\Frame\Header\Header;
+use Nmea\Protocol\Socket\Client;
 
 class FramesFactory
 {
     private static ?Frames $instance;
     private static CacheInterface $cache;
+    private static Client $socket;
 
     public static function setCache(CacheInterface $cache)
     {
         static::$cache = $cache;
+    }
+
+    public static function setSocket(Client $socket)
+    {
+        static::$socket = $socket;
     }
 
     public static function reset()
@@ -27,7 +34,7 @@ class FramesFactory
     {
         if (!isset(static::$instance)) {
 
-            static::$instance = new Frames(static::$cache);
+            static::$instance = new Frames(static::$cache, static::$socket);
         }
 
         return static::$instance;

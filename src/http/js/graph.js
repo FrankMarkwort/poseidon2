@@ -1,6 +1,6 @@
 (async () => {
     const chartData = await fetch(
-        'http://192.168.0.101/averages.php'
+        'http://192.168.0.101/api/averages.php'
     ).then(response => response.json());
     Highcharts.chart('container', {
         chart: {

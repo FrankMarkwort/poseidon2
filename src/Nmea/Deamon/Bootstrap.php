@@ -5,10 +5,11 @@ namespace Nmea\Deamon;
 use Nmea\Cache\CacheInterface;
 use Nmea\Logger\Factory;
 use Nmea\Protocol\FramesFactory;
+use Nmea\Protocol\Socket\Client;
 
 class Bootstrap
 {
-    public function __construct(readonly Serial $serial, readonly CacheInterface $cache)
+    public function __construct(readonly Serial $serial, readonly CacheInterface $cache, readonly Client $websocket)
     {
     }
 
@@ -17,6 +18,7 @@ class Bootstrap
         $run = true;
         $this->serial->open();
         FramesFactory::setCache($this->cache);
+        FramesFactory::setSocket($this->websocket);
         do {
             try {
                 $line = $this->serial->readStream();
