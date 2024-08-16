@@ -1,7 +1,7 @@
 export function isSerie(name)
 {
-    result = false;
-    chart.series.forEach((serie, index) => {
+    var result = false;
+    chart.series.forEach((serie) => {
         if (serie.getName() === name) {
 
             result = true;
@@ -13,8 +13,8 @@ export function isSerie(name)
 
 export function getSerieByName(name)
 {
-    result = false;
-    chart.series.forEach((serie, index) => {
+    var result = false;
+    chart.series.forEach((serie) => {
         if (serie.getName() === name) {
             result = serie;
         }
@@ -25,8 +25,8 @@ export function getSerieByName(name)
 
 export function rmSerieByName(name)
 {
-    result = false;
-    chart.series.forEach((serie, index) => {
+    var result = false;
+    chart.series.forEach((serie) => {
         if (serie.getName() === name) {
             serie.remove();
 
@@ -39,7 +39,7 @@ export function rmSerieByName(name)
 
 export function updateSeriesColorByName(name, color, index = 0)
 {
-    serie = getSerieByName(name);
+    var serie = getSerieByName(name);
     if (serie != null) {
         serie.data[index].color = color;
     }
@@ -144,7 +144,7 @@ export function addAnchorCirlesSerie(name, dataName1, dataName2, data1, data2, c
 
 export function updateSerieByName(name, index, data)
 {
-    serie = getSerieByName(name);
+    var serie = getSerieByName(name);
     if (serie != null) {
         serie.data[index].update(data);
     }

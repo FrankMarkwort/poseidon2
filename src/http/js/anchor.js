@@ -169,7 +169,7 @@
     function isSerie(name)
     {
         result = false;
-        chart.series.forEach((serie, index) => {
+        chart.series.forEach((serie) => {
             if (serie.getName() === name) {
 
                 result = true;
@@ -182,7 +182,7 @@
     function getSerieByName(name)
     {
         var result = false;
-        chart.series.forEach((serie, index) => {
+        chart.series.forEach((serie) => {
             if (serie.getName() === name) {
                 result = serie;
             }
@@ -194,7 +194,7 @@
     function rmSerieByName(name)
     {
         var result = false;
-        chart.series.forEach((serie, index) => {
+        chart.series.forEach((serie) => {
             if (serie.getName() === name) {
                 serie.remove();
 
@@ -332,7 +332,7 @@
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    const interval = setInterval(function() {
+    setInterval(function() {
         fetch('http://' + host + '/api/anchorJson.php')
             .then(function (response) { return response.json(); })
             .then(function (data) {

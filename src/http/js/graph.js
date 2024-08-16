@@ -204,7 +204,7 @@
         } // #####################
         ],
     });
-    const interval = setInterval(function() {
+    setInterval(function() {
         fetch('http://192.168.0.101/api/averages.php')
             .then(function (response) { return response.json(); })
             .then(function (data) {
