@@ -2,7 +2,7 @@
     const chartData = await fetch(
         'http://192.168.0.101/api/averages.php'
     ).then(response => response.json());
-    Highcharts.chart('container', {
+    var chart = Highcharts.chart('container', {
         chart: {
             zooming: {
                 type: 'x'
@@ -203,6 +203,27 @@
             }
         } // #####################
         ],
-    }
-)})();
+    });
+    const interval = setInterval(function() {
+        fetch('http://192.168.0.101/api/averages.php')
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                console.info(data.averagesAwa);
+                chart.series[0].data[0].update(data.averagesAwa);
+                chart.series[1].data[0].update(data.rangesAwa);
+                //chart.series[2].data[0].update(positions);
+                //chart.series[1].data[0].update(circleColor);
+                //chart.series[1].data[1].update(circleColor);
+                //if(! data.hasAlarm) {
+                //audio.play();
+                //}
+
+                // chart.series[2].redraw();
+                //chart.series[2].data[0].
+                //console.info(positions);
+                //console.info(data);
+                //console.info(chart.series[2].data[0]);
+            });
+    }, 1000); //1000 m
+})();
 

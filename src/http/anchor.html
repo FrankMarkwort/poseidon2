@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Circles</title>
+    <title>Anchor</title>
       <link href="./css/anchor.css" type="text/css" rel="stylesheet" />
       <script src="https://code.highcharts.com/maps/highmaps.js"></script>
       <script src="https://code.highcharts.com/maps/modules/data.js"></script>
@@ -9,6 +9,7 @@
       <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
       <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
       <script src="https://code.highcharts.com/maps/modules/debugger.js"></script>
+      <script type="module" src="js/anchor/series.js"></script>
 
   </head>
   <body>
@@ -17,6 +18,11 @@
 
         <div class="row d-flex justify-content-center main">
             <div class="col-md-6 text-center">
+                <input type="number" name="ancorMeter" id="ancorMeter" min="0" max="100" class="form-input"/>
+                <label for="ancorMeter" class="mt-4">m</label>
+                <button id="setAncor" class="btn btn-outline-secondary">Set Ancor</button>
+                <button id="ancorAlarmSound" class="btn btn-outline-secondary" onclick="playSound()">Alarm Signal</button>
+
                 <label for="provider" class="mt-4">Choose a provider:</label>
                 <select name="provider" id="provider" class="form-select"></select>
 

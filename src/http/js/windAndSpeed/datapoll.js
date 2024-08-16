@@ -1,8 +1,8 @@
-var socket = new WebSocket('ws://192.168.0.101:8090');
+var socket = new WebSocket('ws://' + hostPort);
 
 socket.onmessage = function (event) {
     var daten = JSON.parse(event.data);
-    console.log('Received data:', daten);
+    //console.log('Received data:', daten);
     if(typeof daten.testmsg != 'undefined' && daten.testmsg != null) {
        // console.log('Received data testmsg:', daten.testmsg);
         var awa = parseInt(daten.testmsg.awa);

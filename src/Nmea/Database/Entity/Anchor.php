@@ -19,8 +19,8 @@ class Anchor implements InterfaceObservable
     private float $aws;
     private float $awa;
     private bool $isSet = false;
-    private float $anchorLatitude;
-    private float $anchorLongitude;
+    private float|null $anchorLatitude;
+    private float|null $anchorLongitude;
     private array $historyPosition = [];
     private int $chainLength = 0;
     private float $waterDepth = 5;
@@ -83,6 +83,10 @@ class Anchor implements InterfaceObservable
     public function unsetAnchor(): self
     {
         $this->isSet = false;
+        $this->historyPosition = [];
+        $this->anchorLatitude= null;
+        $this->anchorLongitude = null;
+
 
         return $this;
     }
@@ -168,7 +172,7 @@ class Anchor implements InterfaceObservable
     public function circleRadius():int
     {
         return intval(acos((sin($this->getLatitude()) * sin($this->getAnchorLatitude()) + (cos($this->getLatitude()) * cos($this->getAnchorLatitude()))
-            * cos($this->getAnchorLongitude() - $this->getLongitude()))) * (static::EARTH_RADIUS)) +static::GPS_ACCURACY;
+            * cos($this->getAnchorLongitude() - $this->getLongitude()))) * (static::EARTH_RADIUS)) + static::GPS_ACCURACY;
     }
 
     protected function getDistance(): int
@@ -289,7 +293,8 @@ class Anchor implements InterfaceObservable
             'anchorColorCirclePolygon' => $this->getStatusColor(),
             'anchorHistory' => [$this->historyPosition],
             'anchorCirclePolygon' => [$this->getAnchorCirclePolygon($this->getMaxDistance())],
-            'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygon($this->getMaxDistance() + static::ANCOR_ALARM )]
+            'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygon($this->getMaxDistance() + static::ANCOR_ALARM )],
+            'hasAlarm' => $this->meterInCircle() >= static::ANCOR_ALARM
         ];
     }
 
