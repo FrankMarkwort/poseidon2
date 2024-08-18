@@ -19,7 +19,7 @@ jobs:
         uses: php-actions/composer@v6
         with:
           php_version: "8.3"
-          php_extensions: memcached bcmath
+          php_extensions: memcached bcmath sockets
           version: latest
        
       - name: PHPUnit Tests
