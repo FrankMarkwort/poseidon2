@@ -3,11 +3,11 @@
     var chartData = await fetch(
        'http://' + host + '/api/anchorJson.php'
     ).then(response => response.json());
-    var isSetAncor = false;
+    var isSetAnchor = false;
     if(chartData.isSet === undefined) {
-        isSetAncor = false;
+        isSetAnchor = false;
     } else {
-        isSetAncor = chartData.isSet;
+        isSetAnchor = chartData.isSet;
     }
     var chart = Highcharts.mapChart('container', {
         chart: {
@@ -36,9 +36,9 @@
                     }
                     function setAncorFu() {
                         var meter = parseInt(ancorMeter.value);
-                        if (isSetAncor) {
+                        if (isSetAnchor) {
                             sendRequest('http://' + host + '/api/setAnchor.php?set=false');
-                            isSetAncor = false;
+                            isSetAnchor = false;
                             setAncor.innerText = 'setAncor';
                             ancorMeter.readOnly = false;
                             ancorMeter.disabled = false;
@@ -213,11 +213,22 @@
         }
     }
 
-    function addAnchorPoint(name, latitude, longitude)
+    function addAnchorPoint(name, latitude, longitude, waterDepth = 22)
     {
         if (! isSerie(name)) {
+            console.info(longitude, longitude);
             chart.addSeries(
                 {
+                    tooltip: {
+                        formatter() {
+
+                            return `
+                                x: ${this.lat}, 
+                                y: ${this.lon}, 
+                                Wassertiefe: ${this.watherDepth}
+            `
+                        }
+                    },
                     type: 'mappoint',
                     name: name,
                     states: {
@@ -234,24 +245,21 @@
                             name: 'Ancor',
                             color: 'rgb(255,0,0)',
                             lat: latitude,
-                            lon: longitude
+                            lon: longitude,
+                            waterDepth: waterDepth
                         }
                     ]
                 })
         }
     }
 
-    function addBoatPositions(name, dataName1, data1, force = false)
+    function addLineFromBotToAnchor(name, alat, along, lat, lon)
     {
-        if (force) {
-            rmSerieByName(name)
-        }
-        if (! isSerie(name)) {
-            chart.addSeries({
+         rmSerieByName(name);
+         chart.addSeries({
                 name: name,
                 type: 'map',
-                bordercolor: 'rgb(0,34,255)',
-                color: 'rgb(251,228,1)',
+                color: 'rgba(127,124,124,0.3)',
                 states: {
                     inactive: {
                         enabled: false
@@ -260,11 +268,42 @@
                 zIndex: 2,
                 data: [
                     {
-                        name: dataName1,
-                        color: 'rgba(0,34,255,0)',
+                        name: name,
+                        color: 'rgba(127,124,124,0.3)',
                         geometry: {
-                            type: 'Polygon',
-                            coordinates: data1
+                            type: 'LineString',
+                            coordinates: [[lon, lat],[along, alat]]
+                        }
+                    }]
+            })
+    }
+
+    function addBoatPositions(name, dataName, data, force = true)
+    {
+        if (force) {
+            rmSerieByName(name)
+        }
+        console.info('data:', data)
+        console.info('danten laenge', data.length);
+        if ((! isSerie(name)) && data.length > 0) {
+            console.info('addBoatPositions',data);
+            chart.addSeries({
+                name: name,
+                type: 'mapline',
+                color: 'rgba(225,0,0,0.3)',
+                states: {
+                    inactive: {
+                        enabled: false
+                    }
+                },
+                zIndex: 2,
+                data: [
+                    {
+                        name: dataName,
+                        color: 'rgba(255,0,0,0.3)',
+                        geometry: {
+                            type: 'MultiLineString',
+                            coordinates: data
                         }
                     }]
             })
@@ -311,9 +350,7 @@
     function updateSerieByName(name, index, data)
     {
         serie = getSerieByName(name);
-        //console.info('serie', serie);
         if (serie != null) {
-            //console.info('serie', serie.data[index]);
             serie.data[index].update(data);
         }
     }
@@ -348,11 +385,13 @@
                         chartData.anchorColorCirclePolygon,
                         false
                     );
+                    addLineFromBotToAnchor('chain',data.anchorLatitude, data.anchorLongitude, data.latitude, data.longitude);
                     addAnchorPoint('Anchor', data.anchorLatitude, data.anchorLongitude);
-                    addBoatPositions('BoatPositions', 'positions', data.anchorHistory, force = false)
+                    addBoatPositions('BoatPositions', 'positions', data.anchorHistory, force = true)
                     updateSerieByName('Boat', 0, {
                         lat: data.latitude,
-                        lon: data.longitude
+                        lon: data.longitude,
+                        waterDepth: data.waterDepth
                     });
                 } else {
                     rmSerieByName('Anchor');
@@ -360,7 +399,7 @@
                     rmSerieByName('AnchorCircle');
                 }
 
-                isSetAncor = data.isSet;
+                isSetAnchor = data.isSet;
                 if (isSetAnchorFu(data)) {
                     document.getElementById("setAncor").innerText = 'unset Ancor';
                     document.getElementById("setAncor").disabled = false;

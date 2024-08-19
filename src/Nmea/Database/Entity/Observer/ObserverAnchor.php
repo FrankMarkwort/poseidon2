@@ -4,7 +4,7 @@ namespace Nmea\Database\Entity\Observer;
 
 class ObserverAnchor implements InterfaceObserver
 {
-    private const int ANCOR_ALARM = 10;
+    private const int ANCHOR_ALARM = 10;
     public function update(InterfaceObservable $observable)
     {
         if (! $observable->isAnchorSet()) return;
@@ -23,7 +23,7 @@ class ObserverAnchor implements InterfaceObserver
         if ($observable->isAnchorSet()) {
             if ($observable->meterInCircle() <= 0.00) {
                 return "\e[32m ANKER OK \e[0m \n";
-            } elseif ($observable->meterInCircle() >= static::ANCOR_ALARM) {
+            } elseif ($observable->meterInCircle() >= static::ANCHOR_ALARM) {
                 return "\e[31m ANKER ALARM \e[0m \n";
             } else {
                 return "\e[33m ANKER WARN\e[0m \n";

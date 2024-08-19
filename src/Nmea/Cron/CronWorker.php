@@ -10,6 +10,7 @@ use Nmea\Database\Mapper\PositionMapper;
 use Nmea\Database\Mapper\WindSpeedCourse;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\DataFacadeFactory;
+use Nmea\Parser\ParserException;
 
 final class CronWorker extends AbstractCronWorker
 {
@@ -54,6 +55,9 @@ final class CronWorker extends AbstractCronWorker
         }
     }
 
+    /**
+     * @throws ParserException
+     */
     private function anchor(string $position, string $vesselHeading, string $waterDepth, string $windData): void
     {
         $positionFacade = DataFacadeFactory::create($position, 'YACHT_DEVICE');

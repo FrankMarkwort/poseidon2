@@ -7,24 +7,28 @@ use Nmea\Database\Entity\Observer\InterfaceObserver;
 
 class Anchor implements InterfaceObservable
 {
-    private const EARTH_RADIUS = 6378136.6;
+    private const float EARTH_RADIUS = 6378136.6;
     private const float GPS_BUG_DISTANCE = 11;
     private const int GPS_ACCURACY = 10;
     private const float FREIBOARD = 1;
     private const int WIND_ANGLE_ANCOR = 5;
     private const int ANCOR_ALARM = 10;
+
+    private float|null $previousLatitude = null;
+    private float|null $previousLongitude = null;
     private float $latitude;
     private float $longitude;
     private float $heading;
     private float $aws;
     private float $awa;
     private bool $isSet = false;
-    private float|null $anchorLatitude;
-    private float|null $anchorLongitude;
+    private float|null $anchorLatitude = null;
+    private float|null $anchorLongitude = null;
     private array $historyPosition = [];
+    private bool $isActualHistoryPosition = false;
     private int $chainLength = 0;
-    private float $waterDepth = 5;
-    private int $historyPositionCounter = 10;
+    private float $waterDepth = 0;
+    private int $historyPositionRoundCounter = 10;
     /*
      * @var InterfaceObserver[] $observers
      */
@@ -32,6 +36,7 @@ class Anchor implements InterfaceObservable
 
     public function setPosition(float $gradLatitude, float $gradLongitude, float $gradHeading, float $waterDepth, float $aws, float $awa): self
     {
+        $this->isActualHistoryPosition = false;
         $this->aws = $aws;
         $this->awa = $awa;
         $this->latitude = deg2rad($gradLatitude);
@@ -39,7 +44,7 @@ class Anchor implements InterfaceObservable
         $this->heading = deg2rad($gradHeading);
         $this->setWaterDepth($waterDepth);
         if ($this->isAnchorSet()) {
-            $this->addHistoryPoint($gradLongitude, $gradLatitude);
+            $this->addHistoryPoint($gradLatitude, $gradLongitude);
         }
         $this->notify();
 
@@ -48,11 +53,26 @@ class Anchor implements InterfaceObservable
 
     private function addHistoryPoint(float $latitude, float $longitude):void
     {
-        $this->historyPositionCounter++;
-        if ($this->historyPositionCounter >= 10) {
-            $this->historyPosition[] = [$latitude, $longitude];
-            $this->historyPositionCounter = 0;
+        $this->isActualHistoryPosition = false;
+        $this->historyPositionRoundCounter++;
+        if ($this->historyPositionRoundCounter >= 10) {
+            if (! (is_null($this->previousLatitude) || is_null($this->previousLongitude))) {
+                $this->historyPosition[] = [[$this->previousLongitude, $this->previousLatitude],[ $longitude, $latitude]];
+                $this->isActualHistoryPosition = true;
+            }
+            $this->previousLatitude = $latitude;
+            $this->previousLongitude = $longitude;
+            $this->historyPositionRoundCounter = 0;
         }
+    }
+
+    private function getHistoryPositionsWithLastPosition(array $historyPosition):array
+    {
+        if (! (is_null($this->previousLatitude) || is_null($this->previousLongitude) || $this->isActualHistoryPosition)) {
+            $historyPosition[] = [[$this->previousLongitude, $this->previousLatitude],[rad2deg($this->longitude), rad2deg($this->latitude)]];
+        }
+
+        return $historyPosition;
     }
 
     public function getAwa():float
@@ -72,7 +92,9 @@ class Anchor implements InterfaceObservable
 
     private function isWindComesFromTheFront():bool
     {
-        return (($this->awa >= 0 && $this->awa <= static::WIND_ANGLE_ANCOR) || ($this->awa >= 360 - static::WIND_ANGLE_ANCOR && $this->awa <= 360));
+        $awa = $this->awa;
+
+        return (($awa >= 0 && $awa <= static::WIND_ANGLE_ANCOR) || ($awa >= 360 - static::WIND_ANGLE_ANCOR && $awa <= 360));
     }
 
     public function isAnchorSet(): bool
@@ -86,6 +108,9 @@ class Anchor implements InterfaceObservable
         $this->historyPosition = [];
         $this->anchorLatitude= null;
         $this->anchorLongitude = null;
+        $this->previousLatitude = null;
+        $this->previousLongitude = null;
+        $this->chainLength = 0;
 
 
         return $this;
@@ -156,23 +181,13 @@ class Anchor implements InterfaceObservable
 
     public function meterInCircle():int
     {
-        return intval($this->circleRadius() - $this->getMaxDistance());
-    }
-
-    public function isInCircle():bool
-    {
-        if ($this->isSet) {
-
-            return $this->circleRadius() <= $this->getMaxDistance();
-        }
-
-        return true;
+        return $this->getMaxDistance() - $this->circleRadius();
     }
 
     public function circleRadius():int
     {
-        return intval(acos((sin($this->getLatitude()) * sin($this->getAnchorLatitude()) + (cos($this->getLatitude()) * cos($this->getAnchorLatitude()))
-            * cos($this->getAnchorLongitude() - $this->getLongitude()))) * (static::EARTH_RADIUS)) + static::GPS_ACCURACY;
+        return acos((sin($this->getLatitude()) * sin($this->getAnchorLatitude()) + (cos($this->getLatitude()) * cos($this->getAnchorLatitude()))
+            * cos($this->getAnchorLongitude() - $this->getLongitude()))) * (static::EARTH_RADIUS) + static::GPS_ACCURACY;
     }
 
     protected function getDistance(): int
@@ -198,20 +213,26 @@ class Anchor implements InterfaceObservable
 
     public function getMaxDistance():int
     {
-        return  intval(sqrt(pow($this->getChainLength(),2) - pow($this->getWaterDepth() + static::FREIBOARD,2)) + static::GPS_BUG_DISTANCE);
+        return  intval(sqrt(pow($this->getChainLength(),2) - pow($this->getWaterDepth() + static::FREIBOARD,2)) + static::GPS_BUG_DISTANCE+ static::GPS_ACCURACY);
     }
 
     protected function getMinDistance():int
     {
-        return intval(($this->getChainLength() - ($this->getWaterDepth() + static::FREIBOARD)) + static::GPS_BUG_DISTANCE);
+        return intval(($this->getChainLength() - ($this->getWaterDepth() + static::FREIBOARD)) + static::GPS_BUG_DISTANCE) + static::GPS_ACCURACY;
     }
 
     protected function setAnchorPosition() :void
     {
+        if ($this->getAwa() > 180) {
+            $awa = 180 - $this->getAwa() ;
+        } else {
+            $awa = $this->getAwa();
+        }
+        $heading = fmod($this->getHeading() + deg2rad($awa), 2 * pi());
         $angularDistance = $this->getDistance() / (static::EARTH_RADIUS);
         $lat2 = asin(sin($this->getLatitude()) * cos($angularDistance) +
-            cos($this->getLatitude()) * sin($angularDistance) * cos($this->getHeading()));
-        $lon2 = $this->getLongitude() + atan2(sin($this->getHeading()) * sin($angularDistance) * cos($this->getLatitude()),
+            cos($this->getLatitude()) * sin($angularDistance) * cos($heading));
+        $lon2 = $this->getLongitude() + atan2(sin($heading) * sin($angularDistance) * cos($this->getLatitude()),
                 cos($angularDistance) - sin($this->getLatitude()) * sin($lat2));
 
         $this->setAnchorLatitude($lat2)->setAnchorLongitude($lon2);
@@ -224,11 +245,11 @@ class Anchor implements InterfaceObservable
 
             return [];
         }
+        $coordinates = [];
          for ($i = 0; $i < $points; $i++) {
             $bearing = 2 * pi() * $i / $points;
             $coordinates[] = $this->getCirclePoint($bearing, $radius);
         }
-
         $coordinates[] = $coordinates[0];
 
         return $coordinates;
@@ -256,7 +277,7 @@ class Anchor implements InterfaceObservable
         return [rad2deg($lon), rad2deg($lat)];
     }
 
-    public function attach(InterfaceObserver $observer)
+    public function attach(InterfaceObserver $observer):void
     {
         $this->observers[] = $observer;
     }
@@ -276,7 +297,12 @@ class Anchor implements InterfaceObservable
         }
     }
 
-    public function toArray():array
+    protected function getHistoryPositions():array
+    {
+        return $this->historyPosition;
+    }
+
+    protected function toArray():array
     {
         return [
             'latitude' => rad2deg($this->latitude),
@@ -284,18 +310,31 @@ class Anchor implements InterfaceObservable
             'anchorLatitude' => rad2deg($this->anchorLatitude),
             'anchorLongitude' => rad2deg($this->anchorLongitude),
             'heading' => rad2deg($this->heading),
-            'distance' => $this->getDistance(),
             'awa' => $this->awa,
             'aws' => $this->aws,
             'isSet' => $this->isSet,
             'chainLength' => $this->chainLength,
             'waterDepth' => $this->waterDepth,
             'anchorColorCirclePolygon' => $this->getStatusColor(),
-            'anchorHistory' => [$this->historyPosition],
+            'anchorHistory' => $this->getHistoryPositionsWithLastPosition($this->getHistoryPositions()),
             'anchorCirclePolygon' => [$this->getAnchorCirclePolygon($this->getMaxDistance())],
             'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygon($this->getMaxDistance() + static::ANCOR_ALARM )],
-            'hasAlarm' => $this->meterInCircle() >= static::ANCOR_ALARM
+            'hasAlarm' => $this->hasAlarm(),
+            'hasWarn' => $this->hasWarn(),
+            'meterInCirle' => $this->meterInCircle(),
+            'circleRadius' => $this->circleRadius(),
+            'distance' => $this->getDistance(),
         ];
+    }
+
+    protected function hasAlarm(): bool
+    {
+        return $this->meterInCircle() + static::ANCOR_ALARM < 0;
+    }
+
+    protected function hasWarn(): bool
+    {
+        return $this->meterInCircle() < 0;
     }
 
     public function toJson(int $flags = JSON_UNESCAPED_UNICODE):string
@@ -306,15 +345,16 @@ class Anchor implements InterfaceObservable
      protected function getStatusColor():string
     {
         if ($this->isAnchorSet()) {
-            if ($this->meterInCircle() <= 0.00) {
-                return "rgba(0,255,0,0.3)";
-            } elseif ($this->meterInCircle() >= static::ANCOR_ALARM) {
+            if ($this->hasAlarm() && $this->hasWarn()) {
+
                 return "rgba(255,0,0,0.3)";
-            } else {
-                return "rgba(252,224,1,0.3)";
+
+            } elseif ($this->hasWarn()) {
+
+                return "rgba(255,173,0,0.3)";
             }
-        } else {
-            return  "rgba(45,45,45,0.3)";
         }
+
+        return  "rgba(0,255,0,0.3)";
     }
 }
