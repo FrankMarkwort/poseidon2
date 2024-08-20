@@ -9,8 +9,8 @@ class ObserverAnchor implements InterfaceObserver
     {
         if (! $observable->isAnchorSet()) return;
          echo  sprintf("circle r=%s, dist=%sm, heading=%s°, distInC=%sm, pos(%s, %s) ancPos(%s, %s)",
-            $observable->circleRadius(),
-            $observable->getMaxDistance(),
+            $observable->circleRadiusAnchorBoat(),
+            $observable->getDistance(),
             intval(rad2deg($observable->getHeadingRad())),
             $observable->meterInCircle(),
             rad2deg($observable->getLatitudeRad()), rad2deg($observable->getLongitudeRad()),

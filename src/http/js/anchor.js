@@ -1,5 +1,6 @@
+var host = '192.168.0.101';
 (async () => {
-    var host = '192.168.0.101';
+
     var chartData = await fetch(
        'http://' + host + '/api/anchorJson.php'
     ).then(response => response.json());
@@ -53,7 +54,6 @@
                     }
 
                     function sendRequest(url) {
-                        console.info(url);
                         const http = new XMLHttpRequest();
                         http.open("GET", url);
                         http.send();
@@ -205,6 +205,14 @@
         return result
     }
 
+    function rmSerieById(id)
+    {
+        var serie = chart.get(id);
+        if (serie !== undefined) {
+            serie.remove();
+        }
+    }
+
     function updateSeriesColorByName(name, color, index = 0)
     {
         var serie = getSerieByName(name);
@@ -216,7 +224,6 @@
     function addAnchorPoint(name, latitude, longitude, waterDepth = 22)
     {
         if (! isSerie(name)) {
-            console.info(longitude, longitude);
             chart.addSeries(
                 {
                     tooltip: {
@@ -260,6 +267,7 @@
                 name: name,
                 type: 'map',
                 color: 'rgba(127,124,124,0.3)',
+                borderColor: 'rgba(127,124,124,0.3)',
                 states: {
                     inactive: {
                         enabled: false
@@ -278,15 +286,68 @@
             })
     }
 
+    function addAwaLine(name, data)
+    {
+        rmSerieById('awaline');
+        chart.addSeries({
+            id: 'awaline',
+            name: name,
+            type: 'map',
+            color: 'rgb(255,0,0)',
+            borderColor: 'rgb(255,0,0)',
+            states: {
+                inactive: {
+                    enabled: false
+                }
+            },
+            zIndex: 2,
+            data: [
+                {
+                    name: name,
+                    color: 'rgb(255,0,0)',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: data
+                    }
+                }]
+        })
+    }
+
+    function addHeadingLine(name, data)
+    {
+        rmSerieById('heading');
+        chart.addSeries({
+            id: 'heading',
+            name: name,
+            type: 'map',
+            color: 'rgb(0,0,0)',
+            borderColor: 'rgb(0,0,0)',
+            states: {
+                inactive: {
+                    enabled: false
+                }
+            },
+            zIndex: 2,
+            data: [
+                {
+                    name: name,
+                    color: 'rgb(0,0,0)',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: data
+                    }
+                }]
+        })
+    }
+
+
+
     function addBoatPositions(name, dataName, data, force = true)
     {
         if (force) {
             rmSerieByName(name)
         }
-        console.info('data:', data)
-        console.info('danten laenge', data.length);
         if ((! isSerie(name)) && data.length > 0) {
-            console.info('addBoatPositions',data);
             chart.addSeries({
                 name: name,
                 type: 'mapline',
@@ -319,7 +380,7 @@
             chart.addSeries({
                 name: name,
                 type: 'map',
-                color: 'rgb(0,0,0)',
+                color: color1,
                 states: {inactive: {enabled: false}},
                 zIndex: 1,
                 data: [
@@ -373,7 +434,6 @@
         fetch('http://' + host + '/api/anchorJson.php')
             .then(function (response) { return response.json(); })
             .then(function (data) {
-                console.info(data);
                 if (Object.keys(data).length > 3) {
                     addAnchorCirlesSerie(
                         'AnchorCircle',
@@ -393,10 +453,13 @@
                         lon: data.longitude,
                         waterDepth: data.waterDepth
                     });
+                    addAwaLine(data.awaLabel, data.awaLine);
+                    addHeadingLine(data.headingLabel, data.headingLine);
                 } else {
                     rmSerieByName('Anchor');
                     rmSerieByName('BoatPositions');
                     rmSerieByName('AnchorCircle');
+                    rmSerieByName('chain')
                 }
 
                 isSetAnchor = data.isSet;
