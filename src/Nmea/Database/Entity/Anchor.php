@@ -85,7 +85,7 @@ class Anchor implements InterfaceObservable
 
     public function getAwaDeg180():float
     {
-        return fmod($this->getAwaDeg360() + 180,360 - 180);
+        return fmod($this->getAwaDeg360() + 180,360)- 180;
     }
 
     public function setAnchor(float $chainLength): void
