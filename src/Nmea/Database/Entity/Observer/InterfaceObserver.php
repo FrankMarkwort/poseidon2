@@ -5,5 +5,5 @@ namespace Nmea\Database\Entity\Observer;
 
 interface InterfaceObserver
 {
-    public function update(InterfaceObservable $observable);
+    public function update(InterfaceObservable $observable):void;
 }

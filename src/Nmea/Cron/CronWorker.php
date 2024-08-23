@@ -3,11 +3,12 @@
 namespace Nmea\Cron;
 
 use Nmea\Database\Entity\Anchor;
-use Nmea\Database\Entity\Observer\ObserverAnchor;
+use Nmea\Database\Entity\Observer\ObserverAnchorPrintConsole;
 use Nmea\Database\Entity\Observer\ObserverAnchorToCache;
 use Nmea\Database\Entity\Positions;
 use Nmea\Database\Mapper\PositionMapper;
 use Nmea\Database\Mapper\WindSpeedCourse;
+use Nmea\Logger\Factory;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\ParserException;
@@ -26,30 +27,35 @@ final class CronWorker extends AbstractCronWorker
         $this->anchor = new Anchor();
         $this->anchor->attach(new ObserverAnchorToCache());
         if ($this->isDebugRunMode()) {
-            $this->anchor->attach(new ObserverAnchor());
+            $this->anchor->attach(new ObserverAnchorPrintConsole());
         }
         $i = 0;
         while ($this->running) {
             $i++;
-            $this->anchor(
-                $this->cache->get(EnumPgns::Position->value),
-                $this->cache->get(EnumPgns::Vessel_Heading->value),
-                $this->cache->get(EnumPgns::Water_Depth->value),
-                $this->cache->get(EnumPgns::WIND->value)
-            );
-            $this->store(
-                $this->cache->get(EnumPgns::WIND->value),
-                $this->cache->get(EnumPgns::COG_SOG->value),
-                $this->cache->get(EnumPgns::Vessel_Heading->value),
-                $this->cache->get(EnumPgns::Temperature->value),
-            );
-            if ($i >= 60) {
-                $i = 0;
-                $this->storePosition(
+            try {
+                $this->anchor(
                     $this->cache->get(EnumPgns::Position->value),
-                    $this->cache->get(EnumPgns::COG_SOG->value),
-                    $this->cache->get(EnumPgns::Set_And_Drift->value)
+                    $this->cache->get(EnumPgns::Vessel_Heading->value),
+                    $this->cache->get(EnumPgns::Water_Depth->value),
+                    $this->cache->get(EnumPgns::WIND->value)
                 );
+                $this->store(
+                    $this->cache->get(EnumPgns::WIND->value),
+                    $this->cache->get(EnumPgns::COG_SOG->value),
+                    $this->cache->get(EnumPgns::Vessel_Heading->value),
+                    $this->cache->get(EnumPgns::Temperature->value),
+                );
+                if ($i >= 60) {
+                    $i = 0;
+                    $this->storePosition(
+                        $this->cache->get(EnumPgns::Position->value),
+                        $this->cache->get(EnumPgns::COG_SOG->value),
+                        $this->cache->get(EnumPgns::Set_And_Drift->value)
+                    );
+                }
+            } catch (ParserException $e) {
+                $this->isDebugPrintMessage($e->getMessage().PHP_EOL);
+                Factory::log($e->getMessage());
             }
             sleep($this->sleepTime - date('s') % $this->sleepTime);
         }
@@ -72,15 +78,19 @@ final class CronWorker extends AbstractCronWorker
             $windFacade->getFieldValue(3)->getValue(),
             $windFacade->getFieldValue(2)->getValue()
         );
-        if (! $this->cache->isSet(static::CHAIN_LENGTH)) {
+        if (! $this->cache->isSet(CronWorker::CHAIN_LENGTH)) {
             $this->anchor->unsetAnchor();
+            $this->cache->delete('OBJ_ANCHOR');
         } else {
             if (! $this->anchor->isAnchorSet()) {
-                $this->anchor->setAnchor($this->cache->get(static::CHAIN_LENGTH));
+                $this->anchor->setAnchor($this->cache->get(CronWorker::CHAIN_LENGTH));
             }
         }
     }
 
+    /**
+     * @throws ParserException
+     */
     private function storePosition(string $position, string $courseOverGround, $drift):void
     {
         if (empty($position) || empty($courseOverGround) || empty($drift)) {
@@ -132,6 +142,9 @@ final class CronWorker extends AbstractCronWorker
 
     }
 
+    /**
+     * @throws ParserException
+     */
     private function store(string $windData, string $cogSogData, string $vesselHeading, string $temperature):void
     {
         if (empty($windData) || empty($cogSogData) || empty($vesselHeading) || empty($temperature)) {

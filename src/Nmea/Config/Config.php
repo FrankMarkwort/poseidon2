@@ -45,6 +45,15 @@ class Config
         return static::getConfigArray()['socketServer']['port'];
     }
 
+    public static function getApiServerHost():string
+    {
+        return static::getConfigArray()['apiServer']['host'];
+    }
+
+    public static function getApiServerPort():string
+    {
+        return static::getConfigArray()['apiServer']['port'];
+    }
 
     private static function getConfigArray():array
     {
@@ -57,7 +66,6 @@ class Config
     {
         switch (getenv('RUN_MODE')) {
             case 'develop': return 'develop';
-            case 'production': return 'production';
             case 'testing': return 'testing';
             case 'staging': return 'staging';
             default: return 'production';

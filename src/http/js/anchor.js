@@ -1,6 +1,4 @@
-var host = '192.168.0.101';
 (async () => {
-
     var chartData = await fetch(
        'http://' + host + '/api/anchorJson.php'
     ).then(response => response.json());
@@ -18,23 +16,8 @@ var host = '192.168.0.101';
                     const chart = this,
                         ancorMeter = document.getElementById('ancorMeter'),
                         setAncor =  document.getElementById('setAncor'),
-                        providerSelect = document.getElementById('provider'),
-                        themeSelect = document.getElementById('theme'),
-                        apikeyInput = document.getElementById('apikey'),
-                        submitAPIkeyBtn = document.getElementById(
-                            'submitAPIkey'
-                        ),
                         { TilesProviderRegistry } = Highcharts;
 
-                    function updateTWM() {
-                        chart.series[0].update({
-                            provider: {
-                                type: providerSelect.value,
-                                theme: themeSelect.value,
-                                apiKey: apikeyInput.value
-                            }
-                        });
-                    }
                     function setAncorFu() {
                         var meter = parseInt(ancorMeter.value);
                         if (isSetAnchor) {
@@ -62,36 +45,7 @@ var host = '192.168.0.101';
                             console.log('done')
                         }
                     }
-
-                    function loadThemes(key) {
-                        const {
-                            themes
-                        } = new TilesProviderRegistry[key]();
-                        Object.keys(themes).forEach(themeKey => {
-                            const themeOpt = document.createElement('option');
-                            themeOpt.value = themeKey;
-                            themeOpt.innerHTML = themeKey;
-                            themeSelect.appendChild(themeOpt);
-                        });
-                    }
-
-                    Object.keys(TilesProviderRegistry).forEach(key => {
-                        const providerOpt = document.createElement('option');
-                        providerOpt.value = key;
-                        providerOpt.innerHTML = key;
-                        providerSelect.appendChild(providerOpt);
-                    });
-                    loadThemes(providerSelect.value);
-
-                    providerSelect.addEventListener('change', function () {
-                        apikeyInput.value = '';
-                        themeSelect.innerHTML = '';
-                        loadThemes(this.value);
-                        updateTWM();
-                    });
                     setAncor.addEventListener('click', setAncorFu);
-                    themeSelect.addEventListener('change', updateTWM);
-                    submitAPIkeyBtn.addEventListener('click', updateTWM);
                 }
             }
         },
@@ -129,7 +83,7 @@ var host = '192.168.0.101';
         },
         series: [{
             type: 'tiledwebmap',
-            name: 'Map',
+            name: '&#128506;',
             provider: {
                 type: 'OpenStreetMap',
                 theme: 'Standard'
@@ -137,8 +91,9 @@ var host = '192.168.0.101';
             color: 'rgba(128,128,128,0.3)'
         },
         {
+            id: 'boat',
             type: 'mappoint',
-            name: 'Boat',
+            name: '&#9973;',
             states: {
                 inactive: {
                     enabled: false
@@ -191,6 +146,17 @@ var host = '192.168.0.101';
         return result
     }
 
+    function getSerieById(id)
+    {
+        var result = false;
+        serie = chart.get(id);
+        if (serie) {
+            result = serie;
+        }
+
+        return result
+    }
+
     function rmSerieByName(name)
     {
         var result = false;
@@ -213,27 +179,29 @@ var host = '192.168.0.101';
         }
     }
 
-    function updateSeriesColorByName(name, color, index = 0)
+    function updateSeriesColorById(id, name, color, index = 0)
     {
-        var serie = getSerieByName(name);
+        var serie = getSerieById(id);
         if (serie != null) {
             serie.data[index].color = color;
         }
     }
 
+
     function addAnchorPoint(name, latitude, longitude, waterDepth = 22)
     {
+        rmSerieById('anchor');
         if (! isSerie(name)) {
             chart.addSeries(
                 {
+                    id: 'anchor',
                     tooltip: {
-                        formatter() {
-
+                        formatter()
+                        {
                             return `
                                 x: ${this.lat}, 
-                                y: ${this.lon}, 
-                                Wassertiefe: ${this.watherDepth}
-            `
+                                y: ${this.lon} 
+                            `
                         }
                     },
                     type: 'mappoint',
@@ -252,20 +220,22 @@ var host = '192.168.0.101';
                             name: 'Ancor',
                             color: 'rgb(255,0,0)',
                             lat: latitude,
-                            lon: longitude,
-                            waterDepth: waterDepth
+                            lon: longitude
+
                         }
                     ]
                 })
         }
     }
 
-    function addLineFromBotToAnchor(name, alat, along, lat, lon)
+    function addChaineLine(name, alat, along, lat, lon)
     {
-         rmSerieByName(name);
+         rmSerieById('chain');
          chart.addSeries({
+                id: 'chain',
                 name: name,
-                type: 'map',
+                type: 'mapline',
+                //legendSymbol: 'lineMarker',
                 color: 'rgba(127,124,124,0.3)',
                 borderColor: 'rgba(127,124,124,0.3)',
                 states: {
@@ -292,7 +262,8 @@ var host = '192.168.0.101';
         chart.addSeries({
             id: 'awaline',
             name: name,
-            type: 'map',
+            type: 'mapline',
+            //legendSymbol: 'lineMarker',
             color: 'rgb(255,0,0)',
             borderColor: 'rgb(255,0,0)',
             states: {
@@ -300,7 +271,7 @@ var host = '192.168.0.101';
                     enabled: false
                 }
             },
-            zIndex: 2,
+            zIndex: 3,
             data: [
                 {
                     name: name,
@@ -308,7 +279,8 @@ var host = '192.168.0.101';
                     geometry: {
                         type: 'LineString',
                         coordinates: data
-                    }
+                    },
+                     lineWidth: 2,
                 }]
         })
     }
@@ -319,9 +291,10 @@ var host = '192.168.0.101';
         chart.addSeries({
             id: 'heading',
             name: name,
-            type: 'map',
-            color: 'rgb(0,0,0)',
-            borderColor: 'rgb(0,0,0)',
+            type: 'mapline',
+            color: 'rgb(0,34,255)',
+            //legendSymbol: 'lineMarker',
+            borderColor: 'rgb(0,34,255)',
             states: {
                 inactive: {
                     enabled: false
@@ -331,16 +304,15 @@ var host = '192.168.0.101';
             data: [
                 {
                     name: name,
-                    color: 'rgb(0,0,0)',
+                    color: 'rgb(0,34,255)',
                     geometry: {
                         type: 'LineString',
                         coordinates: data
-                    }
+                    },
+                    lineWidth: 4,
                 }]
         })
     }
-
-
 
     function addBoatPositions(name, dataName, data, force = true)
     {
@@ -371,17 +343,18 @@ var host = '192.168.0.101';
         }
     }
 
-    function addAnchorCirlesSerie(name, dataName1, dataName2, data1, data2, color1, color2, force= true)
+    function addAnchorCirlesSerie(id, name, dataName1, dataName2, data1, data2, color1, color2, force= true)
     {
         if (force) {
-            rmSerieByName(name)
+            rmSerieById(id)
         }
-        if (! isSerie(name)) {
+        if (! chart.get(id)) {
             chart.addSeries({
+                id: id,
                 name: name,
                 type: 'map',
                 color: color1,
-                states: {inactive: {enabled: false}},
+                states: {inactive: {enabled: false}, hover:{enabled:false}},
                 zIndex: 1,
                 data: [
                     {
@@ -403,23 +376,25 @@ var host = '192.168.0.101';
                 ]
             });
         } else {
-            updateSeriesColorByName(name, color1, 0)
-            updateSeriesColorByName(name, color2, 1)
+            updateSeriesColorById(id, name, color1, 0)
+            updateSeriesColorById(id, name, color2, 1)
         }
     }
 
-    function updateSerieByName(name, index, data)
+    function updateSerieById(id, label, index, data)
     {
-        serie = getSerieByName(name);
-        if (serie != null) {
+        serie = getSerieById(id);
+        if (serie !== false) {
+            serie.update({name: label}, false)
             serie.data[index].update(data);
+            //chart.redraw();
         }
     }
 
     function getChainLength(data)
     {
         if (data.chainLength === undefined) {
-            return null;
+            return 0;
         }
 
         return data.chainLength;
@@ -437,29 +412,29 @@ var host = '192.168.0.101';
                 if (Object.keys(data).length > 3) {
                     addAnchorCirlesSerie(
                         'AnchorCircle',
-                        'AnchorWarnCircle',
+                        data.anchorCirclePolygonLabel,
                         'AnchorCircle',
+                        'AnchorWarnCircle',
                         chartData.anchorWarnCirclePolygon,
                         chartData.anchorCirclePolygon,
                         chartData.anchorColorCirclePolygon,
                         chartData.anchorColorCirclePolygon,
                         false
                     );
-                    addLineFromBotToAnchor('chain',data.anchorLatitude, data.anchorLongitude, data.latitude, data.longitude);
-                    addAnchorPoint('Anchor', data.anchorLatitude, data.anchorLongitude);
-                    addBoatPositions('BoatPositions', 'positions', data.anchorHistory, force = true)
-                    updateSerieByName('Boat', 0, {
+                    addChaineLine(data.chainLabel, data.anchorLatitude, data.anchorLongitude, data.latitude, data.longitude);
+                    addAnchorPoint(data.anchorLabel, data.anchorLatitude, data.anchorLongitude);
+                    addBoatPositions('positions', 'positions', data.anchorHistory, force = true)
+                    updateSerieById('boat', data.boatLabel, 0, {
                         lat: data.latitude,
-                        lon: data.longitude,
-                        waterDepth: data.waterDepth
+                        lon: data.longitude
                     });
                     addAwaLine(data.awaLabel, data.awaLine);
                     addHeadingLine(data.headingLabel, data.headingLine);
                 } else {
-                    rmSerieByName('Anchor');
-                    rmSerieByName('BoatPositions');
-                    rmSerieByName('AnchorCircle');
-                    rmSerieByName('chain')
+                    rmSerieById('anchor');
+                    rmSerieByName('positions');
+                    rmSerieById('AnchorCircle');
+                    rmSerieById('chain')
                 }
 
                 isSetAnchor = data.isSet;

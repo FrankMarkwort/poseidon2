@@ -11,7 +11,7 @@ class Anchor implements InterfaceObservable
     private const float GPS_BUG_DISTANCE = 11;
     private const int GPS_ACCURACY = 10;
     private const float FREIBOARD = 1;
-    private const int WIND_ANGLE_ANCOR = 5;
+    public const int WIND_ANGLE_ANCOR_RAD = 5;
     private const int ANCOR_ALARM = 10;
 
     private float|null $previousLatitudeDeg = null;
@@ -38,13 +38,10 @@ class Anchor implements InterfaceObservable
     {
         $this->isActualHistoryPosition = false;
         $this->aws = $aws;
-        echo "awaRad: $awaRad \n";
-        echo "headingRad: $headingRad \n";
-        echo "headingDeg: " .rad2deg($headingRad) . " \n";
-        $this->awaDeg = rad2deg($awaRad); //TODO check is Rad or Deg
+        $this->awaDeg = rad2deg($awaRad);
         $this->latitudeRad = deg2rad($latitudeDeg);
         $this->longitudeRad = deg2rad($longitudeDeg);
-        $this->headingRad = $headingRad; //deg2rad($gradHeading);
+        $this->headingRad = $headingRad;
         $this->setWaterDepth($waterDepth);
         if ($this->isAnchorSet()) {
             $this->addHistoryPoint($latitudeDeg, $longitudeDeg);
@@ -96,16 +93,14 @@ class Anchor implements InterfaceObservable
                 $this->setAnchorPosition();
             }
         }
+        $this->notify();
     }
 
     private function isWindComesFromTheFront():bool
     {
         $awa = $this->getAwaDeg360();
 
-        echo "heading: " . $this->getHeadingDeg() . "\n";
-        echo "awa: $awa\n";
-
-        return (($awa >= 0 && $awa <= static::WIND_ANGLE_ANCOR) || ($awa >= 360 - static::WIND_ANGLE_ANCOR && $awa <= 360));
+        return (($awa >= 0 && $awa <= static::WIND_ANGLE_ANCOR_RAD) || ($awa >= 360 - static::WIND_ANGLE_ANCOR_RAD && $awa <= 360));
     }
 
     public function isAnchorSet(): bool
@@ -191,7 +186,7 @@ class Anchor implements InterfaceObservable
         return $this;
     }
 
-    protected function getChainLength(): int
+    public function getChainLength(): int
     {
         return $this->chainLength;
     }
@@ -264,18 +259,12 @@ class Anchor implements InterfaceObservable
 
     protected function setAnchorPosition() :void
     {
-        if ($this->getAwaDeg360() > 180) {
-            $awa = 180 - $this->getAwaDeg360() ;
-        } else {
-            $awa = $this->getAwaDeg360();
-        }
-        $heading = $this->getHeadingRad(); //fmod($this->getHeadingRad() + deg2rad($awa), 2 * pi());
+        $heading = fmod($this->getHeadingRad() + deg2rad($this->getAwaDeg180()), 2 * pi());
         $angularDistance = $this->getDistance() / (static::EARTH_RADIUS);
         $lat2 = asin(sin($this->getLatitudeRad()) * cos($angularDistance) +
             cos($this->getLatitudeRad()) * sin($angularDistance) * cos($heading));
         $lon2 = $this->getLongitudeRad() + atan2(sin($heading) * sin($angularDistance) * cos($this->getLatitudeRad()),
                 cos($angularDistance) - sin($this->getLatitudeRad()) * sin($lat2));
-
         $this->setAnchorLatitudeRad($lat2)->setAnchorLongitudeRad($lon2);
         $this->isSet = true;
     }
@@ -304,6 +293,18 @@ class Anchor implements InterfaceObservable
 
         return $coordinates;
 
+    }
+
+    private function getLengtBetweenAnchorAndBoat():int
+    {
+        $lat1 = $this->getLatitudeRad();
+        $lat2 = $this->getAnchorLatitudeRad();
+        $lon1 = $this->getLongitudeRad();
+        $lon2 = $this->getAnchorLongitudeRad();
+        $x= ($lat2 - $lat1) * cos(($lon1 + $lon2) / 2);
+        $y = ($lon2 - $lon1);
+
+        return sqrt($x * $x + $y * $y) * self::EARTH_RADIUS;
     }
 
     private function getCirclePointDeg(float $bearing, float $radius): array
@@ -359,15 +360,18 @@ class Anchor implements InterfaceObservable
             'longitude' => $this->getLongitudeDeg(),
             'anchorLatitude' => $this->getAnchorLatitudeDeg(),
             'anchorLongitude' => $this->getAnchorLongitudeDeg(),
-            'headingLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getHeadingRad() , 30),
+            'anchorLabel' => sprintf("&#9875; &larr;%s&rarr; &#x26F5", $this->getLengtBetweenAnchorAndBoat()),
+            'headingLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getHeadingRad() , 12),
             'headingLabel' => sprintf("heading: %s°",intval($this->getHeadingDeg())),
-            'awaLabel' => sprintf('awa: %s° %s kn', intval($this->getAwaDeg180()), intval($this->aws * 1.943844)),
-            'isSet' => $this->isSet,
-            'chainLength' => $this->chainLength,
-            'waterDepth' => $this->waterDepth,
-            'awaLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getAwaRad() + $this->getHeadingRad(), $this->aws * 10),
+            'awaLabel' => sprintf('&measuredangle; %s° %s kn', intval($this->getAwaDeg180()), intval($this->aws * 1.943844)),
+            'chainLabel' => sprintf("&#x26D3; &rarr; %sm", $this->getChainLength()),
+            'chainLength' => $this->getChainLength(),
+            'isSet' => $this->isAnchorSet(),
+            'boatLabel' => sprintf('&#x26F5 &darr; %sm', round($this->waterDepth,1)),
+            'awaLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getAwaRad() + $this->getHeadingRad(), intval($this->aws * 1.943844)),
             'anchorColorCirclePolygon' => $this->getStatusColor(),
             'anchorHistory' => $this->getHistoryPositionsWithLastPositionDeg($this->getHistoryPositionsDeg()),
+            'anchorCirclePolygonLabel' => sprintf("&#10807; %sm", $this->getMaxDistance()),
             'anchorCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance())],
             'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance() + static::ANCOR_ALARM )],
             'hasAlarm' => $this->hasAlarm(),

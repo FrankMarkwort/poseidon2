@@ -1,4 +1,8 @@
-<html>
+<?php
+use Nmea\Config\Config;
+require_once( __DIR__ . '/../../vendor/autoload.php');
+?>
+<html lang="en">
   <head>
     <title>Anchor</title>
       <link href="./css/anchor.css" type="text/css" rel="stylesheet" />
@@ -10,33 +14,22 @@
       <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
       <script src="https://code.highcharts.com/maps/modules/debugger.js"></script>
       <script type="module" src="js/anchor/series.js"></script>
-
   </head>
   <body>
     <div class="main">
         <div id="container"></div>
-
         <div class="row d-flex justify-content-center main">
-            <div class="col-md-6 text-center">
+            <div class="btn-line text-center">
                 <input type="number" name="ancorMeter" id="ancorMeter" min="0" max="100" class="form-input"/>
                 <label for="ancorMeter" class="mt-4">m</label>
                 <button id="setAncor" class="btn btn-outline-secondary">Set Ancor</button>
                 <button id="ancorAlarmSound" class="btn btn-outline-secondary" onclick="playSound()">Alarm Signal</button>
-
-                <label for="provider" class="mt-4">Choose a provider:</label>
-                <select name="provider" id="provider" class="form-select"></select>
-
-                <label for="theme" class="mt-4">Choose a theme:</label>
-                <select name="theme" id="theme" class="form-select"></select>
-
-                <label for="apikey" class="mt-4">Insert API key if needed and press button:</label>
-                <input name="apikey" id="apikey" class="form-control" />
-
-                <button id="submitAPIkey" class="btn btn-outline-secondary">
-                    Add API key
-                </button>
             </div>
         </div>
     </div>
+    <script>
+        const host ='<?= Config::getApiServerHost(); ?>';
+    </script>
     <script src="js/anchor.js"></script>
   </body>
+</html>
