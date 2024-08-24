@@ -29,7 +29,7 @@ root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
 ```
 **Deamon**\
 _Dependencies_
-PHP 8.3, memcached and mariadb.\
+PHP 8.3, memcached and mariadb.
 **configuration**
 - 1 Create a user nmea2000 in the database.
 - 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, \
@@ -52,10 +52,10 @@ the database host and port.
     ],
     'testing' => [
 ```
-- 3 Create database tables \
-  http://127.0.0.1/service.phtml => Run DB-Migration \
+- 3 Create database tables 
+  http://127.0.0.1/service.phtml => Run DB-Migration 
   ![Screenshot_20240824_223559](https://github.com/user-attachments/assets/a36c53d4-ba42-4900-8d75-88137c6738f8)
-- 4 Create Linux service phpreader\
+- 4 Create Linux service phpreader
 ```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
 [Unit]
 Description=Data NMEA2000 Reader
@@ -68,7 +68,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-- 5 Create Linux service phpcron\
+- 5 Create Linux service phpcron
 ```root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
 [Unit]
 Description=Data NMEA2000 Cron
@@ -141,16 +141,16 @@ VirtualHost *:80>
     </IfModule>
 </VirtualHost>
 ```
-**Displaying the decoded data.**\
-The data is currently displayed in the browser as HTML or JSON.\
+**Displaying the decoded data.**
+The data is currently displayed in the browser as HTML or JSON.
 ```
 as html http://127.0.0.1/index.phtml
 as Json http://127.0.0.1/index.phtml?mode=json
-as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291\
+as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291
 as Highchart http://127.0.0.1/graph.phtml
 Services http://127.0.0.1/service.phtml __see point 3__
 ```
-**src/deamon/cron.php**\
+**src/deamon/cron.php**
 ```
 pi@raspberrypi:/var/www/html/src/deamon $ ./cron.php --help
 --help
