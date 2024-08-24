@@ -13,10 +13,10 @@
             margin: 0,
             events: {
                 load() {
-                    const chart = this,
-                        ancorMeter = document.getElementById('ancorMeter'),
-                        setAncor =  document.getElementById('setAncor'),
-                        { TilesProviderRegistry } = Highcharts;
+                    //chart = this,
+                    ancorMeter = document.getElementById('ancorMeter'),
+                    setAncor =  document.getElementById('setAncor'),
+                    { TilesProviderRegistry } = Highcharts;
 
                     function setAncorFu() {
                         var meter = parseInt(ancorMeter.value);
@@ -317,10 +317,11 @@
     function addBoatPositions(name, dataName, data, force = true)
     {
         if (force) {
-            rmSerieByName(name)
+            rmSerieById('positions');
         }
         if ((! isSerie(name)) && data.length > 0) {
             chart.addSeries({
+                id: 'positions',
                 name: name,
                 type: 'mapline',
                 color: 'rgba(225,0,0,0.3)',
