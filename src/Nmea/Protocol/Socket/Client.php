@@ -134,7 +134,7 @@ class Client
             }
             // most significant bit MUST be 0 (close connection if frame too big)
             if ($frameHead[2] > 127) {
-                $this->close(1004);
+                $this->close();
                 return false;
             }
         } elseif ($payloadLength > 125) {

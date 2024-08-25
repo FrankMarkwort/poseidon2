@@ -2,15 +2,19 @@
 
 namespace Nmea\Parser\Lib;
 
+use Exception;
 use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 class BinDec
 {
+    /**
+     * @throws Exception
+     */
     public static function bin2dec64BitSystem(string $bin, bool $signed = false ,float|int|null $resolution = 1):float|int
     {
         if (! static::isBinary($bin)) {
 
-            throw new \Exception("is not BinaryString $bin");
+            throw new Exception("is not BinaryString $bin");
         }
 
         if (! $signed) {
@@ -24,7 +28,7 @@ class BinDec
 
         if (! in_array(strlen($bin), [4 ,8, 16 ,32 ,64])) {
 
-            throw new \Exception('can only convert 4 ,8, 16 ,32 ,64 length to dec');
+            throw new Exception('can only convert 4 ,8, 16 ,32 ,64 length to dec');
         }
 
         if ($bin[0] == '1') {
@@ -43,7 +47,7 @@ class BinDec
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     #[CodeCoverageIgnore]
     public static function bin2dec(string $bin, bool $signed = false, float|int|null $resolution = 1):float|int
@@ -57,13 +61,13 @@ class BinDec
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function bin2dec32BitSystem(string $bin, bool $signed = false, float|int|null $resolution = 1):float|int
     {
         if (! static::isBinary($bin)) {
 
-           throw new \Exception("is not BinaryString $bin");
+           throw new Exception("is not BinaryString $bin");
         }
         $result = 0;
         $firstBit = $bin[0];
@@ -76,7 +80,7 @@ class BinDec
         if ($signed && $firstBit == '1') {
             $result = BCMul(BCAdd($result, '1', 0), '-1', 0);
         }
-        if (! is_null($resolution) &&  is_numeric($resolution) ) {
+        if (is_numeric($resolution) ) {
             $result =  BCMul($result,  number_format($resolution, 64, '.', null), 64);
         }
 
@@ -84,14 +88,14 @@ class BinDec
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function binToAscii(string $bin):string
     {
         static::validBitLength($bin);
         if (! static::isBinary($bin)) {
 
-           throw new \Exception('is not BinaryString');
+           throw new Exception('is not BinaryString');
         }
         $result = '';
         for($i=0; $i<strlen($bin); $i+=8) {
@@ -106,10 +110,13 @@ class BinDec
         return preg_match("/^[01]+$/", $string);
     }
 
+    /**
+     * @throws Exception
+     */
     private static function validBitLength(string $bin):void
     {
         if (! in_array(strlen($bin), [4 ,8, 16 ,32 ,64])) {
-            throw new \Exception('can only convert 4 ,8, 16 ,32 ,64 length to dec');
+            throw new Exception('can only convert 4 ,8, 16 ,32 ,64 length to dec');
         }
     }
 

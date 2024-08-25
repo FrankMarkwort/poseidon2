@@ -3,7 +3,6 @@
 namespace Nmea\Database\Mapper;
 
 use Nmea\Database\Collection\WindSpeedHourCollection;
-use Nmea\Database\DatabaseInterface;
 use Nmea\Database\Entity\WindSpeedHour;
 
 class WindSpeedHoursMapper extends AbstractMapper

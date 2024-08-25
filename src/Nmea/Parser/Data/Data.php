@@ -92,11 +92,11 @@ class Data
         return $this;
     }
 
-    private function findEnum($enun)
+    private function findEnum($enum)
     {
-        $results = array_filter($this->getEnum(), function($enun) {
+        $results = array_filter($this->getEnum(), function($enum) {
 
-            return $enun['value'] == $this->value;
+            return $enum['value'] == $this->value;
         });
 
         $value =  current($results);

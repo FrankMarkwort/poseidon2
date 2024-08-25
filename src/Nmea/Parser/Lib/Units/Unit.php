@@ -2,8 +2,8 @@
 
 namespace Nmea\Parser\Lib\Units;
 
-use \DateTimeImmutable;
-use \DateInterval;
+use DateTimeImmutable;
+use DateInterval;
 use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 class Unit implements UnitInterface
@@ -16,7 +16,7 @@ class Unit implements UnitInterface
     private array $unitsConfig;
     private array $supported = ['km/h', 'kt', 'C', 'F', 'hPa', 'grad'];
 
-    public function __construct(private float|int $value, private string|null $unit, private ?string $type= null)
+    public function __construct(private float|int $value, private readonly string|null $unit, private ?string $type= null)
     {
         $this->setConfig(include( static::CONFIG_DIR_FILE));
     }
@@ -73,20 +73,14 @@ class Unit implements UnitInterface
 
     private function convert(): float|int
     {
-        switch ($this->unit) {
-            case static::SI_SPEED:
-                return $this->speed();
-            case static::SI_ANGEL:
-                return $this->angle();
-            case static::SI_TEMPERATURE:
-                return $this->temperature();
-            case static::SI_PASCAL:
-                return $this->pressure();
-            case static::SI_METRE:
-                return $this->metre();
-            default:
-                return $this->value;
-        }
+        return match ($this->unit) {
+            static::SI_SPEED => $this->speed(),
+            static::SI_ANGEL => $this->angle(),
+            static::SI_TEMPERATURE => $this->temperature(),
+            static::SI_PASCAL => $this->pressure(),
+            static::SI_METRE => $this->metre(),
+            default => $this->value,
+        };
     }
 
     private function metre(): float|int
@@ -111,37 +105,31 @@ class Unit implements UnitInterface
 
     private function date():string
     {
-        $days = round($this->getMappedValue(),0);
+        $days = round($this->getMappedValue());
         return (new DateTimeImmutable())->setDate(1970,1,1)->add(new DateInterval("P{$days}D"))->format('Y-m-d');
     }
 
     private function time():string
     {
-        return gmdate("H:i:s", round($this->getMappedValue(),0));
+        return gmdate("H:i:s", round($this->getMappedValue()));
     }
 
     private function speed():float|int
     {
-        switch ($this->unitsConfig[$this->unit][static::UNIT]) {
-            case 'km/h':
-                return round($this->value * 3.6,$this->unitsConfig[$this->unit][static::ROUND]);
-            case 'kt':
-                return round($this->value * 1.9438444924574, $this->unitsConfig[$this->unit][static::ROUND]);
-            default:
-                return $this->value;
-        }
+        return match ($this->unitsConfig[$this->unit][static::UNIT]) {
+            'km/h' => round($this->value * 3.6, $this->unitsConfig[$this->unit][static::ROUND]),
+            'kt' => round($this->value * 1.9438444924574, $this->unitsConfig[$this->unit][static::ROUND]),
+            default => $this->value,
+        };
     }
 
     private function temperature():float|int
     {
-        switch ($this->unitsConfig[$this->unit][static::UNIT]) {
-            case 'C':
-                return round($this->value - 273.15, $this->unitsConfig[$this->unit][static::ROUND]);
-            case 'F':
-                return round(($this->value - 273.15) * (9/5) +32, $this->unitsConfig[$this->unit][static::ROUND]);
-            default:
-                return $this->value;
-        }
+        return match ($this->unitsConfig[$this->unit][static::UNIT]) {
+            'C' => round($this->value - 273.15, $this->unitsConfig[$this->unit][static::ROUND]),
+            'F' => round(($this->value - 273.15) * (9 / 5) + 32, $this->unitsConfig[$this->unit][static::ROUND]),
+            default => $this->value,
+        };
     }
 
     private function latitudeOrLongitude(string $type):array
@@ -185,11 +173,9 @@ class Unit implements UnitInterface
 
     private function pressure():float|int
     {
-        switch ($this->unitsConfig[$this->unit][static::UNIT]) {
-            case 'hPa':
-                return round($this->value / 100, $this->unitsConfig[$this->unit][static::ROUND]);
-            default:
-                return $this->value;
-        }
+        return match ($this->unitsConfig[$this->unit][static::UNIT]) {
+            'hPa' => round($this->value / 100, $this->unitsConfig[$this->unit][static::ROUND]),
+            default => $this->value,
+        };
     }
 }

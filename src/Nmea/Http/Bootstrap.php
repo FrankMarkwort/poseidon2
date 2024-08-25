@@ -14,11 +14,11 @@ use Nmea\View\Json;
 class Bootstrap
 {
 
-    public function __construct(private CacheInterface $cache)
+    public function __construct(private readonly CacheInterface $cache)
     {
     }
 
-    public function run()
+    public function run(): void
     {
         try {
             if (isset($_GET['pgn'])) {
@@ -53,7 +53,7 @@ class Bootstrap
                 $collection->add(DataFacadeFactory::create($nmea2000, 'YACHT_DEVICE'));
             } catch (ParserException $e) {
 
-            } catch (ConfigException $e) {}
+            } catch (ConfigException $f) {}
         }
         if ($this->getmode() === 'json') {
             echo (new Json($collection))->present();

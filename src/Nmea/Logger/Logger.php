@@ -14,6 +14,8 @@ class Logger implements LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): self
     {
         $this->logger = $logger;
+
+        return $this;
     }
 
     public function log(string $level, string $message, array $context = []): void

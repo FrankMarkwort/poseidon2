@@ -2,20 +2,24 @@
 
 namespace Nmea\Database\Entity\Observer;
 
+use Exception;
 use Nmea\Cache\Memcached;
 use Nmea\Config\Config;
 use Nmea\Database\Entity\Anchor;
 
 class ObserverAnchorToCache implements InterfaceObserver
 {
-
     private Memcached $cache;
+
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
         $this->cache = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
     }
     /**
-     * @throws \Exception
+     * @throws Exception
      * @param Anchor $observable
      */
     public function update(InterfaceObservable $observable):void

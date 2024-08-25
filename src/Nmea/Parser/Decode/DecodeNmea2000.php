@@ -2,13 +2,14 @@
 
 namespace Nmea\Parser\Decode;
 
+use Exception;
 use Nmea\Parser\ParserException;
 use Nmea\Parser\Lib\BinDec;
 
 class DecodeNmea2000 implements DecoderInterface
 {
-    private const ASCCII = 'ASCII text';
-    private static  $instance;
+    private const string ASCCII = 'ASCII text';
+    private static self $instance;
     private string $binString;
 
     public static function getInstance() : DecoderInterface
@@ -22,6 +23,9 @@ class DecodeNmea2000 implements DecoderInterface
 
     private function __clone() {}
 
+    /**
+     * @throws ParserException
+     */
     public function setArray(array $dataArray, int $length): DecoderInterface
     {
         if (count($dataArray) !== $length) {
@@ -34,7 +38,7 @@ class DecodeNmea2000 implements DecoderInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getValue(Request $request) : float|int|string|null
     {
