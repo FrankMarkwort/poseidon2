@@ -4,7 +4,6 @@ namespace Nmea\Parser\Data;
 
 use Nmea\Parser\Decode\DecoderInterface;
 use Nmea\Config\PngFieldConfig;
-use Nmea\Parser\Data\Data;
 use Nmea\Parser\Decode\Request;
 
 class DataPart
@@ -15,7 +14,7 @@ class DataPart
      */
     private DecoderInterface $decoder;
 
-    public function setDecoder(DecoderInterface $decoder)
+    public function setDecoder(DecoderInterface $decoder):self
     {
         $this->decoder = $decoder;
 
@@ -30,7 +29,7 @@ class DataPart
         return $this;
     }
 
-    public function getDescription()
+    public function getDescription():string
     {
         return $this->pngFieldConfig->getDescription();
     }
@@ -45,6 +44,9 @@ class DataPart
         return $this->pngFieldConfig->count();
     }
 
+    /**
+     * @throws \Nmea\Config\ConfigException
+     */
     public function getFieldValue(int $order): Data
     {
         if ( $this->pngFieldConfig->getBitLengthVariable($order) === true) {

@@ -6,20 +6,26 @@ use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\DataFacadeFactory;
+use Nmea\Parser\ParserException;
 use Nmea\Protocol\Socket\Client;
 
-class WindSpeedCourseFactory
+readonly class WindSpeedCourseFactory
 {
-    private $pgn = null;
-
-    public function __construct(private Client $webSocket)
+    public function __construct(private ?Client $webSocket = null)
     {
     }
 
-     public function writeToSocket(string $windData, string $cogSogData, string $vesselHeading):void
+    /**
+     * @throws ParserException
+     */
+    public function writeToSocket(string $windData, string $cogSogData, string $vesselHeading):void
      {
+        if ($this->webSocket === null) {
+
+            return;
+        }
         if (empty($windData) || empty($cogSogData) || empty($vesselHeading)) {
-            //wait
+
             return;
         }
         $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');

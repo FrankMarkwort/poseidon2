@@ -9,7 +9,7 @@ class Server
         private readonly string $host,
         private readonly int $port,
         private SocketsCollection $clientSockets,
-        private HandleInterface $messageHandler
+        private readonly HandleInterface $messageHandler
     )
     {
         $this->socketResource = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

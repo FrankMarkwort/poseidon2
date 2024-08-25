@@ -8,8 +8,6 @@
  */
 namespace Nmea\Parser\Data;
 
-use Nmea\Parser\Lib\Units;
-
 class Data
 {
     private const string LOOKUP_TABLE = 'Lookup table';
@@ -32,7 +30,7 @@ class Data
 
     public function getValue():mixed
     {
-        if (!empty($this->enum) && ($this->getType() === static::LOOKUP_TABLE || $this->getType() === static::MANUFACTURER_CODE )) {
+        if (!empty($this->getEnum()) && ($this->getType() === static::LOOKUP_TABLE || $this->getType() === static::MANUFACTURER_CODE )) {
             return $this->findEnum(intval($this->value));
         }
 
@@ -96,8 +94,7 @@ class Data
 
     private function findEnum($enun)
     {
-
-        $results = array_filter($this->enum, function($enun) {
+        $results = array_filter($this->getEnum(), function($enun) {
 
             return $enun['value'] == $this->value;
         });

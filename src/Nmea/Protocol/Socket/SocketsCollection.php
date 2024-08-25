@@ -2,10 +2,11 @@
 
 namespace Nmea\Protocol\Socket;
 
-use \Countable;
-use \Iterator;
-use \Socket;
-use \ArrayAccess;
+use Countable;
+use InvalidArgumentException;
+use Iterator;
+use Socket;
+use ArrayAccess;
 
 class SocketsCollection  implements  Iterator, Countable, ArrayAccess
 {
@@ -51,10 +52,13 @@ class SocketsCollection  implements  Iterator, Countable, ArrayAccess
         return $this->clientSockets[$offset];
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (! $value instanceof Socket) {
-            throw new \InvalidArgumentException('Offset must be an instance of Socket');
+            throw new InvalidArgumentException('Offset must be an instance of Socket');
         }
         if( is_null($offset)) {
             $this->clientSockets[] = $value;

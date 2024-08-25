@@ -2,9 +2,9 @@
 
 namespace Nmea\Parser\Data;
 
-use Nmea\Parser\Lib\Units\Unit;
+use Nmea\Config\ConfigException;
 
-class DataFacade
+readonly class DataFacade
 {
     public function __construct(private MainPart $mainPart, private DataPart $dataPart)
     {
@@ -12,7 +12,7 @@ class DataFacade
 
     public function getTimestamp(): string
     {
-        return (string)$this->mainPart->getTimestamp();
+        return $this->mainPart->getTimestamp();
     }
 
     public function getFrameType():string
@@ -22,12 +22,12 @@ class DataFacade
 
     public function getPrio(): int
     {
-        return (int)$this->mainPart->getPrio();
+        return $this->mainPart->getPrio();
     }
 
     public function getPng(): int
     {
-        return (int)$this->mainPart->getPng();
+        return $this->mainPart->getPng();
     }
 
     public function getDataPage(): ?int
@@ -37,17 +37,17 @@ class DataFacade
 
     public function getSrc(): int
     {
-        return (int)$this->mainPart->getSrc();
+        return $this->mainPart->getSrc();
     }
 
     public function getDst(): int
     {
-        return (int)$this->mainPart->getDst();
+        return $this->mainPart->getDst();
     }
 
     public function getLength(): int
     {
-        return (int)$this->mainPart->getLength();
+        return $this->mainPart->getLength();
     }
 
     public function count(): int
@@ -60,6 +60,9 @@ class DataFacade
         return $this->dataPart->getDescription();
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getFieldValue(int $order): Data
     {
         return $this->dataPart->getFieldValue($order);
@@ -70,10 +73,8 @@ class DataFacade
         return $this->dataPart->getOrderIds();
     }
 
-    public function getPduFormat()
+    public function getPduFormat():int
     {
         return $this->mainPart->getPduFormat();
     }
-
-
 }

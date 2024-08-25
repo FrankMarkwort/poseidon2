@@ -10,10 +10,10 @@ namespace Nmea\Config;
 
 class ConfigPgn
 {
-    static $configFileName = __DIR__ . "/../config/pgns.json";
+    static string $configFileName = __DIR__ . "/../config/pgns.json";
 
-    private $pngNumber;
-    private $jsonConfig;
+    private int $pngNumber;
+    private array $jsonConfig;
 
     const string ORDER = 'Order';
     const string DESCRIPTION = 'Description';
@@ -29,7 +29,7 @@ class ConfigPgn
         $this->readJsonConfig();
     }
 
-    private function readJsonConfig()
+    private function readJsonConfig(): void
     {
         $string = file_get_contents(static::$configFileName);
         $this->jsonConfig = json_decode($string, true);
@@ -56,16 +56,25 @@ class ConfigPgn
         return $results;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getFields(int $pngNumber):array
     {
         return $this->getPngConfig($pngNumber)[static::FIELDS];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getComplete(int $pngNumber):bool
     {
         return $this->getPngConfig($pngNumber)[static::COMPLETE];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getRepeatingFields(int $pngNumber):int
     {
         return $this->getPngConfig($pngNumber)[static::REPEATING_FIELDS];
@@ -81,6 +90,9 @@ class ConfigPgn
         return $this->getPngConfig($pngNumber)[static::ID];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getDescription(int $pngNumber):string
     {
         return $this->getPngConfig($pngNumber)[static::DESCRIPTION];
@@ -91,11 +103,17 @@ class ConfigPgn
         return $this->getPngConfig($pngNumber)[static::LENGTH];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getPng(int $pngNumber):string
     {
         return $this->getPngConfig($pngNumber)[static::PNG];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getOrderIds(int $pngNumber):array
     {
         $result = [];

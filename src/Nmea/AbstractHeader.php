@@ -2,20 +2,23 @@
 
 namespace Nmea;
 
-use Nmea\Parser\Lib\BinDec;
+use Exception;
 use Nmea\Protocol\Frames\Frame\Header\PackedTypeHelper;
 
 abstract class AbstractHeader
 {
+    /**
+     * @throws Exception
+     */
     public function __construct(protected readonly string $canIdHex)
     {
         if (!$this->isSingelPacked() && !$this->isFastPacked()) {
 
-            throw new \Exception($this->getPgn() . ' is not a singlePacked and not a fastPacked. Look src/Nmea/Protocol/Frames/Frame/Header/PackedTypeHelper.php');
+            throw new Exception($this->getPgn() . ' is not a singlePacked and not a fastPacked. Look src/Nmea/Protocol/Frames/Frame/Header/PackedTypeHelper.php');
         }
     }
 
-    public function getCanIdDec()
+    public function getCanIdDec():float|int
     {
         return hexdec($this->canIdHex);
     }
@@ -42,7 +45,7 @@ abstract class AbstractHeader
         return $this->decode($this->getCanIdDec(), 26, 111);
     }
 
-    public function getReserved()
+    public function getReserved():int
     {
         return $this->decode($this->getCanIdDec(), 25, 1);
     }
@@ -57,7 +60,7 @@ abstract class AbstractHeader
         return $this->getReserved();
     }
 
-    public function getPduFormat()
+    public function getPduFormat():int
     {
         return $this->decode($this->getCanIdDec(), 16, 11111111);
     }
@@ -67,12 +70,12 @@ abstract class AbstractHeader
         return $this->decode($this->getCanIdDec(), 8, 11111111);
     }
 
-    public function getSourceAdress()
+    public function getSourceAdress():int
     {
         return $this->decode($this->getCanIdDec(), 0, 11111111);
     }
 
-    public function getDestination()
+    public function getDestination():int
     {
         if ($this->getPduFormat() < 240) {
 
@@ -82,7 +85,7 @@ abstract class AbstractHeader
         return 255;
     }
 
-    public function getGroupExtension()
+    public function getGroupExtension():int
     {
         if ($this->getPduFormat() >= 240) {
 

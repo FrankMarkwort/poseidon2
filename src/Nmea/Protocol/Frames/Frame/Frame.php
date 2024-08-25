@@ -5,9 +5,9 @@ namespace Nmea\Protocol\Frames\Frame;
 use Nmea\Protocol\Frames\Frame\Data\Data;
 use Nmea\Protocol\Frames\Frame\Header\Header;
 
-class Frame
+readonly class Frame
 {
-    public function __construct(private readonly Header $header, private readonly Data $data)
+    public function __construct(private Header $header, private Data $data)
     {
     }
     public function getHeader():Header

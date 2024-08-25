@@ -23,9 +23,9 @@ class MainPart
     const string PDU_FORMAT = 'pduFormat';
     const string GROUP_EXTENSION = 'groupExtension';
     private const string FRAME_TYPE = 'frameType';
-    private $data = '';
+    private string $data = '';
     private string $deviceName;
-    private $mainData = [
+    private array $mainData = [
         self::TIMESTAMP => null,
         self::PRIO => null,
         self::PGN => null,
@@ -52,6 +52,7 @@ class MainPart
 
     /**
      * @throws ParserException
+     * @throws \Exception
      */
     public function setMainBitString(string $string):self
     {
@@ -147,11 +148,9 @@ class MainPart
 
     private function getDelimiter():string
     {
-        switch ($this->deviceName) {
-            case 'YACHT_DEVICE':
-                return  ' ';
-            default:
-                return  ',';
-        }
+        return match ($this->deviceName) {
+            'YACHT_DEVICE' => ' ',
+            default => ',',
+        };
     }
 }

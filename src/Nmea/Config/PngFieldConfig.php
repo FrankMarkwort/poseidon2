@@ -1,22 +1,13 @@
 <?php
-/**
- * @author Frank Markwort
- * @date 13.12.2018
- * @email frank.markwort@gmail.com
- * @project Poseidon
- *
- */
+
 namespace Nmea\Config;
 
 class PngFieldConfig
 {
-    /**
-     * @var ConfigPgn
-     */
-    private $configInstance;
-    private $jsonArray =[];
-    private $order;
-    private $png;
+    private ConfigPgn|null $configInstance = null;
+    private array $jsonArray = [];
+    private int $order;
+    private int $png;
     private const string BIT_LENGTH_VARIABLE = 'BitLengthVariable';
 
     private const string BIT_LENGTH = 'BitLength';
@@ -28,10 +19,10 @@ class PngFieldConfig
     private const string SIGNED = 'Signed';
     private const string RESOLUTION = 'Resolution';
     private const string UNITS ='Units';
-    const string FIELDS = 'Fields';
+    //const string FIELDS = 'Fields';
     const string TYPE = 'Type';
     const string ENUM_VALUES = 'EnumValues';
-    const string ID = 'Id';
+
     const string NAME = 'Name';
 
     public function setConfigInstance(ConfigPgn $configInstance): self
@@ -49,7 +40,7 @@ class PngFieldConfig
         return $this;
     }
 
-    public function getDescription()
+    public function getDescription():string
     {
         return $this->configInstance->getDescription($this->png);
     }
@@ -57,11 +48,6 @@ class PngFieldConfig
     public function getOrderIds():array
     {
         return $this->configInstance->getOrderIds($this->png);
-    }
-
-    public function getFields():array
-    {
-        return $this->configInstance->getFields($this->png);
     }
 
     private function getFieldsJson(): array
@@ -94,6 +80,9 @@ class PngFieldConfig
         return count($this->getFieldsJson());
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getBitLengthVariable($order):bool
     {
         if (isset($this->getFieldsByOrder($order)[static::BIT_LENGTH_VARIABLE])) {
@@ -103,64 +92,92 @@ class PngFieldConfig
         return false;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getBitLength(int $order):int
     {
         return $this->getFieldsByOrder($order)[static::BIT_LENGTH];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getBitOffset(int $order):int
     {
         return  $this->getFieldsByOrder($order)[static::BIT_OFFSET];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getBitStart(int $order):int
     {
         return $this->getFieldsByOrder($order)[static::BIT_START];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getResolution(int $order): ?float
     {
         return isset($this->getFieldsByOrder($order)[static::RESOLUTION])? $this->getFieldsByOrder($order)[static::RESOLUTION]: null;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getUnits(int $order): ?string
     {
         return isset($this->getFieldsByOrder($order)[static::UNITS])? $this->getFieldsByOrder($order)[static::UNITS]: null;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getSigned(int $order):bool
     {
         return (bool) $this->getFieldsByOrder($order)[static::SIGNED];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getType(int $order): ?string
     {
         return isset($this->getFieldsByOrder($order)[static::TYPE])? $this->getFieldsByOrder($order)[static::TYPE]: null;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getRangeMin(int $order): int|float|null
     {
         return isset($this->getFieldsByOrder($order)[static::RANGE_MIN])? $this->getFieldsByOrder($order)[static::RANGE_MIN]: null;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getRangeMax(int $order): int|float|null
     {
         return isset($this->getFieldsByOrder($order)[static::RANGE_MAX])? $this->getFieldsByOrder($order)[static::RANGE_MAX]: null;
     }
 
-   public function getEnumValues(int $order): ?array
-   {
+    /**
+     * @throws ConfigException
+     */
+    public function getEnumValues(int $order): ?array
+    {
         return isset($this->getFieldsByOrder($order)[static::ENUM_VALUES]) && is_array($this->getFieldsByOrder($order)[static::ENUM_VALUES])?
             $this->getFieldsByOrder($order)[static::ENUM_VALUES] :[];
-   }
+    }
 
-   public function getId(int $order):string
-   {
-       return $this->getFieldsByOrder($order)[static::ID];
-   }
-
-   public function getName(int $order):string
-   {
+    /**
+     * @throws ConfigException
+     */
+    public function getName(int $order):string
+    {
        return $this->getFieldsByOrder($order)[static::NAME];
-   }
+    }
 }

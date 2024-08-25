@@ -2,6 +2,8 @@
 
 namespace Nmea\Cron;
 
+use Exception;
+use Nmea\Config\ConfigException;
 use Nmea\Database\Entity\Anchor;
 use Nmea\Database\Entity\Observer\ObserverAnchorPrintConsole;
 use Nmea\Database\Entity\Observer\ObserverAnchorToCache;
@@ -56,13 +58,17 @@ final class CronWorker extends AbstractCronWorker
             } catch (ParserException $e) {
                 $this->isDebugPrintMessage($e->getMessage().PHP_EOL);
                 Factory::log($e->getMessage());
+            } catch (ConfigException $f) {
+                Factory::log($f->getMessage());
+            } catch (Exception $g) {
+                Factory::log($g->getMessage());
             }
-            sleep($this->sleepTime - date('s') % $this->sleepTime);
         }
     }
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     private function anchor(string $position, string $vesselHeading, string $waterDepth, string $windData): void
     {
@@ -90,6 +96,7 @@ final class CronWorker extends AbstractCronWorker
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     private function storePosition(string $position, string $courseOverGround, $drift):void
     {
@@ -144,6 +151,7 @@ final class CronWorker extends AbstractCronWorker
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     private function store(string $windData, string $cogSogData, string $vesselHeading, string $temperature):void
     {

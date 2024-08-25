@@ -2,6 +2,7 @@
 
 namespace Nmea\Protocol;
 
+use Exception;
 use Nmea\Cache\CacheInterface;
 use Nmea\Protocol\Frames\Frame\Data\Data;
 use Nmea\Protocol\Frames\Frames;
@@ -11,21 +12,21 @@ use Nmea\Protocol\Socket\Client;
 
 class FramesFactory
 {
-    private static ?Frames $instance;
+    private static ?Frames $instance = null;
     private static CacheInterface $cache;
-    private static Client $socket;
+    private static ?Client $socket = null;
 
-    public static function setCache(CacheInterface $cache)
+    public static function setCache(CacheInterface $cache):void
     {
         static::$cache = $cache;
     }
 
-    public static function setSocket(Client $socket)
+    public static function setSocket(Client $socket):void
     {
         static::$socket = $socket;
     }
 
-    public static function reset()
+    public static function reset():void
     {
         static::$instance = null;
     }
@@ -41,7 +42,10 @@ class FramesFactory
 
     }
 
-    public static function addData(string $nmea2000)
+    /**
+     * @throws Exception
+     */
+    public static function addData(string $nmea2000): void
     {
         list($timestamp, $direction, $canHexId, $data) = explode(' ', self::removeSpecialCharacter($nmea2000)  , 4);
 

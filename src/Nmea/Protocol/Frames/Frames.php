@@ -108,7 +108,7 @@ class Frames
         }
     }
 
-    private function writeToSocket()
+    private function writeToSocket():void
     {
         $socketObj = new WindSpeedCourseFactory($this->webSocket);
         $socketObj->writeToSocket(

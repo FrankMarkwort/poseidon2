@@ -2,7 +2,7 @@
 
 namespace Nmea\Protocol\Socket;
 
-use \Socket;
+use Socket;
 interface HandleInterface
 {
       public function send(mixed $message):true;

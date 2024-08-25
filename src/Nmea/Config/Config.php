@@ -64,11 +64,11 @@ class Config
 
     private static function getRunMode():string
     {
-        switch (getenv('RUN_MODE')) {
-            case 'develop': return 'develop';
-            case 'testing': return 'testing';
-            case 'staging': return 'staging';
-            default: return 'production';
-        }
+        return match (getenv('RUN_MODE')) {
+            'develop' => 'develop',
+            'testing' => 'testing',
+            'staging' => 'staging',
+            default => 'production',
+        };
     }
 }

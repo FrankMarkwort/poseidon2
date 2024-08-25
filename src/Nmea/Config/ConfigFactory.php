@@ -10,7 +10,7 @@ namespace Nmea\Config;
 
 class ConfigFactory
 {
-    private static  $configInstance;
+    private static ConfigPgn|null $configInstance = null;
 
     public static function create(int $png): PngFieldConfig
     {

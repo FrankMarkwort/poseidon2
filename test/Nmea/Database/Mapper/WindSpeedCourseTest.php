@@ -38,7 +38,7 @@ class WindSpeedCourseTest extends TestCase
         $this->mapper->setCourseOverGround((new PolarVector())->setR($sog)->setOmega(deg2rad($cog)));
         $this->mapper->setVesselHeading((new Rad())->setOmega(deg2rad($heading)));
         $this->mapper->setApparentWind((new PolarVector())->setR($aws)->setOmega(deg2rad($awa)));
-        $result = $this->mapper->getStoreArray();
+        $result = $this->mapper->toArray();
         $this->assertEqualsWithDelta( $expectedTws,  $this->kn2ms($result['tws']), 0.9,'tws');
         $this->assertEqualsWithDelta( $expectedTwd , $result['twd'] ,0.9,'twd');
         $this->assertEqualsWithDelta( $expectedTwa , $result['twa'] ,0.9,'twa');

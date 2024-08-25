@@ -2,7 +2,10 @@
 
 namespace Nmea\Parser\Data;
 
-class DataFacadenColection implements \Iterator, \Countable
+use Countable;
+use Iterator;
+
+class DataFacadenColection implements Iterator, Countable
 {
     private array $dataFacaden = [];
     public function add(DataFacade $dataFacade):self

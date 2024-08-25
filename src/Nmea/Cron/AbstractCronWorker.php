@@ -3,6 +3,7 @@
 namespace Nmea\Cron;
 
 use Nmea\Cache\CacheInterface;
+use Nmea\Config\ConfigException;
 use Nmea\Database\DatabaseInterface;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
@@ -29,9 +30,13 @@ abstract class AbstractCronWorker
         $result = $dataFacade->getDescription() . ' pgn => ' . $dataFacade->getPng() . " src => " .$dataFacade->getSrc() . ' dst => ' . $dataFacade->getDst()
             . ' type => ' .  $dataFacade->getFrameType(). ' pduFormat => ' .$dataFacade->getPduFormat() . ' dataPage => ' . $dataFacade->getDataPage() . PHP_EOL;
         for ($i = 1; $i <= $dataFacade->count(); $i++) {
-            $result .= "$i, " . $dataFacade->getFieldValue($i)->getName() ." "
-                . "$i, " . $dataFacade->getFieldValue($i)->getValue() ." "
-                . "$i, " . $dataFacade->getFieldValue($i)->getType() . PHP_EOL;
+            try {
+                $result .= "$i, " . $dataFacade->getFieldValue($i)->getName() . " "
+                    . "$i, " . $dataFacade->getFieldValue($i)->getValue() . " "
+                    . "$i, " . $dataFacade->getFieldValue($i)->getType() . PHP_EOL;
+            } catch (ConfigException $e) {
+                $result .= $e->getMessage() . PHP_EOL;
+            }
         }
 
         return $result;
@@ -48,6 +53,9 @@ abstract class AbstractCronWorker
          return false;
     }
 
+    /**
+     * @throws ConfigException
+     */
      protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, float $omegaFieldvalue): PolarVector
     {
          return (new PolarVector())

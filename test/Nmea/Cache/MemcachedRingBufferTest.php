@@ -2,6 +2,7 @@
 
 namespace TestsNmea\Cache;
 
+use Nmea\Cache\Dummy;
 use Nmea\Cache\Memcached;
 use Nmea\Cache\MemcachedRingBuffer;
 use Nmea\Config\Config;
@@ -14,7 +15,7 @@ class MemcachedRingBufferTest extends TestCase
 
     protected function setUp():void
     {
-        $this->ringBuffer = new MemcachedRingBuffer((new Memcached(Config::getMemcacheHost(), Config::getMemcachePort()))->clear(), 3);
+        $this->ringBuffer = new MemcachedRingBuffer(new Dummy(), 3);
     }
 
     public function testAddLine()
