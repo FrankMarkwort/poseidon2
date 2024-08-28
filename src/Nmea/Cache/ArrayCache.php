@@ -2,11 +2,11 @@
 
 namespace Nmea\Cache;
 
-class Dummy implements CacheInterface
+class ArrayCache implements CacheInterface
 {
 
-    private $array = [];
-    private $arrayByKey =[];
+    private array $array = [];
+    private array $arrayByKey =[];
 
     public function get(string $pgn):mixed
     {

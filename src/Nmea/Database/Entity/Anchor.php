@@ -222,8 +222,8 @@ class Anchor implements InterfaceObservable
 
     public function circleRadiusAnchorBoat():int
     {
-        return acos((sin($this->getLatitudeRad()) * sin($this->getAnchorLatitudeRad()) + (cos($this->getLatitudeRad()) * cos($this->getAnchorLatitudeRad()))
-            * cos($this->getAnchorLongitudeRad() - $this->getLongitudeRad()))) * (static::EARTH_RADIUS) - static::GPS_ACCURACY;
+        return intval(acos((sin($this->getLatitudeRad()) * sin($this->getAnchorLatitudeRad()) + (cos($this->getLatitudeRad()) * cos($this->getAnchorLatitudeRad()))
+            * cos($this->getAnchorLongitudeRad() - $this->getLongitudeRad()))) * (static::EARTH_RADIUS) - static::GPS_ACCURACY);
     }
 
     public function getDistance(): int
@@ -304,7 +304,7 @@ class Anchor implements InterfaceObservable
         $x= ($lat2 - $lat1) * cos(($lon1 + $lon2) / 2);
         $y = ($lon2 - $lon1);
 
-        return sqrt($x * $x + $y * $y) * self::EARTH_RADIUS;
+        return intval(sqrt($x * $x + $y * $y) * self::EARTH_RADIUS);
     }
 
     private function getCirclePointDeg(float $bearing, float $radius): array
@@ -375,6 +375,7 @@ class Anchor implements InterfaceObservable
             'anchorCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance())],
             'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance() + static::ANCOR_ALARM )],
             'hasAlarm' => $this->hasAlarm(),
+            'count' => count($this->historyPosition),
             'hasWarn' => $this->hasWarn(),
             'meterInCirle' => $this->meterInCircle(),
             'circleRadius' => $this->circleRadiusAnchorBoat(),

@@ -2,7 +2,7 @@
 
 namespace TestsNmea\Protocoll\Frames;
 
-use Nmea\Cache\Dummy;
+use Nmea\Cache\ArrayCache;
 use Nmea\Protocol\Frames\Frame\Data\Data;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Frames\Frame\Header\Header;
@@ -13,7 +13,7 @@ class FramesTest extends TestCase
 {
     public function testBla()
     {
-        $cache = new Dummy();
+        $cache = new ArrayCache();
         $frames = new Frames($cache);
         $frame = new Frame(new Header('19EF00FE'),new Data('E0 17 A3 99 04 80 05 02', 'R', '09:44:38.604'));
         $frames->addFrame($frame);

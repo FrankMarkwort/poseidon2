@@ -3,7 +3,7 @@
 namespace TestsNmea\Protocol;
 
 use Nmea\Cache\CacheInterface;
-use Nmea\Cache\Dummy;
+use Nmea\Cache\ArrayCache;
 use Nmea\Protocol\Frames\Frames;
 use Nmea\Protocol\FramesFactory;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ class FramesFactoryTest extends TestCase
     private CacheInterface $cache;
     protected function setUp():void
     {
-        $this->cache = new Dummy();
+        $this->cache = new ArrayCache();
         FramesFactory::reset();
         FramesFactory::setCache($this->cache);
     }

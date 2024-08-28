@@ -61,7 +61,7 @@ abstract class AbstractRingBuffer
         $this->setReadIndex($readIndex);
     }
 
-    protected function increaseStoreIndex()
+    protected function increaseStoreIndex():void
     {
         $storeIndex = $this->getStoreIndex();
         $storeIndex++;

@@ -3,7 +3,7 @@
 namespace TestsNmea\Cache;
 
 use Nmea\Cache\ArrayRingBuffer;
-use Nmea\Cache\Dummy;
+use Nmea\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
 
 class ArrayRingBufferTest extends TestCase
@@ -11,7 +11,7 @@ class ArrayRingBufferTest extends TestCase
     private ArrayRingBuffer $ringBuffer;
     protected function setUp():void
     {
-        $this->ringBuffer = new ArrayRingBuffer(new Dummy(),3);
+        $this->ringBuffer = new ArrayRingBuffer(new ArrayCache(),3);
     }
 
     public function testAddLine()

@@ -4,11 +4,11 @@
 namespace Nmea\Protocol\Frames\Frame\Data;
 
 
-class Data
+readonly class Data
 {
     private const string DELIMITTER =' ';
 
-    public function __construct(private readonly string $data, private readonly string $direction, private readonly string $timestamp)
+    public function __construct(private string $data, private string $direction, private string $timestamp)
     {
     }
 

@@ -3,7 +3,7 @@
 namespace TestsNmea\Protocol;
 
 use Nmea\Cache\CacheInterface;
-use Nmea\Cache\Dummy;
+use Nmea\Cache\ArrayCache;
 use Nmea\Cache\Memcached;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\DataFacadeFactory;
@@ -20,7 +20,7 @@ class MultiPackedTest extends TestCase
     protected function setUp(): void
     {
         #$this->cache = new Memcached();
-        $this->cache = new Dummy();
+        $this->cache = new ArrayCache();
         $this->cache->clear();
 
         FramesFactory::reset();

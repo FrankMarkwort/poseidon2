@@ -1,0 +1,26 @@
+<?php
+use \Nmea\Config\Config;
+require_once( __DIR__ . '/../../vendor/autoload.php');
+?>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/boost.js"></script>
+<link rel="stylesheet" type="text/css" href="css/gauge.css" />
+<figure class="highcharts-figure">
+    <div id="windcontainer"></div>
+    <div id="windlupencontainer"></div>
+    <div id="speedcontainer"></div>
+</figure>
+<script src="js/windAndSpeed/wind/gauge.js"></script>
+<script src="js/windAndSpeed/wind/lupe.js"></script>
+<script src="js/windAndSpeed/speed/gauge.js"></script>
+<script>
+    var hostPort ='<?= Config::getSocketServerHost() . ':' . Config::getSocketServerPort(); ?>';
+</script>
+
+<script src="js/windAndSpeed/datapoll.js"></script>

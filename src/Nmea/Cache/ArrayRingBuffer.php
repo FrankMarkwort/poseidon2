@@ -2,7 +2,9 @@
 
 namespace Nmea\Cache;
 
-class ArrayRingBuffer extends AbstractRingBuffer implements \Iterator
+use Iterator;
+
+class ArrayRingBuffer extends AbstractRingBuffer implements Iterator
 {
     public function isFull():bool
     {

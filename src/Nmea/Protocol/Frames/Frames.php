@@ -7,6 +7,7 @@ use Nmea\Cron\EnumPgns;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
 use Nmea\Protocol\Socket\Client;
+use Nmea\Parser\ParserException;
 
 class Frames
 {
@@ -95,9 +96,12 @@ class Frames
                 $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
             );
-        } catch (\ErrorException $e) {}
+        } catch (ParserException $e) {}
     }
 
+    /**
+     * @throws ParserException
+     */
     private function windSocketData($pgn, string $data):void
     {
         if ($this->isNeedForWindData($pgn)) {
@@ -108,6 +112,9 @@ class Frames
         }
     }
 
+    /**
+     * @throws ParserException
+     */
     private function writeToSocket():void
     {
         $socketObj = new WindSpeedCourseFactory($this->webSocket);
@@ -166,13 +173,13 @@ class Frames
                         if ($index < 2 ) continue;
                             $data .= $splitter . $byte;
                             $splitter = ' ';
-                    };
+                    }
                 } else {
                     foreach ($frame->getData()->getDataBytes() as $index => $byte) {
                         if ($index < 1 ) continue;
                             $data .= $splitter . $byte;
                             $splitter = ' ';
-                    };
+                    }
                 }
             }
         }
