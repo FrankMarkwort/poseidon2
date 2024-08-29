@@ -55,6 +55,7 @@ final class CronWorker extends AbstractCronWorker
                         $this->cache->get(EnumPgns::Set_And_Drift->value)
                     );
                 }
+                sleep($this->sleepTime - date('s') % $this->sleepTime);
             } catch (ParserException $e) {
                 $this->isDebugPrintMessage($e->getMessage().PHP_EOL);
                 Factory::log($e->getMessage());

@@ -13,7 +13,7 @@ class Anchor implements InterfaceObservable
     private const float FREIBOARD = 1;
     public const int WIND_ANGLE_ANCOR_RAD = 5;
     private const int ANCOR_ALARM = 10;
-
+    private const int MAX_HISTORY_POSITIONS = 14000;
     private float|null $previousLatitudeDeg = null;
     private float|null $previousLongitudeDeg = null;
     private float $latitudeRad;
@@ -57,6 +57,9 @@ class Anchor implements InterfaceObservable
         $this->historyPositionRoundCounter++;
         if ($this->historyPositionRoundCounter >= 10) {
             if (! (is_null($this->previousLatitudeDeg) || is_null($this->previousLongitudeDeg))) {
+                if (count($this->historyPosition) > static::MAX_HISTORY_POSITIONS) {
+                    array_shift($this->historyPosition);
+                }
                 $this->historyPosition[] = [[$this->previousLongitudeDeg, $this->previousLatitudeDeg],[ $longitudeDeg, $latitudeDeg]];
                 $this->isActualHistoryPosition = true;
             }
