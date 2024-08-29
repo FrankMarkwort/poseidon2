@@ -428,7 +428,7 @@
                         chartData.ext.anchorColorCirclePolygon,
                         false
                     );
-                    addChaineLine(data.base.chainLabel, data.ext.anchorLatitude, data.ext.anchorLongitude, data.base.latitude, data.base.longitude);
+                    addChaineLine(data.ext.chainLabel, data.ext.anchorLatitude, data.ext.anchorLongitude, data.base.latitude, data.base.longitude);
                     addAnchorPoint(data.ext.anchorLabel, data.ext.anchorLatitude, data.ext.anchorLongitude);
                     addBoatPositions('positions', 'positions', data.ext.positionsHistory, force = true)
                 } else {
@@ -458,17 +458,7 @@
                     document.getElementById("ancorMeter").readOnly = false;
                     document.getElementById("ancorMeter").disabled = false;
                 }
-                if(data.hasAlarm) {
-                    audio = new Audio('http://192.168.0.101/sound/alertAlarm.wav');
-                    audio.play();
-                }
+                //document.getElementById('alarmSound').play();
             });
-    }, 1000 * 60); //1000 means 1 sec, 5000 means 5 seconds
+    }, 1000 * 60);
 })();
-
-function playSound()
-{
-    let audio = new Audio('http://192.168.0.101/sound/alertAlarm.wav');
-    //audio.muted = true;
-    //audio.play();
-}

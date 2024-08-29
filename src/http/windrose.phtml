@@ -6,7 +6,7 @@ use \Nmea\Database\Database;
 use \Nmea\Database\Mapper\WindroseMapper;
 require_once( __DIR__ . '/../../vendor/autoload.php');
 
-$database = Database::getInstance()->init(Config::getMariadbHost(), Config::getMariadbPort(),Config::getMariadbUser(),Config::getMariadbPassword(), Config::getMariadbName());
+Database::getInstance()->init(Config::getMariadbHost(), Config::getMariadbPort(),Config::getMariadbUser(),Config::getMariadbPassword(), Config::getMariadbName());
 $mapper = new WindroseMapper(Database::getInstance());
 $entity = $mapper->getWindroseEntity();
 
