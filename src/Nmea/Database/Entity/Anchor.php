@@ -116,8 +116,9 @@ class Anchor implements InterfaceObservable
         $this->anchorLongitudeRad = null;
         $this->previousLatitudeDeg = null;
         $this->previousLongitudeDeg = null;
+        $this->isActualHistoryPosition = false;
         $this->chainLength = 0;
-
+        $this->historyPositionRoundCounter = 10;
 
         return $this;
     }
@@ -269,7 +270,7 @@ class Anchor implements InterfaceObservable
         $this->isSet = true;
     }
 
-    protected function getLine($latitudeRad, $longitudeRad, $angleRad, $length): array
+    public static function getLine($latitudeRad, $longitudeRad, $angleRad, $length): array
     {
         $distance = $length / static::EARTH_RADIUS;
         $lat2 = asin(sin($latitudeRad) * cos($distance) + cos($latitudeRad) * sin($distance) * cos($angleRad));
@@ -356,30 +357,48 @@ class Anchor implements InterfaceObservable
     protected function toArray():array
     {
         return [
-            'latitude' => $this->getLatitudeDeg(),
-            'longitude' => $this->getLongitudeDeg(),
-            'anchorLatitude' => $this->getAnchorLatitudeDeg(),
-            'anchorLongitude' => $this->getAnchorLongitudeDeg(),
-            'anchorLabel' => sprintf("&#9875; &larr;%s&rarr; &#x26F5", $this->getLengtBetweenAnchorAndBoat()),
-            'headingLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getHeadingRad() , 12),
-            'headingLabel' => sprintf("heading: %s°",intval($this->getHeadingDeg())),
-            'awaLabel' => sprintf('&measuredangle; %s° %s kn', intval($this->getAwaDeg180()), intval($this->aws * 1.943844)),
-            'chainLabel' => sprintf("&#x26D3; &rarr; %sm", $this->getChainLength()),
-            'chainLength' => $this->getChainLength(),
-            'isSet' => $this->isAnchorSet(),
-            'boatLabel' => sprintf('&#x26F5 &darr; %sm', round($this->waterDepth,1)),
-            'awaLine' => $this->getLine( $this->getLatitudeRad(), $this->getLongitudeRad(), $this->getAwaRad() + $this->getHeadingRad(), intval($this->aws * 1.943844)),
-            'anchorColorCirclePolygon' => $this->getStatusColor(),
-            'anchorHistory' => $this->getHistoryPositionsWithLastPositionDeg($this->getHistoryPositionsDeg()),
-            'anchorCirclePolygonLabel' => sprintf("&#10807; %sm", $this->getMaxDistance()),
-            'anchorCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance())],
-            'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance() + static::ANCOR_ALARM )],
-            'hasAlarm' => $this->hasAlarm(),
-            'count' => count($this->historyPosition),
-            'hasWarn' => $this->hasWarn(),
-            'meterInCirle' => $this->meterInCircle(),
-            'circleRadius' => $this->circleRadiusAnchorBoat(),
-            'distance' => $this->getDistance(),
+            'base' => static::toBaseArray(
+                $this->getLatitudeDeg(),
+                $this->getLongitudeDeg(),
+                $this->getHeadingDeg(),
+                $this->getAwaDeg360(),
+                $this->aws,
+                $this->waterDepth,
+                $this->getChainLength(),
+                $this->isAnchorSet()
+            ),
+            'ext' => [
+                'anchorLatitude' => $this->getAnchorLatitudeDeg(),
+                'anchorLongitude' => $this->getAnchorLongitudeDeg(),
+                'anchorLabel' => sprintf("&#9875; &larr;%s&rarr; &#x26F5", $this->getLengtBetweenAnchorAndBoat()),
+                'chainLength' => $this->getChainLength(),
+                'anchorColorCirclePolygon' => $this->getStatusColor(),
+                'positionsHistory' => $this->getHistoryPositionsWithLastPositionDeg($this->getHistoryPositionsDeg()),
+                'anchorCirclePolygonLabel' => sprintf("&#10807; %sm", $this->getMaxDistance()),
+                'anchorCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance())],
+                'anchorWarnCirclePolygon' => [$this->getAnchorCirclePolygonDeg($this->getMaxDistance() + static::ANCOR_ALARM )],
+                'hasAlarm' => $this->hasAlarm(),
+                'count' => count($this->historyPosition),
+                'hasWarn' => $this->hasWarn(),
+                'meterInCirle' => $this->meterInCircle(),
+                'circleRadius' => $this->circleRadiusAnchorBoat(),
+                'distance' => $this->getDistance(),
+            ]
+        ];
+    }
+
+    public static function toBaseArray(float $latDeg, float $lonDeg, float $headingDeg, float $awaDeg, float $aws, float $waterDepth, int $chainLength, bool $isAnchorSet): array
+    {
+        return [
+                'latitude' => $latDeg,
+                'longitude' => $lonDeg,
+                'boatLabel' => sprintf('&#x26F5 &darr; %sm', round($waterDepth,1)),
+                'headingLine' => static::getLine( deg2rad($latDeg), deg2rad($lonDeg), deg2rad($headingDeg) , 12),
+                'headingLabel' => sprintf("heading: %s°",intval($headingDeg)),
+                'awaLabel' => sprintf('&measuredangle; %s° %s kn', intval($awaDeg), intval($aws * 1.943844)),
+                'awaLine' => static::getLine( deg2rad($latDeg), deg2rad($lonDeg), deg2rad($awaDeg) + deg2rad($headingDeg), intval($aws * 1.943844)),
+                'chainLength' => $chainLength,
+                'isSet' => $isAnchorSet,
         ];
     }
 

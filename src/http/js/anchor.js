@@ -3,10 +3,10 @@
        'http://' + host + '/api/anchorJson.php'
     ).then(response => response.json());
     var isSetAnchor = false;
-    if(chartData.isSet === undefined) {
+    if(chartData.base.isSet === undefined) {
         isSetAnchor = false;
     } else {
-        isSetAnchor = chartData.isSet;
+        isSetAnchor = chartData.base.isSet;
     }
     var chart = Highcharts.mapChart('container', {
         chart: {
@@ -64,8 +64,8 @@
             fitToGeometry: {
                 type: 'MultiPoint',
                 coordinates: [
-                    [chartData.longitude - 0.004, chartData.latitude + 0.004],
-                    [chartData.longitude + 0.004, chartData.latitude - 0.004]
+                    [chartData.base.longitude - 0.004, chartData.base.latitude + 0.004],
+                    [chartData.base.longitude + 0.004, chartData.base.latitude - 0.004]
                 ]
             }
         },
@@ -105,20 +105,20 @@
             zIndex: 10,
             data: [ {
                 name: 'Boat',
-                lat: chartData.latitude,
-                lon: chartData.longitude
+                lat: chartData.base.latitude,
+                lon: chartData.base.longitude
             }]
         }]
     });
 
     function isSetAnchorFu(data)
     {
-        if (data.isSet === undefined) {
+        if (data.base.isSet === undefined) {
 
             return false;
         }
 
-        return data.isSet;
+        return data.base.isSet;
     }
 
     function isSerie(name)
@@ -394,11 +394,11 @@
 
     function getChainLength(data)
     {
-        if (data.chainLength === undefined) {
+        if (data.base.chainLength === undefined) {
             return 0;
         }
 
-        return data.chainLength;
+        return data.base.chainLength;
     }
 
     function isNumeric(n)
@@ -410,27 +410,27 @@
         fetch('http://' + host + '/api/anchorJson.php')
             .then(function (response) { return response.json(); })
             .then(function (data) {
-                if (Object.keys(data).length > 3) {
+                updateSerieById('boat', data.base.boatLabel, 0, {
+                    lat: data.base.latitude,
+                    lon: data.base.longitude
+                });
+                addAwaLine(data.base.awaLabel, data.base.awaLine);
+                addHeadingLine(data.base.headingLabel, data.base.headingLine);
+                if (data.ext !== false) {
                     addAnchorCirlesSerie(
                         'AnchorCircle',
-                        data.anchorCirclePolygonLabel,
+                        data.ext.anchorCirclePolygonLabel,
                         'AnchorCircle',
                         'AnchorWarnCircle',
-                        chartData.anchorWarnCirclePolygon,
-                        chartData.anchorCirclePolygon,
-                        chartData.anchorColorCirclePolygon,
-                        chartData.anchorColorCirclePolygon,
+                        chartData.ext.anchorWarnCirclePolygon,
+                        chartData.ext.anchorCirclePolygon,
+                        chartData.ext.anchorColorCirclePolygon,
+                        chartData.ext.anchorColorCirclePolygon,
                         false
                     );
-                    addChaineLine(data.chainLabel, data.anchorLatitude, data.anchorLongitude, data.latitude, data.longitude);
-                    addAnchorPoint(data.anchorLabel, data.anchorLatitude, data.anchorLongitude);
-                    addBoatPositions('positions', 'positions', data.anchorHistory, force = true)
-                    updateSerieById('boat', data.boatLabel, 0, {
-                        lat: data.latitude,
-                        lon: data.longitude
-                    });
-                    addAwaLine(data.awaLabel, data.awaLine);
-                    addHeadingLine(data.headingLabel, data.headingLine);
+                    addChaineLine(data.base.chainLabel, data.ext.anchorLatitude, data.ext.anchorLongitude, data.base.latitude, data.base.longitude);
+                    addAnchorPoint(data.ext.anchorLabel, data.ext.anchorLatitude, data.ext.anchorLongitude);
+                    addBoatPositions('positions', 'positions', data.ext.positionsHistory, force = true)
                 } else {
                     rmSerieById('anchor');
                     rmSerieByName('positions');
@@ -438,7 +438,7 @@
                     rmSerieById('chain')
                 }
 
-                isSetAnchor = data.isSet;
+                isSetAnchor = data.base.isSet;
                 if (isSetAnchorFu(data)) {
                     document.getElementById("setAncor").innerText = 'unset Ancor';
                     document.getElementById("setAncor").disabled = false;
@@ -446,7 +446,7 @@
                     document.getElementById("ancorMeter").readOnly = true;
                     document.getElementById("ancorMeter").disabled = true;
 
-                } else if(isNumeric(data.chainLength)) {
+                } else if(isNumeric(data.base.chainLength) && data.base.chainLength > 2) {
                     document.getElementById("setAncor").innerText = 'TyToSet';
                     document.getElementById("setAncor").disabled = true;
                     document.getElementById("ancorMeter").value = getChainLength(data);
