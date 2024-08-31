@@ -26,7 +26,7 @@ readonly class Bootstrap
             try {
                 $line = $this->serial->readStream();
                 if (! $this->isValidNmea2000($line)) {
-                    #Factory::log('Deamon\Bootstrap skipped invalid stram data: ' . $line);
+
                     continue;
                 }
 

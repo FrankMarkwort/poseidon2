@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Nmea\Protocol;
 
-use Exception;
+use ErrorException;
 use Nmea\Cache\CacheInterface;
+use Nmea\Config\ConfigException;
+use Nmea\Parser\ParserException;
 use Nmea\Protocol\Frames\Frame\Data\Data;
 use Nmea\Protocol\Frames\Frames;
 use Nmea\Protocol\Frames\Frame\Frame;
@@ -44,7 +46,9 @@ class FramesFactory
     }
 
     /**
-     * @throws Exception
+     * @throws ErrorException
+     * @throws ConfigException
+     * @throws ParserException
      */
     public static function addData(string $nmea2000): void
     {

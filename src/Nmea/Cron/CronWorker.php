@@ -64,6 +64,8 @@ final class CronWorker extends AbstractCronWorker
                 Factory::log($f->getMessage());
             } catch (Exception $g) {
                 Factory::log($g->getMessage());
+            } catch (\TypeError $typeError) {
+                Factory::log('TypeError: '.$typeError->getMessage());
             }
         }
     }
