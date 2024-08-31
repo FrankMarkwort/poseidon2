@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-
+declare(strict_types=1);
 use Nmea\Cache\Memcached;
 use Nmea\Deamon\Bootstrap;
 use Nmea\Deamon\Serial;

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\View;
 
@@ -19,6 +20,7 @@ class Json extends AbstractView
      */
     private function toJson():string
     {
+        $result = [];
         foreach ($this->dataFacaden as $dataFacade) {
             foreach ($dataFacade->getOrderIds() as $orderId) {
                 $fields[] = [

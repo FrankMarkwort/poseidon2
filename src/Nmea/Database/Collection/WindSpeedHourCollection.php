@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Database\Collection;
 
@@ -9,7 +10,7 @@ class WindSpeedHourCollection
     /**
      * @var WindSpeedHour[]
      */
-    private $enitiys = [];
+    private array $enitiys = [];
     public function addEnity(WindSpeedHour $entity):self
     {
         $this->enitiys[] = $entity;

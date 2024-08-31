@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Parser\Lib\Units;
 
 use DateTimeImmutable;
 use DateInterval;
-use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 class Unit implements UnitInterface
 {
@@ -16,7 +16,7 @@ class Unit implements UnitInterface
     private array $unitsConfig;
     private array $supported = ['km/h', 'kt', 'C', 'F', 'hPa', 'grad'];
 
-    public function __construct(private readonly float|int $value, private readonly string|null $unit, private ?string $type= null)
+    public function __construct(private readonly float|int $value, private readonly string|null $unit, private readonly ?string $type= null)
     {
         $this->setConfig(include( static::CONFIG_DIR_FILE));
     }
@@ -111,7 +111,7 @@ class Unit implements UnitInterface
 
     private function time():string
     {
-        return gmdate("H:i:s", round($this->getMappedValue()));
+        return gmdate("H:i:s", intval($this->getMappedValue()));
     }
 
     private function speed():float|int
@@ -140,7 +140,7 @@ class Unit implements UnitInterface
         $grad[static::MIN] = intval($x);
         $grad[static::SEC] = round( ($x - $grad[static::MIN]) * 60 , 2);
         if ($this->type === 'Latitude' && abs($this->value) !== 0) {
-            $grad[static::GRAD] = str_pad($grad[static::GRAD],3, 0, STR_PAD_LEFT);
+            $grad[static::GRAD] = str_pad((string)$grad[static::GRAD],3, '0', STR_PAD_LEFT);
         }
 
         return $grad;

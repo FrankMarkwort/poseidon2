@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cron;
 
@@ -25,6 +26,9 @@ abstract class AbstractCronWorker
         return $this->runMode === ModeEnum::DEBUG || $this->runMode === ModeEnum::NORMAL_PLUS_DEBUG;
     }
 
+    /**
+     * @throws ConfigException
+     */
     protected function printAllFieldNames(DataFacade $dataFacade):string
     {
         $result = $dataFacade->getDescription() . ' pgn => ' . $dataFacade->getPng() . " src => " .$dataFacade->getSrc() . ' dst => ' . $dataFacade->getDst()
@@ -56,7 +60,7 @@ abstract class AbstractCronWorker
     /**
      * @throws ConfigException
      */
-     protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, float $omegaFieldvalue): PolarVector
+     protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, int $omegaFieldvalue): PolarVector
     {
          return (new PolarVector())
              ->setR($dataFacade->getFieldValue($rFieldValue)->getValue())

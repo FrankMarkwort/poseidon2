@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * @author Frank Markwort
  * @date 13.12.2018
@@ -22,7 +24,7 @@ class Data
     {
         if (is_null($this->getUnit()) || strlen($this->getUnit()) === 0) {
 
-            return $this->getValue();
+            return (string) $this->getValue();
         }
         return $this->getValue() . ' ' . $this->getUnit();
 

@@ -1,8 +1,8 @@
 <?php
+
+declare(strict_types=1);
 namespace Nmea\Protocol\Socket;
 
-use ErrorException;
-use RuntimeException;
 /*
 	based on: http://stackoverflow.com/questions/7160899/websocket-client-in-php/16608429#16608429
 	FIRST EXEC PYTHON SCRIPT TO GET HEADERS
@@ -12,7 +12,10 @@ use RuntimeException;
 class Client
 {
 	private string $head;
-	private $instance;
+    /**
+    * @var resource $instance
+    */
+	private mixed $instance;
 
 	public function __construct(private readonly string $host, private readonly int $port)
 	{
@@ -35,18 +38,19 @@ class Client
     }
 
     /**
-     * @throws ErrorException
+     * @throws SocketException
      */
-	public function send(string $method)
-	{
+	public function send(string $method): string
+    {
 		$this->head =  $this->getHead() . "Content-Length: ".strlen($method)."\r\n\r\n";
 		$this->connect();
 		fwrite($this->instance, $this->hybi10Encode($method));
 		$wsdata = fread($this->instance, 2000);
+
 		return $this->hybi10Decode($wsdata);
 	}
 
-    public function close()
+    public function close(): void
     {
         if($this->instance)	{
             fclose($this->instance);
@@ -55,20 +59,20 @@ class Client
     }
 
     /**
-     * @throws ErrorException
+     * @throws SocketException
      */
-    private function connect()
+    private function connect(): void
     {
         $sock = @fsockopen($this->host, $this->port, $errno, $errstr, 2);
         if ($sock === false) {
-            throw new ErrorException("$errstr ($errno)");
+            throw new SocketException("$errstr ($errno)");
         }
         fwrite($sock, $this->head);
-        $headers = fread($sock, 2000);
+        $headers = fread($sock, 2000); //TODO remove
         $this->instance = $sock;
     }
 
-    private function hybi10Decode($data)
+    private function hybi10Decode($data): string
     {
         $bytes = $data;
         $decodedData = '';
@@ -102,7 +106,7 @@ class Client
         return $decodedData;
     }
 
-    private function hybi10Encode($payload, $type = 'text', $masked = true)
+    private function hybi10Encode($payload, $type = 'text', $masked = true):false|string
     {
         $frameHead = array();
         $frame = '';

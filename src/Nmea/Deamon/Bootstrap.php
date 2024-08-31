@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Deamon;
 
@@ -14,9 +15,10 @@ readonly class Bootstrap
     {
     }
 
-    public function run()
+    public function run(): void
     {
         $run = true;
+        $line = '';
         $this->serial->open();
         FramesFactory::setCache($this->cache);
         FramesFactory::setSocket($this->websocket);
@@ -31,6 +33,7 @@ readonly class Bootstrap
                 FramesFactory::addData($line);
             } catch (Exception $e) {
                 Factory::log($line . ': ' . $e->getMessage());
+                echo $e->getMessage() . $e->getTraceAsString(). PHP_EOL;
                 $run = false;
             }
         } while ($run);
@@ -38,7 +41,7 @@ readonly class Bootstrap
         $this->serial->close();
     }
 
-     private function isValidNmea2000(string $nmea2000)
+     private function isValidNmea2000(string $nmea2000): bool
      {
         $result = preg_match('/^(\d\d:\d\d:\d\d\.\d\\d\d \w \w{8} \w\w \w\w \w\w \w\w \w\w \w\w \w\w \w\w)/', $nmea2000);
         if ($result > 0) return true;

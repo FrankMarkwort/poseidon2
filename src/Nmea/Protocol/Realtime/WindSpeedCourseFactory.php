@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Protocol\Realtime;
 
@@ -45,7 +46,7 @@ readonly class WindSpeedCourseFactory
     /**
      * @throws ConfigException
      */
-    protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, float $omegaFieldvalue): PolarVector
+    protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, int $omegaFieldvalue): PolarVector
     {
          return (new PolarVector())
              ->setR($dataFacade->getFieldValue($rFieldValue)->getValue())

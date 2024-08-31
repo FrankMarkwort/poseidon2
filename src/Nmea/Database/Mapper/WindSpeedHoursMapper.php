@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Database\Mapper;
 
@@ -10,7 +11,7 @@ class WindSpeedHoursMapper extends AbstractMapper
     public function getAll():WindSpeedHourCollection
     {
         $collection = new WindSpeedHourCollection();
-        $result = $this->database->query('select * from wind_speed_hour order by date');
+        $result = $this->database->query('select * from wind_speed_hour order by date DESC limit 1000');
         foreach ($result as $row) {
             $entity = new WindSpeedHour();
             $entity->setDate($row['date'])

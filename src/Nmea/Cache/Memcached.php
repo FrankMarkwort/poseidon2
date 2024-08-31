@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cache;
 
@@ -8,12 +9,12 @@ use Exception;
 
 class Memcached implements CacheInterface
 {
-    private $cache;
+    private Cache $cache;
 
     /**
      * @throws Exception
      */
-    public function __construct(private readonly string $host = '127.0.0.1', private int $port = 11211)
+    public function __construct(private readonly string $host = '127.0.0.1', private readonly int $port = 11211)
     {
         $this->cache = new Cache();
         if (!$this->cache->addServer($host, $port)) {

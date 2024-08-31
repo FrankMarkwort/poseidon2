@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea;
 
@@ -33,7 +34,7 @@ abstract class AbstractHeader
     }
     public function getCanExtendedId():int
     {
-        return $this->decode($this->getCanIdDec(), 29, 000);
+        return $this->decode($this->getCanIdDec(), 29, '000');
     }
 
     private function decode(int $value, int $bitPosition, string $bitMask):int
@@ -42,17 +43,17 @@ abstract class AbstractHeader
     }
     public function getPriority():int
     {
-        return $this->decode($this->getCanIdDec(), 26, 111);
+        return $this->decode($this->getCanIdDec(), 26, '111');
     }
 
     public function getReserved():int
     {
-        return $this->decode($this->getCanIdDec(), 25, 1);
+        return $this->decode($this->getCanIdDec(), 25, '1');
     }
 
     public function getDataPage():int
     {
-        return $this->decode($this->getCanIdDec(), 24, 1);
+        return $this->decode($this->getCanIdDec(), 24, '1');
     }
 
     public function getExtendedDataPage():int
@@ -62,17 +63,17 @@ abstract class AbstractHeader
 
     public function getPduFormat():int
     {
-        return $this->decode($this->getCanIdDec(), 16, 11111111);
+        return $this->decode($this->getCanIdDec(), 16, '11111111');
     }
 
     public function getPduSpecific():int
     {
-        return $this->decode($this->getCanIdDec(), 8, 11111111);
+        return $this->decode($this->getCanIdDec(), 8, '11111111');
     }
 
     public function getSourceAdress():int
     {
-        return $this->decode($this->getCanIdDec(), 0, 11111111);
+        return $this->decode($this->getCanIdDec(), 0, '11111111');
     }
 
     public function getDestination():int

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Deamon;
 
@@ -6,7 +7,10 @@ use Exception;
 
 class Serial
 {
-    private $streamResource;
+    /**
+    * @var resource $streamResource
+    */
+    private mixed $streamResource;
 
     public function __construct(private readonly string $deviceName, private readonly string $mode = 'r')
     {

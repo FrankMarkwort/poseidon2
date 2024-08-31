@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Protocol\Frames;
 
+use ErrorException;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Cron\EnumPgns;
@@ -9,6 +11,7 @@ use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
 use Nmea\Protocol\Socket\Client;
 use Nmea\Parser\ParserException;
+use Nmea\Protocol\Socket\SocketException;
 
 class Frames
 {
@@ -22,6 +25,11 @@ class Frames
     {
     }
 
+    /**
+     * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
+     */
     public function addFrame(Frame $frame):self
     {
         $pgn = $frame->getHeader()->getPgn();
@@ -71,6 +79,11 @@ class Frames
         return $this->frames[$pgn][$sequence][$framecounter];
     }
 
+    /**
+     * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
+     */
     private function makeData(array $frames):bool
     {
         if ($frames[0] instanceof Frame) {
@@ -89,10 +102,12 @@ class Frames
 
     /**
      * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
      */
     private function addCache(Frame $frame, string $data):void
     {
-        $this->cache->set($frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
+        $this->cache->set((string) $frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data);
         try {
             $this->windSocketData(
@@ -100,12 +115,13 @@ class Frames
                 $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
             );
-        } catch (ParserException $e) {}
+        } catch (SocketException) {}
     }
 
     /**
-     * @throws ParserException
      * @throws ConfigException
+     * @throws ParserException
+     * @throws ErrorException
      */
     private function windSocketData($pgn, string $data):void
     {
@@ -120,7 +136,7 @@ class Frames
     /**
      * @throws ConfigException
      * @throws ParserException
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     private function writeToSocket():void
     {
@@ -151,6 +167,12 @@ class Frames
     }
 
     //TODO implement sequence
+
+    /**
+     * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
+     */
     private function makeSinglePackedData(array $frames):bool
     {
         if ($frames[0] instanceof Frame) {
@@ -169,6 +191,11 @@ class Frames
         return false;
     }
 
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     * @throws ErrorException
+     */
     private function makeFastPackedData(array $frames):bool
     {
         $data = '';

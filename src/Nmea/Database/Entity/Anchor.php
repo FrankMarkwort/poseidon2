@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Database\Entity;
 
@@ -88,7 +89,7 @@ class Anchor implements InterfaceObservable
         return fmod($this->getAwaDeg360() + 180,360)- 180;
     }
 
-    public function setAnchor(float $chainLength): void
+    public function setAnchor(int $chainLength): void
     {
         if (! $this->isAnchorSet()) {
             if ($this->isWindComesFromTheFront()) {

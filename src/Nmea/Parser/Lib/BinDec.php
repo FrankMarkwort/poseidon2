@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Parser\Lib;
 
 use Exception;
-use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 class BinDec
 {
@@ -49,7 +49,7 @@ class BinDec
     /**
      * @throws Exception
      */
-    #[CodeCoverageIgnore]
+
     public static function bin2dec(string $bin, bool $signed = false, float|int|null $resolution = 1):float|int
     {
         if ( static::is_32bit() ) {
@@ -63,13 +63,13 @@ class BinDec
     /**
      * @throws Exception
      */
-    public static function bin2dec32BitSystem(string $bin, bool $signed = false, float|int|null $resolution = 1):float|int
+    public static function bin2dec32BitSystem(string $bin, bool $signed = false, float|int|null $resolution = 1):float
     {
         if (! static::isBinary($bin)) {
 
            throw new Exception("is not BinaryString $bin");
         }
-        $result = 0;
+        $result = '0';
         $firstBit = $bin[0];
         if ($signed && $firstBit == '1') {
             $bin = static::bitFlip($bin);
@@ -84,7 +84,7 @@ class BinDec
             $result =  BCMul($result,  number_format($resolution, 64, '.', null), 64);
         }
 
-        return $result;
+        return floatval($result);
     }
 
     /**
@@ -107,7 +107,7 @@ class BinDec
 
     private static function isBinary(string $string): bool
     {
-        return preg_match("/^[01]+$/", $string);
+        return preg_match("/^[01]+$/", $string) >= 1;
     }
 
     /**

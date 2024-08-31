@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Database\Mapper;
 
@@ -14,7 +15,7 @@ class WindroseMapper extends AbstractMapper
         'N', 'NNE', 'NE,', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW' ,'WSW', 'W', 'WNW', 'NW', 'NNW'
     ];
 
-    public function getWindroseEntity()
+    public function getWindroseEntity():WindRose
     {
         $entity = new WindRose();
         $range = 0 - static::TEST / 2;
@@ -31,7 +32,7 @@ class WindroseMapper extends AbstractMapper
         return $entity;
     }
 
-    private function getSegment(string $where, string $segment)
+    private function getSegment(string $where, string $segment):array
     {
         $sql = sprintf("select speed_range, count(*) as count from
             (SELECT CASE
@@ -53,10 +54,5 @@ class WindroseMapper extends AbstractMapper
             as wind_summaries group by speed_range", $where);
 
         return $this->database->query($sql);
-    }
-
-    private function countAll()
-    {
-        $result =  $this->database->query('select count(*) as count from wind_speed_hour' );
     }
 }

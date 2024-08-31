@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Config;
 
@@ -15,7 +16,7 @@ class Config
     {
         return static::getConfigArray()[static::MEMCACHED][static::HOST];
     }
-    public static function getMemcachePort():string
+    public static function getMemcachePort():int
     {
         return static::getConfigArray()[static::MEMCACHED][static::PORT];
     }
@@ -47,7 +48,7 @@ class Config
     {
         return static::getConfigArray()['socketServer'][static::HOST];
     }
-    public static function getSocketServerPort():string
+    public static function getSocketServerPort():int
     {
         return static::getConfigArray()['socketServer'][static::PORT];
     }
@@ -57,7 +58,7 @@ class Config
         return static::getConfigArray()['apiServer'][static::HOST];
     }
 
-    public static function getApiServerPort():string
+    public static function getApiServerPort():int
     {
         return static::getConfigArray()['apiServer'][static::PORT];
     }

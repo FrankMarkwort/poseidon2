@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Migration;
 
@@ -10,7 +11,7 @@ class Migration
     /**
      * @throws Exception
      */
-    public function run()
+    public function run(): void
     {
         foreach (include(__DIR__ . '/../config/migration.php') as $key => $migration) {
             Database::getInstance()->execute('CREATE TABLE IF NOT EXISTS migrations (lfd serial, migration VARCHAR(255) NOT NULL, PRIMARY KEY (migration));');

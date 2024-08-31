@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once( __DIR__ . '/../../../vendor/autoload.php');
@@ -16,10 +17,10 @@ try {
         echo $ancor->toJson(JSON_PRETTY_PRINT);
 
     } else {
-        $gpsFacade = DataFacadeFactory::create($cache->get(129025), 'YACHT_DEVICE');
-        $windFacade = DataFacadeFactory::create($cache->get(130306), 'YACHT_DEVICE');
-        $headingFacade = DataFacadeFactory::create($cache->get(127250), 'YACHT_DEVICE');
-        $waterDepthFacade = DataFacadeFactory::create($cache->get(128267), 'YACHT_DEVICE');
+        $gpsFacade = DataFacadeFactory::create($cache->get('129025'), 'YACHT_DEVICE');
+        $windFacade = DataFacadeFactory::create($cache->get('130306'), 'YACHT_DEVICE');
+        $headingFacade = DataFacadeFactory::create($cache->get('127250'), 'YACHT_DEVICE');
+        $waterDepthFacade = DataFacadeFactory::create($cache->get('128267'), 'YACHT_DEVICE');
         $waterDepth = $waterDepthFacade->getFieldValue(2)->getValue() + $waterDepthFacade->getFieldValue(1)->getValue();
         $awaDeg = $windFacade->getFieldValue(3)->getValue();
         $aws = $windFacade->getFieldValue(2)->getValue();

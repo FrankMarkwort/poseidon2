@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+declare(strict_types=1);
 set_time_limit(0);
 use Nmea\Cache\Memcached;
 use Nmea\Database\Database;

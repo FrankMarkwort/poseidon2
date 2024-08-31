@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Nmea\Parser\Lib\Units;
 
 interface UnitInterface

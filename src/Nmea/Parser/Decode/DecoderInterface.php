@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Nmea\Parser\Decode;
 
 interface DecoderInterface

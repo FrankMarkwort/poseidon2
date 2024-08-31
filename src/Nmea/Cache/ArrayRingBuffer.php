@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cache;
 
@@ -11,39 +12,39 @@ class ArrayRingBuffer extends AbstractRingBuffer implements Iterator
         return (count($this->getCache()->getAll()) ===  $this->getMax() && $this->getStoreIndex() === $this->getReadIndex());
     }
 
-    protected function setValue(string $key, mixed $value):void
+    protected function setValue(int $key, mixed $value):void
     {
-        $this->getCache()->set($key, $value);
+        $this->getCache()->set((string)$key, $value);
     }
 
-    protected function readValue(string $key):mixed
+    protected function readValue(int $key):mixed
     {
-        return $this->getCache()->get($key);
+        return $this->getCache()->get((string)$key);
     }
 
     protected function getReadIndex(): int
     {
-        return $this->getCache()->getByKey('index', 'readIndex');
+        return intval($this->getCache()->getByKey('index', 'readIndex'));
     }
 
     protected function setReadIndex(int $index): void
     {
-        $this->getCache()->setByKey('index', 'readIndex', $index);
+        $this->getCache()->setByKey('index', 'readIndex', (string)$index);
     }
 
     protected function getStoreIndex(): int
     {
-        return $this->getCache()->getByKey('index', 'storeIndex');
+        return intval($this->getCache()->getByKey('index', 'storeIndex'));
     }
 
     protected function setStoreIndex(int $index): void
     {
-        $this->getCache()->setByKey('index', 'storeIndex', $index);
+        $this->getCache()->setByKey('index', 'storeIndex', (string)$index);
     }
 
     protected function issetBuffer(int $key): bool
     {
-        return ! is_null($this->getCache()->get($key));
+        return ! is_null($this->getCache()->get((string) $key));
     }
 
     protected function countBuffer(): int
@@ -61,7 +62,7 @@ class ArrayRingBuffer extends AbstractRingBuffer implements Iterator
         // dont need
     }
 
-    public function key(): mixed
+    public function key(): int
     {
         return $this->getReadIndex();
     }

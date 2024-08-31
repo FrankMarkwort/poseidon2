@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Protocol\Frames\Frame;
 
@@ -53,7 +54,7 @@ readonly class Frame
     {
         if ($this->getHeader()->isFastPacked() && $this->getFrameCounter() === 0) {
 
-            return ceil((($this->totalNumberOfBytes() - 6) / 7) + 1);
+            return intval(ceil((($this->totalNumberOfBytes() - 6) / 7) + 1));
          }
 
         return -1;

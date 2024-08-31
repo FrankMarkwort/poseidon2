@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cache;
 
@@ -41,9 +42,9 @@ abstract class AbstractRingBuffer
     abstract protected function issetBuffer(int $key):bool;
     abstract protected function countBuffer():int;
 
-    abstract protected function setValue(string $key, mixed $value):void;
+    abstract protected function setValue(int $key, mixed $value):void;
 
-    abstract protected function readValue(string $key):mixed;
+    abstract protected function readValue(int $key):mixed;
 
     abstract protected function getReadIndex():int;
 

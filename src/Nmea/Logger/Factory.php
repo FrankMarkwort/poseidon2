@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Logger;
 
@@ -6,9 +7,9 @@ use Nmea\Logger\Logger\FileLogger;
 
 class Factory
 {
-    private static $instance;
+    private static LoggerInterface $instance;
 
-    public static function log(string $message)
+    public static function log(string $message): void
     {
         if (!static::$instance instanceof LoggerInterface) {
 

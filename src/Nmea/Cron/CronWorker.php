@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cron;
 
@@ -189,6 +190,9 @@ final class CronWorker extends AbstractCronWorker
         }
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function printWindConsole(
         DataFacade $temperatureFacade,
         DataFacade $windFacade,
@@ -201,6 +205,9 @@ final class CronWorker extends AbstractCronWorker
             . $this->printAllFieldNames($vesselHeadingFacade);
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function printPositionConsole(DataFacade $position, DataFacade $courseOberGround, DataFacade $drift):string
     {
         return $this->printAllFieldNames($position)

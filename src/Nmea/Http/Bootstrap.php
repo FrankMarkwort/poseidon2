@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Http;
 
@@ -32,9 +33,12 @@ readonly class Bootstrap
         }
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function getOnePgn(int $pgn):void
     {
-        $nmea20000 = $this->cache->get($pgn);
+        $nmea20000 = $this->cache->get((string)$pgn);
         try {
             $collection = new DataFacadenColection();
             $collection->add(DataFacadeFactory::create($nmea20000, 'YACHT_DEVICE'));
@@ -46,6 +50,9 @@ readonly class Bootstrap
         }
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function getAllPgns():void
     {
         $collection = new DataFacadenColection();

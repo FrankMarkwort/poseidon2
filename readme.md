@@ -8,7 +8,7 @@ The wind data is stored every minute for maximum 60 minutes.\
 After that, the average, min, max values ​​are stored in the hourly table.\
 The ship's position is stored in the positions table every hour when the ship is moving.\
 (Id, Id_wind, Date, Latitude, longitude, cog, sog, set, drift)\
-***The decoder works on 32 bit and 64 bit systems***\
+***The decoder works on 32-bit and 64-bit systems***\
 \
 The deamon assembles the data packets from "NMEA 2000 USB Gateway YDNU-02 (Yacht-Device)" and saves them ready for decoding in the memcached server. The key is the pgn.\
 Data format from usb device

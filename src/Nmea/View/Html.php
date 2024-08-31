@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\View;
 
@@ -13,13 +14,13 @@ class Html extends AbstractView
             . $this->getEndHtml();
     }
 
-    private function htmlRows()
+    private function htmlRows(): string
     {
         $html = '';
         foreach ($this->dataFacaden as $dataFacade) {
             try {
                 $html .= $this->tableRowMainHead(
-                    $dataFacade->getPng(),
+                    (string)$dataFacade->getPng(),
                     $dataFacade->getFrameType(),
                     $dataFacade->getDescription()
                 );

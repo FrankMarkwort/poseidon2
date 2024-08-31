@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Parser\Data;
 
@@ -71,6 +72,9 @@ readonly class DataFacade
         return $this->dataPart->getFieldValue($order);
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getOrderIds(): array
     {
         return $this->dataPart->getOrderIds();

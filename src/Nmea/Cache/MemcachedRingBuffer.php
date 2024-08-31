@@ -1,7 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Cache;
-
 class MemcachedRingBuffer extends AbstractRingBuffer
 {
     private const string SERVER_KEY = 'index';
@@ -17,14 +17,14 @@ class MemcachedRingBuffer extends AbstractRingBuffer
         return (count(array_filter($this->getCache()->getAll(), 'is_int', ARRAY_FILTER_USE_KEY)));
     }
 
-    protected function setValue(string $key, mixed $value):void
+    protected function setValue(int $key, mixed $value):void
     {
-        $this->getCache()->set($key, $value);
+        $this->getCache()->set((string) $key, $value);
     }
 
-    protected function readValue(string $key):mixed
+    protected function readValue(int $key):mixed
     {
-        return $this->getCache()->get( $key);
+        return $this->getCache()->get((string)$key);
     }
 
     protected function getReadIndex(): int
@@ -49,7 +49,7 @@ class MemcachedRingBuffer extends AbstractRingBuffer
 
     protected function issetBuffer(int $key): bool
     {
-        return ! is_null($this->getCache()->get($key));
+        return ! is_null($this->getCache()->get((string) $key));
     }
 
     protected function countBuffer(): int

@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+declare(strict_types=1);
 
 use Nmea\Database\Database;
 use Nmea\Migration\Migration;

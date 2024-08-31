@@ -1,13 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace Nmea\Database\Entity;
 
 class WindRose
 {
     private array $data = [];
-    public function add(string $segment, array $data)
+    public function add(string $segment, array $data):self
     {
         $this->data[$segment] = $data;
+
+        return $this;
     }
 
     public function count():int
@@ -41,7 +44,7 @@ class WindRose
         foreach ($this->toArray() as $segment => $data) {
             $cols .= $this->td('class="dir"', $segment);
             foreach ($data as $key => $value) {
-                $cols .= $this->td('class="data"', $this->toProcent($value['count']));
+                $cols .= $this->td('class="data"', (string)$this->toProcent($value['count']));
                 $totals[$key] += $value['count'];
             }
             $i++;
@@ -79,7 +82,7 @@ class WindRose
         return sprintf('<th %s>%s</th>',$attribute, $col);
     }
 
-    public function td(string $attribute, string $col):string
+    public function td(string $attribute, string|int|float $col):string
     {
         return sprintf('<td %s>%s</td>', $attribute, $col);
     }
