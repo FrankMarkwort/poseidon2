@@ -2,10 +2,14 @@
 
 namespace Nmea\Migration;
 
+use Exception;
 use Nmea\Database\Database;
 
 class Migration
 {
+    /**
+     * @throws Exception
+     */
     public function run()
     {
         foreach (include(__DIR__ . '/../config/migration.php') as $key => $migration) {

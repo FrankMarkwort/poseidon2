@@ -12,6 +12,9 @@ class ConfigFactory
 {
     private static ConfigPgn|null $configInstance = null;
 
+    /**
+     * @throws ConfigException
+     */
     public static function create(int $png): PngFieldConfig
     {
         return static::getNewPngFieldConfigInstance()

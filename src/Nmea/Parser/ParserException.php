@@ -8,7 +8,7 @@
  */
 namespace Nmea\Parser;
 
-use \Exception;
+use Exception;
 
 class ParserException extends Exception
 {

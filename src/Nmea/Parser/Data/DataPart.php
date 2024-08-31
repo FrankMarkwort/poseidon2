@@ -2,6 +2,7 @@
 
 namespace Nmea\Parser\Data;
 
+use Nmea\Config\ConfigException;
 use Nmea\Parser\Decode\DecoderInterface;
 use Nmea\Config\PngFieldConfig;
 use Nmea\Parser\Decode\Request;
@@ -29,6 +30,9 @@ class DataPart
         return $this;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getDescription():string
     {
         return $this->pngFieldConfig->getDescription();
@@ -45,7 +49,7 @@ class DataPart
     }
 
     /**
-     * @throws \Nmea\Config\ConfigException
+     * @throws ConfigException
      */
     public function getFieldValue(int $order): Data
     {

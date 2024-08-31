@@ -2,14 +2,15 @@
 
 namespace Nmea\Deamon;
 
+use Exception;
 use Nmea\Cache\CacheInterface;
 use Nmea\Logger\Factory;
 use Nmea\Protocol\FramesFactory;
 use Nmea\Protocol\Socket\Client;
 
-class Bootstrap
+readonly class Bootstrap
 {
-    public function __construct(readonly Serial $serial, readonly CacheInterface $cache, readonly Client $websocket)
+    public function __construct(public Serial $serial, public CacheInterface $cache, public Client $websocket)
     {
     }
 
@@ -28,7 +29,7 @@ class Bootstrap
                 }
 
                 FramesFactory::addData($line);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Factory::log($line . ': ' . $e->getMessage());
                 $run = false;
             }

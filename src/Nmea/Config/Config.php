@@ -4,33 +4,40 @@ namespace Nmea\Config;
 
 class Config
 {
+    private const string HOST = 'host';
+    private const string PORT = 'port';
+    private const string MEMCACHED = 'memcached';
+    private const string MARIADB = 'mariadb';
+    private const string USER = 'user';
+    private const string PASSWORD = 'password';
+    private const string DBNAME = 'dbname';
     public static function getMemcacheHost():string
     {
-        return static::getConfigArray()['memcached']['host'];
+        return static::getConfigArray()[static::MEMCACHED][static::HOST];
     }
     public static function getMemcachePort():string
     {
-        return static::getConfigArray()['memcached']['port'];
+        return static::getConfigArray()[static::MEMCACHED][static::PORT];
     }
     public static function getMariadbHost():string
     {
-        return static::getConfigArray()['mariadb']['host'];
+        return static::getConfigArray()[static::MARIADB][static::HOST];
     }
     public static function getMariadbPort():int
     {
-        return static::getConfigArray()['mariadb']['port'];
+        return static::getConfigArray()[static::MARIADB][static::PORT];
     }
     public static function getMariadbName():string
     {
-        return static::getConfigArray()['mariadb']['dbname'];
+        return static::getConfigArray()[static::MARIADB][static::DBNAME];
     }
     public static function getMariadbUser():string
     {
-        return static::getConfigArray()['mariadb']['user'];
+        return static::getConfigArray()[static::MARIADB][static::USER];
     }
     public static function getMariadbPassword():string
     {
-        return static::getConfigArray()['mariadb']['password'];
+        return static::getConfigArray()[static::MARIADB][static::PASSWORD];
     }
     public static function getSerialDevice():string
     {
@@ -38,21 +45,21 @@ class Config
     }
     public static function getSocketServerHost():string
     {
-        return static::getConfigArray()['socketServer']['host'];
+        return static::getConfigArray()['socketServer'][static::HOST];
     }
     public static function getSocketServerPort():string
     {
-        return static::getConfigArray()['socketServer']['port'];
+        return static::getConfigArray()['socketServer'][static::PORT];
     }
 
     public static function getApiServerHost():string
     {
-        return static::getConfigArray()['apiServer']['host'];
+        return static::getConfigArray()['apiServer'][static::HOST];
     }
 
     public static function getApiServerPort():string
     {
-        return static::getConfigArray()['apiServer']['port'];
+        return static::getConfigArray()['apiServer'][static::PORT];
     }
 
     private static function getConfigArray():array

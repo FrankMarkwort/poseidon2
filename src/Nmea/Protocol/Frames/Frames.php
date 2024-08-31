@@ -3,6 +3,7 @@
 namespace Nmea\Protocol\Frames;
 
 use Nmea\Cache\CacheInterface;
+use Nmea\Config\ConfigException;
 use Nmea\Cron\EnumPgns;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
@@ -101,6 +102,7 @@ class Frames
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     private function windSocketData($pgn, string $data):void
     {
@@ -114,6 +116,7 @@ class Frames
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     private function writeToSocket():void
     {
@@ -153,7 +156,7 @@ class Frames
             foreach ($frames[0]->getData()->getDataBytes() as $index => $byte) {
                     $data .= $splitter . $byte ;
                     $splitter = ' ';
-            };
+            }
             $this->addCache($frames[0], $data);
 
             return true;

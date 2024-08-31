@@ -2,7 +2,7 @@
 
 namespace Nmea\Cache;
 
-use \Memcached as Cache;
+use Memcached as Cache;
 use Nmea\Logger\Factory;
 use Exception;
 
@@ -10,11 +10,14 @@ class Memcached implements CacheInterface
 {
     private $cache;
 
+    /**
+     * @throws Exception
+     */
     public function __construct(private string $host = '127.0.0.1', private int $port = 11211)
     {
         $this->cache = new Cache();
         if (!$this->cache->addServer($host, $port)) {
-            throw new \Exception('memcache connection failed');
+            throw new Exception('memcache connection failed');
         }
     }
     public function isSet(string $key):bool
@@ -34,6 +37,9 @@ class Memcached implements CacheInterface
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getAll(): array
     {
         $memcachedAllKeysNotRealyWorking = $this->getAllKeys();
@@ -69,6 +75,9 @@ class Memcached implements CacheInterface
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     private function getAllKeys(): array
     {
         $allKeys = [];

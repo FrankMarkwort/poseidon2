@@ -103,6 +103,7 @@ class Positions implements ComparableInterface
         if ($position instanceof Positions) {
             if (round($this->getLatitude(), 3) === round($position->getLatitude(), 3)
                 && round($this->getLongitude(), 3) === round($position->getLongitude(), 3)) {
+
                 return true;
             }
         }

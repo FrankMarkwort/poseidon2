@@ -1,6 +1,7 @@
 <?php
 namespace TestsNmea\Config;
 
+use Exception;
 use Nmea\Config\ConfigPgn;
 use Nmea\Config\PngFieldConfig;
 use PHPUnit\Framework\TestCase;
@@ -62,7 +63,7 @@ class PngFieldConfigTest extends TestCase
             'BitStart' => 0,
             'Signed' =>false
         ];
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->assertEquals($expected,$this->configFields->getFieldsByOrder(99) );
     }
 

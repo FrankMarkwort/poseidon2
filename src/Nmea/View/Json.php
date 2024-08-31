@@ -2,6 +2,8 @@
 
 namespace Nmea\View;
 
+use Nmea\Config\ConfigException;
+
 class Json extends AbstractView
 {
     public function present(): string
@@ -9,6 +11,9 @@ class Json extends AbstractView
         return $this->toJson();
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function toJson():string
     {
         foreach ($this->dataFacaden as $dataFacade) {

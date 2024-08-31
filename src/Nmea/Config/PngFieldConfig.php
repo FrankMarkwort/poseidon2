@@ -32,6 +32,9 @@ class PngFieldConfig
         return $this;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function setPgn(int $png):self
     {
         $this->png = $png;
@@ -40,11 +43,17 @@ class PngFieldConfig
         return $this;
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getDescription():string
     {
         return $this->configInstance->getDescription($this->png);
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getOrderIds():array
     {
         return $this->configInstance->getOrderIds($this->png);

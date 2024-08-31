@@ -8,6 +8,7 @@
  */
 namespace Nmea\Parser\Data;
 
+use Exception;
 use Nmea\Parser\Decode\DecodeCanId;
 use Nmea\Parser\ParserException;
 
@@ -52,7 +53,7 @@ class MainPart
 
     /**
      * @throws ParserException
-     * @throws \Exception
+     * @throws Exception
      */
     public function setMainBitString(string $string):self
     {

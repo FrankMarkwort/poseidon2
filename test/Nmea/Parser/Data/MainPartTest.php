@@ -1,6 +1,7 @@
 <?php
 namespace Nmea\Parser\Data;
 
+use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -39,7 +40,7 @@ class MainPartTest extends TestCase
 
     public function testException()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $testData = '2011-11-24-22:42:04.388,2,127251,36,255';
         $this->mainPart->setMainBitString($testData);
     }

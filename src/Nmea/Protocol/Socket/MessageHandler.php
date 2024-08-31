@@ -2,9 +2,11 @@
 
 namespace Nmea\Protocol\Socket;
 
+use Socket;
+
 class MessageHandler implements HandleInterface
 {
-    public function __construct(private SocketsCollection $clientSockets)
+    public function __construct(private readonly SocketsCollection $clientSockets)
     {
     }
     public function send(mixed $message):true
@@ -44,16 +46,14 @@ class MessageHandler implements HandleInterface
 		$b1 = 0x80 | (0x1 & 0x0f);
 		$length = strlen($socketData);
 
-		if($length <= 125)
-			$header = pack('CC', $b1, $length);
-		elseif($length > 125 && $length < 65536)
-			$header = pack('CCn', $b1, 126, $length);
-		elseif($length >= 65536)
-			$header = pack('CCNN', $b1, 127, $length);
+		if($length <= 125) $header = pack('CC', $b1, $length);
+		elseif($length < 65536) $header = pack('CCn', $b1, 126, $length);
+        else $header = pack('CCNN', $b1, 127, $length);
+
 		return $header.$socketData;
 	}
 
-	public function doHandshake(string $receivedHeader, \Socket $clientSocketResource, string $hostName, int $port):void
+	public function doHandshake(string $receivedHeader, Socket $clientSocketResource, string $hostName, int $port):void
     {
 		$headers = array();
 		$lines = preg_split("/\r\n/", $receivedHeader);
@@ -78,24 +78,20 @@ class MessageHandler implements HandleInterface
     {
 		$message = 'New client ' . $clientIpAddress.' joined';
 		$messageArray = array('message'=> $message,'message_type'=>'chat-connection-ack');
-		$ack = $this->seal(json_encode($messageArray));
 
-		return $ack;
+        return $this->seal(json_encode($messageArray));
 	}
 
 	public function connectionDisconnectAck(string $clientIpAddress):string
     {
 		$message = 'Client ' . $clientIpAddress.' disconnected';
 		$messageArray = array('message'=>$message,'message_type'=>'chat-connection-ack');
-		$ack = $this->seal(json_encode($messageArray));
 
-		return $ack;
+        return $this->seal(json_encode($messageArray));
 	}
 
 	public function createMessage(string $jsonMessage):string
     {
-        $chatMessage = $this->seal($jsonMessage);
-
-		return $chatMessage;
+        return $this->seal($jsonMessage);
 	}
 }

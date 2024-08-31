@@ -52,9 +52,7 @@ class WindroseMapper extends AbstractMapper
             where (%s))
             as wind_summaries group by speed_range", $where);
 
-            $result =  $this->database->query($sql);
-
-            return $result;
+        return $this->database->query($sql);
     }
 
     private function countAll()

@@ -4,7 +4,7 @@ namespace Nmea\Math;
 
 abstract class AbstractAngleRad
 {
-    private const DELTA = 0.0001;
+    private const float DELTA = 0.0001;
 
     protected float $omega = 0;
 

@@ -80,11 +80,17 @@ class ConfigPgn
         return $this->getPngConfig($pngNumber)[static::REPEATING_FIELDS];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function countFields(int $pngNumber):int
     {
         return count($this->getPngConfig($pngNumber)[static::FIELDS]);
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getId(int $pngNumber):string
     {
         return $this->getPngConfig($pngNumber)[static::ID];
@@ -98,6 +104,9 @@ class ConfigPgn
         return $this->getPngConfig($pngNumber)[static::DESCRIPTION];
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getLength(int $pngNumber):string
     {
         return $this->getPngConfig($pngNumber)[static::LENGTH];

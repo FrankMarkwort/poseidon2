@@ -2,6 +2,8 @@
 
 namespace Nmea\Protocol\Realtime;
 
+use ErrorException;
+use Nmea\Config\ConfigException;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\Data\DataFacade;
@@ -17,6 +19,8 @@ readonly class WindSpeedCourseFactory
 
     /**
      * @throws ParserException
+     * @throws ConfigException
+     * @throws ErrorException
      */
     public function writeToSocket(string $windData, string $cogSogData, string $vesselHeading):void
      {
@@ -38,6 +42,9 @@ readonly class WindSpeedCourseFactory
         $this->webSocket->send(json_encode(['testmsg' => $windSpeedCourse->toArray()]));
     }
 
+    /**
+     * @throws ConfigException
+     */
     protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, float $omegaFieldvalue): PolarVector
     {
          return (new PolarVector())

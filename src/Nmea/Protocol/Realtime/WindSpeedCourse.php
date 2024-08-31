@@ -4,8 +4,6 @@ namespace Nmea\Protocol\Realtime;
 
 use Nmea\Math\EnumRange;
 use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Math\Vector\PolarVectorOperation;
 
 class WindSpeedCourse extends AbstractWindSpeedCourse
 {

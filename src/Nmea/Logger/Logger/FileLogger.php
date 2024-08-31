@@ -3,11 +3,12 @@
 namespace Nmea\Logger\Logger;
 
 use Nmea\Logger\AbstractLogger;
+use Stringable;
 
 class FileLogger extends AbstractLogger
 {
 
-    public function log($level, \Stringable|string $message, array $context = []): void
+    public function log($level, Stringable|string $message, array $context = []): void
     {
         $filename = __DIR__ . '/../../../logs/' . date('Y-m-d') . '.log';
         if (!file_exists($filename)) {

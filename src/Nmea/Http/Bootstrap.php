@@ -2,6 +2,7 @@
 
 namespace Nmea\Http;
 
+use Exception;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Logger\Factory;
@@ -11,10 +12,10 @@ use Nmea\Parser\ParserException;
 use Nmea\View\Html;
 use Nmea\View\Json;
 
-class Bootstrap
+readonly class Bootstrap
 {
 
-    public function __construct(private readonly CacheInterface $cache)
+    public function __construct(private CacheInterface $cache)
     {
     }
 
@@ -26,7 +27,7 @@ class Bootstrap
             } else {
                 $this->getAllPgns();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
              Factory::log($e->getMessage());
         }
     }
@@ -51,9 +52,9 @@ class Bootstrap
         foreach ($this->cache->getAll() as $pgn => $nmea2000) {
             try {
                 $collection->add(DataFacadeFactory::create($nmea2000, 'YACHT_DEVICE'));
-            } catch (ParserException $e) {
+            } catch (ParserException|ConfigException $e) {
 
-            } catch (ConfigException $f) {}
+            }
         }
         if ($this->getmode() === 'json') {
             echo (new Json($collection))->present();

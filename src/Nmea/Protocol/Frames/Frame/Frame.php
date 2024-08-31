@@ -24,7 +24,7 @@ readonly class Frame
     {
         if($this->header->isFastPacked()) {
 
-            return $this->getNHighBits($this->getData()->getFirstByte(), 5);
+            return $this->getNHighBits($this->getData()->getFirstByte());
 
         }
 

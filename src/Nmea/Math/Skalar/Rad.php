@@ -2,6 +2,7 @@
 
 namespace Nmea\Math\Skalar;
 
+use Exception;
 use Nmea\Math\AbstractAngleRad;
 use Nmea\Math\EnumRange;
 
@@ -13,10 +14,10 @@ class Rad extends AbstractAngleRad
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function rotate(float $rad): Rad
     {
-        throw new \Exception('not implemented');
+        throw new Exception('not implemented');
     }
 }

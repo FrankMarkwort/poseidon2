@@ -2,6 +2,8 @@
 
 namespace Nmea\View;
 
+use Exception;
+
 class Html extends AbstractView
 {
     public function present(): string
@@ -33,7 +35,7 @@ class Html extends AbstractView
                         );
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $a = 1;
             }
         }

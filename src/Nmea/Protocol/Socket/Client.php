@@ -1,7 +1,8 @@
 <?php
 namespace Nmea\Protocol\Socket;
 
-use \RuntimeException;
+use ErrorException;
+use RuntimeException;
 /*
 	based on: http://stackoverflow.com/questions/7160899/websocket-client-in-php/16608429#16608429
 	FIRST EXEC PYTHON SCRIPT TO GET HEADERS
@@ -10,10 +11,10 @@ use \RuntimeException;
 
 class Client
 {
-	private $head;
+	private string $head;
 	private $instance;
 
-	public function __construct(private string $host, private int $port)
+	public function __construct(private readonly string $host, private readonly int $port)
 	{
 	}
 
@@ -34,7 +35,7 @@ class Client
     }
 
     /**
-     *
+     * @throws ErrorException
      */
 	public function send(string $method)
 	{
@@ -54,13 +55,13 @@ class Client
     }
 
     /**
-     *
+     * @throws ErrorException
      */
     private function connect()
     {
         $sock = @fsockopen($this->host, $this->port, $errno, $errstr, 2);
         if ($sock === false) {
-            throw new \ErrorException("$errstr ($errno)");
+            throw new ErrorException("$errstr ($errno)");
         }
         fwrite($sock, $this->head);
         $headers = fread($sock, 2000);

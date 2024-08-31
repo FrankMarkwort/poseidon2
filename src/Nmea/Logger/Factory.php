@@ -3,7 +3,6 @@
 namespace Nmea\Logger;
 
 use Nmea\Logger\Logger\FileLogger;
-use Nmea\Logger\Logger\NullLogger;
 
 class Factory
 {

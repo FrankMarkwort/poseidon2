@@ -2,6 +2,8 @@
 
 namespace Nmea\Deamon;
 
+use Exception;
+
 class Serial
 {
     private $streamResource;
@@ -9,11 +11,15 @@ class Serial
     public function __construct(private readonly string $deviceName, private readonly string $mode = 'r')
     {
     }
+
+    /**
+     * @throws Exception
+     */
     public function readStream():string
     {
         $result = fgets($this->streamResource);
         if ($result === false) {
-            throw new \Exception();
+            throw new Exception();
         }
 
         return $this->removeSpecialCharacter($result);

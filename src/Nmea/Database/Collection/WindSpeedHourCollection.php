@@ -39,7 +39,7 @@ class WindSpeedHourCollection
 
             $minMaxWatertemperature[] = [$entity->getMinWatertemperature(),$entity->getMaxWatertemperature()];
             $avgWatertemperature[] = $entity->getAvgWatertemperature();
-        };
+        }
         $startTime = strtotime(reset($this->enitiys)->getDate());
         $endTime = strtotime(end($this->enitiys)->getDate());
         $pointInterval = ($endTime - $startTime) / $this->count();

@@ -41,7 +41,7 @@ class PositionMapper extends AbstractMapper
 
      private function angleGrad(float $angle): float
     {
-        return round(rad2deg($angle), 0);
+        return round(rad2deg($angle));
     }
 
 }
