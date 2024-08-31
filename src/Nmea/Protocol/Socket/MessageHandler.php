@@ -4,9 +4,9 @@ namespace Nmea\Protocol\Socket;
 
 use Socket;
 
-class MessageHandler implements HandleInterface
+readonly class MessageHandler implements HandleInterface
 {
-    public function __construct(private readonly SocketsCollection $clientSockets)
+    public function __construct(private SocketsCollection $clientSockets)
     {
     }
     public function send(mixed $message):true

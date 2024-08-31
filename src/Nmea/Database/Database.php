@@ -9,7 +9,7 @@ use PDOException;
 class Database implements DatabaseInterface
 {
     private PDO $pdo;
-    private static $instance = null;
+    private static self|null $instance = null;
 
     public function init(string $host, int $port, string $user, string $pass, string $db): void
     {

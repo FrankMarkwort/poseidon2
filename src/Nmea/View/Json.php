@@ -6,6 +6,9 @@ use Nmea\Config\ConfigException;
 
 class Json extends AbstractView
 {
+    /**
+     * @throws ConfigException
+     */
     public function present(): string
     {
         return $this->toJson();

@@ -38,6 +38,9 @@ class DataPart
         return $this->pngFieldConfig->getDescription();
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getOrderIds():array
     {
         return $this->pngFieldConfig->getOrderIds();

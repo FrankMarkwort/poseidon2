@@ -55,6 +55,9 @@ readonly class DataFacade
         return $this->dataPart->count();
     }
 
+    /**
+     * @throws ConfigException
+     */
     public function getDescription(): string
     {
         return $this->dataPart->getDescription();

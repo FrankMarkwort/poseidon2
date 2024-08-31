@@ -3,6 +3,7 @@
 
 namespace Nmea\Parser;
 
+use Nmea\Config\ConfigException;
 use Nmea\Config\ConfigFactory;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\Data\DataPart;
@@ -16,6 +17,7 @@ class DataFacadeFactory
 
     /**
      * @throws ParserException
+     * @throws ConfigException
      */
     public static function create(string $nmea2000Data, string $device = self::NONE_DEVICE):DataFacade
     {

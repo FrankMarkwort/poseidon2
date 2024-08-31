@@ -16,7 +16,7 @@ class Unit implements UnitInterface
     private array $unitsConfig;
     private array $supported = ['km/h', 'kt', 'C', 'F', 'hPa', 'grad'];
 
-    public function __construct(private float|int $value, private readonly string|null $unit, private ?string $type= null)
+    public function __construct(private readonly float|int $value, private readonly string|null $unit, private ?string $type= null)
     {
         $this->setConfig(include( static::CONFIG_DIR_FILE));
     }

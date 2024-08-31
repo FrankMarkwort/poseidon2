@@ -87,6 +87,9 @@ class Frames
         return false;
     }
 
+    /**
+     * @throws ConfigException
+     */
     private function addCache(Frame $frame, string $data):void
     {
         $this->cache->set($frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
@@ -115,8 +118,9 @@ class Frames
     }
 
     /**
-     * @throws ParserException
      * @throws ConfigException
+     * @throws ParserException
+     * @throws \ErrorException
      */
     private function writeToSocket():void
     {

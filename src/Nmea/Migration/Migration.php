@@ -20,7 +20,7 @@ class Migration
             if (isset($result) && $result[0]['sum'] === 1) {
                 echo "skip old migration:  {$migration['migration']}\n";
                 continue;
-            };
+            }
             echo "run migration: {$migration['migration']}\n";
             $sql = file_get_contents($migration['file']);
             if (Database::getInstance()->execute($sql) !== false) {
