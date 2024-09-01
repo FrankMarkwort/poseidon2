@@ -68,7 +68,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-- 5 Create Linux service phpcron
+- 5 Create Linux service phpcron (every 60 sec)
 ```root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
 [Unit]
 Description=Data NMEA2000 Cron
@@ -81,11 +81,25 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+- 5.1 Create Linux service php-socket-server (realtime data)
+```root@raspberrypi:~# cat /etc/systemd/system/php-socket-server.service
+[Unit]
+Description=NMEA2000 SocketServer
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/php  /var/www/html/src/http/../deamon/socketServer.php
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
 - 6 activate the services
-  ```
-  sudo systemctl enable phpreader
-  sudo systemctl enable phpcron
-  ```
+```
+sudo systemctl enable phpreader
+ sudo systemctl enable phpcron
+ sudo systemctl enable php-socket-server
+ ```
 - 7 start and test
 ```
 root@raspberrypi:~# service phpreader start
