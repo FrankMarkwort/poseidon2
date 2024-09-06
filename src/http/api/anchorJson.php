@@ -3,10 +3,11 @@ declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once( __DIR__ . '/../../../vendor/autoload.php');
-use Nmea\Config\Config;
+
 use Nmea\Cache\Memcached;
+use Nmea\Config\Config;
 use Nmea\Parser\DataFacadeFactory;
-use Nmea\Database\Entity\Anchor;
+use Modules\AnchorWatch\Anchor;
 
 header('Content-Type: application/json; charset=utf-8');
 try {

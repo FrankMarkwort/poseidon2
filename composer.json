@@ -15,12 +15,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Nmea\\": "src/Nmea/"
+            "Nmea\\": "src/Nmea/",
+            "Modules\\": "src/Modules/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TestsNmea\\": "test/Nmea/"
+            "TestsNmea\\": "test/Nmea/",
+            "TestsModules\\": "test/Modules/"
         }
     },
     "require": {

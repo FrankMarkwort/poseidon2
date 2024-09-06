@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Entity\Observer;
+namespace Modules\AnchorWatch\Observer;
 
 use Exception;
 use Nmea\Cache\Memcached;
 use Nmea\Config\Config;
-use Nmea\Database\Entity\Anchor;
+use Modules\AnchorWatch\Anchor;
 
 class ObserverAnchorToCache implements InterfaceObserver
 {

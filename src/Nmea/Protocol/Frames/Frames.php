@@ -144,7 +144,7 @@ class Frames
         $socketObj->writeToSocket(
             $this->tempStore[EnumPgns::WIND->value],
             $this->tempStore[EnumPgns::COG_SOG->value],
-            $this->tempStore[EnumPgns::Vessel_Heading->value]
+            $this->tempStore[EnumPgns::VESSEL_HEADING->value]
         );
         $this->tempStore = [];
     }
@@ -152,7 +152,7 @@ class Frames
     private function hasAllDataForWindSocket():bool
     {
         if (isset($this->tempStore[EnumPgns::WIND->value])
-            && isset($this->tempStore[EnumPgns::Vessel_Heading->value])
+            && isset($this->tempStore[EnumPgns::VESSEL_HEADING->value])
             && isset($this->tempStore[EnumPgns::COG_SOG->value])) {
 
             return true;
@@ -162,7 +162,7 @@ class Frames
 
     private function isNeedForWindData($pgn):bool
     {
-        return in_array($pgn, array(EnumPgns::WIND->value,EnumPgns::Vessel_Heading->value,EnumPgns::COG_SOG->value));
+        return in_array($pgn, array(EnumPgns::WIND->value,EnumPgns::VESSEL_HEADING->value,EnumPgns::COG_SOG->value));
 
     }
 

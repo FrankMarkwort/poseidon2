@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Entity;
+namespace Modules\AnchorWatch;
 
-use Nmea\Database\Entity\Observer\InterfaceObservable;
-use Nmea\Database\Entity\Observer\InterfaceObserver;
+use Modules\AnchorWatch\Observer\InterfaceObservable;
+use Modules\AnchorWatch\Observer\InterfaceObserver;
 
 class Anchor implements InterfaceObservable
 {

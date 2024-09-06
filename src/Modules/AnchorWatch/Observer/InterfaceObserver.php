@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Entity\Observer;
+namespace Modules\AnchorWatch\Observer;
 
 
 interface InterfaceObserver

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Entity\Observer;
+namespace Modules\AnchorWatch\Observer;
 
-use Nmea\Database\Entity\Anchor;
+use Modules\AnchorWatch\Anchor;
 
 class ObserverAnchorPrintConsole implements InterfaceObserver
 {

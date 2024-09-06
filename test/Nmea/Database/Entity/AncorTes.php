@@ -2,8 +2,8 @@
 
 namespace TestsNmea\Database\Entity;
 
-use Nmea\Database\Entity\Anchor;
 use PHPUnit\Framework\TestCase;
+use Modules\AnchorWatch\Anchor;
 
 class AncorTes extends TestCase
 {
