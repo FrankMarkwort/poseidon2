@@ -16,7 +16,9 @@ $worker = new CronWorker(
         new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()),
         getRunMode($argv)
 );
+$worker->attach(new \Modules\AnchorWatch\Bootstrap());
 $worker->run();
+
 
 function getRunMode(array $argv):ModeEnum
 {

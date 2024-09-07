@@ -2,32 +2,59 @@
 
 namespace Modules\AnchorWatch;
 
-class Bootstrap
+use Modules\AnchorWatch\Observer\ObserverAnchorPrintConsole;
+use Modules\AnchorWatch\Observer\ObserverAnchorToCache;
+use Modules\External\AnchorFacade;
+use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
+use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
+use Modules\Internal\Pgns\Chain;
+use Nmea\Config\ConfigException;
+use Nmea\Parser\ParserException;
+
+class Bootstrap implements InterfaceObserverCronWorker
 {
-/**
-     * @throws ParserException
-     * @throws ConfigException
-     */
-    private function anchor(string $position, string $vesselHeading, string $waterDepth, string $windData): void
+    private Anchor $anchor;
+
+    public function __construct()
     {
-        $positionFacade = DataFacadeFactory::create($position, 'YACHT_DEVICE');
-        $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
-        $waterDepthFacade = DataFacadeFactory::create($waterDepth, 'YACHT_DEVICE');
-        $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
-        $this->anchor->setPosition(
-            $positionFacade->getFieldValue(1)->getValue(),
-            $positionFacade->getFieldValue(2)->getValue(),
-            $vesselHeadingFacade->getFieldValue(2)->getValue(),
-            ($waterDepthFacade->getFieldValue(2)->getValue() + $waterDepthFacade->getFieldValue(3)->getValue()),
-            $windFacade->getFieldValue(3)->getValue(),
-            $windFacade->getFieldValue(2)->getValue()
-        );
-        if (! $this->cache->isSet(CronWorker::CHAIN_LENGTH)) {
-            $this->anchor->unsetAnchor();
-            $this->cache->delete('OBJ_ANCHOR');
-        } else {
-            if (! $this->anchor->isAnchorSet()) {
-                $this->anchor->setAnchor($this->cache->get(CronWorker::CHAIN_LENGTH));
+        $this->anchor = new Anchor();
+        $this->anchor->attach(new ObserverAnchorToCache());
+    }
+
+    public function isRunEveryMinute(): bool
+    {
+        return true;
+    }
+
+    public function setDebugMode(): void
+    {
+         $this->anchor->attach(new ObserverAnchorPrintConsole());
+    }
+
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
+    public function update(InterfaceObservableCronWorker $observable): void
+    {
+        if ($observable->isEveryMinute() === $this->isRunEveryMinute()) {
+            $anchorFacade = new AnchorFacade($observable->getCache());
+            $chane = new Chain($observable->getCache());
+            $this->anchor->setPosition(
+                $anchorFacade->getLatitudeDeg(),
+                $anchorFacade->getLongitudeDeg(),
+                $anchorFacade->getHeadingRad(),
+                $anchorFacade->getWaterDepth(),
+                $anchorFacade->getAwaRad(),
+                $anchorFacade->getAws()
+            );
+            if (!$anchorFacade->isSetChain()) {
+                $this->anchor->unsetAnchor();
+                $anchorFacade->removeChainFromCache();
+            } else {
+                if (!$this->anchor->isAnchorSet()) {
+                    $this->anchor->setAnchor($anchorFacade->getChainLength());
+                }
             }
         }
     }

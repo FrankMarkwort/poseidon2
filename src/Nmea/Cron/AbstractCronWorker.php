@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Nmea\Cron;
 
+use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
+use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Database\DatabaseInterface;
@@ -10,8 +12,11 @@ use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\Data\DataFacade;
 
-abstract class AbstractCronWorker
+abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 {
+    private bool $everyMinuteRun;
+    protected array $observers;
+
     abstract function run():void;
 
      public function __construct(
@@ -71,5 +76,40 @@ abstract class AbstractCronWorker
     protected function getNewRad(float $rad):Rad
     {
         return (new Rad())->setOmega($rad);
+    }
+
+    public function attach(InterfaceObserverCronWorker $observer):void
+    {
+        $this->observers[] = $observer;
+    }
+
+    public function detach(InterfaceObserverCronWorker $observer):void
+    {
+        $this->observers = array_diff($this->observers, array($observer));
+    }
+
+    public function getCache():CacheInterface
+    {
+        return $this->cache;
+    }
+
+    public function isEveryMinute(): bool
+    {
+        return $this->everyMinuteRun;
+    }
+
+    public function setEveryMinuteRun(bool $value):void
+    {
+        $this->everyMinuteRun = $value;
+    }
+
+     public function notify():void
+    {
+        foreach ($this->observers as $observer) {
+            /**
+             * @var $observer InterfaceObserverCronWorker
+             */
+            $observer->update($this);
+        }
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Nmea\Cron;
 
 use Exception;
-use Modules\AnchorWatch\Observer\InterfaceObserver;
 use Nmea\Config\ConfigException;
 use Nmea\Database\Entity\Positions;
 use Nmea\Database\Mapper\PositionMapper;
@@ -13,38 +12,24 @@ use Nmea\Logger\Factory;
 use Nmea\Parser\Data\DataFacade;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\ParserException;
-use Modules\AnchorWatch\Anchor;
-use Modules\AnchorWatch\Observer\ObserverAnchorPrintConsole;
-use Modules\AnchorWatch\Observer\ObserverAnchorToCache;
+use TypeError;
 
-final class CronWorker extends AbstractCronWorker implements InterfaceObservable
+final class CronWorker extends AbstractCronWorker
 {
-    private const string CHAIN_LENGTH = 'chain_length';
-
     private bool $running = true;
     private ?Positions $position = null;
     private ?PositionMapper $positionMapper = null;
     private ?string $privTimastamp = null;
-    private ?Anchor $anchor = null;
-    protected array $observers = [];
 
     public function run():void
     {
-        $this->anchor = new Anchor();
-        $this->anchor->attach(new ObserverAnchorToCache());
-        if ($this->isDebugRunMode()) {
-            $this->anchor->attach(new ObserverAnchorPrintConsole());
-        }
         $i = 0;
         while ($this->running) {
             $i++;
             try {
-                $this->anchor(
-                    $this->cache->get(EnumPgns::POSITION->value),
-                    $this->cache->get(EnumPgns::VESSEL_HEADING->value),
-                    $this->cache->get(EnumPgns::WATER_DEPTH->value),
-                    $this->cache->get(EnumPgns::WIND->value)
-                );
+                $this->setEveryMinuteRun(true);
+                $this->notify();
+
                 $this->store(
                     $this->cache->get(EnumPgns::WIND->value),
                     $this->cache->get(EnumPgns::COG_SOG->value),
@@ -52,6 +37,7 @@ final class CronWorker extends AbstractCronWorker implements InterfaceObservable
                     $this->cache->get(EnumPgns::TEMPERATURE->value),
                 );
                 if ($i >= 60) {
+                    $this->setEveryMinuteRun(false);
                     $i = 0;
                     $this->storePosition(
                         $this->cache->get(EnumPgns::POSITION->value),
@@ -67,36 +53,8 @@ final class CronWorker extends AbstractCronWorker implements InterfaceObservable
                 Factory::log($f->getMessage());
             } catch (Exception $g) {
                 Factory::log($g->getMessage());
-            } catch (\TypeError $typeError) {
+            } catch (TypeError $typeError) {
                 Factory::log('TypeError: '.$typeError->getMessage());
-            }
-        }
-    }
-
-    /**
-     * @throws ParserException
-     * @throws ConfigException
-     */
-    private function anchor(string $position, string $vesselHeading, string $waterDepth, string $windData): void
-    {
-        $positionFacade = DataFacadeFactory::create($position, 'YACHT_DEVICE');
-        $vesselHeadingFacade = DataFacadeFactory::create($vesselHeading, 'YACHT_DEVICE');
-        $waterDepthFacade = DataFacadeFactory::create($waterDepth, 'YACHT_DEVICE');
-        $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
-        $this->anchor->setPosition(
-            $positionFacade->getFieldValue(1)->getValue(),
-            $positionFacade->getFieldValue(2)->getValue(),
-            $vesselHeadingFacade->getFieldValue(2)->getValue(),
-            ($waterDepthFacade->getFieldValue(2)->getValue() + $waterDepthFacade->getFieldValue(3)->getValue()),
-            $windFacade->getFieldValue(3)->getValue(),
-            $windFacade->getFieldValue(2)->getValue()
-        );
-        if (! $this->cache->isSet(CronWorker::CHAIN_LENGTH)) {
-            $this->anchor->unsetAnchor();
-            $this->cache->delete('OBJ_ANCHOR');
-        } else {
-            if (! $this->anchor->isAnchorSet()) {
-                $this->anchor->setAnchor($this->cache->get(CronWorker::CHAIN_LENGTH));
             }
         }
     }
@@ -234,25 +192,4 @@ final class CronWorker extends AbstractCronWorker implements InterfaceObservable
     {
         return $this->getPrivTimestamp() === $timestamp;
     }
-
-     public function attach(InterfaceObserver $observer):void
-    {
-        $this->observers[] = $observer;
-    }
-
-    public function detach(InterfaceObserver $observer):void
-    {
-        $this->observers = array_diff($this->observers, array($observer));
-    }
-
-    public function notify():void
-    {
-        foreach ($this->observers as $observer) {
-            /**
-             * @var $observer InterfaceObserver
-             */
-            $observer->update($this);
-        }
-    }
-
 }
