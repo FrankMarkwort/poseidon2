@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Internal\Interfaces;
 
 use Nmea\Cache\CacheInterface;
+use Nmea\Database\DatabaseInterface;
 
 interface InterfaceObservableCronWorker
 {
@@ -12,4 +13,5 @@ interface InterfaceObservableCronWorker
     public function isEveryMinute(): bool;
     public function notify():void;
     public function getCache():CacheInterface;
+    public function getDatabase():DatabaseInterface;
 }

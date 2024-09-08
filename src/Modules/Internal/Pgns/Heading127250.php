@@ -19,6 +19,6 @@ class Heading127250 extends AbstractPgn
 
     protected function getNmeaData(): string
     {
-        return $this->cache->get(EnumPgns::VESSEL_HEADING->value);
+        return $this->getCache()->get(EnumPgns::VESSEL_HEADING->value);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\AnchorWatch;
+namespace Modules\Module\AnchorWatch;
 
-use Modules\AnchorWatch\Observer\InterfaceObservable;
-use Modules\AnchorWatch\Observer\InterfaceObserver;
+use Modules\Module\AnchorWatch\Observer\InterfaceObservable;
+use Modules\Module\AnchorWatch\Observer\InterfaceObserver;
 
 class Anchor implements InterfaceObservable
 {

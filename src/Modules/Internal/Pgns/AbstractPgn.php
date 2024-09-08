@@ -23,5 +23,15 @@ abstract class AbstractPgn
         return DataFacadeFactory::create($this->getNmeaData(), 'YACHT_DEVICE');
     }
 
+    protected function getNmeaDataFromCache(int $pgn):string
+    {
+        return $this->getCache()->get($pgn);
+    }
+
+    protected function getCache():CacheInterface
+    {
+        return $this->cache;
+    }
+
     abstract protected function getNmeaData():string;
 }

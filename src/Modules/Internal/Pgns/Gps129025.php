@@ -28,6 +28,6 @@ class Gps129025 extends AbstractPgn
 
     protected function getNmeaData():string
     {
-        return $this->cache->get(EnumPgns::POSITION->value);
+        return $this->getCache()->get(EnumPgns::POSITION->value);
     }
 }

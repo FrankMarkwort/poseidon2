@@ -2,12 +2,12 @@
 
 namespace Modules\External;
 
-use Modules\AnchorWatch\Anchor;
 use Modules\Internal\Pgns\Chain;
 use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\WaterDepth128267;
 use Modules\Internal\Pgns\Wind130306;
+use Modules\Module\AnchorWatch\Anchor;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;

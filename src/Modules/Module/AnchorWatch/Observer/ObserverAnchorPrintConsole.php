@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\AnchorWatch\Observer;
+namespace Modules\Module\AnchorWatch\Observer;
 
-use Modules\AnchorWatch\Anchor;
+use Modules\Module\AnchorWatch\Anchor;
 
 class ObserverAnchorPrintConsole implements InterfaceObserver
 {

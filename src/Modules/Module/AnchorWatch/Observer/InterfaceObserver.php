@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\AnchorWatch\Observer;
+namespace Modules\Module\AnchorWatch\Observer;
 
 
 interface InterfaceObserver

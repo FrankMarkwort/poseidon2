@@ -104,12 +104,17 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
     }
 
      public function notify():void
-    {
+     {
         foreach ($this->observers as $observer) {
             /**
              * @var $observer InterfaceObserverCronWorker
              */
             $observer->update($this);
         }
+    }
+
+    public function getDatabase():DatabaseInterface
+    {
+        return $this->database;
     }
 }

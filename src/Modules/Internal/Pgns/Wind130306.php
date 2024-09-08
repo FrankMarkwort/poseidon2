@@ -9,6 +9,16 @@ use Nmea\Parser\ParserException;
 
 class Wind130306 extends AbstractPgn
 {
+
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
+    public function getTimestamp():string
+    {
+        return $this->getFacade()->getTimestamp();
+    }
+
     /**
      * @throws ConfigException
      * @throws ParserException

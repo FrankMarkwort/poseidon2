@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\AnchorWatch;
+namespace Modules\Module\AnchorWatch;
 
-use Modules\AnchorWatch\Observer\ObserverAnchorPrintConsole;
-use Modules\AnchorWatch\Observer\ObserverAnchorToCache;
 use Modules\External\AnchorFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Internal\Pgns\Chain;
+use Modules\Module\AnchorWatch\Observer\ObserverAnchorPrintConsole;
+use Modules\Module\AnchorWatch\Observer\ObserverAnchorToCache;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 

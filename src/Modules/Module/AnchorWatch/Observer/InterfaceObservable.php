@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Cron;
-
-use Modules\Module\AnchorWatch\Observer\InterfaceObserver;
+namespace Modules\Module\AnchorWatch\Observer;
 
 interface InterfaceObservable
 {
