@@ -10,15 +10,7 @@ use Nmea\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {
-
-    private WindspeedCourse $windSpeedCourse;
     private string $privTimastamp;
-
-
-    public function __construct()
-    {
-        $this->windSpeedCourse = new WindspeedCourse();
-    }
 
      /**
      * @throws ParserException
@@ -29,20 +21,14 @@ class Bootstrap implements InterfaceObserverCronWorker
      {
         $facade = new WindStatisticFacade($observable->getCache());
 
-        if (empty($windData) || empty($cogSogData) || empty($vesselHeading) || empty($temperature)) {
-            $this->isDebugPrintMessage('no Data' . PHP_EOL);
+        // TODO check all data existe
 
-            return;
-        }
-        $windFacade = DataFacadeFactory::create($windData, 'YACHT_DEVICE');
         if ($this->isPrivTimestampSame($facade->getTimestamp())) {
-            $this->isDebugPrintMessage('wind timespamp not changed' . $this->privTimastamp . ' = ' .$windFacade->getTimestamp() . PHP_EOL);
 
             return;
         }
-        $this->setPrivTimestamp($facade->getTimestamp());
 
-        $this->isDebugPrintMessage($this->printWindConsole($temperatureFacade, $windFacade, $cogSogFacade, $vesselHeadingFacade));
+        $this->setPrivTimestamp($facade->getTimestamp());
         if ($this->runMode == ModeEnum::DEBUG) {
 
             return;
@@ -74,4 +60,5 @@ class Bootstrap implements InterfaceObserverCronWorker
     {
         return $this->getPrivTimestamp() === $timestamp;
     }
+
 }

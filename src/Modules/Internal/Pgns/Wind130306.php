@@ -4,7 +4,6 @@ namespace Modules\Internal\Pgns;
 
 
 use Nmea\Config\ConfigException;
-use Nmea\Cron\EnumPgns;
 use Nmea\Parser\ParserException;
 
 class Wind130306 extends AbstractPgn

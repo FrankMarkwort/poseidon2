@@ -21,13 +21,13 @@ class AnchorFacade
     private Wind130306 $wind;
     private Chain $chain;
 
-    public function  __construct(private CacheInterface $cache)
+    public function  __construct(private CacheInterface $cache, bool $debug = false)
     {
-        $this->position = new Gps129025($this->cache);
-        $this->heading = new Heading127250($this->cache);
-        $this->waterDepth = new WaterDepth128267($this->cache);
-        $this->wind = new Wind130306($this->cache);
-        $this->chain = new Chain($this->cache);
+        $this->position = new Gps129025($this->cache, $debug);
+        $this->heading = new Heading127250($this->cache, $debug);
+        $this->waterDepth = new WaterDepth128267($this->cache, $debug);
+        $this->wind = new Wind130306($this->cache, $debug);
+        $this->chain = new Chain($this->cache, $debug);
     }
 
     /**

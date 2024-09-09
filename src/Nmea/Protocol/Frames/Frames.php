@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Nmea\Protocol\Frames;
 
 use ErrorException;
+use Modules\Internal\Pgns\EnumPgns;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
-use Nmea\Cron\EnumPgns;
+use Nmea\Parser\ParserException;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
 use Nmea\Protocol\Socket\Client;
-use Nmea\Parser\ParserException;
 use Nmea\Protocol\Socket\SocketException;
 
 class Frames

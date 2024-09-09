@@ -18,6 +18,7 @@ $worker = new CronWorker(
         getRunMode($argv)
 );
 $worker->attach(new \Modules\Module\AnchorWatch\Bootstrap());
+$worker->attach(new \Modules\Module\WeatherStatistic\Bootstrap());
 $worker->run();
 
 

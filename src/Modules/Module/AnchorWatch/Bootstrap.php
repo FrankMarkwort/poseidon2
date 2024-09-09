@@ -39,7 +39,6 @@ class Bootstrap implements InterfaceObserverCronWorker
     {
         if ($observable->isEveryMinute() === $this->isRunEveryMinute()) {
             $anchorFacade = new AnchorFacade($observable->getCache());
-            $chane = new Chain($observable->getCache());
             $this->anchor->setPosition(
                 $anchorFacade->getLatitudeDeg(),
                 $anchorFacade->getLongitudeDeg(),

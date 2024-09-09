@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Cron;
+namespace Modules\Internal\Pgns;
 
 enum EnumPgns: string
 {

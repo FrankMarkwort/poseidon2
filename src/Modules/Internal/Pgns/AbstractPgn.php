@@ -10,7 +10,7 @@ use Nmea\Parser\ParserException;
 
 abstract class AbstractPgn
 {
-    public function __construct(protected CacheInterface $cache)
+    public function __construct(protected CacheInterface $cache, protected $printToConsole = false)
     {
     }
 
@@ -20,7 +20,18 @@ abstract class AbstractPgn
      */
     protected function getFacade():DataFacade
     {
-        return DataFacadeFactory::create($this->getNmeaData(), 'YACHT_DEVICE');
+        $dataFacade =  DataFacadeFactory::create($this->getNmeaData(), 'YACHT_DEVICE');
+        if ($this->isDebug()) {
+
+            echo $this->printAllFieldNames($dataFacade);
+        }
+
+        return $dataFacade;
+    }
+
+    protected function isDebug():bool
+    {
+        return $this->printToConsole;
     }
 
     protected function getNmeaDataFromCache(int $pgn):string
@@ -34,4 +45,30 @@ abstract class AbstractPgn
     }
 
     abstract protected function getNmeaData():string;
+
+    protected function printAllFieldNames(DataFacade $dataFacade):string
+    {
+        $result = sprintf("%s pgn => %s src => %s  dst => %s  type =>  %s  pduFormat => %s dataPage => %s ",
+            $dataFacade->getDescription(),
+            $dataFacade->getPng(),
+            $dataFacade->getSrc(),
+            $dataFacade->getDst(),
+            $dataFacade->getFrameType(),
+            $dataFacade->getPduFormat(),
+            $dataFacade->getDataPage()
+        ). PHP_EOL;
+        for ($i = 1; $i <= $dataFacade->count(); $i++) {
+            try {
+                $result .= sprintf("%s, %s %s, %s %s, %s",
+                   $i, $dataFacade->getFieldValue($i)->getName(),
+                   $i, $dataFacade->getFieldValue($i)->getValue(),
+                   $i, $dataFacade->getFieldValue($i)->getType()
+                ).PHP_EOL;
+            } catch (ConfigException $e) {
+                $result .= $e->getMessage() . PHP_EOL;
+            }
+        }
+
+        return $result;
+    }
 }

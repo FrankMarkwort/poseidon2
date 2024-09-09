@@ -3,7 +3,6 @@
 namespace Modules\Internal\Pgns;
 
 use Nmea\Config\ConfigException;
-use Nmea\Cron\EnumPgns;
 use Nmea\Parser\ParserException;
 
 class SogCog129026 extends AbstractPgn

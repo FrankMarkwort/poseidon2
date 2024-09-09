@@ -19,12 +19,12 @@ class WindStatisticFacade
     private Temperature130312 $temperature;
     private SogCog129026 $sogCog;
 
-    public function  __construct(private CacheInterface $cache)
+    public function  __construct(private CacheInterface $cache, bool $debug = false)
     {
-        $this->heading = new Heading127250($this->cache);
-        $this->wind = new Wind130306($this->cache);
-        $this->temperature = new Temperature130312($this->cache);
-        $this->sogCog = new SogCog129026($this->cache);
+        $this->heading = new Heading127250($this->cache, $debug);
+        $this->wind = new Wind130306($this->cache, $debug);
+        $this->temperature = new Temperature130312($this->cache, $debug);
+        $this->sogCog = new SogCog129026($this->cache, $debug);
     }
 
     /**
@@ -86,7 +86,7 @@ class WindStatisticFacade
 
     public function getTimestamp():string
     {
-
+        return $this->wind->getTimestamp();
     }
 
     protected function getPolarVector(float $rFieldValue, float $omegaFieldvalue): PolarVector

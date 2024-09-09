@@ -31,25 +31,6 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
         return $this->runMode === ModeEnum::DEBUG || $this->runMode === ModeEnum::NORMAL_PLUS_DEBUG;
     }
 
-    /**
-     * @throws ConfigException
-     */
-    protected function printAllFieldNames(DataFacade $dataFacade):string
-    {
-        $result = $dataFacade->getDescription() . ' pgn => ' . $dataFacade->getPng() . " src => " .$dataFacade->getSrc() . ' dst => ' . $dataFacade->getDst()
-            . ' type => ' .  $dataFacade->getFrameType(). ' pduFormat => ' .$dataFacade->getPduFormat() . ' dataPage => ' . $dataFacade->getDataPage() . PHP_EOL;
-        for ($i = 1; $i <= $dataFacade->count(); $i++) {
-            try {
-                $result .= "$i, " . $dataFacade->getFieldValue($i)->getName() . " "
-                    . "$i, " . $dataFacade->getFieldValue($i)->getValue() . " "
-                    . "$i, " . $dataFacade->getFieldValue($i)->getType() . PHP_EOL;
-            } catch (ConfigException $e) {
-                $result .= $e->getMessage() . PHP_EOL;
-            }
-        }
-
-        return $result;
-    }
 
     protected function isDebugPrintMessage(string $message):bool
     {
