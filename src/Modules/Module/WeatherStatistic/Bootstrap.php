@@ -8,6 +8,7 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\WeatherStatistic\Entity\WindSpeedCourse;
 //TODO remove from Module
+use Modules\Module\WeatherStatistic\Mapper\WindSpeedHoursMapper;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 
@@ -36,15 +37,15 @@ class Bootstrap implements InterfaceObserverCronWorker
 
             return;
         }
-        $mapper = new WindSpeedCourse($observable->getDatabase());
-        $mapper->setTime($facade->getTimestamp())
+        (new WindSpeedHoursMapper($observable->getDatabase()))->store(
+            (new WindSpeedCourse($observable->getDatabase()))
+            ->setTime($facade->getTimestamp())
             ->setApparentWind($facade->getApparentWindVector())
             ->setCourseOverGround($facade->getCogVector())
             ->setVesselHeading($facade->getHeadingVectorRad())
-            ->setWaterTemperature($facade->getWaterTemperature());
-
-        $mapper->store();
-            $this->isDebugPrintMessage($observable->isDebug(), 'store wind minute data !');
+            ->setWaterTemperature($facade->getWaterTemperature())
+        );
+        $this->isDebugPrintMessage($observable->isDebug(), 'store wind minute data !');
     }
     
     private function setPreviousTimestamp(string $timestamp):void

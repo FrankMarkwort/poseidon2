@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Entity;
+namespace Modules\Module\Logbook\Entity;
 
 use Nmea\Math\Vector\PolarVector;
 

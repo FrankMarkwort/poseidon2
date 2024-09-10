@@ -13,10 +13,6 @@ class WindSpeedCourse extends AbstractWindSpeedCourse
     private string $time;
     private float $waterTemperature;
 
-    public function __construct(private readonly DatabaseInterface $database)
-    {
-    }
-
     private function getTime(): string
     {
         return $this->time;
@@ -39,18 +35,6 @@ class WindSpeedCourse extends AbstractWindSpeedCourse
         $this->waterTemperature = $waterTemperature;
 
         return $this;
-    }
-
-    /**
-     * TODO move too mapper
-     */
-    public function store():void
-    {
-        $sqlformat = 'REPLACE INTO wind_speed_minute (`timestamp`, twd, aws, awa, tws, twa, cog, sog, vesselHeading, waterTemperature )'
-            . " VALUES ('%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)";
-        $sql = vsprintf($sqlformat, $this->toArray());
-        $this->database::getInstance()->execute($sql);
-
     }
 
     public function toArray():array

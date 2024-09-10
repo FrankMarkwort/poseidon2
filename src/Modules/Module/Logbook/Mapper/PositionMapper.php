@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Mapper;
+namespace Modules\Module\Logbook\Mapper;
 
-use Nmea\Database\Entity\Positions;
+use Modules\Module\Logbook\Entity\Positions;
+use Nmea\Database\Mapper\AbstractMapper;
 
 class PositionMapper extends AbstractMapper
 {

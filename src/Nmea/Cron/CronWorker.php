@@ -5,9 +5,9 @@ namespace Nmea\Cron;
 
 use Exception;
 use Modules\Internal\Enums\EnumPgns;
+use Modules\Module\Logbook\Entity\Positions;
+use Modules\Module\Logbook\Mapper\PositionMapper;
 use Nmea\Config\ConfigException;
-use Nmea\Database\Entity\Positions;
-use Nmea\Database\Mapper\PositionMapper;
 use Nmea\Logger\Factory;
 use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\ParserException;

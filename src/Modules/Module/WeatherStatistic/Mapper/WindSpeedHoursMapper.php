@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Module\WeatherStatistic\Mapper;
 
 use Modules\Module\WeatherStatistic\Collection\WindSpeedHourCollection;
+use Modules\Module\WeatherStatistic\Entity\WindSpeedCourse;
 use Modules\Module\WeatherStatistic\Entity\WindSpeedHour;
 use Nmea\Database\Mapper\AbstractMapper;
 
@@ -48,4 +49,12 @@ class WindSpeedHoursMapper extends AbstractMapper
 
         return $collection;
     }
+
+     public function store(WindSpeedCourse $entity):void
+     {
+        $sqlformat = 'REPLACE INTO wind_speed_minute (`timestamp`, twd, aws, awa, tws, twa, cog, sog, vesselHeading, waterTemperature )'
+            . " VALUES ('%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)";
+        $sql = vsprintf($sqlformat, $entity->toArray());
+        $this->database::getInstance()->execute($sql);
+     }
 }
