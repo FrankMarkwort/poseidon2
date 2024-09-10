@@ -5,7 +5,6 @@ namespace Modules\Module\AnchorWatch;
 use Modules\External\AnchorFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
-use Modules\Internal\Pgns\Chain;
 use Modules\Module\AnchorWatch\Observer\ObserverAnchorPrintConsole;
 use Modules\Module\AnchorWatch\Observer\ObserverAnchorToCache;
 use Nmea\Config\ConfigException;

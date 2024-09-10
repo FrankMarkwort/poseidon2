@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Module\WeatherStatistic;
+namespace Modules\Module\WeatherStatistic\Entity;
 
+//TODO remove from Module
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Math\Vector\PolarVectorOperation;

@@ -2,6 +2,7 @@
 
 namespace Modules\Internal\Pgns;
 
+use Modules\Internal\Enums\EnumPgns;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 

@@ -3,10 +3,10 @@
 declare(strict_types=1);
 set_time_limit(0);
 
+use Modules\Internal\Enums\DebugModeEnum;
 use Nmea\Cache\Memcached;
 use Nmea\Config\Config;
 use Nmea\Cron\CronWorker;
-use Nmea\Cron\ModeEnum;
 use Nmea\Database\Database;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
@@ -22,7 +22,7 @@ $worker->attach(new \Modules\Module\WeatherStatistic\Bootstrap());
 $worker->run();
 
 
-function getRunMode(array $argv):ModeEnum
+function getRunMode(array $argv):DebugModeEnum
 {
     if (isset($argv[1])) {
         parse_str($argv[1], $output);
@@ -45,12 +45,12 @@ function getRunMode(array $argv):ModeEnum
             switch ($output['--mode']) {
                 case 'debug' :
                     echo 'mode=debug' . PHP_EOL;
-                    return ModeEnum::DEBUG;
+                    return DebugModeEnum::DEBUG;
                 case 'both' :
                     echo 'mode=both' . PHP_EOL;
-                    return ModeEnum::NORMAL_PLUS_DEBUG;
+                    return DebugModeEnum::NORMAL_PLUS_DEBUG;
                 default:
-                    return ModeEnum::NORMAL;
+                    return DebugModeEnum::NORMAL;
             }
          }
          echo '--help' . PHP_EOL;
@@ -60,5 +60,5 @@ function getRunMode(array $argv):ModeEnum
          exit;
     }
 
-    return ModeEnum::NORMAL;
+    return DebugModeEnum::NORMAL;
 }

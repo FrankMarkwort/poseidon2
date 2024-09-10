@@ -10,7 +10,7 @@ use Nmea\Parser\ParserException;
 
 abstract class AbstractPgn
 {
-    public function __construct(protected CacheInterface $cache, protected $printToConsole = false)
+    public function __construct(protected CacheInterface $cache, protected bool $printToConsole = false)
     {
     }
 
@@ -32,11 +32,6 @@ abstract class AbstractPgn
     protected function isDebug():bool
     {
         return $this->printToConsole;
-    }
-
-    protected function getNmeaDataFromCache(int $pgn):string
-    {
-        return $this->getCache()->get($pgn);
     }
 
     protected function getCache():CacheInterface

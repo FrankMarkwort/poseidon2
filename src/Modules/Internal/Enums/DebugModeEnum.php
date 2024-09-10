@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Cron;
+namespace Modules\Internal\Enums;
 
-enum ModeEnum
+enum DebugModeEnum
 {
     case NORMAL;
     case DEBUG;

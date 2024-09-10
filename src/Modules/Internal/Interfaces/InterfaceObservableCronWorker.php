@@ -15,4 +15,5 @@ interface InterfaceObservableCronWorker
     public function getCache():CacheInterface;
     public function getDatabase():DatabaseInterface;
     public function isDebug(): bool;
+    public function isNormalRun():bool;
 }

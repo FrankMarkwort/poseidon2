@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Internal\Pgns;
+namespace Modules\Internal\Enums;
 
 enum EnumPgns: string
 {

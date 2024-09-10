@@ -2,63 +2,70 @@
 
 namespace Modules\Module\WeatherStatistic;
 
+use Exception;
 use Modules\External\WindStatisticFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
+use Modules\Module\WeatherStatistic\Entity\WindSpeedCourse;
+//TODO remove from Module
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {
-    private string $privTimastamp;
+    private string $previousTimastamp;
 
      /**
      * @throws ParserException
      * @throws ConfigException
      */
      public function update(InterfaceObservableCronWorker $observable):void
-     #private function store(string $windData, string $cogSogData, string $vesselHeading, string $temperature):void
      {
-        $facade = new WindStatisticFacade($observable->getCache());
-
-        // TODO check all data existe
-
-        if ($this->isPrivTimestampSame($facade->getTimestamp())) {
+        try {
+            $facade = new WindStatisticFacade($observable->getCache(), $observable->isDebug());
+        } catch (Exception) {
+            return;
+        }
+        if ($this->isPreviousTimestampSame($facade->getTimestamp())) {
 
             return;
         }
 
-        $this->setPrivTimestamp($facade->getTimestamp());
-        if ($this->runMode == ModeEnum::DEBUG) {
+        $this->setPreviousTimestamp($facade->getTimestamp());
+        if (! $observable->isNormalRun()) {
 
             return;
         }
-        if ($this->runMode == ModeEnum::NORMAL || $this->runMode == ModeEnum::NORMAL_PLUS_DEBUG) {
-            $mapper = new WindSpeedCourse($observable->getDatabase());
-            $mapper->setTime($facade->getTimestamp())
-                ->setApparentWind($facade->getApparentWindVector())
-                ->setCourseOverGround($facade->getCogVector())
-                ->setVesselHeading($facade->getHeadingVectorRad())
-                ->setWaterTemperature($facade->getWaterTemperature());
+        $mapper = new WindSpeedCourse($observable->getDatabase());
+        $mapper->setTime($facade->getTimestamp())
+            ->setApparentWind($facade->getApparentWindVector())
+            ->setCourseOverGround($facade->getCogVector())
+            ->setVesselHeading($facade->getHeadingVectorRad())
+            ->setWaterTemperature($facade->getWaterTemperature());
 
-            $mapper->store();
-            $this->isDebugPrintMessage('store wind minute data !'. PHP_EOL);
-        }
+        $mapper->store();
+            $this->isDebugPrintMessage($observable->isDebug(), 'store wind minute data !');
     }
     
-    private function setPrivTimestamp(string $timestamp):void
+    private function setPreviousTimestamp(string $timestamp):void
     {
-        $this->privTimastamp = $timestamp;
+        $this->previousTimastamp = $timestamp;
     }
 
-    private function getPrivTimestamp():string|null
+    private function getPreviousTimestamp():string|null
     {
-        return $this->privTimastamp;
+        return $this->previousTimastamp;
     }
 
-    private function isPrivTimestampSame(string $timestamp):bool
+    private function isPreviousTimestampSame(string $timestamp):bool
     {
-        return $this->getPrivTimestamp() === $timestamp;
+        return $this->getPreviousTimestamp() === $timestamp;
     }
 
+    private function isDebugPrintMessage(bool $debug, string $message):void
+    {
+        if ($debug) {
+            echo $message . PHP_EOL;
+        }
+    }
 }

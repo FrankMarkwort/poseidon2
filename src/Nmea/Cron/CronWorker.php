@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Nmea\Cron;
 
 use Exception;
-use Modules\Internal\Pgns\EnumPgns;
+use Modules\Internal\Enums\EnumPgns;
 use Nmea\Config\ConfigException;
 use Nmea\Database\Entity\Positions;
 use Nmea\Database\Mapper\PositionMapper;
@@ -102,10 +102,5 @@ final class CronWorker extends AbstractCronWorker
 
         return false;
 
-    }
-
-    public function isDebug():bool
-    {
-        return false;
     }
 }

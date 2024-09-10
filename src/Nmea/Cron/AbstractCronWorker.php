@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Nmea\Cron;
 
+use Modules\Internal\Enums\DebugModeEnum;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Nmea\Cache\CacheInterface;
@@ -23,18 +24,18 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
         protected readonly int $sleepTime,
         protected readonly DatabaseInterface $database,
         protected readonly CacheInterface $cache,
-        protected readonly ModeEnum $runMode = ModeEnum::NORMAL
+        protected readonly DebugModeEnum $runMode = DebugModeEnum::NORMAL
     ) {}
 
     public function isDebugRunMode(): bool
     {
-        return $this->runMode === ModeEnum::DEBUG || $this->runMode === ModeEnum::NORMAL_PLUS_DEBUG;
+        return $this->runMode === DebugModeEnum::DEBUG || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
     }
 
 
     protected function isDebugPrintMessage(string $message):bool
     {
-         if (in_array($this->runMode, [ModeEnum::DEBUG, ModeEnum::NORMAL_PLUS_DEBUG])) {
+         if (in_array($this->runMode, [DebugModeEnum::DEBUG, DebugModeEnum::NORMAL_PLUS_DEBUG])) {
                 echo $message . PHP_EOL;
 
                 return true;
@@ -97,5 +98,15 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
     public function getDatabase():DatabaseInterface
     {
         return $this->database;
+    }
+
+    public function isDebug():bool
+    {
+        return $this->runMode === DebugModeEnum::DEBUG || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
+    }
+
+    public function isNormalRun():bool
+    {
+        return  $this->runMode === DebugModeEnum::NORMAL || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
     }
 }
