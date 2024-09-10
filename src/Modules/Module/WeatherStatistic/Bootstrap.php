@@ -13,7 +13,7 @@ use Nmea\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {
-    private string $previousTimastamp;
+    private string $previousTimestamp = '';
 
      /**
      * @throws ParserException
@@ -49,12 +49,12 @@ class Bootstrap implements InterfaceObserverCronWorker
     
     private function setPreviousTimestamp(string $timestamp):void
     {
-        $this->previousTimastamp = $timestamp;
+        $this->previousTimestamp = $timestamp;
     }
 
     private function getPreviousTimestamp():string|null
     {
-        return $this->previousTimastamp;
+        return $this->previousTimestamp;
     }
 
     private function isPreviousTimestampSame(string $timestamp):bool

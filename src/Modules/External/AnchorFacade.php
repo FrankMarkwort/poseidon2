@@ -7,7 +7,6 @@ use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\WaterDepth128267;
 use Modules\Internal\Pgns\Wind130306;
-use Modules\Module\AnchorWatch\Anchor;
 // TODO remove from External
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
@@ -15,7 +14,6 @@ use Nmea\Parser\ParserException;
 
 class AnchorFacade
 {
-    private Anchor $anchor;
     private Gps129025 $position;
     private Heading127250 $heading;
     private WaterDepth128267 $waterDepth;
@@ -62,6 +60,15 @@ class AnchorFacade
      * @throws ConfigException
      * @throws ParserException
      */
+    public function getHeadingDeg(): float
+    {
+        return rad2deg($this->heading->getHeadingRad());
+    }
+
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
     public function getWaterDepth(): float
     {
         return $this->waterDepth->getWaterDepth();
@@ -74,6 +81,15 @@ class AnchorFacade
     public function getAwaRad(): float
     {
         return $this->wind->getAwaRad();
+    }
+
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
+    public function getAwaDeg(): float
+    {
+        return rad2deg($this->wind->getAwaRad());
     }
 
     /**

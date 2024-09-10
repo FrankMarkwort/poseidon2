@@ -24,7 +24,7 @@ readonly class Bootstrap
     {
         try {
             if (isset($_GET['pgn'])) {
-                $this->getOnePgn($_GET['pgn']);
+                $this->getOnePgn((int)$_GET['pgn']);
             } else {
                 $this->getAllPgns();
             }

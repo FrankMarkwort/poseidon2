@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Mapper;
+namespace Modules\Module\Windrose\Mapper;
 
-use Nmea\Database\Entity\WindRose;
+use Modules\Module\Windrose\Entity\WindRose;
+use Nmea\Database\Mapper\AbstractMapper;
 
 class WindroseMapper extends AbstractMapper
 {

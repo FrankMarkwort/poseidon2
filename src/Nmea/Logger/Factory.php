@@ -7,7 +7,7 @@ use Nmea\Logger\Logger\FileLogger;
 
 class Factory
 {
-    private static LoggerInterface $instance;
+    private static ?LoggerInterface $instance = null;
 
     public static function log(string $message): void
     {

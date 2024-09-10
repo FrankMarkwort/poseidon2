@@ -2,9 +2,11 @@
 declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+
+use Modules\Module\Windrose\Mapper\WindroseMapper;
 use Nmea\Config\Config;
 use Nmea\Database\Database;
-use Nmea\Database\Mapper\WindroseMapper;
+
 require_once( __DIR__ . '/../../vendor/autoload.php');
 
 Database::getInstance()->init(Config::getMariadbHost(), Config::getMariadbPort(),Config::getMariadbUser(),Config::getMariadbPassword(), Config::getMariadbName());

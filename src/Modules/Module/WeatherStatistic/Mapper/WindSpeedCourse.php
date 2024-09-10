@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Mapper;
+namespace Modules\Module\WeatherStatistic\Mapper;
 
 use Nmea\Database\DatabaseInterface;
 use Nmea\Math\EnumRange;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Protocol\Realtime\AbstractWindSpeedCourse;
+
 class WindSpeedCourse extends AbstractWindSpeedCourse
 {
     private string $time;

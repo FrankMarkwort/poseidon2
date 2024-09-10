@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Mapper;
+namespace Modules\Module\WeatherStatistic\Mapper;
 
-use Nmea\Database\Collection\WindSpeedHourCollection;
-use Nmea\Database\Entity\WindSpeedHour;
+use Modules\Module\WeatherStatistic\Collection\WindSpeedHourCollection;
+use Modules\Module\WeatherStatistic\Entity\WindSpeedHour;
+use Nmea\Database\Mapper\AbstractMapper;
 
 class WindSpeedHoursMapper extends AbstractMapper
 {

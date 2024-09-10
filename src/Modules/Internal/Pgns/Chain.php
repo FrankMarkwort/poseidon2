@@ -13,15 +13,15 @@ readonly class Chain
 
     public function getLength():int
     {
-        $chaneLength = $this->cache->get(static::CHAIN_LENGTH);
-        if ($chaneLength === false) {
-            $chaneLength = 0;
+        $chainLength = $this->cache->get(static::CHAIN_LENGTH);
+        if ($chainLength === false) {
+            $chainLength = 0;
         }
         if ($this->isDebug()) {
-            echo "chain length: " . $chaneLength .PHP_EOL;
+            echo "chain length: " . $chainLength .PHP_EOL;
         }
 
-        return $chaneLength;
+        return $chainLength;
     }
 
     protected function isDebug():bool

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Nmea\Database\Collection;
+namespace Modules\Module\WeatherStatistic\Collection;
 
-use Nmea\Database\Entity\WindSpeedHour;
+use Modules\Module\WeatherStatistic\Entity\WindSpeedHour;
 
 class WindSpeedHourCollection
 {

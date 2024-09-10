@@ -27,11 +27,6 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
         protected readonly DebugModeEnum $runMode = DebugModeEnum::NORMAL
     ) {}
 
-    public function isDebugRunMode(): bool
-    {
-        return $this->runMode === DebugModeEnum::DEBUG || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
-    }
-
 
     protected function isDebugPrintMessage(string $message):bool
     {
@@ -102,6 +97,7 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 
     public function isDebug():bool
     {
+        #return true;
         return $this->runMode === DebugModeEnum::DEBUG || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
     }
 

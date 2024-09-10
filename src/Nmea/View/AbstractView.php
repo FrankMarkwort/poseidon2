@@ -29,6 +29,6 @@ abstract class AbstractView implements ViewInterface
             ))->getMappedValueWithUnit();
         }
 
-        return $dataFacade->getFieldValue($orderId)->getValue();
+        return (string) $dataFacade->getFieldValue($orderId)->getValue();
     }
 }
