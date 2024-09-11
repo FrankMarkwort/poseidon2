@@ -14,20 +14,18 @@ class Bootstrap implements InterfaceObserverCronWorker
 {
     private Anchor $anchor;
 
-    public function __construct()
+    public function __construct(bool $isDebug = false)
     {
         $this->anchor = new Anchor();
         $this->anchor->attach(new ObserverAnchorToCache());
+        if ($isDebug) {
+            $this->anchor->attach(new ObserverAnchorPrintConsole());
+        }
     }
 
     public function isRunEveryMinute(): bool
     {
         return true;
-    }
-
-    public function setDebugMode(): void
-    {
-         $this->anchor->attach(new ObserverAnchorPrintConsole());
     }
 
     /**

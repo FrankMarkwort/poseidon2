@@ -7,4 +7,6 @@ namespace Modules\Internal\Interfaces;
 interface InterfaceObserverCronWorker
 {
     public function update(InterfaceObservableCronWorker $observable):void;
+
+    public function isRunEveryMinute(): bool;
 }

@@ -7,11 +7,7 @@ use Modules\Internal\Enums\DebugModeEnum;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Nmea\Cache\CacheInterface;
-use Nmea\Config\ConfigException;
 use Nmea\Database\DatabaseInterface;
-use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Parser\Data\DataFacade;
 
 abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 {
@@ -37,22 +33,6 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
          }
 
          return false;
-    }
-
-    /**
-     * @throws ConfigException
-     */
-     protected function getPolarVector(DataFacade $dataFacade, int $rFieldValue, int $omegaFieldvalue): PolarVector
-    {
-         return (new PolarVector())
-             ->setR($dataFacade->getFieldValue($rFieldValue)->getValue())
-             ->setOmega($dataFacade->getFieldValue($omegaFieldvalue)->getValue()
-         );
-    }
-
-    protected function getNewRad(float $rad):Rad
-    {
-        return (new Rad())->setOmega($rad);
     }
 
     public function attach(InterfaceObserverCronWorker $observer):void
@@ -97,7 +77,6 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 
     public function isDebug():bool
     {
-        #return true;
         return $this->runMode === DebugModeEnum::DEBUG || $this->runMode === DebugModeEnum::NORMAL_PLUS_DEBUG;
     }
 

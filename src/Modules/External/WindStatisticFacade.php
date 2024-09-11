@@ -14,7 +14,7 @@ use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\ParserException;
 
-class WindStatisticFacade
+class WindStatisticFacade extends AbstractFacade
 {
     private Heading127250 $heading;
     private Wind130306 $wind;
@@ -109,17 +109,5 @@ class WindStatisticFacade
     public function getTimestamp():string
     {
         return $this->wind->getTimestamp();
-    }
-
-    protected function getPolarVector(float $rFieldValue, float $omegaFieldvalue): PolarVector
-    {
-         return (new PolarVector())
-             ->setR($rFieldValue)
-             ->setOmega($omegaFieldvalue);
-    }
-
-    protected function getRad(float $rad):Rad
-    {
-        return (new Rad())->setOmega($rad);
     }
 }

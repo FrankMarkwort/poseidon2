@@ -69,4 +69,9 @@ class Bootstrap implements InterfaceObserverCronWorker
             echo $message . PHP_EOL;
         }
     }
+
+    public function isRunEveryMinute(): bool
+    {
+        return true;
+    }
 }
