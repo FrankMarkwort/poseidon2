@@ -13,7 +13,7 @@ class WindSpeedHoursMapper extends AbstractMapper
     public function getAll():WindSpeedHourCollection
     {
         $collection = new WindSpeedHourCollection();
-        $result = $this->database->query('select * from wind_speed_hour order by date DESC limit 1000');
+        $result = $this->database->query('select * from wind_speed_hour order by date');
         foreach ($result as $row) {
             $entity = new WindSpeedHour();
             $entity->setDate($row['date'])

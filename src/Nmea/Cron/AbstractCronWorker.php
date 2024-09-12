@@ -23,18 +23,6 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
         protected readonly DebugModeEnum $runMode = DebugModeEnum::NORMAL
     ) {}
 
-
-    protected function isDebugPrintMessage(string $message):bool
-    {
-         if (in_array($this->runMode, [DebugModeEnum::DEBUG, DebugModeEnum::NORMAL_PLUS_DEBUG])) {
-                echo $message . PHP_EOL;
-
-                return true;
-         }
-
-         return false;
-    }
-
     public function attach(InterfaceObserverCronWorker $observer):void
     {
         $this->observers[] = $observer;
