@@ -57,7 +57,7 @@ class FramesFactory
      * @throws ConfigException
      * @throws ParserException
      */
-    public static function addData(string $nmea2000, RealtimeDistributor $realtimeDistributor): void
+    public static function addData(string $nmea2000): void
     {
         list($timestamp, $direction, $canHexId, $data) = explode(' ', self::removeSpecialCharacter($nmea2000)  , 4);
 

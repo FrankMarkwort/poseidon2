@@ -5,6 +5,7 @@ namespace Nmea\Protocol\Frames;
 
 use ErrorException;
 use Modules\Internal\Enums\EnumPgns;
+use Modules\Internal\Interfaces\InterfaceObservableRealtime;
 use Modules\Internal\RealtimeDistributor;
 use Modules\Module\Realtime\Instruments\WindSpeedCourseFactory;
 use Nmea\Cache\CacheInterface;
@@ -116,7 +117,9 @@ class Frames
                 $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
             );
-            $this->distributor->setFrame($frame);
+            if ($this->distributor instanceof InterfaceObservableRealtime) {
+                $this->distributor->setFrame($frame);
+            }
         } catch (SocketException) {}
     }
 
