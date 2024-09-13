@@ -34,10 +34,6 @@
                 pointInterval: chartData['pointInterval'],
             }
         },
-        data: {
-            enablePolling: true,
-            dataRefreshRate: 3600,
-        },
         series: [
             // #####################
             {
@@ -163,7 +159,7 @@
                 valueSuffix: ' °'
             },
         }, {
-            name: 'RangeTwd',
+            name: 'RangeTWD',
             data: chartData['rangesTwd'],
             type: 'arearange',
             lineWidth: 0,
@@ -176,7 +172,7 @@
             }
         }, // #####################
           {
-            name:  chartData['titleWatertemperature'],
+            name: chartData['titleWatertemperature'],
             data: chartData['averagesWatertemperature'],
             zIndex: 1,
             marker: {

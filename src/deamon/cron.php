@@ -17,9 +17,9 @@ $worker = new CronWorker(
         new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()),
         getRunMode($argv)
 );
-$worker->attach(new Modules\Module\AnchorWatch\Bootstrap($worker->isDebug()));
-$worker->attach(new Modules\Module\WeatherStatistic\Bootstrap());
-$worker->attach(new Modules\Module\Logbook\Bootstrap());
+$worker->attach(new \Modules\Module\Cron\AnchorWatch\Bootstrap($worker->isDebug()));
+$worker->attach(new \Modules\Module\Cron\WeatherStatistic\Bootstrap());
+$worker->attach(new \Modules\Module\Cron\Logbook\Bootstrap());
 $worker->run();
 
 

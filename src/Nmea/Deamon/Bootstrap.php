@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Nmea\Deamon;
 
 use Exception;
+use Modules\Internal\Interfaces\InterfaceObservableRealtime;
+use Modules\Internal\Interfaces\InterfaceObserverRealtime;
+use Modules\Internal\RealtimeDistributor;
 use Nmea\Cache\CacheInterface;
 use Nmea\Logger\Factory;
 use Nmea\Protocol\FramesFactory;
@@ -11,7 +14,7 @@ use Nmea\Protocol\Socket\Client;
 
 readonly class Bootstrap
 {
-    public function __construct(public Serial $serial, public CacheInterface $cache, public Client $websocket)
+    public function __construct(public Serial $serial, public CacheInterface $cache, public Client $websocket, protected RealtimeDistributor $distributor)
     {
     }
 
@@ -30,7 +33,7 @@ readonly class Bootstrap
                     continue;
                 }
 
-                FramesFactory::addData($line);
+                FramesFactory::addData($line, $this->distributor);
             } catch (Exception $e) {
                 Factory::log($line . ': ' . $e->getMessage());
                 echo $e->getMessage() . $e->getTraceAsString(). PHP_EOL;
@@ -48,4 +51,19 @@ readonly class Bootstrap
 
         return false;
      }
+
+    public function attach(InterfaceObserverRealtime $observer)
+    {
+        // TODO: Implement attach() method.
+    }
+
+    public function detach(InterfaceObserverRealtime $observer)
+    {
+        // TODO: Implement detach() method.
+    }
+
+    public function notify(): void
+    {
+        // TODO: Implement notify() method.
+    }
 }

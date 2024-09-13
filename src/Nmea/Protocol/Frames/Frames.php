@@ -5,11 +5,12 @@ namespace Nmea\Protocol\Frames;
 
 use ErrorException;
 use Modules\Internal\Enums\EnumPgns;
+use Modules\Internal\RealtimeDistributor;
+use Modules\Module\Realtime\Instruments\WindSpeedCourseFactory;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 use Nmea\Protocol\Frames\Frame\Frame;
-use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
 use Nmea\Protocol\Socket\Client;
 use Nmea\Protocol\Socket\SocketException;
 
@@ -21,7 +22,7 @@ class Frames
     private array $frames = [];
     private array $tempStore = [];
 
-    public function __construct(private readonly CacheInterface $cache, private readonly ?Client $webSocket = null)
+    public function __construct(private readonly CacheInterface $cache, private readonly ?Client $webSocket = null, private readonly ?RealtimeDistributor $distributor= null)
     {
     }
 
@@ -115,6 +116,7 @@ class Frames
                 $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
             );
+            $this->distributor->setFrame($frame);
         } catch (SocketException) {}
     }
 
@@ -173,7 +175,7 @@ class Frames
      * @throws ErrorException
      * @throws ParserException
      */
-    private function makeSinglePackedData(array $frames):bool
+    private function makeSinglePackedData(array $frames, ?RealtimeDistributor $distributor = null):bool
     {
         if ($frames[0] instanceof Frame) {
 

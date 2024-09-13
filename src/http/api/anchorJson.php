@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once( __DIR__ . '/../../../vendor/autoload.php');
 
-use Modules\Module\AnchorWatch\Anchor;
+use Modules\External\AnchorFacade;
+use Modules\Module\Cron\AnchorWatch\Anchor;
 use Nmea\Cache\Memcached;
 use Nmea\Config\Config;
-use Modules\External\AnchorFacade;
 
 header('Content-Type: application/json; charset=utf-8');
 try {
