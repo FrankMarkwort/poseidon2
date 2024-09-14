@@ -1,5 +1,5 @@
-/.phpunit.cache/
-/src/http/coverage/
-/tests/.phpunit.cache/
+./.phpunit.cache/
+./src/http/coverage/
+./tests/.phpunit.cache/
 .idea
-/src/logs/
+./src/logs/
