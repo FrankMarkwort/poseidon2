@@ -2,8 +2,8 @@
 
 namespace TestsNmea\Database\Mapper;
 
+use Modules\Module\WeatherStatistic\Mapper\WindSpeedCourse;
 use Nmea\Database\Database;
-use Nmea\Database\Mapper\WindSpeedCourse;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use PHPUnit\Framework\Attributes\DataProvider;

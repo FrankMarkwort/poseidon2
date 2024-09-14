@@ -4,13 +4,15 @@ declare(strict_types=1);
 namespace Nmea\Protocol\Frames;
 
 use ErrorException;
+use Modules\Internal\Enums\EnumPgns;
+use Modules\Internal\Interfaces\InterfaceObservableRealtime;
+use Modules\Internal\RealtimeDistributor;
+use Modules\Module\Realtime\Instruments\WindSpeedCourseFactory;
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
-use Nmea\Cron\EnumPgns;
-use Nmea\Protocol\Frames\Frame\Frame;
-use Nmea\Protocol\Realtime\WindSpeedCourseFactory;
-use Nmea\Protocol\Socket\Client;
 use Nmea\Parser\ParserException;
+use Nmea\Protocol\Frames\Frame\Frame;
+use Nmea\Protocol\Socket\Client;
 use Nmea\Protocol\Socket\SocketException;
 
 class Frames
@@ -21,7 +23,7 @@ class Frames
     private array $frames = [];
     private array $tempStore = [];
 
-    public function __construct(private readonly CacheInterface $cache, private readonly ?Client $webSocket = null)
+    public function __construct(private readonly CacheInterface $cache, private readonly ?Client $webSocket = null, private readonly ?RealtimeDistributor $distributor= null)
     {
     }
 
@@ -110,60 +112,10 @@ class Frames
         $this->cache->set((string) $frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data);
         try {
-            $this->windSocketData(
-                $frame->getHeader()->getPgn(),
-                $frame->getData()->getTimestamp()
-                . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
-            );
+            if ($this->distributor instanceof InterfaceObservableRealtime) {
+                $this->distributor->setFrame($frame, $data, $this->webSocket);
+            }
         } catch (SocketException) {}
-    }
-
-    /**
-     * @throws ConfigException
-     * @throws ParserException
-     * @throws ErrorException
-     */
-    private function windSocketData($pgn, string $data):void
-    {
-        if ($this->isNeedForWindData($pgn)) {
-            $this->tempStore[$pgn] = $data;
-        }
-        if ($this->hasAllDataForWindSocket()) {
-            $this->writeToSocket();
-        }
-    }
-
-    /**
-     * @throws ConfigException
-     * @throws ParserException
-     * @throws ErrorException
-     */
-    private function writeToSocket():void
-    {
-        $socketObj = new WindSpeedCourseFactory($this->webSocket);
-        $socketObj->writeToSocket(
-            $this->tempStore[EnumPgns::WIND->value],
-            $this->tempStore[EnumPgns::COG_SOG->value],
-            $this->tempStore[EnumPgns::Vessel_Heading->value]
-        );
-        $this->tempStore = [];
-    }
-
-    private function hasAllDataForWindSocket():bool
-    {
-        if (isset($this->tempStore[EnumPgns::WIND->value])
-            && isset($this->tempStore[EnumPgns::Vessel_Heading->value])
-            && isset($this->tempStore[EnumPgns::COG_SOG->value])) {
-
-            return true;
-        }
-        return false;
-    }
-
-    private function isNeedForWindData($pgn):bool
-    {
-        return in_array($pgn, array(EnumPgns::WIND->value,EnumPgns::Vessel_Heading->value,EnumPgns::COG_SOG->value));
-
     }
 
     //TODO implement sequence
@@ -173,7 +125,7 @@ class Frames
      * @throws ErrorException
      * @throws ParserException
      */
-    private function makeSinglePackedData(array $frames):bool
+    private function makeSinglePackedData(array $frames, ?RealtimeDistributor $distributor = null):bool
     {
         if ($frames[0] instanceof Frame) {
 

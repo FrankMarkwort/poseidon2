@@ -2,7 +2,7 @@
 
 namespace TestsNmea\Database\Entity;
 
-use Nmea\Database\Entity\Anchor;
+use Modules\Module\Cron\AnchorWatch\Anchor;
 use PHPUnit\Framework\TestCase;
 
 class AncorTes extends TestCase

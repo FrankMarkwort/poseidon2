@@ -2,11 +2,12 @@
 <?php
 declare(strict_types=1);
 set_time_limit(0);
+
+use Modules\Internal\Enums\DebugModeEnum;
 use Nmea\Cache\Memcached;
-use Nmea\Database\Database;
 use Nmea\Config\Config;
 use Nmea\Cron\CronWorker;
-use Nmea\Cron\ModeEnum;
+use Nmea\Database\Database;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
 Database::getInstance()->init(Config::getMariadbHost(), Config::getMariadbPort(),Config::getMariadbUser(),Config::getMariadbPassword(), Config::getMariadbName());
@@ -16,9 +17,13 @@ $worker = new CronWorker(
         new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()),
         getRunMode($argv)
 );
+$worker->attach(new \Modules\Module\Cron\AnchorWatch\Bootstrap($worker->isDebug()));
+$worker->attach(new \Modules\Module\Cron\WeatherStatistic\Bootstrap());
+$worker->attach(new \Modules\Module\Cron\Logbook\Bootstrap());
 $worker->run();
 
-function getRunMode(array $argv):ModeEnum
+
+function getRunMode(array $argv):DebugModeEnum
 {
     if (isset($argv[1])) {
         parse_str($argv[1], $output);
@@ -41,12 +46,12 @@ function getRunMode(array $argv):ModeEnum
             switch ($output['--mode']) {
                 case 'debug' :
                     echo 'mode=debug' . PHP_EOL;
-                    return ModeEnum::DEBUG;
+                    return DebugModeEnum::DEBUG;
                 case 'both' :
                     echo 'mode=both' . PHP_EOL;
-                    return ModeEnum::NORMAL_PLUS_DEBUG;
+                    return DebugModeEnum::NORMAL_PLUS_DEBUG;
                 default:
-                    return ModeEnum::NORMAL;
+                    return DebugModeEnum::NORMAL;
             }
          }
          echo '--help' . PHP_EOL;
@@ -56,5 +61,5 @@ function getRunMode(array $argv):ModeEnum
          exit;
     }
 
-    return ModeEnum::NORMAL;
+    return DebugModeEnum::NORMAL;
 }

@@ -3,20 +3,21 @@ declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once( __DIR__ . '/../../../vendor/autoload.php');
-use Nmea\Config\Config;
+
+use Modules\External\FromCache\AnchorFacade;
+use Modules\Module\Cron\AnchorWatch\Anchor;
 use Nmea\Cache\Memcached;
-use Nmea\Parser\DataFacadeFactory;
-use Nmea\Database\Entity\Anchor;
+use Nmea\Config\Config;
 
 header('Content-Type: application/json; charset=utf-8');
 try {
     $cache  = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
     if ($cache->isSet('OBJ_ANCHOR')) {
         $ancor = unserialize($cache->get('OBJ_ANCHOR'));
-
         echo $ancor->toJson(JSON_PRETTY_PRINT);
 
     } else {
+        /*
         $gpsFacade = DataFacadeFactory::create($cache->get('129025'), 'YACHT_DEVICE');
         $windFacade = DataFacadeFactory::create($cache->get('130306'), 'YACHT_DEVICE');
         $headingFacade = DataFacadeFactory::create($cache->get('127250'), 'YACHT_DEVICE');
@@ -27,6 +28,8 @@ try {
         $headingDeg = $headingFacade->getFieldValue(2)->getValue();
         $latitude = $gpsFacade->getFieldValue(1)->getValue();
         $longitude = $gpsFacade->getFieldValue(2)->getValue();
+        */
+        $anchorFacade = new AnchorFacade($cache);
         if ($cache->isSet('chain_length')) {
             $chainLength = intval($cache->get('chain_length'));
         } else {
@@ -35,12 +38,12 @@ try {
         echo json_encode([
             'ext' => false,
             'base' => Anchor::toBaseArray(
-                $latitude,
-                $longitude,
-                $headingDeg,
-                $awaDeg,
-                $aws,
-                $waterDepth,
+                $anchorFacade->getLatitudeDeg(),
+                $anchorFacade->getLongitudeDeg(),
+                $anchorFacade->getHeadingDeg(),
+                $anchorFacade->getAwaRad(),
+                $anchorFacade->getAws(),
+                $anchorFacade->getWaterDepth(),
                 $chainLength,
                 false
             )

@@ -34,10 +34,6 @@
                 pointInterval: chartData['pointInterval'],
             }
         },
-        data: {
-            enablePolling: true,
-            dataRefreshRate: 3600,
-        },
         series: [
             // #####################
             {
@@ -163,7 +159,7 @@
                 valueSuffix: ' °'
             },
         }, {
-            name: 'RangeTwd',
+            name: 'RangeTWD',
             data: chartData['rangesTwd'],
             type: 'arearange',
             lineWidth: 0,
@@ -176,7 +172,7 @@
             }
         }, // #####################
           {
-            name:  chartData['titleWatertemperature'],
+            name: chartData['titleWatertemperature'],
             data: chartData['averagesWatertemperature'],
             zIndex: 1,
             marker: {
@@ -204,6 +200,7 @@
         } // #####################
         ],
     });
+    /*
     setInterval(function() {
         fetch('http://192.168.0.101/api/averages.php')
             .then(function (response) { return response.json(); })
@@ -224,6 +221,7 @@
                 //console.info(data);
                 //console.info(chart.series[2].data[0]);
             });
-    }, 1000); //1000 m
+    }, 1000 * 60 *60); //1000 m
+    */
 })();
 

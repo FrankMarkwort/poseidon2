@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Nmea\Deamon;
 
 use Exception;
+use Modules\Internal\Interfaces\InterfaceObservableRealtime;
+use Modules\Internal\Interfaces\InterfaceObserverRealtime;
 use Nmea\Cache\CacheInterface;
 use Nmea\Logger\Factory;
 use Nmea\Protocol\FramesFactory;
@@ -11,7 +13,7 @@ use Nmea\Protocol\Socket\Client;
 
 readonly class Bootstrap
 {
-    public function __construct(public Serial $serial, public CacheInterface $cache, public Client $websocket)
+    public function __construct(public Serial $serial, public CacheInterface $cache, public Client $websocket, protected InterfaceObservableRealtime $distributor)
     {
     }
 
@@ -22,6 +24,7 @@ readonly class Bootstrap
         $this->serial->open();
         FramesFactory::setCache($this->cache);
         FramesFactory::setSocket($this->websocket);
+        FramesFactory::setRealtimeDistributor($this->distributor);
         do {
             try {
                 $line = $this->serial->readStream();
