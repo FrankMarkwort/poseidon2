@@ -2,7 +2,7 @@
 
 namespace Modules\Module\Cron\AnchorWatch;
 
-use Modules\External\AnchorFacade;
+use Modules\External\FromCache\AnchorFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\AnchorWatch\Observer\ObserverAnchorPrintConsole;

@@ -12,7 +12,7 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 $bootstrap = new Bootstrap(
     new Serial(Config::getSerialDevice()), (new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()))->clear(),
     new Client(Config::getSocketServerHost(), Config::getSocketServerPort()),
-    new RealtimeDistributor()
+    (new RealtimeDistributor())->attach(new Modules\Module\Realtime\Instruments\Bootstrap())
 );
 $bootstrap->run();
 

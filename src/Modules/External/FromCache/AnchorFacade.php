@@ -1,16 +1,17 @@
 <?php
 
-namespace Modules\External;
+namespace Modules\External\FromCache;
 
 use Modules\Internal\Pgns\Chain;
 use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\WaterDepth128267;
 use Modules\Internal\Pgns\Wind130306;
-// TODO remove from External
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
+
+// TODO remove from External
 
 class AnchorFacade
 {

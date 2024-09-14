@@ -2,7 +2,7 @@
 
 namespace Modules\Module\Cron\Logbook;
 
-use Modules\External\LogBookFacade;
+use Modules\External\FromCache\LogBookFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\Logbook\Entity\Positions;

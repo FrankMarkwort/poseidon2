@@ -1,18 +1,19 @@
 <?php
 
-namespace Modules\External;
+namespace Modules\External\FromCache;
 
+use Modules\External\AbstractFacade;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\SogCog129026;
 use Modules\Internal\Pgns\Temperature130312;
 use Modules\Internal\Pgns\Wind130306;
-
-//TODO remove from External
 use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\ParserException;
+
+//TODO remove from External
 
 class WindStatisticFacade extends AbstractFacade
 {

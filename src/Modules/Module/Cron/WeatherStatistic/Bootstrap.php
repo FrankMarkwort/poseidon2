@@ -3,7 +3,7 @@
 namespace Modules\Module\Cron\WeatherStatistic;
 
 use Exception;
-use Modules\External\WindStatisticFacade;
+use Modules\External\FromCache\WindStatisticFacade;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;

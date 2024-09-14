@@ -1,7 +1,8 @@
 <?php
 
-namespace Modules\External;
+namespace Modules\External\FromCache;
 
+use Modules\External\AbstractFacade;
 use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\SetAndDrift129291;
 use Modules\Internal\Pgns\SogCog129026;

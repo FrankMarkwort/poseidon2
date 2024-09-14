@@ -112,63 +112,10 @@ class Frames
         $this->cache->set((string) $frame->getHeader()->getPgn(), $frame->getData()->getTimestamp()
                 . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data);
         try {
-            $this->windSocketData(
-                $frame->getHeader()->getPgn(),
-                $frame->getData()->getTimestamp()
-                . ' ' . $frame->getData()->getDirection() . ' ' . $frame->getHeader()->getCanIdHex() . ' ' . $data
-            );
             if ($this->distributor instanceof InterfaceObservableRealtime) {
-                $this->distributor->setFrame($frame);
+                $this->distributor->setFrame($frame, $data, $this->webSocket);
             }
         } catch (SocketException) {}
-    }
-
-    /**
-     * @throws ConfigException
-     * @throws ParserException
-     * @throws ErrorException
-     */
-    private function windSocketData($pgn, string $data):void
-    {
-        if ($this->isNeedForWindData($pgn)) {
-            $this->tempStore[$pgn] = $data;
-        }
-        if ($this->hasAllDataForWindSocket()) {
-            $this->writeToSocket();
-        }
-    }
-
-    /**
-     * @throws ConfigException
-     * @throws ParserException
-     * @throws ErrorException
-     */
-    private function writeToSocket():void
-    {
-        $socketObj = new WindSpeedCourseFactory($this->webSocket);
-        $socketObj->writeToSocket(
-            $this->tempStore[EnumPgns::WIND->value],
-            $this->tempStore[EnumPgns::COG_SOG->value],
-            $this->tempStore[EnumPgns::VESSEL_HEADING->value]
-        );
-        $this->tempStore = [];
-    }
-
-    private function hasAllDataForWindSocket():bool
-    {
-        if (isset($this->tempStore[EnumPgns::WIND->value])
-            && isset($this->tempStore[EnumPgns::VESSEL_HEADING->value])
-            && isset($this->tempStore[EnumPgns::COG_SOG->value])) {
-
-            return true;
-        }
-        return false;
-    }
-
-    private function isNeedForWindData($pgn):bool
-    {
-        return in_array($pgn, array(EnumPgns::WIND->value,EnumPgns::VESSEL_HEADING->value,EnumPgns::COG_SOG->value));
-
     }
 
     //TODO implement sequence
