@@ -3,3 +3,4 @@
 ./tests/.phpunit.cache/
 .idea
 ./src/logs/
+/qodana.yaml
