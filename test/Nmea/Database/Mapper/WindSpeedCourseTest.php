@@ -2,7 +2,7 @@
 
 namespace TestsNmea\Database\Mapper;
 
-use Modules\Module\WeatherStatistic\Mapper\WindSpeedCourse;
+use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;
 use Nmea\Database\Database;
 use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
