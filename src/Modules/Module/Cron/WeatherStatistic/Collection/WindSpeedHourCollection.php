@@ -26,6 +26,18 @@ class WindSpeedHourCollection
     protected function toArray(): array
     {
         $minMax = [];
+        $minMaxAws = [];
+        $avgAws = [];
+        $minMaxAwa = [];
+        $avgAwa = [];
+        $minMaxTws = [];
+        $avgTws = [];
+        $minMaxTwa = [];
+        $avgTwa = [];
+        $minMaxTwd = [];
+        $avgTwd = [];
+        $minMaxWatertemperature = [];
+        $avgWatertemperature = [];
         foreach ($this->enitiys as $entity) {
             $minMaxAws[] = [$entity->getMinAws(),$entity->getMaxAws()];
             $avgAws[] = $entity->getAvgAws();

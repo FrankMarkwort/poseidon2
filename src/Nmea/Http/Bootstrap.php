@@ -39,6 +39,7 @@ readonly class Bootstrap
     private function getOnePgn(int $pgn):void
     {
         $nmea20000 = $this->cache->get((string)$pgn);
+        $collection = null;
         try {
             $collection = new DataFacadenColection();
             $collection->add(DataFacadeFactory::create($nmea20000, 'YACHT_DEVICE'));

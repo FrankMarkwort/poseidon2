@@ -2,10 +2,14 @@
 
 namespace Modules\Internal;
 
+use ErrorException;
 use Modules\Internal\Interfaces\InterfaceObservableRealtime;
 use Modules\Internal\Interfaces\InterfaceObserverRealtime;
+use Nmea\Config\ConfigException;
+use Nmea\Parser\ParserException;
 use Nmea\Protocol\Frames\Frame\Frame;
 use Nmea\Protocol\Socket\Client;
+use Nmea\Protocol\Socket\SocketException;
 
 class RealtimeDistributor implements InterfaceObservableRealtime
 {
@@ -14,6 +18,12 @@ class RealtimeDistributor implements InterfaceObservableRealtime
     private $data;
     private ?Client $webSocket = null;
 
+    /**
+     * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
+     * @throws SocketException
+     */
     public function setFrame(Frame $frame, string $data, ?Client $webSocket = null):void
     {
         $this->frame = $frame;
@@ -39,6 +49,12 @@ class RealtimeDistributor implements InterfaceObservableRealtime
         $this->observers = array_diff($this->observers, array($observer));
     }
 
+    /**
+     * @throws ConfigException
+     * @throws ErrorException
+     * @throws ParserException
+     * @throws SocketException
+     */
      public function notify():void
      {
         foreach ($this->observers as $observer) {

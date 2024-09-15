@@ -21,6 +21,7 @@ class Json extends AbstractView
     private function toJson():string
     {
         $result = [];
+        $fields = [];
         foreach ($this->dataFacaden as $dataFacade) {
             foreach ($dataFacade->getOrderIds() as $orderId) {
                 $fields[] = [

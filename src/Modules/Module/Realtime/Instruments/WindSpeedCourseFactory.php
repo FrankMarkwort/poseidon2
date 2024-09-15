@@ -3,15 +3,11 @@ declare(strict_types=1);
 
 namespace Modules\Module\Realtime\Instruments;
 
-use ErrorException;
 use Modules\External\FromSocket\InstrumentsFacade;
 use Nmea\Config\ConfigException;
-use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Parser\Data\DataFacade;
-use Nmea\Parser\DataFacadeFactory;
 use Nmea\Parser\ParserException;
 use Nmea\Protocol\Socket\Client;
+use Nmea\Protocol\Socket\SocketException;
 
 readonly class WindSpeedCourseFactory
 {
@@ -21,9 +17,9 @@ readonly class WindSpeedCourseFactory
     }
 
     /**
-     * @throws ParserException
      * @throws ConfigException
-     * @throws ErrorException
+     * @throws ParserException
+     * @throws SocketException
      */
     public function writeToSocket(string $windData, string $cogSogData, string $vesselHeading):void
      {

@@ -11,9 +11,7 @@ use Nmea\Cache\CacheInterface;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 
-// TODO remove from External
-
-class AnchorFacade
+readonly class AnchorFacade
 {
     private Gps129025 $position;
     private Heading127250 $heading;

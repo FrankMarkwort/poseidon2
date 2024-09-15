@@ -7,7 +7,9 @@ use Modules\Internal\Enums\DebugModeEnum;
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Nmea\Cache\CacheInterface;
+use Nmea\Config\ConfigException;
 use Nmea\Database\DatabaseInterface;
+use Nmea\Parser\ParserException;
 
 abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 {
@@ -48,6 +50,10 @@ abstract class AbstractCronWorker implements InterfaceObservableCronWorker
         $this->everyMinuteRun = $value;
     }
 
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
      public function notify():void
      {
         foreach ($this->observers as $observer) {

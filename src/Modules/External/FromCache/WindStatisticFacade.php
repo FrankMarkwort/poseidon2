@@ -13,8 +13,6 @@ use Nmea\Math\Skalar\Rad;
 use Nmea\Math\Vector\PolarVector;
 use Nmea\Parser\ParserException;
 
-//TODO remove from External
-
 class WindStatisticFacade extends AbstractFacade
 {
     private Heading127250 $heading;
@@ -22,7 +20,7 @@ class WindStatisticFacade extends AbstractFacade
     private Temperature130312 $temperature;
     private SogCog129026 $sogCog;
 
-    public function  __construct(private CacheInterface $cache, bool $debug = false)
+    public function  __construct(readonly private CacheInterface $cache, bool $debug = false)
     {
         $this->heading = new Heading127250($this->cache, $debug);
         $this->wind = new Wind130306($this->cache, $debug);

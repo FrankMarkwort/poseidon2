@@ -14,7 +14,7 @@
             events: {
                 load() {
                     //chart = this,
-                    ancorMeter = document.getElementById('ancorMeter'),
+                    var ancorMeter = document.getElementById('ancorMeter'),
                     setAncor =  document.getElementById('setAncor'),
                     { TilesProviderRegistry } = Highcharts;
 
@@ -123,7 +123,7 @@
 
     function isSerie(name)
     {
-        result = false;
+        var result = false;
         chart.series.forEach((serie) => {
             if (serie.getName() === name) {
 
@@ -149,7 +149,7 @@
     function getSerieById(id)
     {
         var result = false;
-        serie = chart.get(id);
+        var serie = chart.get(id);
         if (serie) {
             result = serie;
         }
@@ -384,7 +384,7 @@
 
     function updateSerieById(id, label, index, data)
     {
-        serie = getSerieById(id);
+        var serie = getSerieById(id);
         if (serie !== false) {
             serie.update({name: label}, false)
             serie.data[index].update(data);
@@ -430,7 +430,7 @@
                     );
                     addChaineLine(data.ext.chainLabel, data.ext.anchorLatitude, data.ext.anchorLongitude, data.base.latitude, data.base.longitude);
                     addAnchorPoint(data.ext.anchorLabel, data.ext.anchorLatitude, data.ext.anchorLongitude);
-                    addBoatPositions('positions', 'positions', data.ext.positionsHistory, force = true)
+                    addBoatPositions('positions', 'positions', data.ext.positionsHistory, true)
                 } else {
                     rmSerieById('anchor');
                     rmSerieByName('positions');

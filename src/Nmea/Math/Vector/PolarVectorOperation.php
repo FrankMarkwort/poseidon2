@@ -28,7 +28,7 @@ class PolarVectorOperation
         $part2 = 2 * abs($r1) * abs($r2) * cos($omega1 - $omega2);
         if ($operator == Operator::PLUS) {
             $z = sqrt($part1 + $part2);
-        } elseif ($operator == Operator::MINUS) {
+        } else {
             //TODO sqrt(-x )
             $z = sqrt($part1 - $part2);
         }
@@ -49,7 +49,7 @@ class PolarVectorOperation
         if ($operator == Operator::PLUS) {
              $y = $yPart1 + $yPart2;
              $x = $xPart1 + $xPart2;
-        } elseif ($operator == Operator::MINUS) {
+        } else {
              $y = $yPart1 - $yPart2;
              $x = $xPart1 - $xPart2;
         }

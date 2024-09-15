@@ -8,6 +8,7 @@ use Modules\Internal\Interfaces\InterfaceObserverRealtime;
 use Nmea\Config\ConfigException;
 use Nmea\Parser\ParserException;
 use ErrorException;
+use Nmea\Protocol\Socket\SocketException;
 
 class Bootstrap implements InterfaceObserverRealtime
 {
@@ -17,6 +18,7 @@ class Bootstrap implements InterfaceObserverRealtime
      * @throws ConfigException
      * @throws ErrorException
      * @throws ParserException
+     * @throws SocketException
      */
     public function update(InterfaceObservableRealtime $observable): void
     {
@@ -34,6 +36,7 @@ class Bootstrap implements InterfaceObserverRealtime
      * @throws ConfigException
      * @throws ParserException
      * @throws ErrorException
+     * @throws SocketException
      */
     private function windSocketData(InterfaceObservableRealtime $observable, int $pgn, string $data):void
     {
@@ -49,6 +52,7 @@ class Bootstrap implements InterfaceObserverRealtime
      * @throws ConfigException
      * @throws ParserException
      * @throws ErrorException
+     * @throws SocketException
      */
     private function writeToSocket(InterfaceObservableRealtime $observable):void
     {

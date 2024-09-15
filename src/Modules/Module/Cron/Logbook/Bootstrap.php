@@ -7,13 +7,19 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\Logbook\Entity\Positions;
 use Modules\Module\Cron\Logbook\Mapper\PositionMapper;
+use Nmea\Config\ConfigException;
 use Nmea\Database\DatabaseInterface;
+use Nmea\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {
     private ?PositionMapper $positionMapper = null;
     private ?Positions $position = null;
 
+    /**
+     * @throws ConfigException
+     * @throws ParserException
+     */
     public function update(InterfaceObservableCronWorker $observable): void
     {
         $facade = new LogBookFacade($observable->getCache(), $observable->isDebug());
