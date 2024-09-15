@@ -10,6 +10,7 @@ use Nmea\Cron\CronWorker;
 use Nmea\Database\Database;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
+$registerObserver = include (__DIR__ . '/../Modules/register.php');
 Database::getInstance()->init(Config::getMariadbHost(), Config::getMariadbPort(),Config::getMariadbUser(),Config::getMariadbPassword(), Config::getMariadbName());
 $worker = new CronWorker(
         60,
@@ -17,9 +18,7 @@ $worker = new CronWorker(
         new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()),
         getRunMode($argv)
 );
-$worker->attach(new \Modules\Module\Cron\AnchorWatch\Bootstrap($worker->isDebug()));
-$worker->attach(new \Modules\Module\Cron\WeatherStatistic\Bootstrap());
-$worker->attach(new \Modules\Module\Cron\Logbook\Bootstrap());
+$registerObserver[CronWorker::class]($worker);
 $worker->run();
 
 
