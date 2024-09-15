@@ -15,7 +15,7 @@ class RealtimeDistributor implements InterfaceObservableRealtime
 {
     private Frame $frame;
     private array $observers = [];
-    private $data;
+    private string $data;
     private ?Client $webSocket = null;
 
     /**

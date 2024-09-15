@@ -82,11 +82,19 @@ class WindStatisticFacade extends AbstractFacade
         return $this->sogCog->getCog();
     }
 
+    /**
+     * @throws ParserException
+     * @throws ConfigException
+     */
     public function getHeadingVectorRad(): Rad
     {
         return $this->getRad($this->getHeadingRad());
     }
 
+    /**
+     * @throws ParserException
+     * @throws ConfigException
+     */
     public function getCogVector(): PolarVector
     {
         return $this->getPolarVector($this->getSog(), $this->getCog());

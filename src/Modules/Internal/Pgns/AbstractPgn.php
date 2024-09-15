@@ -41,6 +41,9 @@ abstract class AbstractPgn
 
     abstract protected function getNmeaData():string;
 
+    /**
+     * @throws ConfigException
+     */
     protected function printAllFieldNames(DataFacade $dataFacade):string
     {
         $result = sprintf("%s pgn => %s src => %s  dst => %s  type =>  %s  pduFormat => %s dataPage => %s ",

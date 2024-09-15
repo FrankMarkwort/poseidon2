@@ -56,6 +56,7 @@ class FramesFactory
      * @throws ErrorException
      * @throws ConfigException
      * @throws ParserException
+     * @throws \Exception
      */
     public static function addData(string $nmea2000): void
     {
