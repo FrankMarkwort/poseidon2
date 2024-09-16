@@ -1,10 +1,11 @@
-/**
+**
 @author Frank Markwort
 @version 0.9.5
 @email frank.markwort@gmail.com
-*/
+**
 
-***This functionality has been removed from the [Core](src/Core) and is now available as a [Module](src/Modules/Module). Modules will get their own repository in the future. That is the plan.***
+***This functionality has been removed from the [Core](src/Core) and is now available as a [Modules](src/Modules). 
+Modules will get their own repository in the future. That is the plan.***
 The wind data is stored every minute for maximum 60 minutes.
 (Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG, waterTemperature)
 After that, the average, min, max values are stored in the hourly table.
