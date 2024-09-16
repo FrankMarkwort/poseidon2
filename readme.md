@@ -4,8 +4,10 @@
 @email frank.markwort@gmail.com
 **
 
-***This functionality has been removed from the [Core](src/Core) and is now available as a [Modules](src/Modules). 
-Modules will get their own repository in the future. That is the plan.***
+***This functionality has been removed from the [Core](src/Core) and is now available as a [Modules](src/Modules).
+Modules will get their own repository in the future. 
+That is the plan.***
+
 The wind data is stored every minute for maximum 60 minutes.
 (Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG, waterTemperature)
 After that, the average, min, max values are stored in the hourly table.
@@ -38,7 +40,7 @@ PHP 8.3, memcached and mariadb.
 **configuration**
 
 - 1 Create a user nmea2000 in the database.
-- 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, 
+- 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port,
   the database host and port.
 
 ```
