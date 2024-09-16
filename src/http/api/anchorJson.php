@@ -6,8 +6,8 @@ require_once( __DIR__ . '/../../../vendor/autoload.php');
 
 use Modules\External\FromCache\AnchorFacade;
 use Modules\Module\Cron\AnchorWatch\Anchor;
-use Nmea\Cache\Memcached;
-use Nmea\Config\Config;
+use Core\Cache\Memcached;
+use Core\Config\Config;
 
 header('Content-Type: application/json; charset=utf-8');
 try {

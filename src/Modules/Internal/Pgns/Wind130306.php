@@ -4,8 +4,8 @@ namespace Modules\Internal\Pgns;
 
 
 use Modules\Internal\Enums\EnumPgns;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 
 class Wind130306 extends AbstractPgn
 {

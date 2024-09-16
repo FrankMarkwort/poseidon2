@@ -2,7 +2,7 @@
 
 use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\RealtimeDistributor;
-use Nmea\Cron\CronWorker;
+use Core\Cron\CronWorker;
 
 return [
     RealtimeDistributor::class => function (): RealtimeDistributor {

@@ -2,7 +2,7 @@
 
 namespace Modules\Internal\Pgns;
 
-use Nmea\Cache\CacheInterface;
+use Core\Cache\CacheInterface;
 
 readonly class Chain
 {

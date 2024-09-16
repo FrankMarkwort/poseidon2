@@ -5,8 +5,8 @@ namespace Modules\Module\Cron\AnchorWatch\Observer;
 
 use Exception;
 use Modules\Module\Cron\AnchorWatch\Anchor;
-use Nmea\Cache\Memcached;
-use Nmea\Config\Config;
+use Core\Cache\Memcached;
+use Core\Config\Config;
 
 class ObserverAnchorToCache implements InterfaceObserver
 {

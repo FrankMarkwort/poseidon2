@@ -7,8 +7,8 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\AnchorWatch\Observer\ObserverAnchorPrintConsole;
 use Modules\Module\Cron\AnchorWatch\Observer\ObserverAnchorToCache;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {

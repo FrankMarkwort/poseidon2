@@ -7,9 +7,9 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\Logbook\Entity\Positions;
 use Modules\Module\Cron\Logbook\Mapper\PositionMapper;
-use Nmea\Config\ConfigException;
-use Nmea\Database\DatabaseInterface;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Database\DatabaseInterface;
+use Core\Parser\ParserException;
 
 class Bootstrap implements InterfaceObserverCronWorker
 {

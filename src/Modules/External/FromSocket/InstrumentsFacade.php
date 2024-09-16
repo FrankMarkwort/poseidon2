@@ -3,12 +3,12 @@
 namespace Modules\External\FromSocket;
 
 use Modules\External\AbstractFacade;
-use Nmea\Config\ConfigException;
-use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Parser\DataFacadeFactory;
-use Nmea\Parser\ParserException;
-use Nmea\Parser\Data\DataFacade;
+use Core\Config\ConfigException;
+use Core\Math\Skalar\Rad;
+use Core\Math\Vector\PolarVector;
+use Core\Parser\DataFacadeFactory;
+use Core\Parser\ParserException;
+use Core\Parser\Data\DataFacade;
 
 class InstrumentsFacade extends AbstractFacade
 {

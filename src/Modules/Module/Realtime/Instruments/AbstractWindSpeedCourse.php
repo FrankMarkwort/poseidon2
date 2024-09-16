@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Modules\Module\Realtime\Instruments;
 
-use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Math\Vector\PolarVectorOperation;
+use Core\Math\Skalar\Rad;
+use Core\Math\Vector\PolarVector;
+use Core\Math\Vector\PolarVectorOperation;
 
 abstract class AbstractWindSpeedCourse
 {

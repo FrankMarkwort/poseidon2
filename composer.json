@@ -15,14 +15,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Nmea\\": "src/Nmea/",
+            "Core\\": "src/Core/",
             "Modules\\": "src/Modules/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TestsNmea\\": "test/Nmea/",
-            "TestsModules\\": "test/Modules/"
+            "TestCore\\": "test/Core/",
+            "TestModules\\": "test/Modules/"
         }
     },
     "require": {
@@ -31,6 +31,7 @@
       "ext-memcached": "*",
       "ext-bcmath": "*",
       "ext-sockets": "*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+      "frankmarkwort/math": "^1.0"
     }
 }

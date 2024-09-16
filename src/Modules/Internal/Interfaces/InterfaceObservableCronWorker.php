@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Internal\Interfaces;
 
-use Nmea\Cache\CacheInterface;
-use Nmea\Database\DatabaseInterface;
+use Core\Cache\CacheInterface;
+use Core\Database\DatabaseInterface;
 
 interface InterfaceObservableCronWorker
 {

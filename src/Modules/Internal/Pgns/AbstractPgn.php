@@ -2,11 +2,11 @@
 
 namespace Modules\Internal\Pgns;
 
-use Nmea\Cache\CacheInterface;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\Data\DataFacade;
-use Nmea\Parser\DataFacadeFactory;
-use Nmea\Parser\ParserException;
+use Core\Cache\CacheInterface;
+use Core\Config\ConfigException;
+use Core\Parser\Data\DataFacade;
+use Core\Parser\DataFacadeFactory;
+use Core\Parser\ParserException;
 
 abstract class AbstractPgn
 {

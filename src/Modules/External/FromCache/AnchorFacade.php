@@ -7,9 +7,9 @@ use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\WaterDepth128267;
 use Modules\Internal\Pgns\Wind130306;
-use Nmea\Cache\CacheInterface;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Cache\CacheInterface;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 
 readonly class AnchorFacade
 {

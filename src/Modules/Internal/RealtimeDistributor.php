@@ -5,11 +5,11 @@ namespace Modules\Internal;
 use ErrorException;
 use Modules\Internal\Interfaces\InterfaceObservableRealtime;
 use Modules\Internal\Interfaces\InterfaceObserverRealtime;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
-use Nmea\Protocol\Frames\Frame\Frame;
-use Nmea\Protocol\Socket\Client;
-use Nmea\Protocol\Socket\SocketException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
+use Core\Protocol\Frames\Frame\Frame;
+use Core\Protocol\Socket\Client;
+use Core\Protocol\Socket\SocketException;
 
 class RealtimeDistributor implements InterfaceObservableRealtime
 {

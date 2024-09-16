@@ -2,8 +2,8 @@
 
 namespace Modules\External;
 
-use Nmea\Math\Skalar\Rad;
-use Nmea\Math\Vector\PolarVector;
+use Core\Math\Skalar\Rad;
+use Core\Math\Vector\PolarVector;
 
 abstract class AbstractFacade
 {

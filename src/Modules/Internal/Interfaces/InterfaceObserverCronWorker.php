@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Internal\Interfaces;
 
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 
 interface InterfaceObserverCronWorker
 {

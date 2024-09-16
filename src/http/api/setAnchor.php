@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 require_once( __DIR__ . '/../../../vendor/autoload.php');
-use Nmea\Config\Config;
-use Nmea\Cache\Memcached;
+use Core\Config\Config;
+use Core\Cache\Memcached;
 
 $cache  = new Memcached(Config::getMemcacheHost(), Config::getMemcachePort());
 

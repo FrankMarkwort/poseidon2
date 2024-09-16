@@ -4,10 +4,10 @@ declare(strict_types=1);
 set_time_limit(0);
 
 use Modules\Internal\Enums\DebugModeEnum;
-use Nmea\Cache\Memcached;
-use Nmea\Config\Config;
-use Nmea\Cron\CronWorker;
-use Nmea\Database\Database;
+use Core\Cache\Memcached;
+use Core\Config\Config;
+use Core\Cron\CronWorker;
+use Core\Database\Database;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
 $registerObserver = include (__DIR__ . '/../Modules/register.php');

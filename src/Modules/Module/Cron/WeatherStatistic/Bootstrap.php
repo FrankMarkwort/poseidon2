@@ -8,8 +8,8 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;
 use Modules\Module\Cron\WeatherStatistic\Mapper\WindSpeedHoursMapper;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 
 //TODO remove from Module
 

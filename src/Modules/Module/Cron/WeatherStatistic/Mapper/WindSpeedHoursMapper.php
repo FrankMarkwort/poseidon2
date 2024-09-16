@@ -6,7 +6,7 @@ namespace Modules\Module\Cron\WeatherStatistic\Mapper;
 use Modules\Module\Cron\WeatherStatistic\Collection\WindSpeedHourCollection;
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedHour;
-use Nmea\Database\Mapper\AbstractMapper;
+use Core\Database\Mapper\AbstractMapper;
 
 class WindSpeedHoursMapper extends AbstractMapper
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Modules\Module\Cron\Logbook\Mapper;
 
 use Modules\Module\Cron\Logbook\Entity\Positions;
-use Nmea\Database\Mapper\AbstractMapper;
+use Core\Database\Mapper\AbstractMapper;
 
 class PositionMapper extends AbstractMapper
 {

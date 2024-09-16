@@ -6,10 +6,10 @@ use Modules\External\AbstractFacade;
 use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\SetAndDrift129291;
 use Modules\Internal\Pgns\SogCog129026;
-use Nmea\Cache\CacheInterface;
-use Nmea\Config\ConfigException;
-use Nmea\Math\Vector\PolarVector;
-use Nmea\Parser\ParserException;
+use Core\Cache\CacheInterface;
+use Core\Config\ConfigException;
+use Core\Math\Vector\PolarVector;
+use Core\Parser\ParserException;
 
 class LogBookFacade extends AbstractFacade
 {

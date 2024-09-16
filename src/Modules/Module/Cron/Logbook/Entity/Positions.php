@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Module\Cron\Logbook\Entity;
 
-use Nmea\Math\Vector\PolarVector;
+use Core\Math\Vector\PolarVector;
 
 class Positions implements ComparableInterface
 {

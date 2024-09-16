@@ -5,10 +5,10 @@ namespace Modules\Module\Realtime\Instruments;
 use Modules\Internal\Enums\EnumPgns;
 use Modules\Internal\Interfaces\InterfaceObservableRealtime;
 use Modules\Internal\Interfaces\InterfaceObserverRealtime;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
 use ErrorException;
-use Nmea\Protocol\Socket\SocketException;
+use Core\Protocol\Socket\SocketException;
 
 class Bootstrap implements InterfaceObserverRealtime
 {

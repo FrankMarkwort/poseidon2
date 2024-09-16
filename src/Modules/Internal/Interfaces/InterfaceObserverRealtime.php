@@ -5,9 +5,9 @@ namespace Modules\Internal\Interfaces;
 
 
 use ErrorException;
-use Nmea\Config\ConfigException;
-use Nmea\Parser\ParserException;
-use Nmea\Protocol\Socket\SocketException;
+use Core\Config\ConfigException;
+use Core\Parser\ParserException;
+use Core\Protocol\Socket\SocketException;
 
 interface InterfaceObserverRealtime
 {
