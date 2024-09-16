@@ -31,7 +31,6 @@
       "ext-memcached": "*",
       "ext-bcmath": "*",
       "ext-sockets": "*",
-      "ext-pdo": "*",
-      "frankmarkwort/math": "^1.0"
+      "ext-pdo": "*"
     }
 }
