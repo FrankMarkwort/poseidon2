@@ -1,17 +1,21 @@
-/** \
-@author Frank Markwort\
-@version 0.9.5\
-@email frank.markwort@gmail.com\
-*/\
-The wind data is stored every minute for maximum 60 minutes.\
-(Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG, waterTemperature)\
-After that, the average, min, max values ​​are stored in the hourly table.\
-The ship's position is stored in the positions table every hour when the ship is moving.\
-(Id, Id_wind, Date, Latitude, longitude, cog, sog, set, drift)\
-***The decoder works on 32-bit and 64-bit systems***\
-\
-The deamon assembles the data packets from "NMEA 2000 USB Gateway YDNU-02 (Yacht-Device)" and saves them ready for decoding in the memcached server. The key is the pgn.\
+/**
+@author Frank Markwort
+@version 0.9.5
+@email frank.markwort@gmail.com
+*/
+
+***This functionality has been removed from the [Core](src/Core) and is now available as a [Module](src/Modules/Module). Modules will get their own repository in the future. That is the plan.***
+The wind data is stored every minute for maximum 60 minutes.
+(Id, Date, AWA, AWS, TWS, TWA, TWD, VesselHeading, SOG, COG, waterTemperature)
+After that, the average, min, max values are stored in the hourly table.
+The ship's position is stored in the positions table every hour when the ship is moving.
+(Id, Id_wind, Date, Latitude, longitude, cog, sog, set, drift)
+***The decoder works on 32-bit and 64-bit systems***
+
+The [deamon.php](src/deamon/deamon.php) assembles the data packets from "NMEA 2000 USB Gateway YDNU-02 (Yacht-Device)" and saves them ready for decoding in the memcached server
+or send it to the [RealtimeDistributor.php](src/Modules/Internal/RealtimeDistributor.php) for Realtime Modules. The key is the pgn.
 Data format from usb device
+
 ```
 root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
 
@@ -27,13 +31,15 @@ root@raspberrypi:/etc/apache2/sites-enabled# cat /dev/ttyACM0
 06:13:27.206 R 0DF90B00 FF FC 67 00 0C 00 FF FF
 06:13:27.207 R 19F81400 80 14 57 38 34 00 00 00
 ```
-**Deamon**\
-_Dependencies_
+
+**Deamon**_Dependencies_
 PHP 8.3, memcached and mariadb.
 **configuration**
+
 - 1 Create a user nmea2000 in the database.
-- 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, \
-the database host and port.
+- 2 In the configuration file src/config/config.php under the 'production' section, enter the memcached host and port, 
+  the database host and port.
+
 ```
   ],
     'production' => [
@@ -52,11 +58,13 @@ the database host and port.
     ],
     'testing' => [
 ```
-- 3 Create database tables 
-  http://127.0.0.1/service.phtml => Run DB-Migration 
+
+- 3 Create database tables
+  http://127.0.0.1/service.phtml => Run DB-Migration
   ![Screenshot_20240824_223559](https://github.com/user-attachments/assets/a36c53d4-ba42-4900-8d75-88137c6738f8)
 - 4 Create Linux service phpreader
-```root@raspberrypi:~# cat /etc/systemd/system/phpreader.service
+
+```root@raspberrypi:~#
 [Unit]
 Description=Data NMEA2000 Reader
 
@@ -68,8 +76,10 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
 - 5 Create Linux service phpcron (every 60 sec)
-```root@raspberrypi:~# cat /etc/systemd/system/phpcron.service 
+
+```root@raspberrypi:~#
 [Unit]
 Description=Data NMEA2000 Cron
 
@@ -81,8 +91,10 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
 - 5.1 Create Linux service php-socket-server (realtime data)
-```root@raspberrypi:~# cat /etc/systemd/system/php-socket-server.service
+
+```root@raspberrypi:~#
 [Unit]
 Description=NMEA2000 SocketServer
 
@@ -94,13 +106,17 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
 - 6 activate the services
+
 ```
 sudo systemctl enable phpreader
  sudo systemctl enable phpcron
  sudo systemctl enable php-socket-server
- ```
+```
+
 - 7 start and test
+
 ```
 root@raspberrypi:~# service phpreader start
 root@raspberrypi:~# service phpcron start
@@ -125,7 +141,9 @@ root@raspberrypi:~# service phpcron status
 
 Jun 03 04:10:03 raspberrypi systemd[1]: Started Data NMEA2000 Cron.
 ```
+
 - 8 In the .htaccess set the RUN_MODE to production
+
 ```
 root@raspberrypi:/var/www/html/src/http# cat .htaccess
 SetEnv RUN_MODE production
@@ -134,7 +152,9 @@ SetEnv RUN_MODE production
 
 </FilesMatch>
 ```
+
 - 9 Apache configuration something like this
+
 ```
 root@raspberrypi:/etc/apache2/sites-enabled# cat  000-default.conf 
 VirtualHost *:80>
@@ -147,7 +167,7 @@ VirtualHost *:80>
     <Directory "/var/www/html/src/http">
         AllowOverride all
         # New directive needed in Apache 2.4.3:
-        Require all granted    
+        Require all granted  
     </Directory>
     <IfModule mod_rewrite.c>
        RewriteEngine On
@@ -155,8 +175,10 @@ VirtualHost *:80>
     </IfModule>
 </VirtualHost>
 ```
+
 **Displaying the decoded data.**
 The data is currently displayed in the browser as HTML or JSON.
+
 ```
 as html http://127.0.0.1/index.phtml
 as Json http://127.0.0.1/index.phtml?mode=json
@@ -164,7 +186,9 @@ as Json only one pgn http://127.0.0.1/index.phtml?mode=json&pgn=129291
 as Highchart http://127.0.0.1/graph.phtml
 Services http://127.0.0.1/service.phtml __see point 3__
 ```
+
 **src/deamon/cron.php**
+
 ```
 pi@raspberrypi:/var/www/html/src/deamon $ ./cron.php --help
 --help
@@ -209,5 +233,5 @@ Temperature pgn => 130312 src => 110 dst => 255 type => SP pduFormat => 253 data
 1, SID 1, 0 1, Integer
 2, Instance 2, 0 2, Integer
 3, Source 3, Sea Temperature 3, Lookup table
-4, Actual Temperature 4, 296.05 4, Temp    
+4, Actual Temperature 4, 296.05 4, Temp  
 ```
