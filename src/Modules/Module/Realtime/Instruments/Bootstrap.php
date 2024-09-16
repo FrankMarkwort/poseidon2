@@ -25,10 +25,12 @@ class Bootstrap implements InterfaceObserverRealtime
         $this->windSocketData(
             $observable,
             $observable->getFrame()->getHeader()->getPgn(),
-        $observable->getFrame()->getData()->getTimestamp() . ' '
-            . $observable->getFrame()->getData()->getDirection() . ' '
-            . $observable->getFrame()->getHeader()->getCanIdHex() . ' '
-            . $observable->getData()
+            sprintf('%s %s %s %s',
+                $observable->getFrame()->getData()->getTimestamp(),
+                $observable->getFrame()->getData()->getDirection(),
+                $observable->getFrame()->getHeader()->getCanIdHex(),
+                $observable->getData()
+            )
         );
     }
 
