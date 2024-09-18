@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace Modules\Module\Realtime\Instruments;
 
-use Core\Math\EnumRange;
-use Core\Math\Skalar\Rad;
+use Math\EnumRange;
+use Math\Skalar\Rad;
 
 class WindSpeedCourse extends AbstractWindSpeedCourse
 {

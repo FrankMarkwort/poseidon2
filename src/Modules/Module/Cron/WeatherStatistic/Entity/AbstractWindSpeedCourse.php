@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Modules\Module\Cron\WeatherStatistic\Entity;
 
 //TODO remove from Module
-use Core\Math\Skalar\Rad;
-use Core\Math\Vector\PolarVector;
-use Core\Math\Vector\PolarVectorOperation;
+use Math\Skalar\Rad;
+use Math\Vector\PolarVector;
+use Math\Vector\PolarVectorOperation;
 
 abstract class AbstractWindSpeedCourse
 {

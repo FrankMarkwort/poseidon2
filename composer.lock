@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de6611697421c8a1e0cd2c91771606ea",
-    "packages": [],
+    "content-hash": "65b1980d0c89fecdd433059df4035310",
+    "packages": [
+        {
+            "name": "poseidon2/math",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FrankMarkwort/Math.git",
+                "reference": "7b4263ff03801fe18bded99a03fdbf5cb3568c49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FrankMarkwort/Math/zipball/7b4263ff03801fe18bded99a03fdbf5cb3568c49",
+                "reference": "7b4263ff03801fe18bded99a03fdbf5cb3568c49",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 8.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Math\\": "src/Math/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Frank Markwort",
+                    "email": "frank.markwort@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Math vector",
+            "support": {
+                "issues": "https://github.com/FrankMarkwort/Math/issues",
+                "source": "https://github.com/FrankMarkwort/Math/tree/1.0"
+            },
+            "time": "2024-09-15T14:53:12+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "myclabs/deep-copy",
@@ -1654,5 +1699,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
