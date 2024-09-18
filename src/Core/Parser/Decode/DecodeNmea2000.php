@@ -5,7 +5,7 @@ namespace Core\Parser\Decode;
 
 use Exception;
 use Core\Parser\ParserException;
-use Core\Parser\Lib\BinDec;
+use Math\Bin\BinDec;
 
 class DecodeNmea2000 implements DecoderInterface
 {

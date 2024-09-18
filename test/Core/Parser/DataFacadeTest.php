@@ -11,7 +11,7 @@ use Core\Parser\Data\DataPart;
 use Core\Parser\Data\MainPart;
 use Core\Parser\DataFacadeFactory;
 use Core\Parser\Decode\DecodeNmea2000;
-use Core\Parser\Lib\BinDec;
+use Math\Bin\BinDec;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

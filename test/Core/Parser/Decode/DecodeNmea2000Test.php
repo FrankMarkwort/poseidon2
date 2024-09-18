@@ -2,7 +2,7 @@
 namespace TestCore\Parser\Decode;
 
 use Core\Parser\Decode\Request;
-use Core\Parser\Lib\BinDec;
+use Math\Bin\BinDec;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Core\Parser\Decode\DecodeNmea2000;
