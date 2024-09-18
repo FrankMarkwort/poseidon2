@@ -4,8 +4,8 @@ namespace Modules\External\FromSocket;
 
 use Modules\External\AbstractFacade;
 use Core\Config\ConfigException;
-use Core\Math\Skalar\Rad;
-use Core\Math\Vector\PolarVector;
+use Math\Skalar\Rad;
+use Math\Vector\PolarVector;
 use Core\Parser\DataFacadeFactory;
 use Core\Parser\ParserException;
 use Core\Parser\Data\DataFacade;

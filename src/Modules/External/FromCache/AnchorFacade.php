@@ -7,7 +7,7 @@ use Modules\Internal\Pgns\Gps129025;
 use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\WaterDepth128267;
 use Modules\Internal\Pgns\Wind130306;
-use Core\Cache\CacheInterface;
+use Modules\Internal\Interfaces\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 

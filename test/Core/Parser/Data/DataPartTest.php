@@ -5,7 +5,7 @@ use Core\Parser\Data\DataPart;
 use Core\Parser\Decode\DecodeNmea2000;
 use Core\Config\ConfigPgn;
 use Core\Config\PngFieldConfig;
-use Core\Parser\Lib\BinDec;
+use Math\Bin\BinDec;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 use PHPUnit\Framework\TestCase;
