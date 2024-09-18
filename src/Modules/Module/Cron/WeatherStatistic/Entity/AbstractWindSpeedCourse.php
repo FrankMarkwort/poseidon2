@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Modules\Module\Cron\WeatherStatistic\Entity;
 
-//TODO remove from Module
 use Math\Skalar\Rad;
 use Math\Vector\PolarVector;
 use Math\Vector\PolarVectorOperation;

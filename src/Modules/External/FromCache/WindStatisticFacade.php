@@ -7,10 +7,10 @@ use Modules\Internal\Pgns\Heading127250;
 use Modules\Internal\Pgns\SogCog129026;
 use Modules\Internal\Pgns\Temperature130312;
 use Modules\Internal\Pgns\Wind130306;
+use Modules\Internal\Interfaces\CacheInterface;
 use Math\Skalar\Rad;
 use Math\Vector\PolarVector;
 
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 
