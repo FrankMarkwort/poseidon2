@@ -4,8 +4,8 @@ namespace TestCore\Database\Mapper;
 
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;
 use Core\Database\Database;
-use Core\Math\Skalar\Rad;
-use Core\Math\Vector\PolarVector;
+use Math\Skalar\Rad;
+use Math\Vector\PolarVector;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

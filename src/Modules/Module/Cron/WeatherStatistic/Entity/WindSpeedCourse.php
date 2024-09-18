@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Module\Cron\WeatherStatistic\Entity;
 
-//TODO remove from Module
-use Core\Math\EnumRange;
-use Core\Math\Skalar\Rad;
+use Math\EnumRange;
+use Math\Skalar\Rad;
 
 class WindSpeedCourse extends AbstractWindSpeedCourse
 {
