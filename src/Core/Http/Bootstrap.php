@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Core\Http;
 
-use Exception;
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Logger\Factory;
 use Core\Parser\Data\DataFacadenColection;
@@ -12,6 +10,8 @@ use Core\Parser\DataFacadeFactory;
 use Core\Parser\ParserException;
 use Core\View\Html;
 use Core\View\Json;
+use Exception;
+use Modules\Internal\Interfaces\CacheInterface;
 
 readonly class Bootstrap
 {

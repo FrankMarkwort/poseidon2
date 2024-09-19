@@ -3,17 +3,15 @@ declare(strict_types=1);
 
 namespace Core\Protocol\Frames;
 
-use ErrorException;
-use Modules\Internal\Enums\EnumPgns;
-use Modules\Internal\Interfaces\InterfaceObservableRealtime;
-use Modules\Internal\RealtimeDistributor;
-use Modules\Module\Realtime\Instruments\WindSpeedCourseFactory;
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 use Core\Protocol\Frames\Frame\Frame;
 use Core\Protocol\Socket\Client;
 use Core\Protocol\Socket\SocketException;
+use ErrorException;
+use Modules\Internal\Interfaces\CacheInterface;
+use Modules\Internal\Interfaces\InterfaceObservableRealtime;
+use Modules\Internal\RealtimeDistributor;
 
 class Frames
 {
@@ -125,7 +123,7 @@ class Frames
      * @throws ErrorException
      * @throws ParserException
      */
-    private function makeSinglePackedData(array $frames, ?RealtimeDistributor $distributor = null):bool
+    private function makeSinglePackedData(array $frames):bool
     {
         if ($frames[0] instanceof Frame) {
 

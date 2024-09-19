@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 namespace Core\Protocol;
 
-use ErrorException;
-use Modules\Internal\RealtimeDistributor;
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 use Core\Protocol\Frames\Frame\Data\Data;
-use Core\Protocol\Frames\Frames;
 use Core\Protocol\Frames\Frame\Frame;
 use Core\Protocol\Frames\Frame\Header\Header;
+use Core\Protocol\Frames\Frames;
 use Core\Protocol\Socket\Client;
+use ErrorException;
+use Exception;
+use Modules\Internal\Interfaces\CacheInterface;
+use Modules\Internal\RealtimeDistributor;
 
 class FramesFactory
 {
@@ -53,10 +54,10 @@ class FramesFactory
     }
 
     /**
-     * @throws ErrorException
      * @throws ConfigException
+     * @throws ErrorException
      * @throws ParserException
-     * @throws \Exception
+     * @throws Exception
      */
     public static function addData(string $nmea2000): void
     {

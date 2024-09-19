@@ -7,6 +7,7 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\Logbook\Entity\Positions;
 use Modules\Module\Cron\Logbook\Mapper\PositionMapper;
+//TODO catch it in Core
 use Core\Config\ConfigException;
 use Core\Database\DatabaseInterface;
 use Core\Parser\ParserException;

@@ -2,12 +2,11 @@
 
 namespace TestCore\Protocol;
 
-use Core\Cache\CacheInterface;
 use Core\Cache\ArrayCache;
-use Core\Cache\Memcached;
 use Core\Config\ConfigException;
 use Core\Parser\DataFacadeFactory;
 use Core\Protocol\FramesFactory;
+use Modules\Internal\Interfaces\CacheInterface;
 use PHPUnit\Framework\TestCase;
 
 class MultiPackedTest extends TestCase

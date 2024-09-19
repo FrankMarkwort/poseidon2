@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once( __DIR__ . '/../../vendor/autoload.php');
 use Core\Service\Service;
+use Core\Config\Config;
 
 $memcached = new Service('memcached');
 $deamon = new Service('phpreader');
@@ -47,6 +48,19 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
             echo "start Database-Migration<br>";
             exec('/usr/bin/php ' . __DIR__ . '/../Nmea/bin/migration.php');
             break;
+        case 'dbdump':
+            echo "start Database Dump<br>";
+            $exec = sprintf ('/usr/bin/mysqldump --user=%s --password=%s --host=%s %s > %s/%s',
+                Config::getMariadbUser(),
+                Config::getMariadbPassword(),
+                Config::getMariadbHost(),
+                Config::getMariadbName(),
+                __DIR__ . '/../../dbDumps',
+                'dbdump' . date("Ymd") .'.sql'
+            );
+            exec($exec);
+            echo $exec . '<br>';
+            break;
     }
 }
 ?>
@@ -77,6 +91,10 @@ if (isset($_GET['service']) && isset($_GET['mode'])) {
         </td>
     </tr>
     <tr>
+        <td>
+            <a href="services.phtml?mode=dbdump&service=script"> <?= "DB dump" ?> </a>
+        </td>
+    </tr><tr>
         <td>
             <a href="services.phtml?mode=dbmigration&service=script"> <?= "Run DB-Migrations" ?> </a>
         </td>

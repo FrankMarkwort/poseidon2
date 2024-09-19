@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Core\Cache;
 
+use Modules\Internal\Interfaces\CacheInterface;
+
 abstract class AbstractRingBuffer
 {
     public function __construct(protected CacheInterface $cache, protected readonly int $max = 60)

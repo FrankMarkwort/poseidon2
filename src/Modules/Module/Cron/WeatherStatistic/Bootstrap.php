@@ -8,18 +8,17 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\WeatherStatistic\Entity\WindSpeedCourse;
 use Modules\Module\Cron\WeatherStatistic\Mapper\WindSpeedHoursMapper;
+//TODO catch it in CORE
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
-
-//TODO remove from Module
 
 class Bootstrap implements InterfaceObserverCronWorker
 {
     private string $previousTimestamp = '';
 
-     /**
-     * @throws ParserException
+    /**
      * @throws ConfigException
+     * @throws ParserException
      */
      public function update(InterfaceObservableCronWorker $observable):void
      {
@@ -39,7 +38,7 @@ class Bootstrap implements InterfaceObserverCronWorker
             return;
         }
         (new WindSpeedHoursMapper($observable->getDatabase()))->store(
-            (new WindSpeedCourse($observable->getDatabase()))
+            (new WindSpeedCourse())
             ->setTime($facade->getTimestamp())
             ->setApparentWind($facade->getApparentWindVector())
             ->setCourseOverGround($facade->getCogVector())

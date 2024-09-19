@@ -10,11 +10,15 @@ use Core\Protocol\Socket\Client;
 use Modules\Internal\RealtimeDistributor;
 require_once(__DIR__ . '/../../vendor/autoload.php');
 $register = include (__DIR__ . '/../Modules/register.php');
-
-$bootstrap = new Bootstrap(
-    new Serial(Config::getSerialDevice()), (new Memcached(Config::getMemcacheHost(),Config::getMemcachePort()))->clear(),
-    new Client(Config::getSocketServerHost(), Config::getSocketServerPort()),
-    $register[RealtimeDistributor::class]()
-);
-$bootstrap->run();
+try {
+    $bootstrap = new Bootstrap(
+        new Serial(Config::getSerialDevice()),
+        (new Memcached(Config::getMemcacheHost(), Config::getMemcachePort()))->clear(),
+        new Client(Config::getSocketServerHost(), Config::getSocketServerPort()),
+        $register[RealtimeDistributor::class]()
+    );
+    $bootstrap->run();
+} catch (Exception $e) {
+    echo "Memcached Error: " . $e->getMessage() . "\n";
+}
 

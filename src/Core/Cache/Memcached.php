@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Core\Cache;
 
-use Memcached as Cache;
 use Core\Logger\Factory;
 use Exception;
+use Memcached as Cache;
+use Modules\Internal\Interfaces\CacheInterface;
 
 class Memcached implements CacheInterface
 {

@@ -8,6 +8,7 @@ use Modules\Internal\Pgns\SetAndDrift129291;
 use Modules\Internal\Pgns\SogCog129026;
 use Math\Vector\PolarVector;
 use Modules\Internal\Interfaces\CacheInterface;
+//TODO catch it in Core
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 

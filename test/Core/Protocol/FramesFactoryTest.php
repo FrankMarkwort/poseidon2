@@ -2,10 +2,9 @@
 
 namespace TestCore\Protocol;
 
-use Core\Cache\CacheInterface;
 use Core\Cache\ArrayCache;
-use Core\Protocol\Frames\Frames;
 use Core\Protocol\FramesFactory;
+use Modules\Internal\Interfaces\CacheInterface;
 use PHPUnit\Framework\TestCase;
 
 class FramesFactoryTest extends TestCase

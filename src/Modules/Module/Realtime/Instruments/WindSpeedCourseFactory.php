@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Module\Realtime\Instruments;
 
 use Modules\External\FromSocket\InstrumentsFacade;
+//TODO catch it in Core
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 use Core\Protocol\Socket\Client;

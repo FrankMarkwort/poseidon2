@@ -6,6 +6,7 @@ namespace Core\Parser\Decode;
 use Exception;
 use Core\Parser\ParserException;
 use Math\Bin\BinDec;
+use Math\MathException;
 
 class DecodeNmea2000 implements DecoderInterface
 {
@@ -39,7 +40,7 @@ class DecodeNmea2000 implements DecoderInterface
     }
 
     /**
-     * @throws Exception
+     * @throws MathException
      */
     public function getValue(Request $request) : float|int|string|null
     {

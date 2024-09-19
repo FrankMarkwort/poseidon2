@@ -7,6 +7,7 @@ use Core\Config\ConfigException;
 use Core\Parser\Decode\DecoderInterface;
 use Core\Config\PngFieldConfig;
 use Core\Parser\Decode\Request;
+use Core\Parser\ParserException;
 
 class DataPart
 {
@@ -23,6 +24,9 @@ class DataPart
         return $this;
     }
 
+    /**
+     * @throws ParserException
+     */
     public function setData(string $string, int $length, PngFieldConfig $config ):self
     {
         $this->pngFieldConfig = $config;

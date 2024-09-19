@@ -5,6 +5,7 @@ namespace Modules\Module\Realtime\Instruments;
 use Modules\Internal\Enums\EnumPgns;
 use Modules\Internal\Interfaces\InterfaceObservableRealtime;
 use Modules\Internal\Interfaces\InterfaceObserverRealtime;
+//TODO catch it in Core
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 use ErrorException;

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Core\Cache;
 
+use Modules\Internal\Interfaces\CacheInterface;
+
 class ArrayCache implements CacheInterface
 {
 

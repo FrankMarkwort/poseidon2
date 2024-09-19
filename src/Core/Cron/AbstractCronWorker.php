@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Core\Cron;
 
-use Modules\Internal\Enums\DebugModeEnum;
-use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
-use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Database\DatabaseInterface;
 use Core\Parser\ParserException;
+use Modules\Internal\Enums\DebugModeEnum;
+use Modules\Internal\Interfaces\CacheInterface;
+use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
+use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 
 abstract class AbstractCronWorker implements InterfaceObservableCronWorker
 {

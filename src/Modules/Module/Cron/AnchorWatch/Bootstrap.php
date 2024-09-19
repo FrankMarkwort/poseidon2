@@ -7,6 +7,7 @@ use Modules\Internal\Interfaces\InterfaceObservableCronWorker;
 use Modules\Internal\Interfaces\InterfaceObserverCronWorker;
 use Modules\Module\Cron\AnchorWatch\Observer\ObserverAnchorPrintConsole;
 use Modules\Module\Cron\AnchorWatch\Observer\ObserverAnchorToCache;
+//TODO catch it in CORE
 use Core\Config\ConfigException;
 use Core\Parser\ParserException;
 

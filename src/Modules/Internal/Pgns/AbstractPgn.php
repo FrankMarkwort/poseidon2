@@ -2,11 +2,11 @@
 
 namespace Modules\Internal\Pgns;
 
-use Core\Cache\CacheInterface;
 use Core\Config\ConfigException;
 use Core\Parser\Data\DataFacade;
 use Core\Parser\DataFacadeFactory;
 use Core\Parser\ParserException;
+use Modules\Internal\Interfaces\CacheInterface;
 
 abstract class AbstractPgn
 {

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Modules\Internal\Interfaces;
 
-use Core\Cache\CacheInterface;
 use Core\Database\DatabaseInterface;
 
 interface InterfaceObservableCronWorker

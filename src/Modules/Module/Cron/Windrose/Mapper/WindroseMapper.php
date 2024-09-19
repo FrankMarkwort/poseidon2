@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Module\Cron\Windrose\Mapper;
 
 use Modules\Module\Cron\Windrose\Entity\WindRose;
+//TODO move AbstractMapper to Internal
 use Core\Database\Mapper\AbstractMapper;
 
 class WindroseMapper extends AbstractMapper
